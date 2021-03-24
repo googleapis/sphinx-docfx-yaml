@@ -1,12 +1,7 @@
-Before you open a pull request, note that this repository is forked from [here](https://github.com/docascode/sphinx-docfx-yaml/).
-Unless the issue you're trying to solve is unique to this specific repository, 
-please file an issue and/or send changes upstream to the original as well.
+Thank you for opening a Pull Request! Before submitting your PR, there are a few things you can do to make sure it goes smoothly:
+- [ ] Make sure to open an issue as a [bug/issue](https://github.com/googleapis/sphinx-docfx-yaml/issues/new/choose) before writing your code!  That way we can discuss the change, evaluate designs, and agree on the general idea
+- [ ] Ensure the tests and linter pass
+- [ ] Code coverage does not decrease (if any source code was changed)
+- [ ] Appropriate docs were updated (if necessary)
 
-__________________________________________________________________
-
-Fixes #<issue_number_goes_here>
-
-> It's a good idea to open an issue first for discussion.
-
-- [ ] Tests pass
-- [ ] Appropriate changes to README are included in PR
+Fixes #<issue_number_goes_here> 🦕

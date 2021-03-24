@@ -30,7 +30,7 @@ setup(
     version='1.2.76',
     author='Eric Holscher',
     author_email='eric@ericholscher.com',
-    url='https://github.com/ericholscher/sphinx-docfx-yaml',
+    url='https://github.com/googleapis/sphinx-docfx-yaml',
     description='Sphinx Python Domain to DocFX YAML Generator',
     package_dir={'': '.'},
     packages=find_packages('.', exclude=['tests']),
