@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/sphinx-docfx-yaml",
-        "sha": "89c5cccaa7350df3147ee74c7e069b1f7bfc76a7"
+        "remote": "git@github.com:googleapis/sphinx-docfx-yaml.git",
+        "sha": "0ae51aa102e4153bf20aa4f28b94708a0ee3fe4c"
       }
     },
     {
