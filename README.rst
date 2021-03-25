@@ -35,7 +35,13 @@ Basic Workflow
 Install
 -------
 
-First you need to install docfx-yaml:
+To use this forked version, install GCP docfx-yaml:
+
+.. code:: bash
+
+    pip install gcp-sphinx-docfx-yaml
+
+To use the default original, install original docfx-yaml:
 
 .. code:: bash
 
