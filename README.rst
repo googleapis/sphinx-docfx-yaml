@@ -41,12 +41,6 @@ To use this forked version, install GCP docfx-yaml:
 
     pip install gcp-sphinx-docfx-yaml
 
-To use the default original, install original docfx-yaml:
-
-.. code:: bash
-
-    pip install sphinx-docfx-yaml
-
 Then add it to your Sphinx project's ``conf.py``:
 
 .. code:: python
