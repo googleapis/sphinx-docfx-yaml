@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/sphinx-docfx-yaml.git",
-        "sha": "2deb23a9d5785703d1d5c822bb3a80c5b7accf3b"
+        "sha": "e0ea6d38e77cb6ef2e6ce65b62d5101e6880d3b3"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "043cc620d6a6111816d9e09f2a97208565fde958"
+        "sha": "a648ce0ca3fe122b3186d7e6861cb641437e485e"
       }
     }
   ],
