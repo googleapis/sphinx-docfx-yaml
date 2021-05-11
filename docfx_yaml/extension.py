@@ -564,12 +564,30 @@ def build_finished(app, exception):
     Output YAML on the file system.
     """
 
-    # removes uidname fields from the toc_yaml variable
-    def organize_toc_name(toc_yaml):
+    # Used to get rid of the uidname field for cleaner toc file.
+    def sanitize_uidname_field(toc_yaml):
         for module in toc_yaml:
             if 'items' in module:
-                organize_toc_name(module['items'])
+                sanitize_uidname_field(module['items'])
             module.pop('uidname')
+
+    # Parses the package name and returns package name and module name.
+    def find_package_name(package_name):
+        for name in package_name:
+            if name != "google" and name != "cloud":
+                return [name, package_name[-1]]
+
+    # Used to disambiguate names that have same entries.
+    def disambiguate_toc_name(toc_yaml):
+        names = {}
+        for module in toc_yaml:
+            names[module['name']] = 1 if module['name'] not in names else 2
+            if 'items' in module:
+                disambiguate_toc_name(module['items'])
+
+        for module in toc_yaml:
+            if names[module['name']] > 1:
+                module['name'] = ".".join(find_package_name(module['uidname'].split(".")))
 
     def find_node_in_toc_tree(toc_yaml, to_add_node):
         for module in toc_yaml:
@@ -766,13 +784,11 @@ def build_finished(app, exception):
             file_name_set.add(filename)
            
             # Parse the name of the object.
-            # "Types" class will need additional parsing to de-duplicate their names and contain
-            # a portion of their parent name for better disambiguation.
-            node_name = obj['name']
-            if node_name == "types":
-                node_name = ".".join(obj.get('uid').split(".")[-2:])
-            else:
-                node_name = obj.get('class').split(".")[-1] if obj.get('class') else obj['name']
+            # Some types will need additional parsing to de-duplicate their names and contain
+            # a portion of their parent name for better disambiguation. This is done in 
+            # disambiguate_toc_name
+            
+            node_name = obj.get('class').split(".")[-1] if obj.get('class') else obj['name']
 
             # Build nested TOC
             if uid.count('.') >= 1:
@@ -806,12 +822,14 @@ def build_finished(app, exception):
     if len(toc_yaml) == 0:
         raise RuntimeError("No documentation for this module.")
 
+    # Perform additional disambiguation of the name
+    disambiguate_toc_name(toc_yaml)
+
     # Keeping uidname field carrys over onto the toc.yaml files, we need to
     # be keep using them but don't need them in the actual file
     toc_yaml_with_uid = copy.deepcopy(toc_yaml)
 
-    # Strip uidname fields from toc_yaml going into the file
-    organize_toc_name(toc_yaml)
+    sanitize_uidname_field(toc_yaml)
 
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
@@ -829,11 +847,11 @@ def build_finished(app, exception):
     index_children = []
     index_references = []
     for item in toc_yaml_with_uid:
-        index_children.append(item.get('uid', ''))
+        index_children.append(item.get('uidname', ''))
         index_references.append({
-            'uid': item.get('uid', ''),
+            'uid': item.get('uidname', ''),
             'name': item.get('name', ''),
-            'fullname': item.get('uid', ''),
+            'fullname': item.get('uidname', ''),
             'isExternal': False
         })
     with open(index_file, 'w') as index_file_obj:
