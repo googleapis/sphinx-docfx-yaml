@@ -7,9 +7,6 @@ Feel free to use this forked repository for personal or experimental use, use th
 Sphinx DocFX YAML
 =================
 
-.. image:: https://travis-ci.org/docascode/sphinx-docfx-yaml.svg?branch=master
-   :target: https://travis-ci.org/docascode/sphinx-docfx-yaml
-
 Sphinx DocFX YAML is an exporter for the Sphinx Autodoc module into `DocFX YAML <https://dotnet.github.io/docfx/spec/metadata_format_spec.html>`_.
 
 You can read the full documentation online at http://sphinx-docfx-yaml.readthedocs.io
