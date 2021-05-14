@@ -61,6 +61,18 @@ Then build your documentation::
 Inside your build directory (``_build/html`` usually),
 the ``docfx_yaml`` will contain the YAML files that are output.
 
+Testing
+-------
+
+To run the tests in this repository, run:
+
+.. code:: bash
+
+    pip install tox
+    tox -e docs
+
+from the root directory.
+
 ..  Modes
     -----
 
