@@ -71,7 +71,7 @@ To run the tests in this repository, run:
     pip install tox
     tox -e docs
 
-from the root directory.
+from the top directory of this repository.
 
 ..  Modes
     -----
