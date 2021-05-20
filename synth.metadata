@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/sphinx-docfx-yaml.git",
-        "sha": "e013fa576c4bb4d0467ca530061107a1bfc9863b"
+        "sha": "21c456802eb2cec88e82b734a194a24965046f47"
       }
     }
   ],
