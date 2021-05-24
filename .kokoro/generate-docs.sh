@@ -50,16 +50,16 @@ for bucket_item in $(gsutil ls gs://docs-staging-v2 | grep "docfx-python"); do
     # For each repo, process docs and docfx jobs to regenerate the YAML.
     cd ${repo}
 
-    if [ ${GITHUB_TAG} = "latest" ]; then
-      # Grab the latest released tag
-      GITHUB_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
-    elif [ ${GITHUB_TAG} = "all" ]; then
+    if [ ${FORCE_GENERATE_ALL_TAGS} = "true" ]; then
       # Grabs all tags from the repository
-      GITHUB_TAG=$(git tag --sort=-v:refname)
+      GITHUB_TAGS=$(git tag --sort=-v:refname)
+    else
+      # Grab the latest released tag
+      GITHUB_TAGS=$(git describe --tags `git rev-list --tags --max-count=1`)
     fi
 
     # TODO: allow skipping failing docs builds and continue with the rest of the generation.
-    for tag in ${GITHUB_TAG}; do
+    for tag in ${GITHUB_TAGS}; do
       git checkout ${tag}
 
       # Build HTML docs for googleapis.dev.

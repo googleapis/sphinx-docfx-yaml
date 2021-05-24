@@ -25,7 +25,7 @@ pass_down_envvars+=(
     "STAGING_BUCKET"
     "V2_STAGING_BUCKET"
     "NOX_SESSION"
-    "GITHUB_TAG"
+    "FORCE_GENERATE_ALL_TAGS"
 )
 
 # Prevent unintentional override on the default image.
@@ -52,6 +52,6 @@ if [[ -z "${TRAMPOLINE_BUILD_FILE:-}" ]]; then
     TRAMPOLINE_BUILD_FILE=""
 fi
 
-if [[ -z "${GITHUB_TAG:-}" ]]; then
-    GITHUB_TAG="latest"
+if [[ -z "${FORCE_GENERATE_ALL_TAGS:-}" ]]; then
+    FORCE_GENERATE_ALL_TAGS="false"
 fi
