@@ -25,7 +25,6 @@ pass_down_envvars+=(
     "STAGING_BUCKET"
     "V2_STAGING_BUCKET"
     "NOX_SESSION"
-    "FORCE_GENERATE_ALL_TAGS"
 )
 
 # Prevent unintentional override on the default image.
@@ -50,8 +49,4 @@ fi
 
 if [[ -z "${TRAMPOLINE_BUILD_FILE:-}" ]]; then
     TRAMPOLINE_BUILD_FILE=""
-fi
-
-if [[ -z "${FORCE_GENERATE_ALL_TAGS:-}" ]]; then
-    FORCE_GENERATE_ALL_TAGS="false"
 fi
