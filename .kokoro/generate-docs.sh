@@ -25,7 +25,7 @@ python3 -m pip install --user --quiet --upgrade nox
 python3 -m pip install --user gcp-docuploader
 
 # Retrieve repositories to regenerate the YAML with.
-for bucket_item in $(gsutil ls gs://docs-staging-v2 | grep "docfx-python"); do
+for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*'); do
 
   # Parse the library name.
   library=$(echo ${bucket_item} | cut -d "-" -f 5)
