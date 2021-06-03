@@ -39,6 +39,7 @@ s.move(
         ".kokoro/publish-docs.sh",
         ".kokoro/samples/**", # no samples
         ".kokoro/test-sample*",
+        ".kokoro/docker/",
         "CONTRIBUTING.rst",  # repo has a CONTRIBUTING.md
         ".github/CONTRIBUTING.md",
         ".github/PULL_REQUEST_TEMPLATE.md",
