@@ -50,7 +50,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
   rm -rf ${tarball}
 
   # Clone the repository.
-  git clone https://github.com/googleapis/${repo}.giti
+  git clone "https://github.com/googleapis/${repo}.git"
 
   # For each repo, process docs and docfx jobs to regenerate the YAML.
   cd ${repo}
