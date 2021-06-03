@@ -58,7 +58,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
   # Save the noxfile for usage throughout different releases. 
   cp "noxfile.py" ../
 
-  if [ ${FORCE_GENERATE_ALL_TAGS} = "true" ]; then
+  if [[ ${FORCE_GENERATE_ALL_TAGS} == "true" ]]; then
     # Grabs all tags from the repository.
     GITHUB_TAGS=$(git tag --sort=-v:refname)
 
