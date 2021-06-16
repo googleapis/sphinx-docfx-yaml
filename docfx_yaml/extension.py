@@ -312,7 +312,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 lines = inspect.getdoc(obj)
                 lines = lines.split("\n") if lines else []
             except Exception as e:
-                print("couldn't getdoc from method, function. Exception: {}".format(e))
+                print("couldn't getdoc from method, function: {}".format(e))
 
         
         elif _type in [PROPERTY]:
@@ -397,7 +397,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         if summary:
             top_summary = ""
 
-            # Initialize known types needing further process.
+            # Initialize known types needing further processing.
             var_types = {
                 ':rtype:': 'returns',
                 ':returns:': 'returns',
@@ -414,7 +414,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 if index > -1:
                     indexes.append(index)
 
-            # If we found types needing further process, locate its index,
+            # If we found types needing further processing, locate its index,
             # if we found empty array for indexes, stop processing further.
             index = min(indexes) if indexes else 0
 
