@@ -36,6 +36,8 @@ from sphinx.util.console import darkgreen, bold
 from sphinx.util import ensuredir
 from sphinx.errors import ExtensionError
 from sphinx.util.nodes import make_refnode
+from sphinxcontrib.napoleon.docstring import GoogleDocstring
+from sphinxcontrib.napoleon import Config
 
 from .utils import transform_node, transform_string
 from .settings import API_ROOT
@@ -289,6 +291,107 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
         return path
 
+    def _extract_docstring_info(summary_info, summary):
+        top_summary = ""
+
+        # Initialize known types needing further processing.
+        var_types = {
+            ':rtype:': 'returns',
+            ':returns:': 'returns',
+            ':type': 'variables',
+            ':param': 'variables',
+            ':raises': 'exceptions',
+            ':raises:': 'exceptions'
+        }
+        
+        # Clean the string by cleaning newlines and backlashes, then split by white space.
+        config = Config(napoleon_use_param=True, napoleon_use_rtype=True)
+        # Convert Google style to reStructuredText
+        parsed_text = str(GoogleDocstring(summary, config))
+
+        # Trim the top summary but maintain its formatting.
+        indexes = []
+        for types in var_types:
+            index = parsed_text.find(types)
+            if index > -1:
+                # For now, skip on parsing custom fields like attribute
+                if types == ':type' and 'attribute::' in parsed_text:
+                    continue
+                indexes.append(index)
+
+        # If we found types needing further processing, locate its index,
+        # if we found empty array for indexes, stop processing further.
+        index = min(indexes) if indexes else 0
+
+        # Store the top summary separately.
+        if index == 0:
+            top_summary = summary
+        else:
+            top_summary = parsed_text[:index]
+            parsed_text = parsed_text[index:]
+
+            # Clean up whitespace and other characters
+            parsed_text = " ".join(filter(None, re.split(r'\n|  |\|\s', parsed_text))).split(" ")
+
+            cur_type = ''
+            words = []
+            arg_name = ''
+            index = 0
+
+            # Using counter iteration to easily extract names rather than
+            # coming up with more complicated stopping logic for each tags.
+            while index <= len(parsed_text):
+                word = parsed_text[index] if index < len(parsed_text) else ""
+                # Check if we encountered specific words.
+                if word in var_types or index == len(parsed_text):
+                    # Finish processing previous section.
+                    if cur_type:
+                        if cur_type == ':type':
+                            summary_info[var_types[cur_type]][arg_name]['var_type'] = " ".join(words)
+                        elif cur_type == ':param':
+                            summary_info[var_types[cur_type]][arg_name]['description'] = " ".join(words)
+                        elif ":raises" in cur_type:
+                            summary_info[var_types[cur_type]].append({
+                                'var_type': arg_name,
+                                'description': " ".join(words)
+                            })
+                        elif cur_type == ':rtype:':
+                            arg_name = " ".join(words)
+                        else:
+                            summary_info[var_types[cur_type]].append({
+                                'var_type': arg_name,
+                                'description': " ".join(words)
+                            })
+                    else:
+                        # If after we processed the top summary and get in this state,
+                        # likely we encountered a type that's not covered above or the docstring
+                        # was formatted badly. This will likely break docfx job later on, should not
+                        # process further.
+                        if word not in var_types:
+                            raise ValueError("Encountered wrong formatting, please check docstrings")
+   
+                    # Reached end of string, break after finishing processing
+                    if index == len(parsed_text):
+                        break
+    
+                    # Start processing for new section
+                    cur_type = word
+                    if cur_type in [':type', ':param', ':raises', ':raises:']:
+                        index += 1
+                        arg_name = parsed_text[index][:-1]
+                        # Initialize empty dictionary if it doesn't exist already
+                        if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
+                            summary_info[var_types[cur_type]][arg_name] = {}
+
+                    # Empty target string
+                    words = []
+                else:
+                    words.append(word)
+    
+                index += 1
+
+        return top_summary
+
 
     if lines is None:
         lines = []
@@ -298,7 +401,13 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         if _type in [METHOD, FUNCTION]:
             argspec = inspect.getfullargspec(obj) # noqa
             for arg in argspec.args:
-                args.append({'id': arg})
+                # Ignore adding in entry for "self"
+                if arg != 'cls':
+                    args.append({'id': arg})
+            if argspec.varargs:
+                args.append({'id': argspec.varargs})
+            if argspec.varkw:
+                args.append({'id': argspec.varkw})
             if argspec.defaults:
                 for count, default in enumerate(argspec.defaults):
                     cut_count = len(argspec.defaults)
@@ -307,19 +416,18 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     # Match the defaults with the count
                     if 'object at 0x' not in str(default):
                         args[len(args) - cut_count + count]['defaultValue'] = str(default)
-
             try:
                 lines = inspect.getdoc(obj)
                 lines = lines.split("\n") if lines else []
-            except Exception as e:
+            except TypeError as e:
                 print("couldn't getdoc from method, function: {}".format(e))
 
         
         elif _type in [PROPERTY]:
             lines = inspect.getdoc(obj)
             lines = lines.split("\n") if lines else []
-    except Exception as e:
-        print("Can't get argspec for {}: {}. Exception: {}".format(type(obj), name, e))
+    except TypeError as e:
+        print("Can't get argspec for {}: {}. {}".format(type(obj), name, e))
 
     if name in app.env.docfx_signature_funcs_methods:
         sig = app.env.docfx_signature_funcs_methods[name]
@@ -383,7 +491,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     }
 
     summary_info = {
-        'variables': {},  # Stores mapping of variables and its description, types
+        'variables': {},  # Stores mapping of variables and its description & types
         'returns': [],    # Stores the return info
         'exceptions': []  # Stores the exception info
     }
@@ -395,96 +503,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     
         # Extract summary info into respective sections.
         if summary:
-            top_summary = ""
-
-            # Initialize known types needing further processing.
-            var_types = {
-                ':rtype:': 'returns',
-                ':returns:': 'returns',
-                ':type': 'variables',
-                ':param': 'variables',
-                ':raises': 'exceptions',
-                ':raises:': 'exceptions'
-            }
-
-            # Trim the top summary but maintain its formatting.
-            indexes = []
-            for types in var_types:
-                index = summary.find(types)
-                if index > -1:
-                    indexes.append(index)
-
-            # If we found types needing further processing, locate its index,
-            # if we found empty array for indexes, stop processing further.
-            index = min(indexes) if indexes else 0
-
-            # Store the top summary separately.
-            if index == 0:
-                top_summary = summary
-            else:
-                top_summary = summary[:index]
-                summary = summary[index:]
-
-                # Clean the string by cleaning newlines and backlashes, then split by white space.
-                parsed_text = " ".join(filter(None, re.split('\n|  |\\\\',summary))).split(" ")
-            
-                cur_type = ''
-                words = []
-                arg_name = ''
-                index = 0
-
-                # Using counter iteration to easily extract names rather than
-                # coming up with more complicated stopping logic for each tags.
-                while index <= len(parsed_text):
-                    word = parsed_text[index] if index < len(parsed_text) else ""
-                    # Check if we encountered specific words.
-                    if word in var_types or index == len(parsed_text):
-                        # Finish processing previous section.
-                        if cur_type:
-                            if cur_type == ':type':
-                                summary_info[var_types[cur_type]][arg_name]['var_type'] = " ".join(words)
-                            elif cur_type == ':param':
-                                summary_info[var_types[cur_type]][arg_name]['description'] = " ".join(words)
-                            elif ":raises" in cur_type:
-                                summary_info[var_types[cur_type]].append({
-                                    'var_type': arg_name,
-                                    'description': " ".join(words)
-                                })
-                            elif cur_type == ':rtype:':
-                                arg_name = " ".join(words)
-                            else:
-                                summary_info[var_types[cur_type]].append({
-                                    'var_type': arg_name,
-                                    'description': " ".join(words)
-                                })
-                        else:
-                            # If after we processed the top summary and get in this state,
-                            # likely we encountered a type that's not covered above or the docstring
-                            # was formatted badly. This will likely break docfx job later on, should not
-                            # process further.
-                            if word not in var_types:
-                                raise ValueError("Encountered wrong formatting, please check docstrings")
-   
-                        # Reached end of string, break after finishing processing
-                        if index == len(parsed_text):
-                            break
-    
-                        # Start processing for new section
-                        cur_type = word
-                        if cur_type in [':type', ':param', ':raises', ':raises:']:
-                            index += 1
-                            arg_name = parsed_text[index][:-1]
-                            # Initialize empty dictionary if it doesn't exist already
-                            if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
-                                summary_info[var_types[cur_type]][arg_name] = {}
-
-                        # Empty target string
-                        words = []
-                    else:
-                        words.append(word)
-    
-                    index += 1
-
+            top_summary = _extract_docstring_info(summary_info, summary)
             datam['summary'] = top_summary
 
     if args or sig or summary_info:
