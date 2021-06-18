@@ -720,23 +720,42 @@ def build_finished(app, exception):
                 sanitize_uidname_field(module['items'])
             module.pop('uidname')
 
-    # Parses the package name and returns package name and module name.
-    def find_package_name(package_name):
+    # Parses the package name and returns unique identifer and name.
+    def find_unique_name(package_name, entries):
         for name in package_name:
-            if name != "google" and name != "cloud":
+            # Only find unique identifiers beside "google" and "cloud"
+            # For example, if given
+            #   "google.cloud.spanner.v1.params_v1.types"
+            #   "google.cloud.spanner.v1.instance_v1.types"
+            # it will return "instace_v1" or "params_v1" and "types".
+            if name != "google" and name != "cloud" and entries[name] == 1:
                 return [name, package_name[-1]]
 
     # Used to disambiguate names that have same entries.
     def disambiguate_toc_name(toc_yaml):
         names = {}
         for module in toc_yaml:
-            names[module['name']] = 1 if module['name'] not in names else 2
+            module_name = module['name']
+            if module_name not in names:
+                names[module_name] = {}
+
+            # Split the name and mark all duplicates.
+            # There will be at least 1 unique identifer for each name.
+            for part in module['uidname'].split("."):
+                names[module_name][part] = 1 if part not in names[module_name] else 2
+
+            # Some entries don't contain `name` in `uidname`, add these into the map as well.
+            if module_name not in names[module_name]:
+                names[module_name][module_name] = 1
+
             if 'items' in module:
                 disambiguate_toc_name(module['items'])
 
         for module in toc_yaml:
-            if names[module['name']] > 1:
-                module['name'] = ".".join(find_package_name(module['uidname'].split(".")))
+            module_name = module['name']
+            # Check if there are multiple entires of module['name'], disambiguate if needed.
+            if names[module_name][module_name] > 1:
+                module['name'] = ".".join(find_unique_name(module['uidname'].split("."), names[module_name]))
 
     def find_node_in_toc_tree(toc_yaml, to_add_node):
         for module in toc_yaml:
