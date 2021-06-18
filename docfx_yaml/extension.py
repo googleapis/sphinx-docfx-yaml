@@ -742,7 +742,10 @@ def build_finished(app, exception):
             # Split the name and mark all duplicates.
             # There will be at least 1 unique identifer for each name.
             for part in module['uidname'].split("."):
-                names[module_name][part] = 1 if part not in names[module_name] else 2
+                if part not in names[module_name]:
+                    names[module_name][part] = 1
+                else:
+                    names[module_name][part] += 1
 
             # Some entries don't contain `name` in `uidname`, add these into the map as well.
             if module_name not in names[module_name]:
