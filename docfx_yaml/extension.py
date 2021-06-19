@@ -733,23 +733,23 @@ def build_finished(app, exception):
 
     # Used to disambiguate names that have same entries.
     def disambiguate_toc_name(toc_yaml):
-        names = {}
+        name_entries = {}
         for module in toc_yaml:
             module_name = module['name']
-            if module_name not in names:
-                names[module_name] = {}
+            if module_name not in name_entries:
+                name_entries[module_name] = {}
 
             # Split the name and mark all duplicates.
             # There will be at least 1 unique identifer for each name.
             for part in module['uidname'].split("."):
-                if part not in names[module_name]:
-                    names[module_name][part] = 1
+                if part not in name_entries[module_name]:
+                    name_entries[module_name][part] = 1
                 else:
-                    names[module_name][part] += 1
+                    name_entries[module_name][part] += 1
 
             # Some entries don't contain `name` in `uidname`, add these into the map as well.
-            if module_name not in names[module_name]:
-                names[module_name][module_name] = 1
+            if module_name not in name_entries[module_name]:
+                name_entries[module_name][module_name] = 1
 
             if 'items' in module:
                 disambiguate_toc_name(module['items'])
@@ -757,8 +757,8 @@ def build_finished(app, exception):
         for module in toc_yaml:
             module_name = module['name']
             # Check if there are multiple entires of module['name'], disambiguate if needed.
-            if names[module_name][module_name] > 1:
-                module['name'] = ".".join(find_unique_name(module['uidname'].split("."), names[module_name]))
+            if name_entries[module_name][module_name] > 1:
+                module['name'] = ".".join(find_unique_name(module['uidname'].split("."), name_entries[module_name]))
 
     def find_node_in_toc_tree(toc_yaml, to_add_node):
         for module in toc_yaml:
