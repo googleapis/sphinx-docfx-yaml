@@ -21,7 +21,6 @@ version = '0.3.0'
 dependencies = [
     'PyYAML',
     'sphinx',
-    'sphinxcontrib.napoleon',
     'unidecode',
     'wheel>=0.24.0'
 ]
