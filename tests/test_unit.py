@@ -11,23 +11,23 @@ class TestGenerate(unittest.TestCase):
         entries = {}
         
         # Disambiguate with unique entries.
-        entry1_1 = "google.cloud.aiplatform.v1.schema.predict.instance_v1.types"
-        entry1_2 = "google.cloud.aiplatform.v1beta2.schema.predict.instance_v1.types"
-        want1_1 = "v1.types"
-        want1_2 = "v1beta2.types"
+        entry1 = "google.cloud.aiplatform.v1.schema.predict.instance_v1.types"
+        entry2 = "google.cloud.aiplatform.v1beta2.schema.predict.instance_v1.types"
+        want1 = "v1.types"
+        want2 = "v1beta2.types"
 
-        for entry in [entry1_1, entry1_2]:
+        for entry in [entry1, entry2]:
             for word in entry.split("."):
                 if word not in entries:
                     entries[word] = 1
                 else:
                     entries[word] += 1
 
-        got1_1 = find_unique_name(entry1_1.split("."), entries)
-        got1_2 = find_unique_name(entry1_2.split("."), entries)
+        got1 = find_unique_name(entry1.split("."), entries)
+        got2 = find_unique_name(entry2.split("."), entries)
 
-        self.assertEqual(want1_1, ".".join(got1_1))
-        self.assertEqual(want1_2, ".".join(got1_2))
+        self.assertEqual(want1, ".".join(got1))
+        self.assertEqual(want2, ".".join(got2))
 
 
     def test_disambiguate_toc_name(self):
