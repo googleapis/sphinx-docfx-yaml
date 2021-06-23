@@ -324,6 +324,8 @@ def _extract_docstring_info(summary_info, summary, name):
         words = []
         arg_name = ''
         index = 0
+        # Used to track return type and description
+        r_type, r_descr = '', ''
 
         # Using counter iteration to easily extract names rather than
         # coming up with more complicated stopping logic for each tags.
@@ -342,13 +344,18 @@ def _extract_docstring_info(summary_info, summary, name):
                             'var_type': arg_name,
                             'description': " ".join(words)
                         })
-                    elif cur_type == ':rtype:':
-                        arg_name = " ".join(words)
                     else:
-                        summary_info[var_types[cur_type]].append({
-                            'var_type': arg_name,
-                            'description': " ".join(words)
-                        })
+                        if cur_type == ':rtype:':
+                            r_type = " ".join(words)
+                        else:
+                            r_descr = " ".join(words)
+                        if r_type and r_descr:
+                            summary_info[var_types[cur_type]].append({
+                                'var_type': r_type,
+                                'description': r_descr
+                            })
+                            r_type, r_descr = '', ''
+
                 else:
 
                     # If after we processed the top summary and get in this state,
