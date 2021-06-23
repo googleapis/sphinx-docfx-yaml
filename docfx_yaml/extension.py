@@ -293,10 +293,10 @@ def _extract_docstring_info(summary_info, summary, name):
     indexes = []
     for types in var_types:
         # Ensure that we look for exactly the string we want.
-        #  Adding the extra space for non-colon ending types
-        #  helps determine if we simply ran into desired occurrence
-        #  or if we ran into a similar looking syntax but shouldn't
-        #  parse upon it.
+        # Adding the extra space for non-colon ending types
+        # helps determine if we simply ran into desired occurrence
+        # or if we ran into a similar looking syntax but shouldn't
+        # parse upon it.
         types += ' ' if types[-1] != ':' else ''
         if types in parsed_text:
             index = parsed_text.find(types)
@@ -313,77 +313,78 @@ def _extract_docstring_info(summary_info, summary, name):
     # Store the top summary separately.
     if index == 0:
         top_summary = summary
-    else:
-        top_summary = parsed_text[:index]
-        parsed_text = parsed_text[index:]
+        return top_summary
 
-        # Clean up whitespace and other characters
-        parsed_text = " ".join(filter(None, re.split(r'\n|  |\|\s', parsed_text))).split(" ")
+    top_summary = parsed_text[:index]
+    parsed_text = parsed_text[index:]
 
-        cur_type = ''
-        words = []
-        arg_name = ''
-        index = 0
-        # Used to track return type and description
-        r_type, r_descr = '', ''
+    # Clean up whitespace and other characters
+    parsed_text = " ".join(filter(None, re.split(r'\|\s', parsed_text))).split()
 
-        # Using counter iteration to easily extract names rather than
-        # coming up with more complicated stopping logic for each tags.
-        while index <= len(parsed_text):
-            word = parsed_text[index] if index < len(parsed_text) else ""
-            # Check if we encountered specific words.
-            if word in var_types or index == len(parsed_text):               
-                # Finish processing previous section.
-                if cur_type:
-                    if cur_type == ':type':
-                        summary_info[var_types[cur_type]][arg_name]['var_type'] = " ".join(words)
-                    elif cur_type == ':param':
-                        summary_info[var_types[cur_type]][arg_name]['description'] = " ".join(words)
-                    elif ":raises" in cur_type:
-                        summary_info[var_types[cur_type]].append({
-                            'var_type': arg_name,
-                            'description': " ".join(words)
-                        })
-                    else:
-                        if cur_type == ':rtype:':
-                            r_type = " ".join(words)
-                        else:
-                            r_descr = " ".join(words)
-                        if r_type and r_descr:
-                            summary_info[var_types[cur_type]].append({
-                                'var_type': r_type,
-                                'description': r_descr
-                            })
-                            r_type, r_descr = '', ''
+    cur_type = ''
+    words = []
+    arg_name = ''
+    index = 0
+    # Used to track return type and description
+    r_type, r_descr = '', ''
 
+    # Using counter iteration to easily extract names rather than
+    # coming up with more complicated stopping logic for each tags.
+    while index <= len(parsed_text):
+        word = parsed_text[index] if index < len(parsed_text) else ""
+        # Check if we encountered specific words.
+        if word in var_types or index == len(parsed_text):               
+            # Finish processing previous section.
+            if cur_type:
+                if cur_type == ':type':
+                    summary_info[var_types[cur_type]][arg_name]['var_type'] = " ".join(words)
+                elif cur_type == ':param':
+                    summary_info[var_types[cur_type]][arg_name]['description'] = " ".join(words)
+                elif ":raises" in cur_type:
+                    summary_info[var_types[cur_type]].append({
+                        'var_type': arg_name,
+                        'description': " ".join(words)
+                    })
                 else:
+                    if cur_type == ':rtype:':
+                        r_type = " ".join(words)
+                    else:
+                        r_descr = " ".join(words)
+                    if r_type and r_descr:
+                        summary_info[var_types[cur_type]].append({
+                            'var_type': r_type,
+                            'description': r_descr
+                        })
+                        r_type, r_descr = '', ''
 
-                    # If after we processed the top summary and get in this state,
-                    # likely we encountered a type that's not covered above or the docstring
-                    # was formatted badly. This will likely break docfx job later on, should not
-                    # process further.
-                    if word not in var_types:
-                        raise ValueError(f"Encountered wrong formatting, please check docstring for {name}")
-   
-                # Reached end of string, break after finishing processing
-                if index == len(parsed_text):
-                    break
-    
-                # Start processing for new section
-                cur_type = word
-                if cur_type in [':type', ':param', ':raises', ':raises:']:
-                    index += 1
-                    arg_name = parsed_text[index][:-1]
-                    # Initialize empty dictionary if it doesn't exist already
-                    if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
-                        summary_info[var_types[cur_type]][arg_name] = {}
-
-                # Empty target string
-                words = []
             else:
-                words.append(word)
+
+                # If after we processed the top summary and get in this state,
+                # likely we encountered a type that's not covered above or the docstring
+                # was formatted badly. This will likely break docfx job later on, should not
+                # process further.
+                if word not in var_types:
+                    raise ValueError(f"Encountered wrong formatting, please check docstring for {name}")
+   
+            # Reached end of string, break after finishing processing
+            if index == len(parsed_text):
+                break
     
-            index += 1
+            # Start processing for new section
+            cur_type = word
+            if cur_type in [':type', ':param', ':raises', ':raises:']:
+                index += 1
+                arg_name = parsed_text[index][:-1]
+                # Initialize empty dictionary if it doesn't exist already
+                if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
+                    summary_info[var_types[cur_type]][arg_name] = {}
+
+            # Empty target string
+            words = []
+        else:
+            words.append(word)
+    
+        index += 1
 
     return top_summary
 

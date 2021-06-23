@@ -45,36 +45,37 @@ class TestGenerate(unittest.TestCase):
 
         self.assertEqual(yaml_want, yaml_got)
 
+    # Variables used for testing _extract_docstring_info
+    top_summary1_want = "\nSimple test for docstring.\n\n"
+    summary_info1_want = {
+        'variables': {
+            'arg1': {
+                'var_type': 'int',
+                'description': 'simple description.'
+            },
+            'arg2': {
+                'var_type': 'str',
+                'description': 'simple description for `arg2`.'
+            }
+        },
+        'returns': [
+            {
+                'var_type': 'str', 
+                'description': 'simple description for return value.'
+            }
+        ],
+        'exceptions': [
+            {
+                'var_type': 'AttributeError', 
+                'description': 'if `condition x`.'
+            }
+        ]
+    }
+    
 
-    def test_extract_docstring_info(self):
+    def test_extract_docstring_info_normal_input(self):
 
         ## Test for normal input
-        top_summary1_want = "\nSimple test for docstring.\n\n"
-        summary_info1_want = {
-            'variables': {
-                'arg1': {
-                    'var_type': 'int',
-                    'description': 'simple description.'
-                },
-                'arg2': {
-                    'var_type': 'str',
-                    'description': 'simple description for `arg2`.'
-                }
-            },
-            'returns': [
-                {
-                  'var_type': 'str', 
-                  'description': 'simple description for return value.'
-                }
-            ],
-            'exceptions': [
-                {
-                  'var_type': 'AttributeError', 
-                  'description': 'if `condition x`.'
-                }
-            ]
-        }
-
         summary_info1_got = {
             'variables': {},
             'returns': [],
@@ -97,10 +98,11 @@ Raises:
 
         top_summary1_got = _extract_docstring_info(summary_info1_got, summary1, "")
 
-        self.assertEqual(top_summary1_got, top_summary1_want)
-        self.assertEqual(summary_info1_got, summary_info1_want)
+        self.assertEqual(top_summary1_got, self.top_summary1_want)
+        self.assertEqual(summary_info1_got, self.summary_info1_want)
 
 
+    def test_extract_docstring_info_mixed_format(self):
         ## Test for input coming in mixed format.
         summary2 = """
 Simple test for docstring.
@@ -125,10 +127,11 @@ Simple test for docstring.
         top_summary2_got = _extract_docstring_info(summary_info2_got, summary2, "")
         
         # Output should be same as test 1 with normal input.
-        self.assertEqual(top_summary2_got, top_summary1_want)
-        self.assertEqual(summary_info2_got, summary_info1_want)
+        self.assertEqual(top_summary2_got, self.top_summary1_want)
+        self.assertEqual(summary_info2_got, self.summary_info1_want)
 
         
+    def test_extract_docstring_info_check_parser(self):
         ## Test for parser to correctly scan docstring tokens and not custom fields
         summary_info3_want = {
             'variables': {},
@@ -159,6 +162,7 @@ It could return :param: with :returns as well.
         self.assertEqual(top_summary3_got, top_summary3_want)
         self.assertEqual(summary_info3_got, summary_info3_want)
 
+    def test_extract_docstring_info_check_error(self):
         ## Test for incorrectly formmatted docstring raising error
         summary4 = """
 Description of docstring which should fail. 
@@ -166,7 +170,7 @@ Description of docstring which should fail.
 :returns:param:
 """
         with self.assertRaises(ValueError):
-            _extract_docstring_info(summary_info3_got, summary4, "error string")
+            _extract_docstring_info({}, summary4, "error string")
 
 if __name__ == '__main__':
     unittest.main()
