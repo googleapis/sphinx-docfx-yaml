@@ -73,6 +73,7 @@ REFMETHOD = 'meth'
 REFFUNCTION = 'func'
 INITPY = '__init__.py'
 REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_\.<> ]*?`'
+REF_PATTERN_LAST = '~(([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*)'
 
 PROPERTY = 'property'
 
@@ -184,23 +185,31 @@ def _refact_example_in_module_summary(lines):
     return new_lines
 
 
-def _resolve_reference_in_module_summary(lines):
+def _resolve_reference_in_module_summary(PATTERN, lines):
     new_lines = []
     for line in lines:
-        matched_objs = list(re.finditer(REF_PATTERN, line))
+        matched_objs = list(re.finditer(PATTERN, line))
         new_line = line
         for matched_obj in matched_objs:
             start = matched_obj.start()
             end = matched_obj.end()
             matched_str = line[start:end]
-            if '<' in matched_str and '>' in matched_str:
-                # match string like ':func:`***<***>`'
-                index = matched_str.index('<')
-                ref_name = matched_str[index+1:-2]
+            if PATTERN == REF_PATTERN:
+                if '<' in matched_str and '>' in matched_str:
+                    # match string like ':func:`***<***>`'
+                    index = matched_str.index('<')
+                    ref_name = matched_str[index+1:-2]
+                else:
+                    # match string like ':func:`~***`' or ':func:`***`'
+                    index = matched_str.index('~') if '~' in matched_str else matched_str.index('`')
+                    ref_name = matched_str[index+1:-1]
             else:
-                # match string like ':func:`~***`' or ':func:`***`'
-                index = matched_str.index('~') if '~' in matched_str else matched_str.index('`')
-                ref_name = matched_str[index+1:-1]
+                index = matched_str.rfind('.') + 1
+                if index == 0:
+                    # If there is no dot, push index to not include tilde
+                    index = 1
+                # Find the last component of the target. "~Queue.get" only returns <xref:get>
+                ref_name = matched_str[index:]
             new_line = new_line.replace(matched_str, '<xref:{}>'.format(ref_name))
         new_lines.append(new_line)
     return new_lines
@@ -303,11 +312,59 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             ':raises': 'exceptions',
             ':raises:': 'exceptions'
         }
+
+        initial_index = -1
+        
+        # Prevent GoogleDocstring crashing on custom types and parse all xrefs to normal
+        if '~' in summary or '<xref:' in summary:
+            type_pairs = []
+            # Find first character after one of the three combination
+            initial_index = min(
+              max(0, summary.find('~')), 
+              max(0, summary.find('<xref'))
+            )
+
+            summary_part = summary[initial_index:]
+        
+            # Remove all occurrences of "~xref" and "<xref:type>"
+            while '~' in summary_part or "<xref:" in summary_part:
+
+                # Expecting format of "~xref"
+                if '~' in summary_part:
+                    initial_index += summary_part.find('~')
+                    original_type = summary[initial_index:initial_index+(summary[initial_index:].find(':'))]
+                    initial_index += len(original_type)
+                    original_type = " ".join(filter(None, re.split(r'\n|  |\|\s|\t', original_type)))
+                    safe_type = original_type[1:]
+
+                # Expecting format of "<xref:type>:"
+                elif "<xref:" in summary_part:
+                    initial_index += summary_part.find("<xref")
+                    original_type = summary[initial_index:initial_index+(summary[initial_index:].find('>'))+1]
+                    initial_index += len(original_type)
+                    original_type = " ".join(filter(None, re.split(r'\n|  |\|\s|\t', original_type)))
+                    safe_type = original_type[6:-1]
+                else:
+                    raise ValueError("Encountered unexpected type in Exception docstring.")
+
+                type_pairs.append([original_type, safe_type])
+                summary_part = summary[initial_index:]
+
+            # Replace all the found occurrences
+            for pairs in type_pairs:
+                original_type, safe_type = pairs[0], pairs[1]
+                summary = summary.replace(original_type, safe_type)
         
         # Clean the string by cleaning newlines and backlashes, then split by white space.
         config = Config(napoleon_use_param=True, napoleon_use_rtype=True)
         # Convert Google style to reStructuredText
         parsed_text = str(GoogleDocstring(summary, config))
+
+        # Revert back to original type
+        if initial_index > -1:
+            for pairs in type_pairs:
+                original_type, safe_type = pairs[0], pairs[1]
+                parsed_text = parsed_text.replace(safe_type, original_type)
 
         # Trim the top summary but maintain its formatting.
         indexes = []
@@ -498,7 +555,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     # Add extracted summary
     if lines != []:
-        lines = _resolve_reference_in_module_summary(lines)
+        for PATTERN in [REF_PATTERN, REF_PATTERN_LAST]:
+            lines = _resolve_reference_in_module_summary(PATTERN, lines)
         summary = app.docfx_transform_string('\n'.join(_refact_example_in_module_summary(lines)))
     
         # Extract summary info into respective sections.
