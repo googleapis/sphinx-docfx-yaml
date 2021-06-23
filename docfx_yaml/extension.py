@@ -72,7 +72,9 @@ ATTRIBUTE = 'attribute'
 REFMETHOD = 'meth'
 REFFUNCTION = 'func'
 INITPY = '__init__.py'
+# Regex expression for checking references of pattern like ":class:`~package_v1.module`"
 REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_\.<> ]*?`'
+# Regex expression for checking references of pattern like "~package_v1.subpackage.module"
 REF_PATTERN_LAST = '~(([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*)'
 
 PROPERTY = 'property'
@@ -555,8 +557,11 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     # Add extracted summary
     if lines != []:
-        for PATTERN in [REF_PATTERN, REF_PATTERN_LAST]:
-            lines = _resolve_reference_in_module_summary(PATTERN, lines)
+        # Resolve references for xrefs in two different formats.
+        # REF_PATTERN checks for patterns like ":class:`~google.package.module`"
+        lines = _resolve_reference_in_module_summary(REF_PATTERN, lines)
+        # REF_PATTERN_LAST checks for patterns like "~package.module"
+        lines = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines)
         summary = app.docfx_transform_string('\n'.join(_refact_example_in_module_summary(lines)))
     
         # Extract summary info into respective sections.

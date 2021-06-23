@@ -76,9 +76,9 @@ Raises:
 """
         lines_got = lines_got.split("\n")
 
-        PATTERNS = [REF_PATTERN, REF_PATTERN_LAST]
-        for PATTERN in PATTERNS:
-            lines_got = _resolve_reference_in_module_summary(PATTERN, lines_got)
+        # Resolve over different regular expressions for different types of reference patterns.
+        lines_got = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        lines_got = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
 
         lines_want = """
 If a ``stream`` is attached to this download, then the downloaded
