@@ -312,8 +312,7 @@ def _extract_docstring_info(summary_info, summary, name):
 
     # Store the top summary separately.
     if index == 0:
-        top_summary = summary
-        return top_summary
+        return summary
 
     top_summary = parsed_text[:index]
     parsed_text = parsed_text[index:]
