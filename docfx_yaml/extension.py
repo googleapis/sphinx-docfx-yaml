@@ -187,16 +187,16 @@ def _refact_example_in_module_summary(lines):
     return new_lines
 
 
-def _resolve_reference_in_module_summary(PATTERN, lines):
+def _resolve_reference_in_module_summary(pattern, lines):
     new_lines = []
     for line in lines:
-        matched_objs = list(re.finditer(PATTERN, line))
+        matched_objs = list(re.finditer(pattern, line))
         new_line = line
         for matched_obj in matched_objs:
             start = matched_obj.start()
             end = matched_obj.end()
             matched_str = line[start:end]
-            if PATTERN == REF_PATTERN:
+            if pattern == REF_PATTERN:
                 if '<' in matched_str and '>' in matched_str:
                     # match string like ':func:`***<***>`'
                     index = matched_str.index('<')
