@@ -48,6 +48,7 @@ class TestGenerate(unittest.TestCase):
 
         self.assertEqual(yaml_want, yaml_got)
 
+
     def test_reference_in_summary(self):
         lines_got = """
 If a ``stream`` is attached to this download, then the downloaded
@@ -227,6 +228,7 @@ It could return :param: with :returns as well.
         self.assertEqual(top_summary3_got, top_summary3_want)
         self.assertEqual(summary_info3_got, summary_info3_want)
 
+
     def test_extract_docstring_info_check_error(self):
         ## Test for incorrectly formmatted docstring raising error
         summary4 = """
@@ -236,6 +238,60 @@ Description of docstring which should fail.
 """
         with self.assertRaises(ValueError):
             _extract_docstring_info({}, summary4, "error string")
+
+
+    def test_extract_docstring_info_with_xref(self):
+        ## Test with xref included in the summary, ensure they're processed as-is
+        summary_info_want = {
+            'variables': {
+                'arg1': {
+                    'var_type': '<xref:google.spanner_v1.type.Type>',
+                    'description': 'simple description.'
+                },
+                'arg2': {
+                    'var_type': '~google.spanner_v1.type.dict',
+                    'description': 'simple description for `arg2`.'
+                }
+            },
+            'returns': [
+                {
+                    'var_type': '<xref:Pair>', 
+                    'description': 'simple description for return value.'
+                }
+            ],
+            'exceptions': [
+                {
+                    'var_type': '<xref:SpannerException>', 
+                    'description': 'if `condition x`.'
+                }
+            ]
+        }
+
+        summary = """
+Simple test for docstring.
+
+:type arg1: <xref:google.spanner_v1.type.Type>
+:param arg1: simple description.
+:param arg2: simple description for `arg2`.
+:type arg2: ~google.spanner_v1.type.dict
+
+:rtype: <xref:Pair>
+:returns: simple description for return value.
+
+:raises <xref:SpannerException>: if `condition x`. 
+"""
+
+        summary_info_got = {
+            'variables': {},
+            'returns': [],
+            'exceptions': []
+        }
+
+        top_summary_got = _extract_docstring_info(summary_info_got, summary, "")
+
+        # Same as the top summary from previous example, compare with that
+        self.assertEqual(top_summary_got, self.top_summary1_want)
+        self.assertEqual(summary_info_got, summary_info_want)
 
 if __name__ == '__main__':
     unittest.main()
