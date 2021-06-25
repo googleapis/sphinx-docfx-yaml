@@ -630,15 +630,13 @@ def process_docstring(app, _type, name, obj, options, lines):
     """
 
     # Check if we already processed this docstring.
-    if name not in app.env.docfx_uid_names:
-        # Checking in dictionary("{}") takes O(1) average time for a bit more space,
-        # whereas checking in lists("[]") takes O(n) average time.
-        app.env.docfx_uid_names[name] = ''
-    else:
+    if name in app.env.docfx_uid_names:
         return
 
-    # Use exception as class
+    # Register current docstring to a set.
+    app.env.docfx_uid_names[name] = ''
 
+    # Use exception as class
     if _type == EXCEPTION:
         _type = CLASS
 
