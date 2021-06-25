@@ -99,6 +99,8 @@ def build_init(app):
     app.env.docfx_signature_funcs_methods = {}
     # This store the uid-type mapping info
     app.env.docfx_info_uid_types = {}
+    # This stores uidnames of docstrings already parsed
+    app.env.docfx_uid_names = {}
 
     remote = getoutput('git remote -v')
 
@@ -626,6 +628,15 @@ def process_docstring(app, _type, name, obj, options, lines):
     """
     This function takes the docstring and indexes it into memory.
     """
+
+    # Check if we already processed this docstring.
+    if name not in app.env.docfx_uid_names:
+        # Checking in dictionary("{}") takes O(1) average time for a bit more space,
+        # whereas checking in lists("[]") takes O(n) average time.
+        app.env.docfx_uid_names[name] = ''
+    else:
+        return
+
     # Use exception as class
 
     if _type == EXCEPTION:
@@ -703,6 +714,7 @@ def insert_children_on_module(app, _type, datam):
 
     if MODULE not in datam or datam[MODULE] not in app.env.docfx_yaml_modules:
         return
+
     insert_module = app.env.docfx_yaml_modules[datam[MODULE]]
     # Find the module which the datam belongs to
     for obj in insert_module:
@@ -715,7 +727,6 @@ def insert_children_on_module(app, _type, datam):
             # If it is a function, add this to its module. No need for class and module since this is
             # done before calling this function.
             insert_module.append(datam)
-
             obj['references'].append(_create_reference(datam, parent=obj['uid']))
             break
         # Add classes & exceptions to module
