@@ -96,7 +96,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
     # python3 -m docuploader upload docs/_build/html --metadata-file docs.metadata --staging-bucket "${STAGING_BUCKET}"
 
     # Test running with the plugin version locally.
-    if [[ ${TEST_PLUGIN} == "true" ]]; then
+    if [[ "${TEST_PLUGIN}" == "true" ]]; then
       python3 -m pip install -e .
       sphinx-build -T -N -D extensions=sphinx.ext.autodoc,sphinx.ext.autosummary,docfx_yaml.extension,sphinx.ext.intersphinx,sphinx.ext.coverage,sphinx.ext.napoleon,sphinx.ext.todo,sphinx.ext.viewcode,recommonmark -b html -d docs/_build/doctrees/ docs/ docs/_build/html/
       continue
