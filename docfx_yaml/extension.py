@@ -1130,7 +1130,7 @@ def build_finished(app, exception):
                     'langs': ['python'],
                     'type': 'package',
                     'kind': 'distribution',
-                    'summary': '',
+                    'summary': 'Reference API documentation for `{}`.'.format(app.config.project),
                     'children': index_children
                 }],
                 'references': index_references
