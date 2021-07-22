@@ -876,7 +876,7 @@ def build_finished(app, exception):
     def convert_module_to_package_if_needed(obj):
         if 'source' in obj and 'path' in obj['source'] and obj['source']['path']:
             if obj['source']['path'].endswith(INITPY):
-                obj['type'] = 'package'
+                obj['type'] = 'subPackage'
                 return
 
         for child_uid in obj['children']:
