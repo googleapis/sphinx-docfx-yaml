@@ -588,7 +588,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     # If there is no summary, add a short snippet.
     else:
-        datam['summary'] = "API documentation for {} {}.".format(name, _type)
+        datam['summary'] = "API documentation for `{}` {}.".format(name, _type)
 
     if args or sig or summary_info:
         datam['syntax'] = {}
@@ -877,6 +877,7 @@ def build_finished(app, exception):
         if 'source' in obj and 'path' in obj['source'] and obj['source']['path']:
             if obj['source']['path'].endswith(INITPY):
                 obj['type'] = 'subPackage'
+                obj['summary'] = "API documentation for `{}` package.".format(obj['name'])
                 return
 
         for child_uid in obj['children']:
