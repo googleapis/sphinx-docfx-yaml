@@ -102,6 +102,8 @@ def build_init(app):
     # This stores uidnames of docstrings already parsed
     app.env.docfx_uid_names = {}
 
+    app.env.docfx_xrefs = {}
+
     remote = getoutput('git remote -v')
 
     try:
@@ -190,7 +192,7 @@ def _refact_example_in_module_summary(lines):
 
 
 def _resolve_reference_in_module_summary(pattern, lines):
-    new_lines = []
+    new_lines, xrefs = [], []
     for line in lines:
         matched_objs = list(re.finditer(pattern, line))
         new_line = line
@@ -214,9 +216,10 @@ def _resolve_reference_in_module_summary(pattern, lines):
                     index = 1
                 # Find the last component of the target. "~Queue.get" only returns <xref:get>
                 ref_name = matched_str[index:]
+            xrefs.append(matched_str)
             new_line = new_line.replace(matched_str, '<xref:{}>'.format(ref_name))
         new_lines.append(new_line)
-    return new_lines
+    return new_lines, xrefs
 
 
 def enumerate_extract_signature(doc, max_args=20):
@@ -576,9 +579,15 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     if lines != []:
         # Resolve references for xrefs in two different formats.
         # REF_PATTERN checks for patterns like ":class:`~google.package.module`"
-        lines = _resolve_reference_in_module_summary(REF_PATTERN, lines)
+        lines, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines)
+        for xref in xrefs:
+            if xref not in app.env.docfx_xrefs:
+                app.env.docfx_xrefs[xref] = ''
         # REF_PATTERN_LAST checks for patterns like "~package.module"
-        lines = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines)
+        lines, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines)
+        for xref in xrefs:
+            if xref not in app.env.docfx_xrefs:
+                app.env.docfx_xrefs[xref] = ''
         summary = app.docfx_transform_string('\n'.join(_refact_example_in_module_summary(lines)))
     
         # Extract summary info into respective sections.
@@ -1163,6 +1172,11 @@ def build_finished(app, exception):
                 raise ValueError("Unable to dump object\n{0}".format(yaml_data)) from e
 
         file_name_set.add(filename)
+    
+    xref_file = os.path.join(normalized_outdir, 'xrefs.yml')
+    with open(xref_file, 'w') as xref_file_obj:
+        for xref in app.env.docfx_xrefs:
+            xref_file_obj.write(f'{xref}\n')
 
 def missing_reference(app, env, node, contnode):
     reftarget = ''
