@@ -767,7 +767,7 @@ def insert_children_on_module(app, _type, datam):
                         datam['references'].append(_create_reference(obj, parent=module))
                         break
 
- 
+
 def insert_children_on_class(app, _type, datam):
     """
     Insert children of a specific class
