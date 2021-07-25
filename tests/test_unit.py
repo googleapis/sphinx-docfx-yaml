@@ -81,7 +81,7 @@ If a ``stream`` is attached to this download, then the downloaded
 resource will be written to the stream.
 
 Args:
-    transport (~requests.Session): A ``requests`` object which can
+    transport (~google.cloud.requests.Session): A ``requests`` object which can
         make authenticated requests.
 
     timeout (Optional[Union[float, Tuple[float, float]]]):
@@ -90,22 +90,21 @@ Args:
         several times using the same timeout each time.
 
         Can also be passed as a tuple (connect_timeout, read_timeout).
-        See :meth:`requests.Session.request` documentation for details.
+        See :meth:`google.cloud.requests.Session.request` documentation for details.
 
 Returns:
-    ~requests.Response: The HTTP response returned by ``transport``.
+    ~google.cloud.requests.Response: The HTTP response returned by ``transport``.
 
 Raises:
-    ~google.resumable_media.common.DataCorruption: If the download's
+    ~google.cloud.resumable_media.common.DataCorruption: If the download's
         checksum doesn't agree with server-computed checksum.
     ValueError: If the current :class:`Download` has already
         finished.
 """
         lines_got = lines_got.split("\n")
-
         # Resolve over different regular expressions for different types of reference patterns.
-        lines_got = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
-        lines_got = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
+        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
 
         lines_want = """
 If a ``stream`` is attached to this download, then the downloaded
@@ -121,7 +120,7 @@ Args:
         several times using the same timeout each time.
 
         Can also be passed as a tuple (connect_timeout, read_timeout).
-        See <xref:requests.Session.request> documentation for details.
+        See <xref:request> documentation for details.
 
 Returns:
     <xref:Response>: The HTTP response returned by ``transport``.
@@ -129,7 +128,7 @@ Returns:
 Raises:
     <xref:DataCorruption>: If the download's
         checksum doesn't agree with server-computed checksum.
-    ValueError: If the current <xref:Download> has already
+    ValueError: If the current `Download` has already
         finished.
 """
         lines_want = lines_want.split("\n")
