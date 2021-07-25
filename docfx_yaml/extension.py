@@ -221,13 +221,6 @@ def _resolve_reference_in_module_summary(pattern, lines):
                     index = 1
                 ref_name = matched_str[index:]
 
-            # Check to see if we should create an xref for it.
-            if 'google.cloud' in matched_str:
-                new_line = new_line.replace(matched_str, '<xref:{}>'.format(ref_name))
-            # If it not a Cloud library, don't create xref for it.
-            else:
-                new_line = new_line.replace(matched_str, '`{}`'.format(ref_name))
-
             # Find the uid to add for xref
             index = matched_str.find("google.cloud")
             if index > -1:
@@ -235,6 +228,13 @@ def _resolve_reference_in_module_summary(pattern, lines):
                 while not xref[-1].isalnum():
                     xref = xref[:-1]
                 xrefs.append(xref)
+
+            # Check to see if we should create an xref for it.
+            if 'google.cloud' in matched_str:
+                new_line = new_line.replace(matched_str, '<xref uid=\"{}\">{}</xref>'.format(xref, ref_name))
+            # If it not a Cloud library, don't create xref for it.
+            else:
+                new_line = new_line.replace(matched_str, '`{}`'.format(ref_name))
 
         new_lines.append(new_line)
     return new_lines, xrefs
