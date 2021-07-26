@@ -588,7 +588,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     # If there is no summary, add a short snippet.
     else:
-        datam['summary'] = "API documentation for `{}` {}.".format(short_name, _type)
+        datam['summary'] = f"API documentation for `{short_name}` {_type}."
 
     if args or sig or summary_info:
         datam['syntax'] = {}
