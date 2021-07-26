@@ -789,7 +789,7 @@ def insert_children_on_class(app, _type, datam):
                 (
                   # If obj is either method, attr or prop of a class and not self, or
                   (obj[CLASS] == datam[CLASS] and obj != datam) or \
-                  # If obj is a subclass of another class.
+                  # If datam is a subclass of another class.
                   (_type == CLASS and obj['class'] == datam['module'])
                 ):
             obj['children'].append(datam['uid'])
