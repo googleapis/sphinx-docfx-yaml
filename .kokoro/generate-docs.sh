@@ -102,6 +102,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
       # --no-use-pep517 is required for django-spanner install issue: see https://github.com/pypa/pip/issues/7953
       python3 -m pip install --user --no-use-pep517 -e .
       sphinx-build -T -N -D extensions=sphinx.ext.autodoc,sphinx.ext.autosummary,docfx_yaml.extension,sphinx.ext.intersphinx,sphinx.ext.coverage,sphinx.ext.napoleon,sphinx.ext.todo,sphinx.ext.viewcode,recommonmark -b html -d docs/_build/doctrees/ docs/ docs/_build/html/
+      cat docs/_build/html/docfx_yaml/xrefs.yml
       continue
     fi
 
