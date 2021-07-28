@@ -1194,11 +1194,13 @@ def build_finished(app, exception):
 
         file_name_set.add(filename)
 
+    '''
+    # TODO: handle xref for other products.
     xref_file = os.path.join(normalized_outdir, 'xrefs.yml')
     with open(xref_file, 'w') as xref_file_obj:
         for xref in app.env.docfx_xrefs:
             xref_file_obj.write(f'{xref}\n')
-
+    '''
 
 def missing_reference(app, env, node, contnode):
     reftarget = ''
