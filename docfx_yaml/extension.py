@@ -329,19 +329,19 @@ def _extract_docstring_info(summary_info, summary, name):
     initial_index = -1
         
     # Prevent GoogleDocstring crashing on custom types and parse all xrefs to normal
-    if '<xref:' in parsed_text:
+    if '<xref' in parsed_text:
         type_pairs = []
         initial_index = max(0, parsed_text.find('<xref'))
 
         summary_part = parsed_text[initial_index:]
        
         # Remove all occurrences of "<xref:type>"
-        while "<xref:" in summary_part:
+        while "<xref" in summary_part:
 
             # Expecting format of "<xref:type>:"
-            if "<xref:" in summary_part:
+            if "<xref" in summary_part:
                 initial_index += summary_part.find("<xref")
-                original_type = parsed_text[initial_index:initial_index+(parsed_text[initial_index:].find('>'))+1]
+                original_type = parsed_text[initial_index:initial_index+(parsed_text[initial_index:].find('/xref>'))+6]
                 initial_index += len(original_type)
                 original_type = " ".join(filter(None, re.split(r'\n|  |\|\s|\t', original_type)))
                 safe_type = 'xref_' + original_type[6:-1]
