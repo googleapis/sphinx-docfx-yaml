@@ -335,16 +335,18 @@ def _extract_docstring_info(summary_info, summary, name):
 
         summary_part = parsed_text[initial_index:]
        
-        # Remove all occurrences of "<xref:type>"
+        # Remove all occurrences of "<xref uid="uid">text</xref>"
         while "<xref" in summary_part:
 
-            # Expecting format of "<xref:type>:"
+            # Expecting format of "<xref uid="uid">text</xref>"
             if "<xref" in summary_part:
                 initial_index += summary_part.find("<xref")
                 original_type = parsed_text[initial_index:initial_index+(parsed_text[initial_index:].find('/xref>'))+6]
                 initial_index += len(original_type)
                 original_type = " ".join(filter(None, re.split(r'\n|  |\|\s|\t', original_type)))
-                safe_type = 'xref_' + original_type[6:-1]
+                # Extract text from "<xref uid="uid">text</xref>"
+                index = original_type.find(">")
+                safe_type = 'xref_' + original_type[index+1:index+(original_type[index:].find("<"))]
             else:
                 raise ValueError("Encountered unexpected type in Exception docstring.")
 
@@ -451,7 +453,16 @@ def _extract_docstring_info(summary_info, summary, name):
             cur_type = word
             if cur_type in [':type', ':param', ':raises', ':raises:']:
                 index += 1
-                arg_name = parsed_text[index][:-1]
+                # Exception that's not xref should be treated same as other names
+                if ':raises' not in cur_type or 'xref' not in parsed_text[index]:
+                    arg_name = parsed_text[index][:-1]
+                # xrefs are treated by taking its second half and combining the two
+                elif ':raises' in cur_type and 'xref' in parsed_text[index]:
+                    arg_name = f'{parsed_text[index]} {parsed_text[index+1][:-1]}'
+                    index += 1
+                # Other forms will not be processed properly, likely a formatting issue.
+                else:
+                    raise ValueError(f"Encountered wrong formatting, please check docstring for {name}")
                 # Initialize empty dictionary if it doesn't exist already
                 if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
                     summary_info[var_types[cur_type]][arg_name] = {}
