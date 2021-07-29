@@ -335,6 +335,15 @@ Description of docstring which should fail.
         with self.assertRaises(ValueError):
             _extract_docstring_info({}, summary4, "error string")
 
+        summary5 = """
+Description of malformed docstring.
+
+Raises:
+    Error that should fail: if condition `x`.
+"""
+        with self.assertRaises(KeyError):
+            _extract_docstring_info({}, summary5, "malformed docstring")
+
 
     def test_extract_docstring_info_with_xref(self):
         ## Test with xref included in the summary, ensure they're processed as-is
