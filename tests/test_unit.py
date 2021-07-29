@@ -102,9 +102,14 @@ Raises:
         finished.
 """
         lines_got = lines_got.split("\n")
+        xrefs_got = []
         # Resolve over different regular expressions for different types of reference patterns.
         lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        for xref in xrefs:
+            xrefs_got.append(xref)
         lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
+        for xref in xrefs:
+            xrefs_got.append(xref)
 
         lines_want = """
 If a ``stream`` is attached to this download, then the downloaded
@@ -132,8 +137,17 @@ Raises:
         finished.
 """
         lines_want = lines_want.split("\n")
+        xrefs_want = [
+          "google.cloud.requests.Session",
+          "google.cloud.requests.Session.request",
+          "google.cloud.requests.Response",
+          "google.cloud.resumable_media.common.DataCorruption"
+        ]
 
         self.assertEqual(lines_got, lines_want)
+        self.assertCountEqual(xrefs_got, xrefs_want)
+        # assertCountEqual is a misleading name but checks that two lists contain
+        # same items regardless of order, as long as items in list are sortable.
 
 
     # Test for added xref coverage and third party xrefs staying as-is
@@ -155,9 +169,14 @@ Args:
         See :meth:`google.cloud.requests.Session.request()` documentation for details.
 """
         lines_got = lines_got.split("\n")
+        xrefs_got = []
         # Resolve over different regular expressions for different types of reference patterns.
         lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        for xref in xrefs:
+            xrefs_got.append(xref)
         lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
+        for xref in xrefs:
+            xrefs_got.append(xref)
 
         lines_want = """
 If a `dateutil.time.stream()` is attached to this download, then the downloaded
@@ -176,8 +195,16 @@ Args:
         See <xref uid="google.cloud.requests.Session.request">request()</xref> documentation for details.
 """
         lines_want = lines_want.split("\n")
+        xrefs_want = [
+          "google.cloud.requests.Session",
+          "google.cloud.requests.tuple",
+          "google.cloud.requests.Session.request"
+        ]
 
         self.assertEqual(lines_got, lines_want)
+        self.assertCountEqual(xrefs_got, xrefs_want)
+        # assertCountEqual is a misleading name but checks that two lists contain
+        # same items regardless of order, as long as items in list are sortable.
 
 
     # Variables used for testing _extract_docstring_info
