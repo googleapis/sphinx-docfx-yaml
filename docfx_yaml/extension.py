@@ -460,12 +460,13 @@ def _extract_docstring_info(summary_info, summary, name):
                 elif ':raises' in cur_type and 'xref' in parsed_text[index]:
                     arg_name = f'{parsed_text[index]} {parsed_text[index+1][:-1]}'
                     index += 1
-                # Other forms will not be processed properly, likely a formatting issue.
-                else:
-                    raise ValueError(f"Encountered wrong formatting, please check docstring for {name}")
-                # Initialize empty dictionary if it doesn't exist already
-                if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
-                    summary_info[var_types[cur_type]][arg_name] = {}
+
+                try:
+                    # Initialize empty dictionary if it doesn't exist already
+                    if arg_name not in summary_info[var_types[cur_type]] and ':raises' not in cur_type:
+                        summary_info[var_types[cur_type]][arg_name] = {}
+                except KeyError:
+                    raise KeyError(f"Encountered wrong formatting, please check docstring for {name}")
 
             # Empty target string
             words = []
