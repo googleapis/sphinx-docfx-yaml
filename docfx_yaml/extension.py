@@ -543,20 +543,25 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     arg_map['id'] = arg
                     if arg in type_map:
                         arg_map['var_type'] = type_map[arg]
-                    args.append(arg_map)
+                        args.append(arg_map)
             if argspec.varargs:
                 args.append({'id': argspec.varargs})
             if argspec.varkw:
                 args.append({'id': argspec.varkw})
             # Try to add default values. Currently does not work if there is * argument present.
             if argspec.defaults:
-                for count, default in enumerate(argspec.defaults):
-                    cut_count = len(argspec.defaults)
-                    # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
-                    # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
-                    # Match the defaults with the count
-                    if 'object at 0x' not in str(default):
-                        args[len(args) - cut_count + count]['defaultValue'] = str(default)
+                # Attempt to add default values to arguments.
+                try:
+                    for count, default in enumerate(argspec.defaults):
+                        cut_count = len(argspec.defaults)
+                        # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
+                        # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
+                        # Match the defaults with the count
+                        if 'object at 0x' not in str(default):
+                            args[len(args) - cut_count + count]['defaultValue'] = str(default)
+                # If we cannot find the argument, it is missing a type and was taken out intentionally.
+                except IndexError:
+                    pass
             try:
                 lines = inspect.getdoc(obj)
                 lines = lines.split("\n") if lines else []
