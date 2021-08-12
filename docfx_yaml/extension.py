@@ -643,12 +643,26 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     if args:
         variables = summary_info['variables']
+        arg_id = []
         for arg in args:
+            arg_id.append(arg['id'])
+
             if arg['id'] in variables:
                 # Retrieve argument info from extracted map of variable info
                 arg_var = variables[arg['id']]
                 arg['var_type'] = arg_var.get('var_type') if arg_var.get('var_type') else ''
                 arg['description'] = arg_var.get('description') if arg_var.get('description') else ''
+
+        # Add any variables we might have missed from extraction.
+        for variable in variables:
+            if variable not in arg_id:
+                new_arg = {
+                    "id": variable,
+                    "var_type": variables[variable].get('var_type'),
+                    "description": variables[variable].get('description')
+                }
+                args.append(new_arg)
+
         datam['syntax']['parameters'] = args
 
     if sig:
