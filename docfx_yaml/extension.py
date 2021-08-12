@@ -517,10 +517,31 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     try:
         if _type in [METHOD, FUNCTION]:
             argspec = inspect.getfullargspec(obj) # noqa
+            type_map = {}
+            if argspec.annotations:
+                for annotation in argspec.annotations:
+                    if annotation == "return" and argspec.annotations[annotation] == None:
+                        continue
+                    # Extract names for simple types.
+                    try:
+                        type_map[annotation] = (argspec.annotations[annotation]).__name__
+                    # Try to extract names for more complicated types.
+                    except AttributeError:
+                        vartype = argspec.annotations[annotation]
+                        try:
+                            type_map[annotation] = vartype._name + str(vartype.__args__)[:-2] + ")"
+                        except AttributeError:
+                            print(f"Could not parse argument information for {annotation}.")
+                            continue
+
             for arg in argspec.args:
+                arg_map = {}
                 # Ignore adding in entry for "self"
                 if arg != 'cls':
-                    args.append({'id': arg})
+                    arg_map['id'] = arg
+                    if arg in type_map:
+                        arg_map['var_type'] = type_map[arg]
+                    args.append(arg_map)
             if argspec.varargs:
                 args.append({'id': argspec.varargs})
             if argspec.varkw:
