@@ -520,7 +520,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             type_map = {}
             if argspec.annotations:
                 for annotation in argspec.annotations:
-                    if annotation == "return" and argspec.annotations[annotation] == None:
+                    if annotation == "return":
                         continue
                     # Extract names for simple types.
                     try:
@@ -529,7 +529,9 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     except AttributeError:
                         vartype = argspec.annotations[annotation]
                         try:
-                            type_map[annotation] = vartype._name + str(vartype.__args__)[:-2] + ")"
+                            type_map[annotation] = str(vartype._name)
+                            if vartype.__args__:
+                                type_map[annotation] += str(vartype.__args__)[:-2] + ")"
                         except AttributeError:
                             print(f"Could not parse argument information for {annotation}.")
                             continue
@@ -546,6 +548,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 args.append({'id': argspec.varargs})
             if argspec.varkw:
                 args.append({'id': argspec.varkw})
+            # Try to add default values. Currently does not work if there is * argument present.
             if argspec.defaults:
                 for count, default in enumerate(argspec.defaults):
                     cut_count = len(argspec.defaults)
