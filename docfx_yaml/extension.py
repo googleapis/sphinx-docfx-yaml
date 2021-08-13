@@ -556,10 +556,11 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                         # Find the first index which default arguments start at.
                         # Every argument after this offset_count all have default values.
                         offset_count = len(argspec.defaults)
-                        # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
-                        # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
                         # Find the index of the current default value argument
                         index = len(args) + count - offset_count
+
+                        # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
+                        # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
                         if 'object at 0x' not in str(default):
                             args[index]['defaultValue'] = str(default)
                 # If we cannot find the argument, it is missing a type and was taken out intentionally.
