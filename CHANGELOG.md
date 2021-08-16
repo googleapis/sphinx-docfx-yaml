@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.5.3](https://www.github.com/googleapis/sphinx-docfx-yaml/compare/v0.5.2...v0.5.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* recover lost function arguments and argument types ([#93](https://www.github.com/googleapis/sphinx-docfx-yaml/issues/93)) ([b90dd0f](https://www.github.com/googleapis/sphinx-docfx-yaml/commit/b90dd0f7a1e8e00630f24945b5425e20511be7c5))
+
 ### [0.5.2](https://www.github.com/googleapis/sphinx-docfx-yaml/compare/v0.5.1...v0.5.2) (2021-07-30)
 
 
