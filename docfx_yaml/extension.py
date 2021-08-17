@@ -958,6 +958,41 @@ def disambiguate_toc_name(toc_yaml):
 
     return disambiguated_names
 
+def group_by_package(toc_yaml):
+    new_toc_yaml = []
+    package_groups = {}
+    for module in toc_yaml:
+        package_group = find_package_group(module['uidname'])
+        if package_group not in package_groups:
+            package_name = pretty_package_name(package_group)
+            package_groups[package_group] = {
+                "name": package_name,
+                "uidname": package_group,
+                "uid": package_group,
+                "items": []
+            }
+        package_groups[package_group]['items'].append(module)
+
+    for package_group in package_groups:
+        new_toc_yaml.append(package_groups[package_group])
+
+    return new_toc_yaml
+
+# Given the full uid, return the package group including its prefix.
+def find_package_group(uid):
+    return ".".join(uid.split(".")[:3])
+    
+
+# Given the package group, make its name presentable.
+def pretty_package_name(package_group):
+    name = ""
+
+    # Retrieve only the package name
+    split_name = package_group.split(".")[-1]
+    # Capitalize the first letter of each package name part
+    capitalized_name = [part.capitalize() for part in split_name.split("_")]
+    return " ".join(capitalized_name)
+
 def build_finished(app, exception):
     """
     Output YAML on the file system.
@@ -1181,6 +1216,8 @@ def build_finished(app, exception):
     if len(toc_yaml) == 0:
         raise RuntimeError("No documentation for this module.")
 
+    toc_yaml = group_by_package(toc_yaml)
+
     # Perform additional disambiguation of the name
     disambiguated_names = disambiguate_toc_name(toc_yaml)
 
@@ -1194,6 +1231,7 @@ def build_finished(app, exception):
     with open(toc_file, 'w') as writable:
         writable.write(
             dump(
+
                 [{
                     'name': app.config.project,
                     'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + toc_yaml
