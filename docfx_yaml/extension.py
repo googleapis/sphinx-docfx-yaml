@@ -958,6 +958,7 @@ def disambiguate_toc_name(toc_yaml):
 
     return disambiguated_names
 
+
 def group_by_package(toc_yaml):
     new_toc_yaml = []
     package_groups = {}
@@ -968,7 +969,6 @@ def group_by_package(toc_yaml):
             package_groups[package_group] = {
                 "name": package_name,
                 "uidname": package_group,
-                "uid": package_group,
                 "items": []
             }
         package_groups[package_group]['items'].append(module)
@@ -978,10 +978,11 @@ def group_by_package(toc_yaml):
 
     return new_toc_yaml
 
+
 # Given the full uid, return the package group including its prefix.
 def find_package_group(uid):
     return ".".join(uid.split(".")[:3])
-    
+
 
 # Given the package group, make its name presentable.
 def pretty_package_name(package_group):
@@ -992,6 +993,7 @@ def pretty_package_name(package_group):
     # Capitalize the first letter of each package name part
     capitalized_name = [part.capitalize() for part in split_name.split("_")]
     return " ".join(capitalized_name)
+
 
 def build_finished(app, exception):
     """
@@ -1243,14 +1245,15 @@ def build_finished(app, exception):
     index_file = os.path.join(normalized_outdir, 'index.yml')
     index_children = []
     index_references = []
-    for item in toc_yaml_with_uid:
-        index_children.append(item.get('uidname', ''))
-        index_references.append({
-            'uid': item.get('uidname', ''),
-            'name': item.get('name', ''),
-            'fullname': item.get('uidname', ''),
-            'isExternal': False
-        })
+    for package in toc_yaml_with_uid:
+        for item in package.get("items"):
+            index_children.append(item.get('uidname', ''))
+            index_references.append({
+                'uid': item.get('uidname', ''),
+                'name': item.get('name', ''),
+                'fullname': item.get('uidname', ''),
+                'isExternal': False
+            })
     with open(index_file, 'w') as index_file_obj:
         index_file_obj.write('### YamlMime:UniversalReference\n')
         dump(
