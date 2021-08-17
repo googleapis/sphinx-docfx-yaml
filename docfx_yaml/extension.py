@@ -1023,6 +1023,7 @@ def build_finished(app, exception):
         if 'source' in obj and 'path' in obj['source'] and obj['source']['path']:
             if obj['source']['path'].endswith(INITPY):
                 obj['type'] = 'subPackage'
+                obj['summary'] = "API documentation for `{}` package.".format(obj['name'])
                 return
 
         for child_uid in obj['children']:
@@ -1218,10 +1219,10 @@ def build_finished(app, exception):
     if len(toc_yaml) == 0:
         raise RuntimeError("No documentation for this module.")
 
-    toc_yaml = group_by_package(toc_yaml)
-
     # Perform additional disambiguation of the name
     disambiguated_names = disambiguate_toc_name(toc_yaml)
+
+    toc_yaml = group_by_package(toc_yaml)
 
     # Keeping uidname field carrys over onto the toc.yaml files, we need to
     # be keep using them but don't need them in the actual file
@@ -1233,7 +1234,6 @@ def build_finished(app, exception):
     with open(toc_file, 'w') as writable:
         writable.write(
             dump(
-
                 [{
                     'name': app.config.project,
                     'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + toc_yaml
@@ -1241,6 +1241,48 @@ def build_finished(app, exception):
                 default_flow_style=False,
             )
         )
+
+    # Output files
+    for uid, data in iter(yaml_map.items()):
+
+        for yaml_item in data:
+            for obj in yaml_item:
+                # If the entry was disambiguated, update here:
+                obj_full_name = obj['fullName']
+                if disambiguated_names.get(obj_full_name):
+                    obj['name'] = disambiguated_names[obj_full_name]
+                    if obj['type'] == 'subPackage':
+                        obj['summary'] = "API documentation for `{}` package.".format(obj['name'])
+
+        # data is formatted as [yaml_data, references]
+        yaml_data, references = data
+
+        if uid.lower() in file_name_set:
+            filename = uid + "(%s)" % app.env.docfx_info_uid_types[uid]
+        else:
+            filename = uid
+
+        out_file = os.path.join(normalized_outdir, '%s.yml' % filename)
+        ensuredir(os.path.dirname(out_file))
+        if app.verbosity >= 1:
+            app.info(bold('[docfx_yaml] ') + darkgreen('Outputting %s' % filename))
+
+        with open(out_file, 'w') as out_file_obj:
+            out_file_obj.write('### YamlMime:UniversalReference\n')
+            try:
+                dump(
+                    {
+                        'items': yaml_data,
+                        'references': references,
+                        'api_name': [],  # Hack around docfx YAML
+                    },
+                    out_file_obj,
+                    default_flow_style=False
+                )
+            except Exception as e:
+                raise ValueError("Unable to dump object\n{0}".format(yaml_data)) from e
+
+        file_name_set.add(filename)
 
     index_file = os.path.join(normalized_outdir, 'index.yml')
     index_children = []
@@ -1273,48 +1315,6 @@ def build_finished(app, exception):
             index_file_obj,
             default_flow_style=False
         )
-
-    # Output files
-    for uid, data in iter(yaml_map.items()):
-
-        for yaml_item in data:
-            for obj in yaml_item:
-                # If the entry was disambiguated, update here:
-                obj_full_name = obj['fullName']
-                if disambiguated_names.get(obj_full_name):
-                    obj['name'] = disambiguated_names[obj_full_name]
-                    if obj['type'] == 'subPackage':
-                        obj['summary'] = "API documentation for `{}` package.".format(obj['name'])
-      
-        # data is formatted as [yaml_data, references]
-        yaml_data, references = data
-
-        if uid.lower() in file_name_set:
-            filename = uid + "(%s)" % app.env.docfx_info_uid_types[uid]
-        else:
-            filename = uid
-
-        out_file = os.path.join(normalized_outdir, '%s.yml' % filename)
-        ensuredir(os.path.dirname(out_file))
-        if app.verbosity >= 1:
-            app.info(bold('[docfx_yaml] ') + darkgreen('Outputting %s' % filename))
-
-        with open(out_file, 'w') as out_file_obj:
-            out_file_obj.write('### YamlMime:UniversalReference\n')
-            try:
-                dump(
-                    {
-                        'items': yaml_data,
-                        'references': references,
-                        'api_name': [],  # Hack around docfx YAML
-                    },
-                    out_file_obj,
-                    default_flow_style=False
-                )
-            except Exception as e:
-                raise ValueError("Unable to dump object\n{0}".format(yaml_data)) from e
-
-        file_name_set.add(filename)
 
     '''
     # TODO: handle xref for other products.
