@@ -959,6 +959,7 @@ def disambiguate_toc_name(toc_yaml):
     return disambiguated_names
 
 
+# Combines toc_yaml entries with similar version headers.
 def group_by_package(toc_yaml):
     new_toc_yaml = []
     package_groups = {}
