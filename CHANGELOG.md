@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://www.github.com/googleapis/sphinx-docfx-yaml/compare/v0.5.2...v0.6.0) (2021-08-19)
+
+
+### Features
+
+* group left-nav entries into versions and groups ([#96](https://www.github.com/googleapis/sphinx-docfx-yaml/issues/96)) ([ee89394](https://www.github.com/googleapis/sphinx-docfx-yaml/commit/ee8939425682bb81294214dd23b6aaeff74c36da))
+
+
+### Bug Fixes
+
+* recover lost function arguments and argument types ([#93](https://www.github.com/googleapis/sphinx-docfx-yaml/issues/93)) ([b90dd0f](https://www.github.com/googleapis/sphinx-docfx-yaml/commit/b90dd0f7a1e8e00630f24945b5425e20511be7c5))
+* retrieve file name as much as possible  ([#100](https://www.github.com/googleapis/sphinx-docfx-yaml/issues/100)) ([34cad2b](https://www.github.com/googleapis/sphinx-docfx-yaml/commit/34cad2b2159ee73a5d1d1c16a504a1f82527deda))
+* use file name instead of object name for TOC ([#97](https://www.github.com/googleapis/sphinx-docfx-yaml/issues/97)) ([48279ef](https://www.github.com/googleapis/sphinx-docfx-yaml/commit/48279ef23e4962cab7a5b05cf2e1dc6d0b8907f3))
+
 ### [0.5.2](https://www.github.com/googleapis/sphinx-docfx-yaml/compare/v0.5.1...v0.5.2) (2021-07-30)
 
 
