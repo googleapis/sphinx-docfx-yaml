@@ -919,11 +919,12 @@ def find_unique_name(package_name, entries):
         #   "google.cloud.spanner.v1.params_v1.types"
         #   "google.cloud.spanner.v1.instance_v1.types"
         # it will return "instace_v1" or "params_v1" and "types".
-        if name != "google" and name != "cloud" and entries[name] == 1:
-            # Return only what's necessary, do not return duplicate parts twice.
-            return [name, package_name[-1]] if name != package_name[-1] else [name]
+        # Also ensure that if name == package_name[-1], we only return one of
+        # the duplicate and not both.
+        if name != "google" and name != "cloud" and entries[name] == 1 and name != package_name[-1]:
+            return [name, package_name[-1]]
 
-    # If there is no way to disambiguate, return the identifier name
+    # If there is no way to disambiguate or we found duplicates, return the identifier name.
     return [package_name[-1]]
 
 # Used to disambiguate names that have same entries.
