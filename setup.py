@@ -21,6 +21,7 @@ version = '0.5.2'
 dependencies = [
     'PyYAML',
     'sphinx',
+    'sphinx-markdown-builder',
     'sphinxcontrib.napoleon',
     'unidecode',
     'wheel>=0.24.0'

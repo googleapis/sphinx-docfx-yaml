@@ -47,6 +47,8 @@ from .monkeypatch import patch_docfields
 from .directives import RemarksDirective, TodoDirective
 from .nodes import remarks
 
+import subprocess
+from docuploader import shell
 
 class Bcolors:
     HEADER = '\033[95m'
@@ -82,7 +84,24 @@ REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 PROPERTY = 'property'
 
 
+def run_sphinx_markdown():
+    return shell.run(
+        [
+            "sphinx-build",
+            "-M",
+            "markdown",
+            "docs/",
+            "docs/_build",
+        ],
+        hide_output=False
+    )
+
+
 def build_init(app):
+    print("Running sphinx-build with Markdown first...")
+    run_sphinx_markdown()
+
+
     """
     Set up environment data
     """
