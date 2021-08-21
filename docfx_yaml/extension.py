@@ -22,6 +22,8 @@ import os
 import inspect
 import re
 import copy
+import shutil
+from pathlib import Path
 from functools import partial
 from itertools import zip_longest
 
@@ -103,6 +105,8 @@ def build_init(app):
     app.env.docfx_uid_names = {}
     # This stores file path for class when inspect cannot retrieve file path
     app.env.docfx_class_paths = {}
+    # This stores the name and href of the markdown pages.
+    app.env.markdown_pages = []
 
     app.env.docfx_xrefs = {}
 
@@ -1002,6 +1006,41 @@ def pretty_package_name(package_group):
     return " ".join(capitalized_name)
 
 
+def find_markdown_pages(app, outdir):
+    # Use this to ignore markdown files that are unnecessary.
+    files_to_ignore = [
+        "index.md",     # merge index.md and README.md and index.yaml later
+        "reference.md", # Reference docs overlap with Overview. Will try and incorporate this in later.
+        "readme.md",    # README does not seem to work in cloud site
+        "upgrading.md", # Currently the formatting breaks, will need to come back to it.
+    ]
+
+    markdown_dir = Path(app.builder.outdir).parent / "markdown"
+    if not markdown_dir.exists():
+        print("There's no markdown file to move.")
+        return
+
+    # For each file, if it is a markdown file move to the top level pages.
+    for mdfile in markdown_dir.iterdir():
+        if mdfile.is_file() and mdfile.name.lower() not in files_to_ignore:
+            shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
+
+            # Extract the header name for TOC.
+            with open(mdfile) as f:
+                header_line = f.readline()
+                # Ignore licenses and other non-headers prior to the header.
+                while "#" not in header_line:
+                    header_line = f.readline()
+                #extract the header name
+                name = header_line.split("#")[1][1:].strip()
+
+            # Add the file to the TOC later.
+            app.env.markdown_pages.append({
+                'name': name,
+                'href': mdfile.name.lower(),
+            })
+
+
 def build_finished(app, exception):
     """
     Output YAML on the file system.
@@ -1047,6 +1086,8 @@ def build_finished(app, exception):
         API_ROOT,
     ))
     ensuredir(normalized_outdir)
+
+    find_markdown_pages(app, normalized_outdir)
 
     toc_yaml = []
     # Used to record filenames dumped to avoid confliction
@@ -1235,7 +1276,7 @@ def build_finished(app, exception):
                   'uid': uid
                 })
 
-    if len(toc_yaml) == 0:
+    if len(toc_yaml) == 0 and len(app.env.markdown_pages) == 0:
         raise RuntimeError("No documentation for this module.")
 
     # Perform additional disambiguation of the name
@@ -1255,7 +1296,7 @@ def build_finished(app, exception):
             dump(
                 [{
                     'name': app.config.project,
-                    'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + toc_yaml
+                    'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + app.env.markdown_pages + toc_yaml
                 }],
                 default_flow_style=False,
             )
