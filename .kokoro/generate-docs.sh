@@ -74,7 +74,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
   fi
 
   for tag in ${GITHUB_TAGS}; do
-    git checkout ${tag}
+    #git checkout ${tag}
 
     # Use the latest noxfile for all tags.
     cp ../"noxfile.py" .
