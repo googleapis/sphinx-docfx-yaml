@@ -986,6 +986,22 @@ def group_by_package(toc_yaml):
     return new_toc_yaml
 
 
+# Checks names against their uid, if they're different update it.
+def check_name_with_uid(toc_yaml):
+    for entry in toc_yaml:
+        if entry.get("items"):
+            check_name_with_uid(entry['items'])
+
+        # Don't update the name for overview pages or entries without uid
+        if entry['name'] == "Overview" or not entry.get("uid"):
+            continue
+
+        # If there is a discrepancy in the name, use one from uid.
+        name_from_uid = entry['uid'].split(".")[-1]
+        if entry['name'] != name_from_uid:
+            entry['name'] = name_from_uid
+
+
 # Given the full uid, return the package group including its prefix.
 def find_package_group(uid):
     return ".".join(uid.split(".")[:3])
@@ -1200,7 +1216,6 @@ def build_finished(app, exception):
                 found_node = find_node_in_toc_tree(toc_yaml, parent_level)
 
                 if found_node:
-                    found_node.pop('uid', 'No uid found')
                     found_node.setdefault(
                       'items', 
                       [{'name': 'Overview', 'uidname': parent_level, 'uid': parent_level}]
@@ -1237,6 +1252,9 @@ def build_finished(app, exception):
 
     if len(toc_yaml) == 0:
         raise RuntimeError("No documentation for this module.")
+
+    # Ensure names align with the last bits of the uid
+    check_name_with_uid(toc_yaml)
 
     # Perform additional disambiguation of the name
     disambiguated_names = disambiguate_toc_name(toc_yaml)

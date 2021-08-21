@@ -7,6 +7,7 @@ from docfx_yaml.extension import _extract_docstring_info
 from docfx_yaml.extension import find_package_group
 from docfx_yaml.extension import pretty_package_name
 from docfx_yaml.extension import group_by_package
+from docfx_yaml.extension import check_name_with_uid
 
 import unittest
 
@@ -16,7 +17,7 @@ class TestGenerate(unittest.TestCase):
     def test_find_unique_name(self):
 
         entries = {}
-        
+
         # Disambiguate with unique entries.
         entry1 = "google.cloud.aiplatform.v1.schema.predict.instance_v1.types"
         entry2 = "google.cloud.aiplatform.v1beta2.schema.predict.instance_v1.types"
@@ -536,6 +537,83 @@ Simple test for docstring.
         toc_yaml_got = group_by_package(toc_yaml)
 
         self.assertCountEqual(toc_yaml_got, toc_yaml_want)
+
+
+
+    def test_check_name_with_uid(self):
+        # Test that none of these entries change.
+        toc_yaml_want = [
+            {
+                "name":"Overview",
+                "uid":"google.cloud.spanner.types"
+            },
+            {
+                "name":"types",
+                "uid":"google.cloud.spanner.types"
+            },
+            {
+                "name":"types",
+                "items": [
+                    {
+                        "name":"BackupInfo",
+                        "uid":"google.cloud.spanner.types.BackupInfo"
+                    }
+                ]
+            }
+        ]
+
+        # Grab a shallow copy of the wanted toc_yaml.
+        toc_yaml = toc_yaml_want.copy()
+
+        check_name_with_uid(toc_yaml)
+        # Check that nothing changes with this given data.
+        self.assertCountEqual(toc_yaml, toc_yaml_want)
+
+
+    def test_check_name_with_uid_diff(self):
+        # Test that most of these entries change.
+        toc_yaml_want = [
+            {
+                "name":"types",
+                "uid":"google.cloud.spanner.types"
+            },
+            {
+                "name":"Types",
+                "uid":"google.cloud.spanner.Types"
+            },
+            {
+                "name":"types",
+                "items": [
+                    {
+                        "name":"BackupInfo",
+                        "uid":"google.cloud.spanner.types.BackupInfo"
+                    }
+                ]
+            }
+        ]
+
+        toc_yaml = [
+            {
+                "name":"overview",
+                "uid":"google.cloud.spanner.types"
+            },
+            {
+                "name":"types",
+                "uid":"google.cloud.spanner.Types"
+            },
+            {
+                "name":"types",
+                "items": [
+                    {
+                        "name":"types.BackupInfo",
+                        "uid":"google.cloud.spanner.types.BackupInfo"
+                    }
+                ]
+            }
+        ]
+
+        check_name_with_uid(toc_yaml)
+        self.assertCountEqual(toc_yaml, toc_yaml_want)
 
 
 if __name__ == '__main__':
