@@ -84,12 +84,12 @@ REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 PROPERTY = 'property'
 
 
+# Run sphinx-build with Markdown builder in the plugin.
 def run_sphinx_markdown():
     cwd = os.getcwd()
     # Skip running sphinx-build for Markdown for some unit test
     if "docs" in cwd:
         return
-
 
     return shell.run(
         [
@@ -1031,6 +1031,8 @@ def pretty_package_name(package_group):
     return " ".join(capitalized_name)
 
 
+# Given generated markdown files, incorporate them into the docfx_yaml output.
+# The markdown file metadata will be added to top level of the TOC.
 def find_markdown_pages(app, outdir):
     # Use this to ignore markdown files that are unnecessary.
     files_to_ignore = [
@@ -1112,6 +1114,7 @@ def build_finished(app, exception):
     ))
     ensuredir(normalized_outdir)
 
+    # Add markdown pages to the configured output directory.
     find_markdown_pages(app, normalized_outdir)
 
     toc_yaml = []
@@ -1301,6 +1304,7 @@ def build_finished(app, exception):
                   'uid': uid
                 })
 
+    # Exit if there are no generated YAML pages or Markdown pages.
     if len(toc_yaml) == 0 and len(app.env.markdown_pages) == 0:
         raise RuntimeError("No documentation for this module.")
 
