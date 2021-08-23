@@ -1051,10 +1051,17 @@ def extract_header_from_markdown(mdfile_iterator):
 def find_markdown_pages(app, outdir):
     # Use this to ignore markdown files that are unnecessary.
     files_to_ignore = [
-        "index.md",     # merge index.md and README.md and index.yaml later
+        "index.md",     # merge index.md and README.md and index.yaml later.
+                        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/105.
+
         "reference.md", # Reference docs overlap with Overview. Will try and incorporate this in later.
+                        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/106.
+
         "readme.md",    # README does not seem to work in cloud site
+                        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/107.
+
         "upgrading.md", # Currently the formatting breaks, will need to come back to it.
+                        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/108.
     ]
 
     markdown_dir = Path(app.builder.outdir).parent / "markdown"
