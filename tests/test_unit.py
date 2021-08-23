@@ -548,11 +548,11 @@ Simple test for docstring.
                 "uid":"google.cloud.spanner.types"
             },
             {
-                "name":"types",
-                "uid":"google.cloud.spanner.types"
+                "name":"Types",
+                "uid":"google.cloud.spanner_v1.Types"
             },
             {
-                "name":"types",
+                "name":"Overview",
                 "items": [
                     {
                         "name":"BackupInfo",
