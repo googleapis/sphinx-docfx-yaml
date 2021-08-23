@@ -1033,17 +1033,17 @@ def pretty_package_name(package_group):
 
 
 # For a given markdown file, extract its header line.
-def extract_header_from_markdown(mdfile_iterator)
+def extract_header_from_markdown(mdfile_iterator):
     for header_line in mdfile_iterator:
         # Ignore licenses and other non-headers prior to the header.
         if "#" in header_line:
             break
 
-    if header_line.count("#") > 1:
-        raise ValueError(f"The first header of {mdfile} is not a h1 header: {header_line}")
+    if header_line.count("#") != 1:
+        raise ValueError(f"The first header of {mdfile_iterator.name} is not a h1 header: {header_line}")
 
     # Extract the header name.
-    return name = header_line.strip("#").strip()
+    return header_line.strip("#").strip()
 
 
 # Given generated markdown files, incorporate them into the docfx_yaml output.
