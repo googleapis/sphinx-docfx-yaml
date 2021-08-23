@@ -87,7 +87,8 @@ PROPERTY = 'property'
 # Run sphinx-build with Markdown builder in the plugin.
 def run_sphinx_markdown():
     cwd = os.getcwd()
-    # Skip running sphinx-build for Markdown for some unit test
+    # Skip running sphinx-build for Markdown for some unit tests.
+    # Not required other than to output DocFX YAML.
     if "docs" in cwd:
         return
 
@@ -106,7 +107,7 @@ def run_sphinx_markdown():
 def build_init(app):
     print("Running sphinx-build with Markdown first...")
     run_sphinx_markdown()
-
+    print("Completed running sphinx-build with Markdown files.")
 
     """
     Set up environment data
@@ -959,11 +960,11 @@ def find_unique_name(package_name, entries):
 # Used to disambiguate names that have same entries.
 # Returns a dictionary of names that are disambiguated in the form of:
 # {uidname: disambiguated_name}
-def disambiguate_toc_name(toc_yaml):
+def disambiguate_toc_name(pkg_toc_yaml):
     name_entries = {}
     disambiguated_names = {}
 
-    for module in toc_yaml:
+    for module in pkg_toc_yaml:
         module_name = module['name']
         if module_name not in name_entries:
             name_entries[module_name] = {}
@@ -984,7 +985,7 @@ def disambiguate_toc_name(toc_yaml):
             # Update the dictionary of dismabiguated names
             disambiguated_names.update(disambiguate_toc_name(module['items']))
 
-    for module in toc_yaml:
+    for module in pkg_toc_yaml:
         module_name = module['name']
         # Check if there are multiple entires of module['name'], disambiguate if needed.
         if name_entries[module_name][module_name] > 1:
@@ -994,11 +995,11 @@ def disambiguate_toc_name(toc_yaml):
     return disambiguated_names
 
 
-# Combines toc_yaml entries with similar version headers.
-def group_by_package(toc_yaml):
-    new_toc_yaml = []
+# Combines pkg_toc_yaml entries with similar version headers.
+def group_by_package(pkg_toc_yaml):
+    new_pkg_toc_yaml = []
     package_groups = {}
-    for module in toc_yaml:
+    for module in pkg_toc_yaml:
         package_group = find_package_group(module['uidname'])
         if package_group not in package_groups:
             package_name = pretty_package_name(package_group)
@@ -1010,9 +1011,9 @@ def group_by_package(toc_yaml):
         package_groups[package_group]['items'].append(module)
 
     for package_group in package_groups:
-        new_toc_yaml.append(package_groups[package_group])
+        new_pkg_toc_yaml.append(package_groups[package_group])
 
-    return new_toc_yaml
+    return new_pkg_toc_yaml
 
 
 # Given the full uid, return the package group including its prefix.
@@ -1029,6 +1030,20 @@ def pretty_package_name(package_group):
     # Capitalize the first letter of each package name part
     capitalized_name = [part.capitalize() for part in split_name.split("_")]
     return " ".join(capitalized_name)
+
+
+# For a given markdown file, extract its header line.
+def extract_header_from_markdown(mdfile_iterator)
+    for header_line in mdfile_iterator:
+        # Ignore licenses and other non-headers prior to the header.
+        if "#" in header_line:
+            break
+
+    if header_line.count("#") > 1:
+        raise ValueError(f"The first header of {mdfile} is not a h1 header: {header_line}")
+
+    # Extract the header name.
+    return name = header_line.strip("#").strip()
 
 
 # Given generated markdown files, incorporate them into the docfx_yaml output.
@@ -1053,13 +1068,8 @@ def find_markdown_pages(app, outdir):
             shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Extract the header name for TOC.
-            with open(mdfile) as f:
-                header_line = f.readline()
-                # Ignore licenses and other non-headers prior to the header.
-                while "#" not in header_line:
-                    header_line = f.readline()
-                #extract the header name
-                name = header_line.split("#")[1][1:].strip()
+            with open(mdfile) as mdfile_iterator:
+                name = extract_header_from_markdown(mdfile_iterator)
 
             # Add the file to the TOC later.
             app.env.markdown_pages.append({
@@ -1074,14 +1084,14 @@ def build_finished(app, exception):
     """
 
     # Used to get rid of the uidname field for cleaner toc file.
-    def sanitize_uidname_field(toc_yaml):
-        for module in toc_yaml:
+    def sanitize_uidname_field(pkg_toc_yaml):
+        for module in pkg_toc_yaml:
             if 'items' in module:
                 sanitize_uidname_field(module['items'])
             module.pop('uidname')
 
-    def find_node_in_toc_tree(toc_yaml, to_add_node):
-        for module in toc_yaml:
+    def find_node_in_toc_tree(pkg_toc_yaml, to_add_node):
+        for module in pkg_toc_yaml:
             if module['uidname'] == to_add_node:
                 return module
 
@@ -1117,7 +1127,7 @@ def build_finished(app, exception):
     # Add markdown pages to the configured output directory.
     find_markdown_pages(app, normalized_outdir)
 
-    toc_yaml = []
+    pkg_toc_yaml = []
     # Used to record filenames dumped to avoid confliction
     # caused by Windows case insensitive file system
     file_name_set = set()
@@ -1266,7 +1276,7 @@ def build_finished(app, exception):
             # Build nested TOC
             if uid.count('.') >= 1:
                 parent_level = '.'.join(uid.split('.')[:-1])
-                found_node = find_node_in_toc_tree(toc_yaml, parent_level)
+                found_node = find_node_in_toc_tree(pkg_toc_yaml, parent_level)
 
                 if found_node:
                     found_node.pop('uid', 'No uid found')
@@ -1291,33 +1301,33 @@ def build_finished(app, exception):
                         file_name = obj['source']['path'].split("/")[-1][:-3]
                     except AttributeError:
                         file_name = node_name
-                    toc_yaml.append({
+                    pkg_toc_yaml.append({
                       'name': file_name, 
                       'uidname': uid, 
                       'uid': uid
                     })
 
             else:
-                toc_yaml.append({
+                pkg_toc_yaml.append({
                   'name': node_name, 
                   'uidname': uid, 
                   'uid': uid
                 })
 
     # Exit if there are no generated YAML pages or Markdown pages.
-    if len(toc_yaml) == 0 and len(app.env.markdown_pages) == 0:
+    if len(pkg_toc_yaml) == 0 and len(app.env.markdown_pages) == 0:
         raise RuntimeError("No documentation for this module.")
 
     # Perform additional disambiguation of the name
-    disambiguated_names = disambiguate_toc_name(toc_yaml)
+    disambiguated_names = disambiguate_toc_name(pkg_toc_yaml)
 
-    toc_yaml = group_by_package(toc_yaml)
+    pkg_toc_yaml = group_by_package(pkg_toc_yaml)
 
     # Keeping uidname field carrys over onto the toc.yaml files, we need to
     # be keep using them but don't need them in the actual file
-    toc_yaml_with_uid = copy.deepcopy(toc_yaml)
+    pkg_toc_yaml_with_uid = copy.deepcopy(pkg_toc_yaml)
 
-    sanitize_uidname_field(toc_yaml)
+    sanitize_uidname_field(pkg_toc_yaml)
 
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
@@ -1325,7 +1335,7 @@ def build_finished(app, exception):
             dump(
                 [{
                     'name': app.config.project,
-                    'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + app.env.markdown_pages + toc_yaml
+                    'items': [{'name': 'Overview', 'uid': 'project-' + app.config.project}] + app.env.markdown_pages + pkg_toc_yaml
                 }],
                 default_flow_style=False,
             )
@@ -1376,7 +1386,7 @@ def build_finished(app, exception):
     index_file = os.path.join(normalized_outdir, 'index.yml')
     index_children = []
     index_references = []
-    for package in toc_yaml_with_uid:
+    for package in pkg_toc_yaml_with_uid:
         for item in package.get("items"):
             index_children.append(item.get('uidname', ''))
             index_references.append({
