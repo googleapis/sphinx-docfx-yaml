@@ -983,7 +983,7 @@ def group_by_package(toc_yaml):
     for package_group in package_groups:
         new_toc_yaml.append(package_groups[package_group])
 
-    return  new_toc_yaml
+    return new_toc_yaml
 
 
 # Given the full uid, return the package group including its prefix.

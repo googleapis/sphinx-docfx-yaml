@@ -538,6 +538,5 @@ Simple test for docstring.
         self.assertCountEqual(toc_yaml_got, toc_yaml_want)
 
 
-
 if __name__ == '__main__':
     unittest.main()
