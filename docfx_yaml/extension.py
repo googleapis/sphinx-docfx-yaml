@@ -983,23 +983,7 @@ def group_by_package(toc_yaml):
     for package_group in package_groups:
         new_toc_yaml.append(package_groups[package_group])
 
-    return new_toc_yaml
-
-
-# Checks names against their uid, if they're different update it.
-def check_name_with_uid(toc_yaml):
-    for entry in toc_yaml:
-        if entry.get("items"):
-            check_name_with_uid(entry['items'])
-
-        # Don't update the name for overview pages or entries without uid
-        if entry['name'] == "Overview" or not entry.get("uid"):
-            continue
-
-        # If there is a discrepancy in the name, use one from uid.
-        name_from_uid = entry['uid'].split(".")[-1]
-        if entry['name'] != name_from_uid:
-            entry['name'] = name_from_uid
+    return  new_toc_yaml
 
 
 # Given the full uid, return the package group including its prefix.
@@ -1202,13 +1186,13 @@ def build_finished(app, exception):
                         del(obj['source'])
 
             yaml_map[uid] = [yaml_data, references]
-           
+
             # Parse the name of the object.
             # Some types will need additional parsing to de-duplicate their names and contain
-            # a portion of their parent name for better disambiguation. This is done in 
+            # a portion of their parent name for better disambiguation. This is done in
             # disambiguate_toc_name
-            
-            node_name = obj.get('class').split(".")[-1] if obj.get('class') else obj['name']
+
+            node_name = uid.split(".")[-1]
 
             # Build nested TOC
             if uid.count('.') >= 1:
@@ -1217,44 +1201,29 @@ def build_finished(app, exception):
 
                 if found_node:
                     found_node.setdefault(
-                      'items', 
+                      'items',
                       [{'name': 'Overview', 'uidname': parent_level, 'uid': parent_level}]
                     ).append({
                       'name': node_name,
-                      'uidname': uid, 
+                      'uidname': uid,
                       'uid': uid
                     })
                 else:
-                    # Extract the file name to use for new entries into the TOC
-                    # to make TOC entries consistent with filenames.
-                    file_name = obj['source']['path']
-                    # `inspect.getfile() cannot retrieve file path for some
-                    # types. Try to retrieve the file path from its class
-                    # parent, otherwise simply use node_name.
-                    if not file_name:
-                        file_name = app.env.docfx_class_paths.get(obj.get("class"))
-                    try:
-                        file_name = obj['source']['path'].split("/")[-1][:-3]
-                    except AttributeError:
-                        file_name = node_name
                     toc_yaml.append({
-                      'name': file_name, 
-                      'uidname': uid, 
+                      'name': node_name,
+                      'uidname': uid,
                       'uid': uid
                     })
 
             else:
                 toc_yaml.append({
-                  'name': node_name, 
-                  'uidname': uid, 
+                  'name': node_name,
+                  'uidname': uid,
                   'uid': uid
                 })
 
     if len(toc_yaml) == 0:
         raise RuntimeError("No documentation for this module.")
-
-    # Ensure names align with the last bits of the uid
-    check_name_with_uid(toc_yaml)
 
     # Perform additional disambiguation of the name
     disambiguated_names = disambiguate_toc_name(toc_yaml)
