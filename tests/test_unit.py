@@ -560,6 +560,16 @@ Simple test for docstring.
 
         self.assertEqual(header_line_got, header_line_want)
 
+        # Test for invalid input.
+        header_line_want = ""
+
+        header_line = "#  Test header"
+        prev_line = ""
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
         # Test for no header.
         header_line_want = ""
 
