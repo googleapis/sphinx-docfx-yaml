@@ -1037,8 +1037,7 @@ def is_markdown_header(header_line, prev_line):
     if "#" in header_line:
         # Check for proper h1 header formatting, ensure there's more than just
         # the hashtag character.
-        if header_line.count("#") > 0 and \
-            header_line[header_line.index("#")+1] == " " and \
+        if header_line[header_line.index("#")+1] == " " and \
             not header_line[header_line.index("#")+2].isspace() and \
             len(header_line) > 2:
 
@@ -1066,6 +1065,7 @@ def extract_header_from_markdown(mdfile_iterator):
 
         # Ignore licenses and other non-headers prior to the header.
         header = is_markdown_header(header_line, prev_line)
+        # If we've found the header, return the header.
         if header != "":
             return header
 
