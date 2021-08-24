@@ -8,6 +8,7 @@ from docfx_yaml.extension import find_package_group
 from docfx_yaml.extension import pretty_package_name
 from docfx_yaml.extension import group_by_package
 from docfx_yaml.extension import extract_header_from_markdown
+from docfx_yaml.extension import is_markdown_header
 
 import unittest
 
@@ -538,6 +539,71 @@ Simple test for docstring.
         self.assertCountEqual(toc_yaml_got, toc_yaml_want)
 
 
+    def test_is_markdown_header(self):
+        # Test for simple header_line.
+        header_line_want = "Test header"
+
+        header_line = "# Test header"
+        prev_line = ""
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+        # Test for invalid input.
+        header_line_want = ""
+
+        header_line = "#Test header"
+        prev_line = ""
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+        # Test for no header.
+        header_line_want = ""
+
+        header_line = "-->"
+        prev_line = "limitations under the License.\n"
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+
+    def test_is_markdown_header_alternate(self):
+        # Test for simple alternate header.
+        header_line_want = "Test header"
+
+        header_line = "============\n"
+        prev_line = "Test header"
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+        # Test for no header.
+        header_line_want = ""
+
+        header_line = "============\n"
+        prev_line = ""
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+
+        # Test for shorter divider.
+        header_line_want = "Test header"
+
+        header_line = "======\n"
+        prev_line = "Test header"
+
+        header_line_got = is_markdown_header(header_line, prev_line)
+
+        self.assertEqual(header_line_got, header_line_want)
+
+
     def test_extract_header_from_markdown(self):
         # Check the header for a normal markdown file.
         header_line_want = "Test header for a simple markdown file."
@@ -551,28 +617,72 @@ Simple test for docstring.
         # The header should be the same even with the license header.
         header_line_with_license_want = header_line_want
 
-        mdfile = open('tests/markdown_example_header.md', 'r')
-        header_line_with_license_got = extract_header_from_markdown(mdfile)
+        mdfile_license = open('tests/markdown_example_header.md', 'r')
+        header_line_with_license_got = extract_header_from_markdown(mdfile_license)
 
         self.assertEqual(header_line_with_license_got, header_line_with_license_want)
         mdfile.close()
 
 
-    def test_extract_header_from_markdown_check_error(self):
-        # Check an exception is thrown for markdown files that's not well
-        # formatted.
-        mdfile = open('tests/markdown_example_bad.md', 'r')
-        with self.assertRaises(ValueError):
-            header_line = extract_header_from_markdown(mdfile)
+    def test_extract_header_from_markdown_alternate_header(self):
+        # Check the header for an alternate header style.
+        header_line_want = "This is a simple alternate header"
+
+        mdfile = open('tests/markdown_example_alternate.md', 'r')
+        header_line_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_got, header_line_want)
+        mdfile.close()
+
+        # The header should be the same even with the license header.
+        header_line_with_license_want = header_line_want
+
+        mdfile = open('tests/markdown_example_alternate_header.md', 'r')
+        header_line_with_license_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_with_license_got, header_line_with_license_want)
+        mdfile.close()
+
+        # Check the header for an alternate header style.
+        header_line_want = "This is a simple alternate header"
+
+        mdfile = open('tests/markdown_example_alternate_less.md', 'r')
+        header_line_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_got, header_line_want)
+        mdfile.close()
+
+
+    def test_extract_header_from_markdown_bad_headers(self):
+        # Check that the filename is used as header if no valid header is found.
+        header_line_want = "Markdown_example_bad_header"
+
+        mdfile = open('tests/markdown_example_bad_header.md', 'r')
+        header_line_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_want, header_line_got)
 
         mdfile.close()
 
-        mdfile = open('tests/markdown_example_noheader.md', 'r')
-        with self.assertRaises(ValueError):
-            header_line = extract_header_from_markdown(mdfile)
+        # Check that only h1 headers are parsed.
+        header_line_want = "Markdown_example_h2"
+
+        mdfile = open('tests/markdown_example_h2.md', 'r')
+        header_line_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_want, header_line_got)
 
         mdfile.close()
 
+        # Check that there must be a line before the h1 header breaker.
+        header_line_want = "Markdown_example_alternate_bad"
+
+        mdfile = open('tests/markdown_example_alternate_bad.md', 'r')
+        header_line_got = extract_header_from_markdown(mdfile)
+
+        self.assertEqual(header_line_want, header_line_got)
+
+        mdfile.close() 
 
 
 if __name__ == '__main__':
