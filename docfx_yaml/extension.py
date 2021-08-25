@@ -546,6 +546,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         lines = []
     short_name = name.split('.')[-1]
     args = []
+    # Check how many arguments are present in the function.
     arg_count = 0
     try:
         if _type in [METHOD, FUNCTION]:
@@ -569,6 +570,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                             print(f"Could not parse argument information for {annotation}.")
                             continue
 
+            # Add up the number of arguments. `argspec.args` contains a list of
+            # all the arguments from the function.
             arg_count += len(argspec.args)
             for arg in argspec.args:
                 arg_map = {}
@@ -710,6 +713,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     if args or sig or summary_info:
         datam['syntax'] = {}
 
+    # If there are well-formatted arguments or a lot of arguments we should look
+    # into, loop through what we got from the docstring.
     if args or arg_count > 0:
         variables = summary_info['variables']
         arg_id = []
