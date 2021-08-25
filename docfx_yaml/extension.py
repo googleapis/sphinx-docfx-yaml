@@ -1040,12 +1040,13 @@ def pretty_package_name(package_group):
 
 
 # Check is the current lines conform to markdown header format.
-def is_markdown_header(header_line, prev_line):
-    if "#" in header_line:
+def parse_markdown_header(header_line, prev_line):
+    # Markdown h1 prefix should have only 1 of '#' character followed by exactly one space.
+    h1_header_prefix = "# "
+    if h1_header_prefix in header_line and header_line.count("#") == 1:
         # Check for proper h1 header formatting, ensure there's more than just
-        # the hashtag character.
-        if header_line[header_line.index("#")+1] == " " and \
-            not header_line[header_line.index("#")+2].isspace() and \
+        # the hashtag character, and exactly only one space after the hashtag.
+        if not header_line[header_line.index(h1_header_prefix)+2].isspace() and \
             len(header_line) > 2:
 
             return header_line.strip("#").strip()
@@ -1071,7 +1072,7 @@ def extract_header_from_markdown(mdfile_iterator):
     for header_line in mdfile_iterator:
 
         # Ignore licenses and other non-headers prior to the header.
-        header = is_markdown_header(header_line, prev_line)
+        header = parse_markdown_header(header_line, prev_line)
         # If we've found the header, return the header.
         if header != "":
             return header

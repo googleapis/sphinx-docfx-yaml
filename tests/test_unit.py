@@ -8,7 +8,7 @@ from docfx_yaml.extension import find_package_group
 from docfx_yaml.extension import pretty_package_name
 from docfx_yaml.extension import group_by_package
 from docfx_yaml.extension import extract_header_from_markdown
-from docfx_yaml.extension import is_markdown_header
+from docfx_yaml.extension import parse_markdown_header
 
 import unittest
 
@@ -534,14 +534,14 @@ Simple test for docstring.
         self.assertCountEqual(toc_yaml_got, toc_yaml_want)
 
 
-    def test_is_markdown_header(self):
+    def test_parse_markdown_header(self):
         # Test for simple header_line.
         header_line_want = "Test header"
 
         header_line = "# Test header"
         prev_line = ""
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -551,7 +551,7 @@ Simple test for docstring.
         header_line = "#Test header"
         prev_line = ""
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -561,7 +561,7 @@ Simple test for docstring.
         header_line = "#  Test header"
         prev_line = ""
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -571,19 +571,19 @@ Simple test for docstring.
         header_line = "-->"
         prev_line = "limitations under the License.\n"
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
 
-    def test_is_markdown_header_alternate(self):
+    def test_parse_markdown_header_alternate(self):
         # Test for simple alternate header.
         header_line_want = "Test header"
 
         header_line = "============\n"
         prev_line = "Test header"
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -593,7 +593,7 @@ Simple test for docstring.
         header_line = "============\n"
         prev_line = ""
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -604,7 +604,7 @@ Simple test for docstring.
         header_line = "======\n"
         prev_line = "Test header"
 
-        header_line_got = is_markdown_header(header_line, prev_line)
+        header_line_got = parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
