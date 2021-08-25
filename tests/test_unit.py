@@ -8,6 +8,7 @@ from docfx_yaml.extension import find_package_group
 from docfx_yaml.extension import pretty_package_name
 from docfx_yaml.extension import group_by_package
 from docfx_yaml.extension import extract_header_from_markdown
+from docfx_yaml.extension import _parse_docstring_summary
 
 import unittest
 
@@ -573,6 +574,72 @@ Simple test for docstring.
 
         mdfile.close()
 
+
+    def test_parse_docstring_summary(self):
+        # Check that the summary gets parsed correctly.
+        summary_want = \
+"""```python
+from google.api_core.client_options import ClientOptions
+from google.cloud.vision_v1 import ImageAnnotatorClient
+def get_client_cert():
+    # code to load client certificate and private key.
+    return client_cert_bytes, client_private_key_bytes
+options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
+    client_cert_source=get_client_cert)
+client = ImageAnnotatorClient(client_options=options)
+```
+
+You can also pass a mapping object.
+```ruby
+from google.cloud.vision_v1 import ImageAnnotatorClient
+client = ImageAnnotatorClient(
+    client_options={
+        \"api_endpoint\": \"foo.googleapis.com\",
+        \"client_cert_source\" : get_client_cert
+    })
+```
+"""
+        summary = \
+"""
+
+
+.. code-block:: python
+from google.api_core.client_options import ClientOptions
+from google.cloud.vision_v1 import ImageAnnotatorClient
+def get_client_cert():
+    # code to load client certificate and private key.
+    return client_cert_bytes, client_private_key_bytes
+options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
+    client_cert_source=get_client_cert)
+client = ImageAnnotatorClient(client_options=options)
+
+
+You can also pass a mapping object.
+
+
+.. code-block:: ruby
+from google.cloud.vision_v1 import ImageAnnotatorClient
+client = ImageAnnotatorClient(
+    client_options={
+        \"api_endpoint\": \"foo.googleapis.com\",
+        \"client_cert_source\" : get_client_cert
+    })
+"""
+        summary_got = _parse_docstring_summary(summary)
+        self.assertEqual(summary_got, summary_want)
+
+        # Check that nothing much changes otherwise.
+        summary = \
+"""
+.. note::
+    note that these are not supported yet, so they will be ignored for now.
+
+And any other documentation that the source code would have could go here.
+"""
+        summary_want = summary + "\n"
+
+        summary_got = _parse_docstring_summary(summary)
+        self.assertEqual(summary_got, summary_want)
 
 
 if __name__ == '__main__':
