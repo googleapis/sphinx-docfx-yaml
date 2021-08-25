@@ -380,7 +380,7 @@ def is_python_code(lines):
         # Try parsing more if it fails.
         pass
 
-    # Try parsing with all the spaces stripped.
+    # Try parsing with all the leading spaces stripped.
     try:
         parts = [part.lstrip(' ') for part in lines.split("\n")]
         ast.parse("\n".join(parts))
@@ -414,7 +414,7 @@ def _parse_docstring_summary(summary):
             continue
 
         # Continue adding parts for code-block.
-        if keyword == CODEBLOCK:
+        if keyword and keyword in CODEBLOCK:
             # If we reach the end of keyword, close up the code block.
             if part.find("..") == 0:
                 summary_parts.append("```\n")
@@ -430,9 +430,11 @@ def _parse_docstring_summary(summary):
         # Parse keywords if found.
         if part.find("..") == 0:
             keyword = extract_keyword(part)
-            if keyword == CODEBLOCK:
+            # Works for both code-block and code
+            if keyword and keyword in CODEBLOCK:
                 # Retrieve the language found in the format of
                 #   .. code-block:: lang
+                # {lang} is optional however.
                 language = part.split("::")[1].strip()
                 summary_parts.append(f"```{language}")
 
@@ -445,7 +447,7 @@ def _parse_docstring_summary(summary):
             summary_parts.append(part + "\n")
 
     # Close up from the keyword if needed.
-    if keyword == CODEBLOCK:
+    if keyword and keyword in CODEBLOCK:
         # Check if it's already closed.
         if summary_parts[-1] != "```\n":
             summary_parts.append("```\n")
