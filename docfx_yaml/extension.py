@@ -372,6 +372,7 @@ def indent_code_left(lines):
 
 def _parse_docstring_summary(summary):
     summary_parts = []
+    attributes = []
     keyword = ""
 
     # We need to separate in chunks, which is defined by 3 newline breaks.
@@ -404,6 +405,25 @@ def _parse_docstring_summary(summary):
                 summary_parts.append(indent_code_left(part))
                 continue
 
+        # Attributes come in 3 parts, parse the latter two here.
+        elif keyword and keyword == ATTRIBUTE:
+            # Second part, extract the description.
+            if not found_name:
+                description = part.strip()
+                found_name = True
+                continue
+            # Third part, extract the attribute type then add the completed one
+            # set to a list to be retunred. Close up as needed.
+            else:
+                var_type = part.split(":type:")[1].strip()
+                keyword = ""
+                attributes.append({
+                    "name": name,
+                    "description": description,
+                    "var_type": var_type
+                })
+                continue
+
         # Parse keywords if found.
         if part.startswith(".."):
             keyword = extract_keyword(part)
@@ -416,6 +436,11 @@ def _parse_docstring_summary(summary):
                 summary_parts.append(f"```{language}")
 
                 tab_space = -1
+
+            # Extract the name for attribute first.
+            elif keyword and keyword == ATTRIBUTE:
+                found_name = False
+                name = part.split("::")[1].strip()
 
             # Reserve for additional parts
             # elif keyword == keyword:
@@ -432,7 +457,7 @@ def _parse_docstring_summary(summary):
             summary_parts.append("```\n")
 
     # Requires 2 newline chars to properly show on cloud site.
-    return "\n".join(summary_parts)
+    return "\n".join(summary_parts), attributes
 
 
 # Given documentation docstring, parse them into summary_info.
@@ -793,11 +818,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 app.env.docfx_xrefs[xref] = ''
 
         summary = app.docfx_transform_string('\n'.join(_refact_example_in_module_summary(lines)))
-    
+
         # Extract summary info into respective sections.
         if summary:
             top_summary = _extract_docstring_info(summary_info, summary, name)
-            datam['summary'] = _parse_docstring_summary(top_summary)
+            datam['summary'], datam['attributes'] = _parse_docstring_summary(top_summary)
+
 
     # If there is no summary, add a short snippet.
     else:
