@@ -84,6 +84,7 @@ REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 
 PROPERTY = 'property'
 CODEBLOCK = "code-block"
+CODE = "code"
 
 
 # Run sphinx-build with Markdown builder in the plugin.
@@ -355,7 +356,7 @@ def extract_keyword(line):
     except ValueError:
         # TODO: handle reST template.
         if line[3] != "_":
-            print(f"Wrong formatting enoucntered for \n{line}\n Please check the docstring.")
+            raise ValueError(f"Wrong formatting enoucntered for \n{line}\n Please check the docstring.")
         return line
 
 
@@ -364,8 +365,8 @@ def extract_keyword(line):
 def indent_code_left(lines):
     parts = lines.split("\n")
     # Count how much leading whitespaces there are based on first line.
-    # lstrip(' ') removes all trailing whitespace from the string.
-    tab_space = len(parts[0]) - len(parts[0].lstrip(' '))
+    # lstrip(" ") removes all trailing whitespace from the string.
+    tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
     parts = [part[tab_space:] for part in parts]
     return "\n".join(parts)
 
@@ -387,7 +388,7 @@ def _parse_docstring_summary(summary):
             continue
 
         # Continue adding parts for code-block.
-        if keyword and keyword in CODEBLOCK:
+        if keyword and keyword in [CODE, CODEBLOCK]:
             # If we reach the end of keyword, close up the code block.
             if not part.startswith(" "*tab_space) or part.startswith(".."):
                 summary_parts.append("```\n")
@@ -396,9 +397,9 @@ def _parse_docstring_summary(summary):
             else:
                 if tab_space == -1:
                     parts = [split_part for split_part in part.split("\n") if split_part]
-                    tab_space = len(parts[0]) - len(parts[0].lstrip(' '))
+                    tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
                     if tab_space == 0:
-                        print("Code in the code block should be indented. Please check the docstring.")
+                        raise ValueError("Code in the code block should be indented. Please check the docstring.")
                 if not part.startswith(" "*tab_space):
                     # No longer looking at code-block, reset keyword.
                     keyword = ""
@@ -414,7 +415,7 @@ def _parse_docstring_summary(summary):
                 found_name = True
                 continue
             # Third part, extract the attribute type then add the completed one
-            # set to a list to be retunred. Close up as needed.
+            # set to a list to be returned. Close up as needed.
             else:
                 if attribute_type_token in part:
                     var_type = part.split(":type:")[1].strip()
@@ -427,7 +428,7 @@ def _parse_docstring_summary(summary):
                     })
 
                 else:
-                    print("Could not process the attribute. Please check the docstring.")
+                    print("Could not process the attribute. Please check the docstring in {summary}.")
 
                 continue
 

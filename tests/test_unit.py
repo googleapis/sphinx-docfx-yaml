@@ -764,6 +764,20 @@ And any other documentation that the source code would have could go here.
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
+        # Check that exception is raised if code block is not indented.
+        summary = \
+"""
+
+
+.. code:: python
+
+\nprint("This should throw an exception.")
+\nfor i in range(10):
+\n    print(i)
+"""
+        with self.assertRaises(ValueError):
+            _parse_docstring_summary(summary)
+
 
     def test_parse_docstring_summary_attributes(self):
         # Test parsing docstring with attributes.
@@ -835,13 +849,6 @@ And any other documentation that the source code would have could go here.
         ]
         summary = \
 """
-
-
-.. attribute: simple name
-
-\nsimple description
-
-\n:type: str
 
 
 .. attribute:: table_insert_request
