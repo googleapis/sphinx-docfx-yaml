@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -eo pipefail
+# Should run regardless of failure status for the generator.
+set +eo pipefail
 
 # Disable buffering, so that the logs stream through.
 export PYTHONUNBUFFERED=1
@@ -67,7 +68,7 @@ for bucket_item in $(gsutil ls 'gs://docs-staging-v2/docfx-python*' | sort -u -t
     GITHUB_TAGS=$(git tag --sort=-v:refname)
 
     # Turn off exit on failures, continue execution.
-    set +eo pipefail
+    # set +eo pipefail
   else
     # Grab the latest released tag.
     GITHUB_TAGS=$(git describe --tags `git rev-list --tags --max-count=1`)
