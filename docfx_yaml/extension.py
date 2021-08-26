@@ -373,7 +373,8 @@ def indent_code_left(lines):
 def _parse_docstring_summary(summary):
     summary_parts = []
     attributes = []
-    keyword = ""
+    attribute_type_token = ":type:"
+    keyword = name = description = var_type = ""
 
     # We need to separate in chunks, which is defined by 3 newline breaks.
     # Otherwise when parsing for code and blocks of stuff, we will not be able
@@ -415,13 +416,19 @@ def _parse_docstring_summary(summary):
             # Third part, extract the attribute type then add the completed one
             # set to a list to be retunred. Close up as needed.
             else:
-                var_type = part.split(":type:")[1].strip()
+                if attribute_type_token in part:
+                    var_type = part.split(":type:")[1].strip()
                 keyword = ""
-                attributes.append({
-                    "name": name,
-                    "description": description,
-                    "var_type": var_type
-                })
+                if name and description and var_type:
+                    attributes.append({
+                        "name": name,
+                        "description": description,
+                        "var_type": var_type
+                    })
+
+                else:
+                    print("Could not process the attribute. Please check the docstring.")
+
                 continue
 
         # Parse keywords if found.
