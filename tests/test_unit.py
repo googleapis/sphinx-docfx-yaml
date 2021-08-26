@@ -684,23 +684,37 @@ Simple test for docstring.
         summary_want = \
 """```python
 from google.api_core.client_options import ClientOptions
+
 from google.cloud.vision_v1 import ImageAnnotatorClient
+
 def get_client_cert():
+
     # code to load client certificate and private key.
+
     return client_cert_bytes, client_private_key_bytes
+
 options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
+
     client_cert_source=get_client_cert)
+
 client = ImageAnnotatorClient(client_options=options)
 ```
 
 You can also pass a mapping object.
+
 ```ruby
 from google.cloud.vision_v1 import ImageAnnotatorClient
+
 client = ImageAnnotatorClient(
+
     client_options={
+
         \"api_endpoint\": \"foo.googleapis.com\",
+
         \"client_cert_source\" : get_client_cert
+
     })
+
 ```
 """
         summary = \
@@ -708,26 +722,28 @@ client = ImageAnnotatorClient(
 
 
 .. code-block:: python
-from google.api_core.client_options import ClientOptions
-from google.cloud.vision_v1 import ImageAnnotatorClient
-def get_client_cert():
-    # code to load client certificate and private key.
-    return client_cert_bytes, client_private_key_bytes
-options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
-    client_cert_source=get_client_cert)
-client = ImageAnnotatorClient(client_options=options)
+
+\n    from google.api_core.client_options import ClientOptions
+\n    from google.cloud.vision_v1 import ImageAnnotatorClient
+\n    def get_client_cert():
+\n        # code to load client certificate and private key.
+\n        return client_cert_bytes, client_private_key_bytes
+\n    options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
+\n        client_cert_source=get_client_cert)
+\n    client = ImageAnnotatorClient(client_options=options)
 
 
 You can also pass a mapping object.
 
 
 .. code-block:: ruby
-from google.cloud.vision_v1 import ImageAnnotatorClient
-client = ImageAnnotatorClient(
-    client_options={
-        \"api_endpoint\": \"foo.googleapis.com\",
-        \"client_cert_source\" : get_client_cert
-    })
+
+\n    from google.cloud.vision_v1 import ImageAnnotatorClient
+\n    client = ImageAnnotatorClient(
+\n        client_options={
+\n            \"api_endpoint\": \"foo.googleapis.com\",
+\n            \"client_cert_source\" : get_client_cert
+\n        })
 """
         summary_got = _parse_docstring_summary(summary)
         self.assertEqual(summary_got, summary_want)

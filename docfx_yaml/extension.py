@@ -370,35 +370,6 @@ def indent_code_left(lines):
     return "\n".join(parts)
 
 
-# Check if the given lines of code are Python code or not.
-def is_python_code(lines):
-    # Try pasing the code normally.
-    try:
-        ast.parse(lines)
-        return True
-    except SyntaxError:
-        # Try parsing more if it fails.
-        pass
-
-    # Try parsing with all the leading spaces stripped.
-    try:
-        parts = [part.lstrip(' ') for part in lines.split("\n")]
-        ast.parse("\n".join(parts))
-        return True
-    except SyntaxError:
-        pass
-
-    # Try parsing by removing tab_space on all lines.
-    try:
-        parts = indent_code_left(lines)
-        ast.parse(parts)
-        return True
-    except SyntaxError as e:
-        # Either malformed Python code or just not code, return False.
-        print(f"failed to parse on \n{lines}\nAttempted to parse \n{parts}\n", e)
-        return False
-
-
 def _parse_docstring_summary(summary):
     summary_parts = []
     keyword = ""
@@ -416,11 +387,17 @@ def _parse_docstring_summary(summary):
         # Continue adding parts for code-block.
         if keyword and keyword in CODEBLOCK:
             # If we reach the end of keyword, close up the code block.
-            if part.find("..") == 0:
+            if not part.startswith(" "*tab_space) or part.startswith(".."):
                 summary_parts.append("```\n")
+                keyword = ""
 
             else:
-                if not is_python_code(part):
+                if tab_space == -1:
+                    parts = [split_part for split_part in part.split("\n") if split_part]
+                    tab_space = len(parts[0]) - len(parts[0].lstrip(' '))
+                    if tab_space == 0:
+                        print("Code in the code block should be indented. Please check the docstring.")
+                if not part.startswith(" "*tab_space):
                     # No longer looking at code-block, reset keyword.
                     keyword = ""
                     summary_parts.append("```\n")
@@ -428,7 +405,7 @@ def _parse_docstring_summary(summary):
                 continue
 
         # Parse keywords if found.
-        if part.find("..") == 0:
+        if part.startswith(".."):
             keyword = extract_keyword(part)
             # Works for both code-block and code
             if keyword and keyword in CODEBLOCK:
@@ -437,6 +414,8 @@ def _parse_docstring_summary(summary):
                 # {lang} is optional however.
                 language = part.split("::")[1].strip()
                 summary_parts.append(f"```{language}")
+
+                tab_space = -1
 
             # Reserve for additional parts
             # elif keyword == keyword:
