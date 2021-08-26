@@ -459,7 +459,7 @@ def _parse_docstring_summary(summary):
             summary_parts.append(part + "\n")
 
     # Close up from the keyword if needed.
-    if keyword and keyword in CODEBLOCK:
+    if keyword and keyword in [CODE, CODEBLOCK]:
         # Check if it's already closed.
         if summary_parts[-1] != "```\n":
             summary_parts.append("```\n")
