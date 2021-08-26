@@ -436,7 +436,7 @@ def _parse_docstring_summary(summary):
         if part.startswith(".."):
             keyword = extract_keyword(part)
             # Works for both code-block and code
-            if keyword and keyword in CODEBLOCK:
+            if keyword and keyword in [CODE, CODEBLOCK]:
                 # Retrieve the language found in the format of
                 #   .. code-block:: lang
                 # {lang} is optional however.
