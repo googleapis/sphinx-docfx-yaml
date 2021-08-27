@@ -833,7 +833,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         # Extract summary info into respective sections.
         if summary:
             top_summary = _extract_docstring_info(summary_info, summary, name)
-            datam['summary'], datam['attributes'] = _parse_docstring_summary(top_summary)
+            try:
+                datam['summary'], datam['attributes'] = _parse_docstring_summary(top_summary)
+            except ValueError:
+                if path:
+                    print(f"In {path}:")
+                raise ValueError(f"Failed to parse docstring on {name}.")
 
 
     # If there is no summary, add a short snippet.
