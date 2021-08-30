@@ -836,12 +836,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             try:
                 datam['summary'], datam['attributes'] = _parse_docstring_summary(top_summary)
             except ValueError:
-                debug_line = ""
+                debug_line = []
                 if path:
-                    debug_line += f"In {path}\n"
-                debug_line += f"For module {module}, type {_type}:\n\
-Failed to parse docstring on {name}."
-                raise ValueError(debug_line)
+                    debug_line.append(f"In file {path}\n")
+                debug_line.append(f"For module {module}, type {_type}:\n")
+                debug_line.append(f"Failed to parse docstring on {name}.")
+                raise ValueError("".join(debug_line))
 
 
     # If there is no summary, add a short snippet.
