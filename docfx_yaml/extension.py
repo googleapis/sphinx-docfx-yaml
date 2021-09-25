@@ -85,6 +85,7 @@ REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 PROPERTY = 'property'
 CODEBLOCK = "code-block"
 CODE = "code"
+PACKAGE = "package"
 
 
 # Run sphinx-build with Markdown builder in the plugin.
@@ -673,7 +674,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     if lines is None:
         lines = []
-    short_name = name.split('.')[-1]
+    short_name = name.split(".")[-1]
     args = []
     # Check how many arguments are present in the function.
     arg_count = 0
@@ -1260,6 +1261,24 @@ def find_markdown_pages(app, outdir):
             })
 
 
+# Looks for cross references to look for in given content, except for
+# current_name.
+def find_cross_references(content, current_name, keyword_map):
+    words = content.split(" ")
+    # Using counter to check if the entry is already a cross reference.
+    for i in range(0, len(words)):
+        for keyword in sorted(keyword_map.keys(), reverse=True):
+            if keyword != current_name and keyword not in current_name and keyword in words[i]:
+                # If it is already processed as cross reference, skip over it.
+                if "<xref" in words[i-1]:
+                    continue
+                cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
+                words[i] = words[i].replace(keyword, cross_reference)
+                print(f"Converted {keyword} into cross reference in: \n{content}")
+
+    return " ".join(words)
+
+
 def build_finished(app, exception):
     """
     Output YAML on the file system.
@@ -1445,6 +1464,100 @@ def build_finished(app, exception):
                 if 'source' in obj and (not obj['source']['remote']['repo'] or \
                     obj['source']['remote']['repo'] == 'https://apidrop.visualstudio.com/Content%20CI/_git/ReferenceAutomation'):
                         del(obj['source'])
+
+
+                # Extract any missing cross references where applicable.
+                # Potential targets are instances of full uid shown, or
+                # if we find a short form of the uid of one of current
+                # package's items. For example:
+                # cross reference candidates:
+                #   google.cloud.bigquery_storage_v1.types.storage.SplitReadStreamResponse
+                #   SplitReadStreamResponse
+                # non-candidates:
+                #   (not from the same library)
+                #   google.cloud.aiplatform.AutoMLForecastingTrainingJob
+
+                current_name = obj["fullName"]
+                # Currently we only need to look in summary, syntax and
+                # attributes for cross references.
+                if obj.get("summary"):
+                    entry = "summary"
+                    obj[entry] = find_cross_references(obj[entry], current_name, app.env.docfx_uid_names)
+
+                if obj.get("syntax"):
+                    entry = "syntax"
+                    if obj[entry].get("parameters"):
+                        for param in obj[entry]["parameters"]:
+                            if param.get("description"):
+                                param["description"] = find_cross_references(
+                                                          param["description"],
+                                                          current_name,
+                                                          app.env.docfx_uid_names
+                                                       )
+                            if param.get("id"):
+                                param["id"] = find_cross_references(
+                                                  param["id"],
+                                                  current_name,
+                                                  app.env.docfx_uid_names
+                                              )
+                            if param.get("var_type"):
+                                param["var_type"] = find_cross_references(
+                                                        param["var_type"],
+                                                        current_name,
+                                                        app.env.docfx_uid_names
+                                                    )
+
+                    if obj[entry].get("exceptions"):
+                        for exception in obj[entry]["exceptions"]:
+                            if exception.get("description"):
+                                exception["description"] = find_cross_references(
+                                                              exception["description"],
+                                                              current_name,
+                                                              app.env.docfx_uid_names
+                                                           )
+                            if exception.get("var_type"):
+                                exception["var_type"] = find_cross_references(
+                                                              exception["var_type"],
+                                                              current_name,
+                                                              app.env.docfx_uid_names
+                                                           )
+
+                    if obj[entry].get("returns"):
+                        for ret in obj[entry]["returns"]:
+                            if ret.get("description"):
+                                ret["description"] = find_cross_references(
+                                                        ret["description"],
+                                                        current_name,
+                                                        app.env.docfx_uid_names
+                                                     )
+                            if ret.get("var_type"):
+                                ret["var_type"] = find_cross_references(
+                                                      ret["var_type"],
+                                                      current_name,
+                                                      app.env.docfx_uid_names
+                                                  )
+
+                if obj.get("attributes"):
+                    entry = "attributes"
+                    for attribute in obj[entry]:
+                        if attribute.get("description"):
+                            attribute["description"] = find_cross_references(
+                                                          attribute["description"],
+                                                          current_name,
+                                                          app.env.docfx_uid_names
+                                                       )
+                        if attribute.get("name"):
+                            attribute["name"] = find_cross_references(
+                                                    attribute["name"],
+                                                    current_name,
+                                                    app.env.docfx_uid_names
+                                                )
+                        if attribute.get("var_type"):
+                            attribute["var_type"] = find_cross_references(
+                                                        attribute["var_type"],
+                                                        current_name,
+                                                        app.env.docfx_uid_names
+                                                    )
 
             yaml_map[uid] = [yaml_data, references]
 
