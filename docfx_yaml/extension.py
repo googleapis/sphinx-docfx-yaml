@@ -1261,22 +1261,29 @@ def find_markdown_pages(app, outdir):
             })
 
 
-# Looks for cross references to look for in given content, except for
-# current_name.
+# Finds and replaces occurrences which should be a cross reference in the given
+# content, except for the current name.
 def find_cross_references(content, current_name, keyword_map):
     words = content.split(" ")
+    new_words = []
+    sorted_map = sorted(keyword_map.keys(), reverse=True)
     # Using counter to check if the entry is already a cross reference.
-    for i in range(0, len(words)):
-        for keyword in sorted(keyword_map.keys(), reverse=True):
-            if keyword != current_name and keyword not in current_name and keyword in words[i]:
+    for index, word in enumerate(words):
+        cross_reference = ""
+        for keyword in sorted_map:
+            if keyword != current_name and keyword not in current_name and keyword in word:
                 # If it is already processed as cross reference, skip over it.
-                if "<xref" in words[i-1]:
+                if "<xref" in words[index-1] or (new_words and f"<xref uid=\"{keyword}" in new_words[-1]):
                     continue
                 cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
-                words[i] = words[i].replace(keyword, cross_reference)
+                new_words.append(word.replace(keyword, cross_reference))
                 print(f"Converted {keyword} into cross reference in: \n{content}")
 
-    return " ".join(words)
+        # If cross reference has not been found, add current unchanged content.
+        if not cross_reference:
+            new_words.append(word)
+
+    return " ".join(new_words)
 
 
 def build_finished(app, exception):
