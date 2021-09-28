@@ -4,6 +4,7 @@ from docfx_yaml.extension import convert_cross_references
 from docfx_yaml.extension import search_cross_references
 
 import unittest
+from parameterized import parameterized
 
 from yaml import load, Loader
 
@@ -58,40 +59,62 @@ for i in range(10):
             keyword_got = extract_keyword(keyword_line)
 
 
-    def test_convert_cross_references(self):
+    cross_references_testdata = [
+        # Testing for normal input.
+        [
+            "<xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>",
+            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
+        ],
+        # Testing for no cross references to convert.
+        [
+            "Response message for SplitReadStreamResponse.",
+            "Response message for SplitReadStreamResponse."
+        ],
+        # Testing for cross references to convert within longer content.
+        [
+            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>.",
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse."
+        ],
+    ]
+    @parameterized.expand(cross_references_testdata)
+    def test_convert_cross_references(self, content_want, content):
         # Check that entries correctly turns into cross references.
         keyword_map = {
             "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse": "",
         }
         current_name = "SplitRepsonse"
-        long_name_want = "<xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>"
 
-        long_name = "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
-        long_name_got = convert_cross_references(long_name, current_name, keyword_map)
-        self.assertEqual(long_name_got, long_name_want)
+        content_got = convert_cross_references(content, current_name, keyword_map)
+        self.assertEqual(content_got, content_want)
 
-        # This should not get processed.
-        short_content = "Response message for SplitReadStreamResponse."
-        short_content_got = convert_cross_references(short_content, current_name, keyword_map)
-        self.assertEqual(short_content_got, short_content)
 
-        long_content_want = "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>."
-        long_content = "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse."
-        long_content_got = convert_cross_references(long_content, current_name, keyword_map)
-        self.assertEqual(long_content_got, long_content_want)
+    # Test data used to test for processing already-processed cross references.
+    cross_references_short_testdata = [
+        [
+            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>.",
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse."
+        ],
+    ]
+    @parameterized.expand(cross_references_short_testdata)
+    def test_convert_cross_references_twice(self, content_want, content):
+        keyword_map = {
+            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse": "",
+        }
+        current_name = "SplitRepsonse"
+
+        content_got = convert_cross_references(content, current_name, keyword_map)
 
         # Make sure that same entries are not processed twice.
         # The output should not be different.
-        current_want = long_content_want
-        current = long_content_got
-        current_got = convert_cross_references(current, long_name, keyword_map)
-        self.assertEqual(current_want, current_got)
+        current = content_got
+        current_got = convert_cross_references(current, content, keyword_map)
+        self.assertEqual(content_want, current_got)
 
         # If shorter version of the current name exists, it should not interfere
         # unless strictly necessary.
         keyword_map["google.cloud.bigquery_storage_v1.types"] = ""
-        long_name_got = convert_cross_references(long_name, current_name, keyword_map)
-        self.assertEqual(long_name_got, long_name_want)
+        long_name_got = convert_cross_references(content, current_name, keyword_map)
+        self.assertEqual(long_name_got, content_want)
 
         shorter_name_want = "<xref uid=\"google.cloud.bigquery_storage_v1.types\">google.cloud.bigquery_storage_v1.types</xref>"
         shorter_name = "google.cloud.bigquery_storage_v1.types"
