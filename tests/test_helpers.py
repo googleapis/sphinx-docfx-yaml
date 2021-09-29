@@ -62,8 +62,8 @@ for i in range(10):
     cross_references_testdata = [
         # Testing for normal input.
         [
-            "<xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>",
-            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
+            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse",
+            "<xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>"
         ],
         # Testing for no cross references to convert.
         [
@@ -72,12 +72,12 @@ for i in range(10):
         ],
         # Testing for cross references to convert within longer content.
         [
-            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>.",
-            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse."
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse.",
+            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>."
         ],
     ]
     @parameterized.expand(cross_references_testdata)
-    def test_convert_cross_references(self, content_want, content):
+    def test_convert_cross_references(self, content, content_want):
         # Check that entries correctly turns into cross references.
         keyword_map = [
             "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
@@ -91,12 +91,12 @@ for i in range(10):
     # Test data used to test for processing already-processed cross references.
     cross_references_short_testdata = [
         [
-            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>.",
-            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse."
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse.",
+            "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>."
         ],
     ]
     @parameterized.expand(cross_references_short_testdata)
-    def test_convert_cross_references_twice(self, content_want, content):
+    def test_convert_cross_references_twice(self, content, content_want):
         keyword_map = [
             "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
         ]

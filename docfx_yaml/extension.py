@@ -1263,13 +1263,13 @@ def find_markdown_pages(app, outdir):
 
 # Finds and replaces occurrences which should be a cross reference in the given
 # content, except for the current name.
-def convert_cross_references(content, current_name, sorted_map):
+def convert_cross_references(content, current_name, list_of_entry_names):
     words = content.split(" ")
     new_words = []
     # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
         cross_reference = ""
-        for keyword in sorted_map:
+        for keyword in list_of_entry_names:
             if keyword != current_name and keyword not in current_name and keyword in word:
                 # If it is already processed as cross reference, skip over it.
                 if "<xref" in words[index-1] or (new_words and f"<xref uid=\"{keyword}" in new_words[-1]):
@@ -1287,9 +1287,9 @@ def convert_cross_references(content, current_name, sorted_map):
 
 # Used to look for cross references in the obj's data where applicable.
 # For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_name, sorted_map):
+def search_cross_references(obj, current_name, list_of_entry_names):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_name, sorted_map)
+        obj["summary"] = convert_cross_references(obj["summary"], current_name, list_of_entry_names)
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):
@@ -1298,21 +1298,21 @@ def search_cross_references(obj, current_name, sorted_map):
                     param["description"] = convert_cross_references(
                         param["description"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
                 if param.get("id"):
                     param["id"] = convert_cross_references(
                         param["id"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
                 if param.get("var_type"):
                     param["var_type"] = convert_cross_references(
                         param["var_type"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
         if obj["syntax"].get("exceptions"):
@@ -1321,14 +1321,14 @@ def search_cross_references(obj, current_name, sorted_map):
                     exception["description"] = convert_cross_references(
                         exception["description"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
                 if exception.get("var_type"):
                     exception["var_type"] = convert_cross_references(
                         exception["var_type"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
         if obj["syntax"].get("returns"):
@@ -1337,14 +1337,14 @@ def search_cross_references(obj, current_name, sorted_map):
                     ret["description"] = convert_cross_references(
                         ret["description"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
                 if ret.get("var_type"):
                     ret["var_type"] = convert_cross_references(
                         ret["var_type"],
                         current_name,
-                        sorted_map
+                        list_of_entry_names
                     )
 
 
@@ -1354,21 +1354,21 @@ def search_cross_references(obj, current_name, sorted_map):
                 attribute["description"] = convert_cross_references(
                     attribute["description"],
                     current_name,
-                    sorted_map
+                    list_of_entry_names
                 )
 
             if attribute.get("name"):
                 attribute["name"] = convert_cross_references(
                     attribute["name"],
                     current_name,
-                    sorted_map
+                    list_of_entry_names
                 )
 
             if attribute.get("var_type"):
                 attribute["var_type"] = convert_cross_references(
                     attribute["var_type"],
                     current_name,
-                    sorted_map
+                    list_of_entry_names
                 )
 
 
@@ -1571,10 +1571,10 @@ def build_finished(app, exception):
                 #   google.cloud.aiplatform.AutoMLForecastingTrainingJob
 
                 current_name = obj["fullName"]
-                sorted_map = sorted(app.env.docfx_uid_names.keys(), reverse=True)
+                list_of_entry_names = sorted(app.env.docfx_uid_names.keys(), reverse=True)
                 # Currently we only need to look in summary, syntax and
                 # attributes for cross references.
-                search_cross_references(obj, current_name, sorted_map)
+                search_cross_references(obj, current_name, list_of_entry_names)
 
             yaml_map[uid] = [yaml_data, references]
 
