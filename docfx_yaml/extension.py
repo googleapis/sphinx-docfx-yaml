@@ -26,6 +26,7 @@ import shutil
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
+from typing import List
 
 try:
     from subprocess import getoutput
@@ -1263,7 +1264,7 @@ def find_markdown_pages(app, outdir):
 
 # Finds and replaces occurrences which should be a cross reference in the given
 # content, except for the current name.
-def convert_cross_references(content: str, current_name: str, entry_names: list[str]):
+def convert_cross_references(content: str, current_name: str, entry_names: List[str]):
     words = content.split(" ")
     new_words = []
     # Using counter to check if the entry is already a cross reference.
@@ -1287,7 +1288,7 @@ def convert_cross_references(content: str, current_name: str, entry_names: list[
 
 # Used to look for cross references in the obj's data where applicable.
 # For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_name: str, entry_names: list[str]):
+def search_cross_references(obj, current_name: str, entry_names: List[str]):
     if obj.get("summary"):
         obj["summary"] = convert_cross_references(obj["summary"], current_name, entry_names)
 
