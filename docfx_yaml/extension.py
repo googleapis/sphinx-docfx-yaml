@@ -82,6 +82,7 @@ INITPY = '__init__.py'
 REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_\.<> ]*(\(\))?`'
 # Regex expression for checking references of pattern like "~package_v1.subpackage.module"
 REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
+REF_PATTERN_BRACKETS = '\[[a-zA-Z0-9\_\<\>\-\. ]+\]\[[a-zA-Z0-9\_\<\>\-\. ]+\]'
 
 PROPERTY = 'property'
 CODEBLOCK = "code-block"
@@ -251,12 +252,17 @@ def _resolve_reference_in_module_summary(pattern, lines):
                 # Find the last component of the target. "~Queue.get" only returns <xref:get>
                 ref_name = ref_name[index:]
 
-            else:
+            elif pattern == REF_PATTERN_LAST:
                 index = matched_str.rfind('.') + 1
                 if index == 0:
                     # If there is no dot, push index to not include tilde
                     index = 1
                 ref_name = matched_str[index:]
+
+            else: #pattern == REF_PATTERN_BRACKETS:
+                lbracket = matched_str.find('[')+1
+                rbracket = matched_str.find(']')
+                ref_name = matched_str[lbracket:rbracket]
 
             # Find the uid to add for xref
             index = matched_str.find("google.cloud")
@@ -818,17 +824,20 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     # Add extracted summary
     if lines != []:
         # Resolve references for xrefs in two different formats.
-        # REF_PATTERN checks for patterns like ":class:`~google.package.module`"
-        lines, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines)
-        for xref in xrefs:
-            if xref not in app.env.docfx_xrefs:
-                app.env.docfx_xrefs[xref] = ''
+        ref_patterns = [
+            # REF_PATTERN checks for patterns like ":class:`~google.package.module`"
+            REF_PATTERN,
+            # REF_PATTERN_LAST checks for patterns like "~package.module"
+            REF_PATTERN_LAST,
+            # REF_PATTERN_BRACKETS checks for patterns like "~package.module"
+            REF_PATTERN_BRACKETS,
+        ]
 
-        # REF_PATTERN_LAST checks for patterns like "~package.module"
-        lines, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines)
-        for xref in xrefs:
-            if xref not in app.env.docfx_xrefs:
-                app.env.docfx_xrefs[xref] = ''
+        for ref_pattern in ref_patterns:
+            lines, xrefs = _resolve_reference_in_module_summary(ref_pattern, lines)
+            for xref in xrefs:
+                if xref not in app.env.docfx_xrefs:
+                    app.env.docfx_xrefs[xref] = ''
 
         summary = app.docfx_transform_string('\n'.join(_refact_example_in_module_summary(lines)))
 
