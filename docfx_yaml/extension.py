@@ -87,6 +87,12 @@ REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 # "[module][google.cloud.cloudkms_v1.module]"
 REF_PATTERN_BRACKETS = '\[[a-zA-Z0-9\_\<\>\-\. ]+\]\[[a-zA-Z0-9\_\<\>\-\. ]+\]'
 
+REF_PATTERNS = [
+    REF_PATTERN,
+    REF_PATTERN_LAST,
+    REF_PATTERN_BRACKETS,
+]
+
 PROPERTY = 'property'
 CODEBLOCK = "code-block"
 CODE = "code"
@@ -269,7 +275,7 @@ def _resolve_reference_in_module_summary(pattern, lines):
                 ref_name = matched_str[lbracket:rbracket]
 
             else:
-                raise ValueError('Encountered wrong ref pattern.')
+                raise ValueError(f'Encountered wrong ref pattern: \n{pattern}')
 
             # Find the uid to add for xref
             index = matched_str.find("google.cloud")
@@ -831,18 +837,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
     # Add extracted summary
     if lines != []:
-        # Resolve references for xrefs in two different formats.
-        ref_patterns = [
-            # REF_PATTERN checks for patterns like ":class:`~google.package.module`"
-            REF_PATTERN,
-            # REF_PATTERN_LAST checks for patterns like "~package.module"
-            REF_PATTERN_LAST,
-            # REF_PATTERN_BRACKETS checks for patterns like
-            # "[module][google.cloud.cloudkms_v1.module]"
-            REF_PATTERN_BRACKETS,
-        ]
-
-        for ref_pattern in ref_patterns:
+        for ref_pattern in REF_PATTERNS:
             lines, xrefs = _resolve_reference_in_module_summary(ref_pattern, lines)
             for xref in xrefs:
                 if xref not in app.env.docfx_xrefs:
