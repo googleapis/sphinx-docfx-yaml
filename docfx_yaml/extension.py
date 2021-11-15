@@ -83,6 +83,8 @@ INITPY = '__init__.py'
 REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_\.<> ]*(\(\))?`'
 # Regex expression for checking references of pattern like "~package_v1.subpackage.module"
 REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
+# Regex expression for checking references of pattern like
+# "[module][google.cloud.cloudkms_v1.module]"
 REF_PATTERN_BRACKETS = '\[[a-zA-Z0-9\_\<\>\-\. ]+\]\[[a-zA-Z0-9\_\<\>\-\. ]+\]'
 
 PROPERTY = 'property'
@@ -239,6 +241,7 @@ def _resolve_reference_in_module_summary(pattern, lines):
             start = matched_obj.start()
             end = matched_obj.end()
             matched_str = line[start:end]
+            # TODO: separate this portion into a function per pattern.
             if pattern == REF_PATTERN:
                 if '<' in matched_str and '>' in matched_str:
                     # match string like ':func:`***<***>`'
@@ -260,10 +263,13 @@ def _resolve_reference_in_module_summary(pattern, lines):
                     index = 1
                 ref_name = matched_str[index:]
 
-            else: #pattern == REF_PATTERN_BRACKETS:
+            elif pattern == REF_PATTERN_BRACKETS:
                 lbracket = matched_str.find('[')+1
                 rbracket = matched_str.find(']')
                 ref_name = matched_str[lbracket:rbracket]
+
+            else:
+                raise ValueError('Encountered wrong ref pattern.')
 
             # Find the uid to add for xref
             index = matched_str.find("google.cloud")
@@ -831,7 +837,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             REF_PATTERN,
             # REF_PATTERN_LAST checks for patterns like "~package.module"
             REF_PATTERN_LAST,
-            # REF_PATTERN_BRACKETS checks for patterns like "~package.module"
+            # REF_PATTERN_BRACKETS checks for patterns like
+            # "[module][google.cloud.cloudkms_v1.module]"
             REF_PATTERN_BRACKETS,
         ]
 
