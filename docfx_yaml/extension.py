@@ -24,10 +24,7 @@ import re
 import copy
 import shutil
 import black
-
 import logging
-# Disable blib2to3 output that clutters debugging log.
-logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 from pathlib import Path
 from functools import partial
@@ -104,6 +101,8 @@ CODEBLOCK = "code-block"
 CODE = "code"
 PACKAGE = "package"
 
+# Disable blib2to3 output that clutters debugging log.
+logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 # Run sphinx-build with Markdown builder in the plugin.
 def run_sphinx_markdown():
