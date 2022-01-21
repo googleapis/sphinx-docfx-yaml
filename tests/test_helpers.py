@@ -4,11 +4,15 @@ from docfx_yaml.extension import convert_cross_references
 from docfx_yaml.extension import search_cross_references
 from docfx_yaml.extension import format_code
 from docfx_yaml.extension import extract_product_name
+from docfx_yaml.extension import highlight_md_codeblocks
 
 import unittest
 from parameterized import parameterized
 
 from yaml import load, Loader
+
+import shutil
+import os
 
 class TestGenerate(unittest.TestCase):
     def test_indent_code_left(self):
@@ -189,6 +193,35 @@ for i in range(10):
         short_product_name = extract_product_name(short_name)
 
         self.assertEqual(short_name_want, short_product_name)
+
+
+    # Filenames to test markdown syntax highlight with.
+    test_markdown_filenames = [
+        [
+            "tests/markdown_code_obj.md",
+            "tests/markdown_code_pre.md",
+            "tests/markdown_code_post.md"
+        ],
+        [
+            "tests/markdown_mixed_obj.md",
+            "tests/markdown_mixed_pre.md",
+            "tests/markdown_mixed_post.md"
+        ],
+    ]
+    @parameterized.expand(test_markdown_filenames)
+    def test_highlight_md_codeblocks(self, base_filename, test_filename, want_filename):
+        # Test to ensure codeblocks in markdown files are correctly highlighted.
+
+        # Copy the base file we'll need to test.
+        shutil.copyfile(base_filename, test_filename)
+
+        highlight_md_codeblocks(test_filename)
+
+        mdfile_got = open(test_filename)
+        mdfile_want = open(want_filename)
+
+        self.assertEqual(mdfile_got.read(), mdfile_want.read())
+
 
 if __name__ == '__main__':
     unittest.main()
