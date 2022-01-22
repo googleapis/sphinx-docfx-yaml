@@ -1277,7 +1277,7 @@ def highlight_md_codeblocks(mdfile):
 
     with open(mdfile) as mdfile_iterator:
         file_content = mdfile_iterator.read()
-        # If there isn't even number of code block annotations do not syntax
+        # If there is an odd number of code block annotations, do not syntax
         # highlight.
         if file_content.count(find_string_nl) % 2 != 0:
             print(f'{mdfile_iterator.name} contains mixed or wrong format of code blocks. Skipping syntax highlighting.')
