@@ -1270,32 +1270,42 @@ def extract_header_from_markdown(mdfile_iterator):
 
 # For a given markdown file, adds syntax highlighting to code blocks.
 def highlight_md_codeblocks(mdfile):
-    find_string = '```'
-    find_string_nl = '```\n'
-    replace_string = '```python'
+    fence = '```'
+    fence_with_python = '```python'
     new_lines = []
 
     with open(mdfile) as mdfile_iterator:
         file_content = mdfile_iterator.read()
         # If there is an odd number of code block annotations, do not syntax
         # highlight.
-        if file_content.count(find_string_nl) % 2 != 0:
+        if file_content.count(fence) % 2 != 0:
             print(f'{mdfile_iterator.name} contains mixed or wrong format of code blocks. Skipping syntax highlighting.')
             return
         # Retrieve code block positions to replace
         codeblocks = [[m.start(), m.end()] for m in re.finditer(
-                                                      find_string,
+                                                      fence,
                                                       file_content)]
 
-        # This is equivalent to grabbing every odd index items.
+        # This is equivalent to grabbing every odd index item.
         codeblocks = codeblocks[::2]
+        # Used to store code blocks that comes without language indicators.
+        blocks_without_indicators = []
+
+        # Check if the fence comes with a language indicator. If so, skip this.
+        for start, end in codeblocks:
+            newline_index = file_content.find('\n', start)
+            # There should be exactly 3 characters between the start of the
+            # fence and the newline, otherwise there probably is a language
+            # indicator.
+            if newline_index - start == 3:
+                blocks_without_indicators.append([start, end])
 
         # Stitch content that does not need to be parsed, and replace with
         # `replace_string` for parsed portions.
         prev_start = prev_end = 0
-        for start, end in codeblocks:
+        for start, end in blocks_without_indicators:
             new_lines.append(file_content[prev_end:start])
-            new_lines.append(replace_string)
+            new_lines.append(fence_with_python)
             prev_start, prev_end = start, end
 
         # Include rest of the content
