@@ -198,14 +198,19 @@ for i in range(10):
     # Filenames to test markdown syntax highlight with.
     test_markdown_filenames = [
         [
-            "tests/markdown_code_obj.md",
-            "tests/markdown_code_pre.md",
-            "tests/markdown_code_post.md"
+            "tests/markdown_syntax_highlight.md",
+            "tests/markdown_syntax_highlight_got.md",
+            "tests/markdown_syntax_highlight_want.md"
         ],
         [
-            "tests/markdown_mixed_obj.md",
-            "tests/markdown_mixed_pre.md",
-            "tests/markdown_mixed_post.md"
+            "tests/markdown_no_highlight.md",
+            "tests/markdown_no_highlight_got.md",
+            "tests/markdown_no_highlight_want.md"
+        ],
+        [
+            "tests/markdown_mixed_highlight.md",
+            "tests/markdown_mixed_highlight_got.md",
+            "tests/markdown_mixed_highlight_want.md"
         ],
     ]
     @parameterized.expand(test_markdown_filenames)
@@ -221,6 +226,8 @@ for i in range(10):
         mdfile_want = open(want_filename)
 
         self.assertEqual(mdfile_got.read(), mdfile_want.read())
+        # Clean up test file.
+        os.remove(test_filename)
 
 
 if __name__ == '__main__':
