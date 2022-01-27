@@ -1279,7 +1279,7 @@ def highlight_md_codeblocks(mdfile):
         # If there is an odd number of code block annotations, do not syntax
         # highlight.
         if file_content.count(fence) % 2 != 0:
-            print(f'{mdfile_iterator.name} contains mixed or wrong format of code blocks. Skipping syntax highlighting.')
+            print(f'{mdfile_iterator.name} contains wrong format of code blocks. Skipping syntax highlighting.')
             return
         # Retrieve code block positions to replace
         codeblocks = [[m.start(), m.end()] for m in re.finditer(
@@ -1291,9 +1291,9 @@ def highlight_md_codeblocks(mdfile):
         # Used to store code blocks that come without language indicators.
         blocks_without_indicators = []
 
-        # Check if the fence comes with a language indicator. If so, skip this.
+        # Check if the fence comes without a language indicator. If so, include
+        # this to a list to render.
         for start, end in codeblocks:
-            # Check if there are any additional character after the fence.
             if file_content[end] == '\n':
                 blocks_without_indicators.append([start, end])
 
@@ -1305,7 +1305,7 @@ def highlight_md_codeblocks(mdfile):
             new_lines.append(fence_with_python)
             prev_start, prev_end = start, end
 
-        # Include rest of the content
+        # Include rest of the content.
         new_lines.append(file_content[prev_end:])
 
     # Overwrite with newly parsed content.

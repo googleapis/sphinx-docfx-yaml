@@ -11,8 +11,6 @@ from parameterized import parameterized
 
 from yaml import load, Loader
 
-import shutil
-import os
 import tempfile
 
 class TestGenerate(unittest.TestCase):
