@@ -1,9 +1,9 @@
 ```python
-These code block should not be highlighted.
+These code blocks should not be highlighted.
 ```
 
 ```py
-As these comes with a language indicator.
+As these come with a language indicator.
 ```
 
 ```java
@@ -11,5 +11,5 @@ Shouldn't matter which langauge indicator is used.
 ```
 
 ```python
-But this should be highlighted.
+But this block should get highlighted.
 ```

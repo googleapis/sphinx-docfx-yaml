@@ -13,6 +13,7 @@ from yaml import load, Loader
 
 import shutil
 import os
+import tempfile
 
 class TestGenerate(unittest.TestCase):
     def test_indent_code_left(self):
@@ -199,35 +200,35 @@ for i in range(10):
     test_markdown_filenames = [
         [
             "tests/markdown_syntax_highlight.md",
-            "tests/markdown_syntax_highlight_got.md",
             "tests/markdown_syntax_highlight_want.md"
         ],
         [
             "tests/markdown_no_highlight.md",
-            "tests/markdown_no_highlight_got.md",
             "tests/markdown_no_highlight_want.md"
         ],
         [
             "tests/markdown_mixed_highlight.md",
-            "tests/markdown_mixed_highlight_got.md",
             "tests/markdown_mixed_highlight_want.md"
         ],
     ]
     @parameterized.expand(test_markdown_filenames)
-    def test_highlight_md_codeblocks(self, base_filename, test_filename, want_filename):
+    def test_highlight_md_codeblocks(self, base_filename, want_filename):
         # Test to ensure codeblocks in markdown files are correctly highlighted.
 
         # Copy the base file we'll need to test.
-        shutil.copyfile(base_filename, test_filename)
+        test_file = tempfile.NamedTemporaryFile(mode='r+', delete=False)
+        with open(base_filename) as base_file:
+            test_file.write(base_file.read())
+            test_file.flush()
 
-        highlight_md_codeblocks(test_filename)
+        highlight_md_codeblocks(test_file.name)
+        test_file.seek(0)
 
-        mdfile_got = open(test_filename)
-        mdfile_want = open(want_filename)
+        with open(want_filename) as mdfile_want:
+            self.assertEqual(test_file.read(), mdfile_want.read())
 
-        self.assertEqual(mdfile_got.read(), mdfile_want.read())
-        # Clean up test file.
-        os.remove(test_filename)
+        # Close temporary file.
+        test_file.close()
 
 
 if __name__ == '__main__':
