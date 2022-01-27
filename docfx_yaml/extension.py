@@ -1288,20 +1288,17 @@ def highlight_md_codeblocks(mdfile):
 
         # This is equivalent to grabbing every odd index item.
         codeblocks = codeblocks[::2]
-        # Used to store code blocks that comes without language indicators.
+        # Used to store code blocks that come without language indicators.
         blocks_without_indicators = []
 
         # Check if the fence comes with a language indicator. If so, skip this.
         for start, end in codeblocks:
-            newline_index = file_content.find('\n', start)
-            # There should be exactly 3 characters between the start of the
-            # fence and the newline, otherwise there probably is a language
-            # indicator.
-            if newline_index - start == 3:
+            # Check if there are any additional character after the fence.
+            if file_content[end] == '\n':
                 blocks_without_indicators.append([start, end])
 
         # Stitch content that does not need to be parsed, and replace with
-        # `replace_string` for parsed portions.
+        # `fence_with_python` for parsed portions.
         prev_start = prev_end = 0
         for start, end in blocks_without_indicators:
             new_lines.append(file_content[prev_end:start])
@@ -1343,7 +1340,7 @@ def find_markdown_pages(app, outdir):
     # For each file, if it is a markdown file move to the top level pages.
     for mdfile in markdown_dir.iterdir():
         if mdfile.is_file() and mdfile.name.lower() not in files_to_ignore:
-            highlight_md_codeblocks(f"{markdown_dir}/{mdfile.name}")
+            highlight_md_codeblocks(markdown_dir / mdfile.name)
             shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Extract the header name for TOC.
