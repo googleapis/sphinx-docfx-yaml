@@ -214,19 +214,16 @@ for i in range(10):
         # Test to ensure codeblocks in markdown files are correctly highlighted.
 
         # Copy the base file we'll need to test.
-        test_file = tempfile.NamedTemporaryFile(mode='r+', delete=False)
-        with open(base_filename) as base_file:
-            test_file.write(base_file.read())
-            test_file.flush()
+        with tempfile.NamedTemporaryFile(mode='r+', delete=False) as test_file:
+            with open(base_filename) as base_file:
+                test_file.write(base_file.read())
+                test_file.flush()
 
-        highlight_md_codeblocks(test_file.name)
-        test_file.seek(0)
+            highlight_md_codeblocks(test_file.name)
+            test_file.seek(0)
 
-        with open(want_filename) as mdfile_want:
-            self.assertEqual(test_file.read(), mdfile_want.read())
-
-        # Close temporary file.
-        test_file.close()
+            with open(want_filename) as mdfile_want:
+                self.assertEqual(test_file.read(), mdfile_want.read())
 
 
 if __name__ == '__main__':
