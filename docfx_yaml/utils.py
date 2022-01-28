@@ -17,10 +17,7 @@ from docutils.io import StringOutput
 from docutils.utils import new_document
 from docutils import nodes
 from inspect import signature
-try:
-    from collections import namedtuple
-except ImportError:
-    from colelctions.abc import namedtuple
+from collections import namedtuple
 
 from .writer import MarkdownWriter as Writer
 
