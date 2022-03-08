@@ -36,13 +36,13 @@ python3 -m pip install recommonmark
 # Required for some client libraries:
 python3 -m pip install --user django==2.2 ipython
 
-# Store the contents of bucket in a variable to reuse.
+# Store the contents of bucket log in a variable to reuse.
 python_bucket_items=$(gsutil ls "gs://docs-staging-v2/docfx-python*")
 # Retrieve unique repositories to regenerate the YAML with.
-for package in $(echo "${python_bucket_items}" | sort -u -t- -k5,5 | cut -d "-" -f 5); do
+for package in $(echo "${python_bucket_items}" | cut -d "-" -f 5- | rev | cut -d "-" -f 2- | rev | uniq); do
 
   # Extract the latest version of the package to grab latest metadata.
-  version=$(echo "${python_bucket_items}" | grep "docfx-python-${package}" | cut -d "-" -f 6 | sort -V -r | head -1)
+  version=$(echo "${python_bucket_items}" | grep "docfx-python-${package}-" | rev | cut -d "-" -f 1 | rev | sort -V -r | head -1)
 
   # Set the bucket and tarball values to be used for the package.
   bucket_item=$(echo "gs://docs-staging-v2/docfx-python-${package}-${version}")
