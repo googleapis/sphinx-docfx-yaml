@@ -386,9 +386,16 @@ def extract_keyword(line):
         return line
 
 
-# Given lines of code, indent to left by 1 block, based on
-# amount of trailing white space of first line as 1 block.
 def indent_code_left(lines, tab_space):
+    """Indents code lines left by tab_space.
+
+    Args:
+        lines: String lines of code.
+        tab_space: Number of spaces to indent to left by.
+
+    Returns:
+        String lines of left-indented code.
+    """
     parts = lines.split("\n")
     parts = [part[tab_space:] for part in parts]
     return "\n".join(parts)
