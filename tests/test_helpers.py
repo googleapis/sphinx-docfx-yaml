@@ -45,9 +45,29 @@ for i in range(10):
 """
         parts = code_want.split("\n")
         tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
-
         code_got = indent_code_left(code_want, tab_space)
         # Confirm that nothing changes.
+        self.assertEqual(code_got, code_want)
+
+
+    def test_indent_code_blocks_left(self):
+        # Check code blocks are indented properly.
+        code_want = \
+"""def foo():
+
+    print('test function for indent')
+
+    return ('left-indented-blocks')
+"""
+
+        # Test with how blocks would appear in the code block
+        code = [
+            "    def foo():",
+            "        print('test function for indent')",
+            "        return ('left-indented-blocks')\n"
+        ]
+        tab_space = len(code[0]) - len(code[0].lstrip(" "))
+        code_got = "\n\n".join([indent_code_left(part, tab_space) for part in code])
         self.assertEqual(code_got, code_want)
 
 
