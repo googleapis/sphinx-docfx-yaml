@@ -27,7 +27,9 @@ class TestGenerate(unittest.TestCase):
         print('test function for indent')
         return ('left-indented-code')
 """
-        code = indent_code_left(code)
+        parts = code.split("\n")
+        tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
+        code = indent_code_left(code, tab_space)
         self.assertEqual(code, code_want)
 
         # Check that if there's no whitespace, it does not indent
@@ -41,8 +43,10 @@ for i in range(10):
     else:
         continue
 """
+        parts = code_want.split("\n")
+        tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
 
-        code_got = indent_code_left(code_want)
+        code_got = indent_code_left(code_want, tab_space)
         # Confirm that nothing changes.
         self.assertEqual(code_got, code_want)
 
