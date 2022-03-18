@@ -14,26 +14,33 @@ from yaml import load, Loader
 import tempfile
 
 class TestGenerate(unittest.TestCase):
-    def test_indent_code_left(self):
+    code_testdata = [
         # Check that the code indents to left based on first line.
-        code_want = \
+        [
+            \
+"""    def foo():
+        print('test function for indent')
+        return ('left-indented-code')
+""",
+            \
 """def foo():
     print('test function for indent')
     return ('left-indented-code')
 """
-
-        code = \
-"""    def foo():
-        print('test function for indent')
-        return ('left-indented-code')
-"""
-        parts = code.split("\n")
-        tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
-        code = indent_code_left(code, tab_space)
-        self.assertEqual(code, code_want)
-
+        ],
         # Check that if there's no whitespace, it does not indent
-        code_want = \
+        [
+            \
+"""
+print('test function for no impact indent')
+for i in range(10):
+    print(i)
+    if i%5 == 0:
+        i += 1
+    else:
+        continue
+""",
+            \
 """
 print('test function for no impact indent')
 for i in range(10):
@@ -43,10 +50,13 @@ for i in range(10):
     else:
         continue
 """
-        parts = code_want.split("\n")
+        ],
+    ]
+    @parameterized.expand(code_testdata)
+    def test_indent_code_left(self, code, code_want):
+        parts = code.split("\n")
         tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
-        code_got = indent_code_left(code_want, tab_space)
-        # Confirm that nothing changes.
+        code_got = indent_code_left(code, tab_space)
         self.assertEqual(code_got, code_want)
 
 
