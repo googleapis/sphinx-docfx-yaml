@@ -470,9 +470,6 @@ def _parse_docstring_summary(summary):
 
         # Parse keywords if found.
         # lstrip is added to parse code blocks that are not formatted well.
-        # TODO: remove the lstrip if
-        # https://github.com/googleapis/gapic-generator-python/issues/1244 is
-        # resolved.
         if part.lstrip('\n').startswith('..'):
             try:
                 keyword = extract_keyword(part.lstrip('\n'))
