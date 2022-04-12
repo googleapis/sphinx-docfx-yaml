@@ -1287,8 +1287,8 @@ def parse_markdown_header(header_line, prev_line):
 
 
 # For a given markdown file, extract its header line.
+# Returns empty string if a Markdown heading level 1 does not exist.
 def extract_header_from_markdown(mdfile_iterator):
-    mdfile_name = mdfile_iterator.name.split("/")[-1].split(".")[0].capitalize()
     prev_line = ""
 
     for header_line in mdfile_iterator:
@@ -1301,8 +1301,7 @@ def extract_header_from_markdown(mdfile_iterator):
 
         prev_line = header_line
 
-    print(f"Could not find a title for {mdfile_iterator.name}. Using {mdfile_name} as the title instead.")
-    return mdfile_name
+    return ""
 
 
 # For a given markdown file, adds syntax highlighting to code blocks.
@@ -1351,6 +1350,20 @@ def highlight_md_codeblocks(mdfile):
         mdfile_iterator.write(new_content)
 
 
+def prepend_markdown_title(filename, mdfile_iterator):
+    """Prepends the name as a Markdown title.
+
+    Args:
+        filename: the name of the markdown file to prepend.
+        mdfile_iterator: iterator to the markdown file that is both readable
+        and writable.
+    """
+    file_content = f'# {filename}\n\n' + mdfile_iterator.read()
+    # Reset file position to the beginning to write
+    mdfile_iterator.seek(0)
+    mdfile_iterator.write(file_content)
+
+
 # Given generated markdown files, incorporate them into the docfx_yaml output.
 # The markdown file metadata will be added to top level of the TOC.
 def find_markdown_pages(app, outdir):
@@ -1374,12 +1387,23 @@ def find_markdown_pages(app, outdir):
     # For each file, if it is a markdown file move to the top level pages.
     for mdfile in markdown_dir.iterdir():
         if mdfile.is_file() and mdfile.name.lower() not in files_to_ignore:
+            mdfile_name = ""
             highlight_md_codeblocks(markdown_dir / mdfile.name)
-            shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Extract the header name for TOC.
             with open(mdfile) as mdfile_iterator:
                 name = extract_header_from_markdown(mdfile_iterator)
+
+            if not name:
+                with open(mdfile, 'r+') as mdfile_iterator:
+                    mdfile_name = mdfile_iterator.name.split("/")[-1].split(".")[0].capitalize()
+
+                    print(f"Could not find a title for {mdfile_iterator.name}. Using {mdfile_name} as the title instead.")
+                    name = mdfile_name
+
+                    prepend_markdown_title(name, mdfile_iterator)
+
+            shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Add the file to the TOC later.
             app.env.markdown_pages.append({
