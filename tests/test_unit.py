@@ -713,7 +713,7 @@ Raises:
 
     def test_extract_header_from_markdown_bad_headers(self):
         # Check that the filename is used as header if no valid header is found.
-        header_line_want = "Markdown_example_bad_header"
+        header_line_want = ""
 
         with open('tests/markdown_example_bad_header.md', 'r') as mdfile:
             header_line_got = extract_header_from_markdown(mdfile)
@@ -721,16 +721,12 @@ Raises:
         self.assertEqual(header_line_want, header_line_got)
 
         # Check that only h1 headers are parsed.
-        header_line_want = "Markdown_example_h2"
-
         with open('tests/markdown_example_h2.md', 'r') as mdfile:
             header_line_got = extract_header_from_markdown(mdfile)
 
         self.assertEqual(header_line_want, header_line_got)
 
         # Check that there must be a line before the h1 header breaker.
-        header_line_want = "Markdown_example_alternate_bad"
-
         with open('tests/markdown_example_alternate_bad.md', 'r') as mdfile:
             header_line_got = extract_header_from_markdown(mdfile)
 
