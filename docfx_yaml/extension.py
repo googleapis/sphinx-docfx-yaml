@@ -1286,7 +1286,7 @@ def parse_markdown_header(header_line, prev_line):
     return ""
 
 
-def extract_header_from_markdown(mdfile: Iterable) -> str:
+def extract_header_from_markdown(mdfile: Iterable[str]) -> str:
     """For a given markdown file, extract its header line.
 
     Args:
@@ -1356,7 +1356,7 @@ def highlight_md_codeblocks(mdfile):
         mdfile_iterator.write(new_content)
 
 
-def prepend_markdown_header(filename: str, mdfile: Iterable):
+def prepend_markdown_header(filename: str, mdfile: Iterable[str]):
     """Prepends the filename as a Markdown header.
 
     Args:
