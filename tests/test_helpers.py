@@ -5,7 +5,7 @@ from docfx_yaml.extension import search_cross_references
 from docfx_yaml.extension import format_code
 from docfx_yaml.extension import extract_product_name
 from docfx_yaml.extension import highlight_md_codeblocks
-from docfx_yaml.extension import prepend_markdown_title
+from docfx_yaml.extension import prepend_markdown_header
 
 import unittest
 from parameterized import parameterized
@@ -277,7 +277,7 @@ for i in range(10):
         ],
     ]
     @parameterized.expand(test_markdown_filenames)
-    def test_prepend_markdown_title(self, base_filename, want_filename):
+    def test_prepend_markdown_header(self, base_filename, want_filename):
         # Test to ensure markdown titles are correctly prepended.
 
         # Copy the base file we'll need to test.
@@ -289,7 +289,7 @@ for i in range(10):
                 test_file.flush()
                 test_file.seek(0)
 
-            prepend_markdown_title(file_name, test_file)
+            prepend_markdown_header(file_name, test_file)
             test_file.seek(0)
 
             with open(want_filename) as mdfile_want:
