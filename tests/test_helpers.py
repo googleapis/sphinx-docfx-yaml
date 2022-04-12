@@ -278,7 +278,7 @@ for i in range(10):
     ]
     @parameterized.expand(test_markdown_filenames)
     def test_prepend_markdown_header(self, base_filename, want_filename):
-        # Test to ensure markdown titles are correctly prepended.
+        # Ensure markdown titles are correctly prepended.
 
         # Copy the base file we'll need to test.
         with tempfile.NamedTemporaryFile(mode='r+', delete=False) as test_file:
