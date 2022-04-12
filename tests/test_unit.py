@@ -728,12 +728,10 @@ Raises:
     @parameterized.expand(test_markdown_filenames)
     def test_extract_header_from_markdown_bad_headers(self, markdown_filename):
         # Check that empty string is returned if no valid header is found.
-        header_line_want = ""
-
         with open(markdown_filename, 'r') as mdfile:
             header_line_got = extract_header_from_markdown(mdfile)
 
-        self.assertEqual(header_line_want, header_line_got)
+        self.assertFalse(header_line_got)
 
 
     def test_parse_docstring_summary(self):
