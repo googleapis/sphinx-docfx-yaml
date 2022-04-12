@@ -29,7 +29,7 @@ import logging
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import List
+from typing import List, Iterable
 from black import InvalidInput
 
 try:
@@ -1286,12 +1286,18 @@ def parse_markdown_header(header_line, prev_line):
     return ""
 
 
-# For a given markdown file, extract its header line.
-# Returns empty string if a Markdown heading level 1 does not exist.
-def extract_header_from_markdown(mdfile_iterator):
+def extract_header_from_markdown(mdfile: Iterable) -> str:
+    """For a given markdown file, extract its header line.
+
+    Args:
+        mdfile: iterator to the markdown file.
+
+    Returns:
+        A string for header or empty string if header is not found.
+    """
     prev_line = ""
 
-    for header_line in mdfile_iterator:
+    for header_line in mdfile:
 
         # Ignore licenses and other non-headers prior to the header.
         header = parse_markdown_header(header_line, prev_line)
@@ -1350,18 +1356,18 @@ def highlight_md_codeblocks(mdfile):
         mdfile_iterator.write(new_content)
 
 
-def prepend_markdown_header(filename, mdfile_iterator):
+def prepend_markdown_header(filename: str, mdfile: Iterable):
     """Prepends the filename as a Markdown header.
 
     Args:
         filename: the name of the markdown file to prepend.
-        mdfile_iterator: iterator to the markdown file that is both readable
+        mdfile: iterator to the markdown file that is both readable
           and writable.
     """
-    file_content = f'# {filename}\n\n' + mdfile_iterator.read()
+    file_content = f'# {filename}\n\n' + mdfile.read()
     # Reset file position to the beginning to write
-    mdfile_iterator.seek(0)
-    mdfile_iterator.write(file_content)
+    mdfile.seek(0)
+    mdfile.write(file_content)
 
 
 # Given generated markdown files, incorporate them into the docfx_yaml output.
