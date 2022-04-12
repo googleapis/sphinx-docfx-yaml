@@ -1351,12 +1351,12 @@ def highlight_md_codeblocks(mdfile):
 
 
 def prepend_markdown_header(filename, mdfile_iterator):
-    """Prepends the name as a Markdown header.
+    """Prepends the filename as a Markdown header.
 
     Args:
         filename: the name of the markdown file to prepend.
         mdfile_iterator: iterator to the markdown file that is both readable
-        and writable.
+          and writable.
     """
     file_content = f'# {filename}\n\n' + mdfile_iterator.read()
     # Reset file position to the beginning to write
