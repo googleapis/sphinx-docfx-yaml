@@ -1350,8 +1350,8 @@ def highlight_md_codeblocks(mdfile):
         mdfile_iterator.write(new_content)
 
 
-def prepend_markdown_title(filename, mdfile_iterator):
-    """Prepends the name as a Markdown title.
+def prepend_markdown_header(filename, mdfile_iterator):
+    """Prepends the name as a Markdown header.
 
     Args:
         filename: the name of the markdown file to prepend.
@@ -1401,7 +1401,7 @@ def find_markdown_pages(app, outdir):
                     print(f"Could not find a title for {mdfile_iterator.name}. Using {mdfile_name} as the title instead.")
                     name = mdfile_name
 
-                    prepend_markdown_title(name, mdfile_iterator)
+                    prepend_markdown_header(name, mdfile_iterator)
 
             shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
