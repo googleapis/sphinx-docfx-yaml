@@ -115,6 +115,13 @@ for i in range(10):
             "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse.",
             "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>."
         ],
+        # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
+        # remove this when it is not needed anymore.
+        # Testing for hardcoded reference.
+        [
+            "google.iam.v1.iam_policy_pb2.GetIamPolicyRequest",
+            "<a href=\"http://github.com/googleapis/python-grpc-google-iam-v1/blob/main/google/iam/v1/iam_policy_pb2_grpc.py#L111-L118\">google.iam.v1.iam_policy_pb2.GetIamPolicyRequest</a>"
+        ]
     ]
     @parameterized.expand(cross_references_testdata)
     def test_convert_cross_references(self, content, content_want):
