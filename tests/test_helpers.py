@@ -1,5 +1,6 @@
 from docfx_yaml.extension import extract_keyword
 from docfx_yaml.extension import indent_code_left
+from docfx_yaml.extension import check_existing_references
 from docfx_yaml.extension import convert_cross_references
 from docfx_yaml.extension import search_cross_references
 from docfx_yaml.extension import format_code
@@ -301,6 +302,48 @@ for i in range(10):
 
             with open(want_filename) as mdfile_want:
                 self.assertEqual(test_file.read(), mdfile_want.read())
+
+
+    test_reference_params = [
+        [
+            "google.cloud.resourcemanager_v3.ProjectsClient",
+            "google.cloud.resourcemanager_v3.ProjectsClient",
+            ["The", "following", "constraints", "apply", "when", "using"],
+            ""
+        ],
+        [
+            "google.cloud.resourcemanager_v3.set_iam_policy",
+            "google.cloud.resourcemanager_v3.set_iam_policy",
+            ["A", "Policy", "is", "a", "collection", "of", "bindings", "from"],
+            "<xref uid=\"google.cloud.resourcemanager_v3.set_iam_policy\">google.cloud.resourcemanager_v3.set_iam_policy</xref>"
+        ],
+        [
+            "uid=\"google.cloud.resourcemanager_v3.set_iam_policy\">documentation</xref>",
+            "google.cloud.resourcemanager_v3.set_iam_policy",
+            ["Take", "a", "look", "at", "<xref"],
+            ""
+        ],
+    ]
+    @parameterized.expand(test_reference_params)
+    def test_check_existing_references(self, word, keyword, converted_words, cross_reference_want):
+        current_name = "google.cloud.resourcemanager_v3.ProjectsClient"
+        content ="""Sets the IAM access control policy for the specified project.
+
+The following constraints apply when using google.cloud.resourcemanager_v3.ProjectsClient
+
+A Policy is a collection of bindings from google.cloud.resourcemanager_v3.set_iam_policy
+
+Take a look at <xref uid="google.cloud.resourcemanager_v3.set_iam_policy">documentation</xref> for more information.
+"""
+        # Break up the paragraph into sanitized list of words as shown in Sphinx.
+        words = " ".join(content.split("\n")).split(" ")
+
+        index = words.index(word)
+
+        cross_reference_got = check_existing_references(
+            current_name, words, index, word, keyword, converted_words
+        )
+        self.assertEqual(cross_reference_got, cross_reference_want)
 
 
 if __name__ == '__main__':
