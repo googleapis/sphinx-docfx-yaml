@@ -1440,7 +1440,7 @@ def convert_cross_references(content: str, current_name: str, entry_names: List[
         cross_reference = ""
         for keyword in entry_names:
             if keyword != current_name and keyword not in current_name and keyword in word:
-                if keyword in hard_coded_references:
+                if keyword, reference in hard_coded_references.items():
                     if "<a" in words[index-1] or \
                         (new_words and f"<a href=\"{hard_coded_references[keyword]}" in new_words[-1]):
                         continue
