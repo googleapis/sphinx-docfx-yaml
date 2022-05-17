@@ -1444,7 +1444,7 @@ def check_existing_references(
     """
     cross_reference = ""
     if keyword != current_name and keyword not in current_name and keyword in word:
-        if keyword in hard_coded_references:
+        if hard_coded_references and keyword in hard_coded_references:
             if "<a" not in words[index-1] and \
                 not (converted_words and f"<a href=\"{hard_coded_references[keyword]}" in converted_words[-1]):
                 cross_reference = f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
