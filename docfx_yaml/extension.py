@@ -29,7 +29,7 @@ import logging
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import List, Iterable
+from typing import Dict, Iterable, List
 from black import InvalidInput
 
 try:
@@ -1417,12 +1417,65 @@ def find_markdown_pages(app, outdir):
                 'href': mdfile.name.lower(),
             })
 
+def check_existing_references(
+    current_name: str,
+    words: List[str],
+    index: int,
+    word: str,
+    keyword: str,
+    converted_words: List[str],
+    hard_coded_references: Dict[str, str] = None
+):
+    """Given a word, check if it contains a reference keyword we should convert.
 
-# Finds and replaces occurrences which should be a cross reference in the given
-# content, except for the current name.
+    Args:
+        current_name: the name of the current Python object being looked at
+        words: list of words used to check and compare content before and after the given word
+        index: current index within words
+        word: current word being looked at
+        keyword: reference keyword to check against
+        converted_words: list of words containing words that's been processed so far
+        hard_coded_references: Optional list containing a list of hard coded references
+
+    Returns:
+        Empty string if no reference needs to be converted, or a string that contains
+          the converted reference.
+
+    """
+    cross_reference = ""
+    if keyword != current_name and keyword not in current_name and keyword in word:
+        if keyword in hard_coded_references:
+            if "<a" not in words[index-1] and \
+                not (converted_words and f"<a href=\"{hard_coded_references[keyword]}" in converted_words[-1]):
+                cross_reference = f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
+
+        else:
+            # If it is already processed as cross reference, skip over it.
+            if "<xref" not in words[index-1] and \
+                not (converted_words and f"<xref uid=\"{keyword}" in converted_words[-1]):
+                cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
+
+    return cross_reference
+
+
 def convert_cross_references(content: str, current_name: str, entry_names: List[str]):
+    """Finds and replaces references that should be a cross reference in given content.
+
+    This should not convert any references that contain its name, i.e. if we're processing
+    `google.cloud.spanner.v1.services`, references to `google.cloud.spanner.v1.services`
+    should not be convereted to references.
+
+    Args:
+        content: given body of content to parse and look for references
+        current_name: the name of the current Python object being looked at
+        entry_names: list of keyword references to look for
+
+    Returns:
+        content that has been modified with proper cross references if found.
+
+    """
     words = content.split(" ")
-    new_words = []
+    converted_words = []
 
     # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
     # remove this in the future.
@@ -1439,28 +1492,19 @@ def convert_cross_references(content: str, current_name: str, entry_names: List[
     for index, word in enumerate(words):
         cross_reference = ""
         for keyword in entry_names:
-            if keyword != current_name and keyword not in current_name and keyword in word:
-                if keyword, reference in hard_coded_references.items():
-                    if "<a" in words[index-1] or \
-                        (new_words and f"<a href=\"{hard_coded_references[keyword]}" in new_words[-1]):
-                        continue
-                    cross_reference = f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
-                    new_words.append(word.replace(keyword, cross_reference))
-                    print(f"Converted {keyword} into cross reference in: \n{content}")
-                    continue
-
-                # If it is already processed as cross reference, skip over it.
-                if "<xref" in words[index-1] or (new_words and f"<xref uid=\"{keyword}" in new_words[-1]):
-                    continue
-                cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
-                new_words.append(word.replace(keyword, cross_reference))
+            cross_reference = check_existing_references(
+                current_name, words, index, word, keyword, converted_words, hard_coded_references
+            )
+            if cross_reference:
+                converted_words.append(word.replace(keyword, cross_reference))
                 print(f"Converted {keyword} into cross reference in: \n{content}")
+                break
 
         # If cross reference has not been found, add current unchanged content.
         if not cross_reference:
-            new_words.append(word)
+            converted_words.append(word)
 
-    return " ".join(new_words)
+    return " ".join(converted_words)
 
 
 # Used to look for cross references in the obj's data where applicable.
