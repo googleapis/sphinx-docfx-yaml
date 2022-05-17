@@ -1423,11 +1423,32 @@ def find_markdown_pages(app, outdir):
 def convert_cross_references(content: str, current_name: str, entry_names: List[str]):
     words = content.split(" ")
     new_words = []
+
+    # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
+    # remove this in the future.
+    iam_policy_link = "http://github.com/googleapis/python-grpc-google-iam-v1/blob/main/google/iam/v1/iam_policy_pb2_grpc.py"
+    hard_coded_references = {
+        "google.iam.v1.iam_policy_pb2.SetIamPolicyRequest": iam_policy_link + "#L103-L109",
+        "google.iam.v1.iam_policy_pb2.GetIamPolicyRequest": iam_policy_link + "#L111-L118",
+        "google.iam.v1.iam_policy_pb2.TestIamPermissionsRequest": iam_policy_link + "#L120-L131",
+        "google.iam.v1.iam_policy_pb2.TestIamPermissionsResponse": iam_policy_link + "#L120-L131"
+    }
+    entry_names.extend(hard_coded_references.keys())
+
     # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
         cross_reference = ""
         for keyword in entry_names:
             if keyword != current_name and keyword not in current_name and keyword in word:
+                if keyword in hard_coded_references:
+                    if "<a" in words[index-1] or \
+                        (new_words and f"<a href=\"{hard_coded_references[keyword]}" in new_words[-1]):
+                        continue
+                    cross_reference = f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
+                    new_words.append(word.replace(keyword, cross_reference))
+                    print(f"Converted {keyword} into cross reference in: \n{content}")
+                    continue
+
                 # If it is already processed as cross reference, skip over it.
                 if "<xref" in words[index-1] or (new_words and f"<xref uid=\"{keyword}" in new_words[-1]):
                     continue
