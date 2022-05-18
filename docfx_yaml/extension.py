@@ -1454,7 +1454,7 @@ def resolve_cross_reference(
     return None
 
 
-def convert_cross_references(content: str, current_object_name: str, entry_names: List[str]):
+def convert_cross_references(content: str, current_object_name: str, entry_names: List[str]) -> str:
     """Finds and replaces references that should be a cross reference in given content.
 
     This should not convert any references that contain `current_object_name`,
