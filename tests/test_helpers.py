@@ -335,7 +335,7 @@ for i in range(10):
         ],
     ]
     @parameterized.expand(test_reference_params)
-    def test_resolve_cross_reference(self, current_word, keyword, visited_words, cross_reference_want):
+    def test_resolve_cross_reference(self, current_word, uid, visited_words, cross_reference_want):
         content ="""Sets the IAM access control policy for the specified project.
 
 The following constraints apply when using google.cloud.resourcemanager_v3.ProjectsClient
@@ -350,7 +350,7 @@ Take a look at <xref uid="google.cloud.resourcemanager_v3.set_iam_policy">docume
         index = words.index(current_word)
 
         cross_reference_got = resolve_cross_reference(
-            current_word, words, index, keyword, visited_words
+            current_word, words, index, uid, visited_words
         )
         self.assertEqual(cross_reference_got, cross_reference_want)
 

@@ -1421,42 +1421,42 @@ def resolve_cross_reference(
     current_word: str,
     words: List[str],
     index: int,
-    keyword: str,
+    uid: str,
     processed_words: List[str],
     hard_coded_references: Dict[str, str] = None
 ) -> Optional[str]:
-    """Given `current_word`, returns the resolved cross reference for `keyword` if found.
+    """Given `current_word`, returns the resolved cross reference for `uid` if found.
 
     Args:
         current_word: current word being looked at
         words: list of words used to check and compare content before and after `current_word`
         index: index position of `current_word` within words
-        keyword: reference keyword to check against
+        uid: reference uid to check against
         processed_words: list of words containing words that's been processed so far
         hard_coded_references: Optional list containing a list of hard coded reference
 
     Returns:
-        None if current word does not contain a reference keyword, or a string
+        None if current word does not contain a reference uid, or a string
           that contains the converted reference.
     """
-    if keyword in current_word:
-        if hard_coded_references and keyword in hard_coded_references:
+    if uid in current_word:
+        if hard_coded_references and uid in hard_coded_references:
             # If the cross reference has been processed already, "<a" will
             # appear as the previous word. Also check against the words that
             # have been converted. For hard coded references, we use
             # "<a href" links.
             if "<a" not in words[index-1] and \
-                not (processed_words and f"<a href=\"{hard_coded_references[keyword]}" in processed_words[-1]):
-                return f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
+                not (processed_words and f"<a href=\"{hard_coded_references[uid]}" in processed_words[-1]):
+                return f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>"
 
         else:
-            # Check to see if the keyword has always been identified as a cross
+            # Check to see if the uid has always been identified as a cross
             # reference. If so, the original text will contain "<xref" as the
             # previous word, i.e. "<xref uid="storage">storage</xref>". Check
             # against the words that have been converted so far as well.
             if "<xref" not in words[index-1] and \
-                not (processed_words and f"<xref uid=\"{keyword}" in processed_words[-1]):
-                return f"<xref uid=\"{keyword}\">{keyword}</xref>"
+                not (processed_words and f"<xref uid=\"{uid}" in processed_words[-1]):
+                return f"<xref uid=\"{uid}\">{uid}</xref>"
 
     return None
 
@@ -1472,7 +1472,7 @@ def convert_cross_references(content: str, current_object_name: str, entry_names
     Args:
         content: given body of content to parse and look for references
         current_object_name: the name of the current Python object being looked at
-        entry_names: list of keyword references to look for
+        entry_names: list of uid references to look for
 
     Returns:
         content that has been modified with proper cross references if found.
@@ -1497,22 +1497,22 @@ def convert_cross_references(content: str, current_object_name: str, entry_names
     # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
         cross_reference = None
-        for keyword in entry_names:
+        for uid in entry_names:
             # Do not convert references to itself or containing partial
             # references. This could result in `storage.types.ReadSession` being
             # prematurely converted to
             # `<xref uid="storage.types">storage.types</xref>ReadSession`
             # instead of
             # `<xref uid="storage.types.ReadSession">storage.types.ReadSession</xref>`
-            if keyword in current_object_name:
+            if uid in current_object_name:
                 continue
 
             cross_reference = resolve_cross_reference(
-                word, words, index, keyword, processed_words, hard_coded_references
+                word, words, index, uid, processed_words, hard_coded_references
             )
             if cross_reference:
-                processed_words.append(word.replace(keyword, cross_reference))
-                print(f"Converted {keyword} into cross reference in: \n{content}")
+                processed_words.append(word.replace(uid, cross_reference))
+                print(f"Converted {uid} into cross reference in: \n{content}")
                 break
 
         # If cross reference has not been found, add current unchanged content.
