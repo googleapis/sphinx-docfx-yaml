@@ -29,7 +29,7 @@ import logging
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Optional
 from black import InvalidInput
 
 try:
@@ -1417,57 +1417,54 @@ def find_markdown_pages(app, outdir):
                 'href': mdfile.name.lower(),
             })
 
-def check_existing_references(
-    current_name: str,
+def resolve_cross_reference(
     words: List[str],
     index: int,
-    word: str,
+    current_word: str,
     keyword: str,
-    converted_words: List[str],
+    visited_words: List[str],
     hard_coded_references: Dict[str, str] = None
-):
+) -> Optional[str]:
     """Given a word, check if it contains a reference keyword we should convert.
 
     Args:
-        current_name: the name of the current Python object being looked at
-        words: list of words used to check and compare content before and after the given word
-        index: current index within words
-        word: current word being looked at
+        words: list of words used to check and compare content before and after `current_word`
+        index: index position of `current_word` within words
+        current_word: current word being looked at
         keyword: reference keyword to check against
-        converted_words: list of words containing words that's been processed so far
-        hard_coded_references: Optional list containing a list of hard coded references
+        visited_words: list of words containing words that's been processed so far
+        hard_coded_references: Optional list containing a list of hard coded reference
 
     Returns:
-        Empty string if no reference needs to be converted, or a string that contains
-          the converted reference.
-
+        None if current word does not contain a reference keyword, or a string
+          that contains the converted reference.
     """
-    cross_reference = ""
-    if keyword != current_name and keyword not in current_name and keyword in word:
+    if keyword in current_word:
         if hard_coded_references and keyword in hard_coded_references:
             if "<a" not in words[index-1] and \
-                not (converted_words and f"<a href=\"{hard_coded_references[keyword]}" in converted_words[-1]):
-                cross_reference = f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
+                not (visited_words and f"<a href=\"{hard_coded_references[keyword]}" in visited_words[-1]):
+                return f"<a href=\"{hard_coded_references[keyword]}\">{keyword}</a>"
 
         else:
             # If it is already processed as cross reference, skip over it.
             if "<xref" not in words[index-1] and \
-                not (converted_words and f"<xref uid=\"{keyword}" in converted_words[-1]):
-                cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
+                not (visited_words and f"<xref uid=\"{keyword}" in visited_words[-1]):
+                return f"<xref uid=\"{keyword}\">{keyword}</xref>"
 
-    return cross_reference
+    return None
 
 
-def convert_cross_references(content: str, current_name: str, entry_names: List[str]):
+def convert_cross_references(content: str, current_object_name: str, entry_names: List[str]):
     """Finds and replaces references that should be a cross reference in given content.
 
-    This should not convert any references that contain its name, i.e. if we're processing
-    `google.cloud.spanner.v1.services`, references to `google.cloud.spanner.v1.services`
-    should not be convereted to references.
+    This should not convert any references that contain `current_object_name`,
+    i.e. if we're processing docstring for `google.cloud.spanner.v1.services`,
+    references to `google.cloud.spanner.v1.services` should not be convereted
+    to references.
 
     Args:
         content: given body of content to parse and look for references
-        current_name: the name of the current Python object being looked at
+        current_object_name: the name of the current Python object being looked at
         entry_names: list of keyword references to look for
 
     Returns:
@@ -1475,11 +1472,14 @@ def convert_cross_references(content: str, current_name: str, entry_names: List[
 
     """
     words = content.split(" ")
-    converted_words = []
+
+    # Contains a list of words that is not a valid reference or converted
+    # references.
+    visited_words = []
 
     # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
     # remove this in the future.
-    iam_policy_link = "http://github.com/googleapis/python-grpc-google-iam-v1/blob/main/google/iam/v1/iam_policy_pb2_grpc.py"
+    iam_policy_link = "http://github.com/googleapis/python-grpc-google-iam-v1/blob/8e73b45993f030f521c0169b380d0fbafe66630b/google/iam/v1/iam_policy_pb2_grpc.py"
     hard_coded_references = {
         "google.iam.v1.iam_policy_pb2.SetIamPolicyRequest": iam_policy_link + "#L103-L109",
         "google.iam.v1.iam_policy_pb2.GetIamPolicyRequest": iam_policy_link + "#L111-L118",
@@ -1490,28 +1490,32 @@ def convert_cross_references(content: str, current_name: str, entry_names: List[
 
     # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
-        cross_reference = ""
+        cross_reference = None
         for keyword in entry_names:
-            cross_reference = check_existing_references(
-                current_name, words, index, word, keyword, converted_words, hard_coded_references
+            # Do not convert references to itself.
+            if keyword in current_object_name:
+                continue
+
+            cross_reference = resolve_cross_reference(
+                words, index, word, keyword, visited_words, hard_coded_references
             )
             if cross_reference:
-                converted_words.append(word.replace(keyword, cross_reference))
+                visited_words.append(word.replace(keyword, cross_reference))
                 print(f"Converted {keyword} into cross reference in: \n{content}")
                 break
 
         # If cross reference has not been found, add current unchanged content.
         if not cross_reference:
-            converted_words.append(word)
+            visited_words.append(word)
 
-    return " ".join(converted_words)
+    return " ".join(visited_words)
 
 
 # Used to look for cross references in the obj's data where applicable.
 # For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_name: str, entry_names: List[str]):
+def search_cross_references(obj, current_object_name: str, entry_names: List[str]):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_name, entry_names)
+        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, entry_names)
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):
@@ -1519,21 +1523,21 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if param.get("description"):
                     param["description"] = convert_cross_references(
                         param["description"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
                 if param.get("id"):
                     param["id"] = convert_cross_references(
                         param["id"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
                 if param.get("var_type"):
                     param["var_type"] = convert_cross_references(
                         param["var_type"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
@@ -1542,14 +1546,14 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if exception.get("description"):
                     exception["description"] = convert_cross_references(
                         exception["description"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
                 if exception.get("var_type"):
                     exception["var_type"] = convert_cross_references(
                         exception["var_type"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
@@ -1558,14 +1562,14 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if ret.get("description"):
                     ret["description"] = convert_cross_references(
                         ret["description"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
                 if ret.get("var_type"):
                     ret["var_type"] = convert_cross_references(
                         ret["var_type"],
-                        current_name,
+                        current_object_name,
                         entry_names
                     )
 
@@ -1575,21 +1579,21 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
             if attribute.get("description"):
                 attribute["description"] = convert_cross_references(
                     attribute["description"],
-                    current_name,
+                    current_object_name,
                     entry_names
                 )
 
             if attribute.get("id"):
                 attribute["id"] = convert_cross_references(
                     attribute["id"],
-                    current_name,
+                    current_object_name,
                     entry_names
                 )
 
             if attribute.get("var_type"):
                 attribute["var_type"] = convert_cross_references(
                     attribute["var_type"],
-                    current_name,
+                    current_object_name,
                     entry_names
                 )
 
@@ -1793,11 +1797,11 @@ def build_finished(app, exception):
                 #   (not from the same library)
                 #   google.cloud.aiplatform.AutoMLForecastingTrainingJob
 
-                current_name = obj["fullName"]
+                current_object_name = obj["fullName"]
                 entry_names = sorted(app.env.docfx_uid_names.keys(), reverse=True)
                 # Currently we only need to look in summary, syntax and
                 # attributes for cross references.
-                search_cross_references(obj, current_name, entry_names)
+                search_cross_references(obj, current_object_name, entry_names)
 
             yaml_map[uid] = [yaml_data, references]
 
