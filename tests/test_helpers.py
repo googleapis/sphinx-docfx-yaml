@@ -1,6 +1,6 @@
 from docfx_yaml.extension import extract_keyword
 from docfx_yaml.extension import indent_code_left
-from docfx_yaml.extension import resolve_cross_reference
+from docfx_yaml.extension import find_uid_to_convert
 from docfx_yaml.extension import convert_cross_references
 from docfx_yaml.extension import search_cross_references
 from docfx_yaml.extension import format_code
@@ -314,28 +314,36 @@ for i in range(10):
         [
             # If no reference keyword is found, check for None
             "google.cloud.resourcemanager_v3.ProjectsClient",
-            "google.cloud.resourcemanager_v1.ProjectsClient",
+            ["google.cloud.resourcemanager_v1.ProjectsClient"],
             ["The", "following", "constraints", "apply", "when", "using"],
             None
         ],
         [
             # If keyword reference is found, validate proper cross reference
             "google.cloud.resourcemanager_v3.set_iam_policy",
-            "google.cloud.resourcemanager_v3.set_iam_policy",
+            ["google.cloud.resourcemanager_v3.set_iam_policy"],
             ["A", "Policy", "is", "a", "collection", "of", "bindings", "from"],
-            "<xref uid=\"google.cloud.resourcemanager_v3.set_iam_policy\">google.cloud.resourcemanager_v3.set_iam_policy</xref>"
+            "google.cloud.resourcemanager_v3.set_iam_policy"
         ],
         [
             # If keyword reference has already been converted, do not convert
             # again.
             "uid=\"google.cloud.resourcemanager_v3.set_iam_policy\">documentation</xref>",
-            "google.cloud.resourcemanager_v3.set_iam_policy",
+            ["google.cloud.resourcemanager_v3.set_iam_policy"],
             ["Take", "a", "look", "at", "<xref"],
+            None
+        ],
+        [
+            # If no reference keyword is found, check for None
+            "google.cloud.resourcemanager_v3.ProjectsClient",
+            ["google.cloud.resourcemanager_v3.ProjectsClient"],
+            ["The", "following", "constraints", "apply", "when", "using"],
             None
         ],
     ]
     @parameterized.expand(test_reference_params)
-    def test_resolve_cross_reference(self, current_word, uid, visited_words, cross_reference_want):
+    def test_find_uid_to_convert(self, current_word, uids, visited_words, cross_reference_want):
+        current_object_name = "google.cloud.resourcemanager_v3.ProjectsClient"
         content ="""Sets the IAM access control policy for the specified project.
 
 The following constraints apply when using google.cloud.resourcemanager_v3.ProjectsClient
@@ -349,8 +357,8 @@ Take a look at <xref uid="google.cloud.resourcemanager_v3.set_iam_policy">docume
 
         index = words.index(current_word)
 
-        cross_reference_got = resolve_cross_reference(
-            current_word, words, index, uid, visited_words
+        cross_reference_got = find_uid_to_convert(
+            current_word, words, index, uids, current_object_name, visited_words
         )
         self.assertEqual(cross_reference_got, cross_reference_want)
 
