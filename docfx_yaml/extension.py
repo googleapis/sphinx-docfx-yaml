@@ -1417,11 +1417,12 @@ def find_markdown_pages(app, outdir):
                 'href': mdfile.name.lower(),
             })
 
-def resolve_cross_reference(
+def find_uid_to_convert(
     current_word: str,
     words: List[str],
     index: int,
-    uid: str,
+    known_uids: List[str],
+    current_object_name: str,
     processed_words: List[str],
     hard_coded_references: Dict[str, str] = None
 ) -> Optional[str]:
@@ -1431,37 +1432,40 @@ def resolve_cross_reference(
         current_word: current word being looked at
         words: list of words used to check and compare content before and after `current_word`
         index: index position of `current_word` within words
-        uid: reference uid to check against
+        known_uids: list of uid references to look for
+        current_object_name: the name of the current Python object being looked at
         processed_words: list of words containing words that's been processed so far
         hard_coded_references: Optional list containing a list of hard coded reference
 
     Returns:
-        None if current word does not contain a reference uid, or a string
-          that contains the converted reference.
+        None if current word does not contain a reference uid, or the uid
+          that should be converted.
     """
-    if uid in current_word:
-        if hard_coded_references and uid in hard_coded_references:
-            # If the cross reference has been processed already, "<a" will
-            # appear as the previous word. Also check against the words that
-            # have been converted. For hard coded references, we use
-            # "<a href" links.
-            if "<a" not in words[index-1] and \
-                not (processed_words and f"<a href=\"{hard_coded_references[uid]}" in processed_words[-1]):
-                return f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>"
+    for uid in known_uids:
+        # Do not convert references to itself or containing partial
+        # references. This could result in `storage.types.ReadSession` being
+        # prematurely converted to
+        # `<xref uid="storage.types">storage.types</xref>ReadSession`
+        # instead of
+        # `<xref uid="storage.types.ReadSession">storage.types.ReadSession</xref>`
+        if uid in current_object_name:
+            continue
 
-        else:
-            # Check to see if the uid has always been identified as a cross
-            # reference. If so, the original text will contain "<xref" as the
-            # previous word, i.e. "<xref uid="storage">storage</xref>". Check
-            # against the words that have been converted so far as well.
-            if "<xref" not in words[index-1] and \
-                not (processed_words and f"<xref uid=\"{uid}" in processed_words[-1]):
-                return f"<xref uid=\"{uid}\">{uid}</xref>"
+        if uid in current_word:
+            # If the cross reference has been processed already, "<a" or
+            # "<xref"will appear as the previous word. Also check against
+            # the words that have been converted. For hard coded
+            # references, we use "<a href" links.
+            if "<a" not in words[index-1] and "<xref" not in words[index-1]:
+                if not (processed_words and ( \
+                    f"<xref uid=\"{uid}" in processed_words[-1] or \
+                    (hard_coded_references and f"<a href=\"{hard_coded_references.get(uid)}" in processed_words[-1]))):
+                  return uid
 
     return None
 
 
-def convert_cross_references(content: str, current_object_name: str, entry_names: List[str]) -> str:
+def convert_cross_references(content: str, current_object_name: str, known_uids: List[str]) -> str:
     """Finds and replaces references that should be a cross reference in given content.
 
     This should not convert any references that contain `current_object_name`,
@@ -1472,7 +1476,7 @@ def convert_cross_references(content: str, current_object_name: str, entry_names
     Args:
         content: given body of content to parse and look for references
         current_object_name: the name of the current Python object being looked at
-        entry_names: list of uid references to look for
+        known_uids: list of uid references to look for
 
     Returns:
         content that has been modified with proper cross references if found.
@@ -1492,31 +1496,24 @@ def convert_cross_references(content: str, current_object_name: str, entry_names
         "google.iam.v1.iam_policy_pb2.TestIamPermissionsRequest": iam_policy_link + "#L120-L131",
         "google.iam.v1.iam_policy_pb2.TestIamPermissionsResponse": iam_policy_link + "#L120-L131"
     }
-    entry_names.extend(hard_coded_references.keys())
+    known_uids.extend(hard_coded_references.keys())
 
     # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
-        cross_reference = None
-        for uid in entry_names:
-            # Do not convert references to itself or containing partial
-            # references. This could result in `storage.types.ReadSession` being
-            # prematurely converted to
-            # `<xref uid="storage.types">storage.types</xref>ReadSession`
-            # instead of
-            # `<xref uid="storage.types.ReadSession">storage.types.ReadSession</xref>`
-            if uid in current_object_name:
-                continue
+        uid = find_uid_to_convert(
+            word, words, index, known_uids, current_object_name, processed_words, hard_coded_references
+        )
 
-            cross_reference = resolve_cross_reference(
-                word, words, index, uid, processed_words, hard_coded_references
-            )
-            if cross_reference:
-                processed_words.append(word.replace(uid, cross_reference))
-                print(f"Converted {uid} into cross reference in: \n{content}")
-                break
+        if uid:
+            cross_reference = f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>" \
+                if uid in hard_coded_references else \
+                f"<xref uid=\"{uid}\">{uid}</xref>"
 
-        # If cross reference has not been found, add current unchanged content.
-        if not cross_reference:
+            processed_words.append(word.replace(uid, cross_reference))
+            print(f"Converted {uid} into cross reference in: \n{content}")
+
+        else:
+            # If cross reference has not been found, add current unchanged content.
             processed_words.append(word)
 
     return " ".join(processed_words)
@@ -1524,9 +1521,9 @@ def convert_cross_references(content: str, current_object_name: str, entry_names
 
 # Used to look for cross references in the obj's data where applicable.
 # For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_object_name: str, entry_names: List[str]):
+def search_cross_references(obj, current_object_name: str, known_uids: List[str]):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, entry_names)
+        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, known_uids)
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):
@@ -1535,21 +1532,21 @@ def search_cross_references(obj, current_object_name: str, entry_names: List[str
                     param["description"] = convert_cross_references(
                         param["description"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
                 if param.get("id"):
                     param["id"] = convert_cross_references(
                         param["id"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
                 if param.get("var_type"):
                     param["var_type"] = convert_cross_references(
                         param["var_type"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
         if obj["syntax"].get("exceptions"):
@@ -1558,14 +1555,14 @@ def search_cross_references(obj, current_object_name: str, entry_names: List[str
                     exception["description"] = convert_cross_references(
                         exception["description"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
                 if exception.get("var_type"):
                     exception["var_type"] = convert_cross_references(
                         exception["var_type"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
         if obj["syntax"].get("returns"):
@@ -1574,14 +1571,14 @@ def search_cross_references(obj, current_object_name: str, entry_names: List[str
                     ret["description"] = convert_cross_references(
                         ret["description"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
                 if ret.get("var_type"):
                     ret["var_type"] = convert_cross_references(
                         ret["var_type"],
                         current_object_name,
-                        entry_names
+                        known_uids
                     )
 
 
@@ -1591,21 +1588,21 @@ def search_cross_references(obj, current_object_name: str, entry_names: List[str
                 attribute["description"] = convert_cross_references(
                     attribute["description"],
                     current_object_name,
-                    entry_names
+                    known_uids
                 )
 
             if attribute.get("id"):
                 attribute["id"] = convert_cross_references(
                     attribute["id"],
                     current_object_name,
-                    entry_names
+                    known_uids
                 )
 
             if attribute.get("var_type"):
                 attribute["var_type"] = convert_cross_references(
                     attribute["var_type"],
                     current_object_name,
-                    entry_names
+                    known_uids
                 )
 
 
@@ -1809,10 +1806,10 @@ def build_finished(app, exception):
                 #   google.cloud.aiplatform.AutoMLForecastingTrainingJob
 
                 current_object_name = obj["fullName"]
-                entry_names = sorted(app.env.docfx_uid_names.keys(), reverse=True)
+                known_uids = sorted(app.env.docfx_uid_names.keys(), reverse=True)
                 # Currently we only need to look in summary, syntax and
                 # attributes for cross references.
-                search_cross_references(obj, current_object_name, entry_names)
+                search_cross_references(obj, current_object_name, known_uids)
 
             yaml_map[uid] = [yaml_data, references]
 
