@@ -1426,19 +1426,19 @@ def find_uid_to_convert(
     processed_words: List[str],
     hard_coded_references: Dict[str, str] = None
 ) -> Optional[str]:
-    """Given `current_word`, returns the resolved cross reference for `uid` if found.
+    """Given `current_word`, returns the `uid` to convert to cross reference if found.
 
     Args:
         current_word: current word being looked at
         words: list of words used to check and compare content before and after `current_word`
         index: index position of `current_word` within words
         known_uids: list of uid references to look for
-        current_object_name: the name of the current Python object being looked at
+        current_object_name: the name of the current Python object being processed
         processed_words: list of words containing words that's been processed so far
         hard_coded_references: Optional list containing a list of hard coded reference
 
     Returns:
-        None if current word does not contain a reference uid, or the uid
+        None if current word does not contain any reference `uid`, or the `uid`
           that should be converted.
     """
     for uid in known_uids:
@@ -1452,11 +1452,11 @@ def find_uid_to_convert(
             continue
 
         if uid in current_word:
-            # If the cross reference has been processed already, "<a" or
-            # "<xref"will appear as the previous word. Also check against
-            # the words that have been converted. For hard coded
-            # references, we use "<a href" links.
-            if "<a" not in words[index-1] and "<xref" not in words[index-1]:
+            # If the cross reference has been processed already, "<xref" or
+            # "<a" will appear as the previous word.
+            # For hard coded references, we use "<a href" style.
+            if "<xref" not in words[index-1] and "<a" not in words[index-1]:
+                # Check to see if the reference has been converted already.
                 if not (processed_words and ( \
                     f"<xref uid=\"{uid}" in processed_words[-1] or \
                     (hard_coded_references and f"<a href=\"{hard_coded_references.get(uid)}" in processed_words[-1]))):
@@ -1474,8 +1474,8 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
     to references.
 
     Args:
-        content: given body of content to parse and look for references
-        current_object_name: the name of the current Python object being looked at
+        content: body of content to parse and look for references in
+        current_object_name: the name of the current Python object being processed
         known_uids: list of uid references to look for
 
     Returns:
@@ -1498,7 +1498,6 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
     }
     known_uids.extend(hard_coded_references.keys())
 
-    # Using counter to check if the entry is already a cross reference.
     for index, word in enumerate(words):
         uid = find_uid_to_convert(
             word, words, index, known_uids, current_object_name, processed_words, hard_coded_references
