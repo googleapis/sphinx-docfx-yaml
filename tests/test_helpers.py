@@ -1,10 +1,12 @@
 from docfx_yaml.extension import extract_keyword
 from docfx_yaml.extension import indent_code_left
+from docfx_yaml.extension import find_uid_to_convert
 from docfx_yaml.extension import convert_cross_references
 from docfx_yaml.extension import search_cross_references
 from docfx_yaml.extension import format_code
 from docfx_yaml.extension import extract_product_name
 from docfx_yaml.extension import highlight_md_codeblocks
+from docfx_yaml.extension import prepend_markdown_header
 
 import unittest
 from parameterized import parameterized
@@ -114,16 +116,29 @@ for i in range(10):
             "Response message for google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse.",
             "Response message for <xref uid=\"google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse\">google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse</xref>."
         ],
+        # Testing for cross reference to not be converted for its own object.
+        [
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitResponse.",
+            "Response message for google.cloud.bigquery_storage_v1.types.SplitResponse."
+        ],
+        # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
+        # remove this when it is not needed anymore.
+        # Testing for hardcoded reference.
+        [
+            "google.iam.v1.iam_policy_pb2.GetIamPolicyRequest",
+            "<a href=\"http://github.com/googleapis/python-grpc-google-iam-v1/blob/8e73b45993f030f521c0169b380d0fbafe66630b/google/iam/v1/iam_policy_pb2_grpc.py#L111-L118\">google.iam.v1.iam_policy_pb2.GetIamPolicyRequest</a>"
+        ]
     ]
     @parameterized.expand(cross_references_testdata)
     def test_convert_cross_references(self, content, content_want):
         # Check that entries correctly turns into cross references.
         keyword_map = [
-            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse"
+            "google.cloud.bigquery_storage_v1.types.SplitReadStreamResponse",
+            "google.cloud.bigquery_storage_v1.types.SplitResponse"
         ]
-        current_name = "SplitRepsonse"
+        current_object_name = "google.cloud.bigquery_storage_v1.types.SplitResponse"
 
-        content_got = convert_cross_references(content, current_name, keyword_map)
+        content_got = convert_cross_references(content, current_object_name, keyword_map)
         self.assertEqual(content_got, content_want)
 
 
@@ -258,6 +273,94 @@ for i in range(10):
 
             with open(want_filename) as mdfile_want:
                 self.assertEqual(test_file.read(), mdfile_want.read())
+
+
+    # Filenames to test prepending Markdown title..
+    test_markdown_filenames = [
+        [
+            "tests/markdown_example_bad_header.md",
+            "tests/markdown_example_bad_header_want.md"
+        ],
+        [
+            "tests/markdown_example_h2.md",
+            "tests/markdown_example_h2_want.md"
+        ],
+        [
+            "tests/markdown_example_alternate_bad.md",
+            "tests/markdown_example_alternate_bad_want.md"
+        ],
+    ]
+    @parameterized.expand(test_markdown_filenames)
+    def test_prepend_markdown_header(self, base_filename, want_filename):
+        # Ensure markdown titles are correctly prepended.
+
+        # Copy the base file we'll need to test.
+        with tempfile.NamedTemporaryFile(mode='r+', delete=False) as test_file:
+            with open(base_filename) as base_file:
+                # Use same file name extraction as original code.
+                file_name = base_file.name.split("/")[-1].split(".")[0].capitalize()
+                test_file.write(base_file.read())
+                test_file.flush()
+                test_file.seek(0)
+
+            prepend_markdown_header(file_name, test_file)
+            test_file.seek(0)
+
+            with open(want_filename) as mdfile_want:
+                self.assertEqual(test_file.read(), mdfile_want.read())
+
+
+    test_reference_params = [
+        [
+            # If no reference keyword is found, check for None
+            "google.cloud.resourcemanager_v3.ProjectsClient",
+            ["google.cloud.resourcemanager_v1.ProjectsClient"],
+            ["The", "following", "constraints", "apply", "when", "using"],
+            None
+        ],
+        [
+            # If keyword reference is found, validate proper cross reference
+            "google.cloud.resourcemanager_v3.set_iam_policy",
+            ["google.cloud.resourcemanager_v3.set_iam_policy"],
+            ["A", "Policy", "is", "a", "collection", "of", "bindings", "from"],
+            "google.cloud.resourcemanager_v3.set_iam_policy"
+        ],
+        [
+            # If keyword reference has already been converted, do not convert
+            # again.
+            "uid=\"google.cloud.resourcemanager_v3.set_iam_policy\">documentation</xref>",
+            ["google.cloud.resourcemanager_v3.set_iam_policy"],
+            ["Take", "a", "look", "at", "<xref"],
+            None
+        ],
+        [
+            # If no reference keyword is found, check for None
+            "google.cloud.resourcemanager_v3.ProjectsClient",
+            ["google.cloud.resourcemanager_v3.ProjectsClient"],
+            ["The", "following", "constraints", "apply", "when", "using"],
+            None
+        ],
+    ]
+    @parameterized.expand(test_reference_params)
+    def test_find_uid_to_convert(self, current_word, uids, visited_words, cross_reference_want):
+        current_object_name = "google.cloud.resourcemanager_v3.ProjectsClient"
+        content ="""Sets the IAM access control policy for the specified project.
+
+The following constraints apply when using google.cloud.resourcemanager_v3.ProjectsClient
+
+A Policy is a collection of bindings from google.cloud.resourcemanager_v3.set_iam_policy
+
+Take a look at <xref uid="google.cloud.resourcemanager_v3.set_iam_policy">documentation</xref> for more information.
+"""
+        # Break up the paragraph into sanitized list of words as shown in Sphinx.
+        words = " ".join(content.split("\n")).split(" ")
+
+        index = words.index(current_word)
+
+        cross_reference_got = find_uid_to_convert(
+            current_word, words, index, uids, current_object_name, visited_words
+        )
+        self.assertEqual(cross_reference_got, cross_reference_want)
 
 
 if __name__ == '__main__':

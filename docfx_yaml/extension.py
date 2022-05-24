@@ -29,7 +29,7 @@ import logging
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import List
+from typing import Dict, Iterable, List, Optional
 from black import InvalidInput
 
 try:
@@ -469,9 +469,10 @@ def _parse_docstring_summary(summary):
                 continue
 
         # Parse keywords if found.
-        if part.startswith(".."):
+        # lstrip is added to parse code blocks that are not formatted well.
+        if part.lstrip('\n').startswith('..'):
             try:
-                keyword = extract_keyword(part)
+                keyword = extract_keyword(part.lstrip('\n'))
             except ValueError:
                 raise ValueError(f"Please check the docstring: \n{summary}")
             # Works for both code-block and code
@@ -1285,12 +1286,18 @@ def parse_markdown_header(header_line, prev_line):
     return ""
 
 
-# For a given markdown file, extract its header line.
-def extract_header_from_markdown(mdfile_iterator):
-    mdfile_name = mdfile_iterator.name.split("/")[-1].split(".")[0].capitalize()
+def extract_header_from_markdown(mdfile: Iterable[str]) -> str:
+    """For a given markdown file, extract its header line.
+
+    Args:
+        mdfile: iterator to the markdown file.
+
+    Returns:
+        A string for header or empty string if header is not found.
+    """
     prev_line = ""
 
-    for header_line in mdfile_iterator:
+    for header_line in mdfile:
 
         # Ignore licenses and other non-headers prior to the header.
         header = parse_markdown_header(header_line, prev_line)
@@ -1300,8 +1307,7 @@ def extract_header_from_markdown(mdfile_iterator):
 
         prev_line = header_line
 
-    print(f"Could not find a title for {mdfile_iterator.name}. Using {mdfile_name} as the title instead.")
-    return mdfile_name
+    return ""
 
 
 # For a given markdown file, adds syntax highlighting to code blocks.
@@ -1350,6 +1356,20 @@ def highlight_md_codeblocks(mdfile):
         mdfile_iterator.write(new_content)
 
 
+def prepend_markdown_header(filename: str, mdfile: Iterable[str]):
+    """Prepends the filename as a Markdown header.
+
+    Args:
+        filename: the name of the markdown file to prepend.
+        mdfile: iterator to the markdown file that is both readable
+          and writable.
+    """
+    file_content = f'# {filename}\n\n' + mdfile.read()
+    # Reset file position to the beginning to write
+    mdfile.seek(0)
+    mdfile.write(file_content)
+
+
 # Given generated markdown files, incorporate them into the docfx_yaml output.
 # The markdown file metadata will be added to top level of the TOC.
 def find_markdown_pages(app, outdir):
@@ -1373,12 +1393,23 @@ def find_markdown_pages(app, outdir):
     # For each file, if it is a markdown file move to the top level pages.
     for mdfile in markdown_dir.iterdir():
         if mdfile.is_file() and mdfile.name.lower() not in files_to_ignore:
+            mdfile_name = ""
             highlight_md_codeblocks(markdown_dir / mdfile.name)
-            shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Extract the header name for TOC.
             with open(mdfile) as mdfile_iterator:
                 name = extract_header_from_markdown(mdfile_iterator)
+
+            if not name:
+                with open(mdfile, 'r+') as mdfile_iterator:
+                    mdfile_name = mdfile_iterator.name.split("/")[-1].split(".")[0].capitalize()
+
+                    print(f"Could not find a title for {mdfile_iterator.name}. Using {mdfile_name} as the title instead.")
+                    name = mdfile_name
+
+                    prepend_markdown_header(name, mdfile_iterator)
+
+            shutil.copy(mdfile, f"{outdir}/{mdfile.name.lower()}")
 
             # Add the file to the TOC later.
             app.env.markdown_pages.append({
@@ -1386,36 +1417,112 @@ def find_markdown_pages(app, outdir):
                 'href': mdfile.name.lower(),
             })
 
+def find_uid_to_convert(
+    current_word: str,
+    words: List[str],
+    index: int,
+    known_uids: List[str],
+    current_object_name: str,
+    processed_words: List[str],
+    hard_coded_references: Dict[str, str] = None
+) -> Optional[str]:
+    """Given `current_word`, returns the `uid` to convert to cross reference if found.
 
-# Finds and replaces occurrences which should be a cross reference in the given
-# content, except for the current name.
-def convert_cross_references(content: str, current_name: str, entry_names: List[str]):
+    Args:
+        current_word: current word being looked at
+        words: list of words used to check and compare content before and after `current_word`
+        index: index position of `current_word` within words
+        known_uids: list of uid references to look for
+        current_object_name: the name of the current Python object being processed
+        processed_words: list of words containing words that's been processed so far
+        hard_coded_references: Optional list containing a list of hard coded reference
+
+    Returns:
+        None if current word does not contain any reference `uid`, or the `uid`
+          that should be converted.
+    """
+    for uid in known_uids:
+        # Do not convert references to itself or containing partial
+        # references. This could result in `storage.types.ReadSession` being
+        # prematurely converted to
+        # `<xref uid="storage.types">storage.types</xref>ReadSession`
+        # instead of
+        # `<xref uid="storage.types.ReadSession">storage.types.ReadSession</xref>`
+        if uid in current_object_name:
+            continue
+
+        if uid in current_word:
+            # If the cross reference has been processed already, "<xref" or
+            # "<a" will appear as the previous word.
+            # For hard coded references, we use "<a href" style.
+            if "<xref" not in words[index-1] and "<a" not in words[index-1]:
+                # Check to see if the reference has been converted already.
+                if not (processed_words and ( \
+                    f"<xref uid=\"{uid}" in processed_words[-1] or \
+                    (hard_coded_references and f"<a href=\"{hard_coded_references.get(uid)}" in processed_words[-1]))):
+                  return uid
+
+    return None
+
+
+def convert_cross_references(content: str, current_object_name: str, known_uids: List[str]) -> str:
+    """Finds and replaces references that should be a cross reference in given content.
+
+    This should not convert any references that contain `current_object_name`,
+    i.e. if we're processing docstring for `google.cloud.spanner.v1.services`,
+    references to `google.cloud.spanner.v1.services` should not be convereted
+    to references.
+
+    Args:
+        content: body of content to parse and look for references in
+        current_object_name: the name of the current Python object being processed
+        known_uids: list of uid references to look for
+
+    Returns:
+        content that has been modified with proper cross references if found.
+    """
     words = content.split(" ")
-    new_words = []
-    # Using counter to check if the entry is already a cross reference.
+
+    # Contains a list of words that is not a valid reference or converted
+    # references.
+    processed_words = []
+
+    # TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/208):
+    # remove this in the future.
+    iam_policy_link = "http://github.com/googleapis/python-grpc-google-iam-v1/blob/8e73b45993f030f521c0169b380d0fbafe66630b/google/iam/v1/iam_policy_pb2_grpc.py"
+    hard_coded_references = {
+        "google.iam.v1.iam_policy_pb2.SetIamPolicyRequest": iam_policy_link + "#L103-L109",
+        "google.iam.v1.iam_policy_pb2.GetIamPolicyRequest": iam_policy_link + "#L111-L118",
+        "google.iam.v1.iam_policy_pb2.TestIamPermissionsRequest": iam_policy_link + "#L120-L131",
+        "google.iam.v1.iam_policy_pb2.TestIamPermissionsResponse": iam_policy_link + "#L120-L131"
+    }
+    known_uids.extend(hard_coded_references.keys())
+
     for index, word in enumerate(words):
-        cross_reference = ""
-        for keyword in entry_names:
-            if keyword != current_name and keyword not in current_name and keyword in word:
-                # If it is already processed as cross reference, skip over it.
-                if "<xref" in words[index-1] or (new_words and f"<xref uid=\"{keyword}" in new_words[-1]):
-                    continue
-                cross_reference = f"<xref uid=\"{keyword}\">{keyword}</xref>"
-                new_words.append(word.replace(keyword, cross_reference))
-                print(f"Converted {keyword} into cross reference in: \n{content}")
+        uid = find_uid_to_convert(
+            word, words, index, known_uids, current_object_name, processed_words, hard_coded_references
+        )
 
-        # If cross reference has not been found, add current unchanged content.
-        if not cross_reference:
-            new_words.append(word)
+        if uid:
+            cross_reference = f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>" \
+                if uid in hard_coded_references else \
+                f"<xref uid=\"{uid}\">{uid}</xref>"
 
-    return " ".join(new_words)
+            processed_words.append(word.replace(uid, cross_reference))
+            print(f"Converted {uid} into cross reference in: \n{content}")
+
+        else:
+            # If cross reference has not been found, add current unchanged content.
+            processed_words.append(word)
+
+    return " ".join(processed_words)
 
 
 # Used to look for cross references in the obj's data where applicable.
 # For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_name: str, entry_names: List[str]):
+def search_cross_references(obj, current_object_name: str, known_uids: List[str]):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_name, entry_names)
+        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, known_uids)
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):
@@ -1423,22 +1530,22 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if param.get("description"):
                     param["description"] = convert_cross_references(
                         param["description"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
                 if param.get("id"):
                     param["id"] = convert_cross_references(
                         param["id"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
                 if param.get("var_type"):
                     param["var_type"] = convert_cross_references(
                         param["var_type"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
         if obj["syntax"].get("exceptions"):
@@ -1446,15 +1553,15 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if exception.get("description"):
                     exception["description"] = convert_cross_references(
                         exception["description"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
                 if exception.get("var_type"):
                     exception["var_type"] = convert_cross_references(
                         exception["var_type"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
         if obj["syntax"].get("returns"):
@@ -1462,15 +1569,15 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
                 if ret.get("description"):
                     ret["description"] = convert_cross_references(
                         ret["description"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
                 if ret.get("var_type"):
                     ret["var_type"] = convert_cross_references(
                         ret["var_type"],
-                        current_name,
-                        entry_names
+                        current_object_name,
+                        known_uids
                     )
 
 
@@ -1479,22 +1586,22 @@ def search_cross_references(obj, current_name: str, entry_names: List[str]):
             if attribute.get("description"):
                 attribute["description"] = convert_cross_references(
                     attribute["description"],
-                    current_name,
-                    entry_names
+                    current_object_name,
+                    known_uids
                 )
 
             if attribute.get("id"):
                 attribute["id"] = convert_cross_references(
                     attribute["id"],
-                    current_name,
-                    entry_names
+                    current_object_name,
+                    known_uids
                 )
 
             if attribute.get("var_type"):
                 attribute["var_type"] = convert_cross_references(
                     attribute["var_type"],
-                    current_name,
-                    entry_names
+                    current_object_name,
+                    known_uids
                 )
 
 
@@ -1697,11 +1804,11 @@ def build_finished(app, exception):
                 #   (not from the same library)
                 #   google.cloud.aiplatform.AutoMLForecastingTrainingJob
 
-                current_name = obj["fullName"]
-                entry_names = sorted(app.env.docfx_uid_names.keys(), reverse=True)
+                current_object_name = obj["fullName"]
+                known_uids = sorted(app.env.docfx_uid_names.keys(), reverse=True)
                 # Currently we only need to look in summary, syntax and
                 # attributes for cross references.
-                search_cross_references(obj, current_name, entry_names)
+                search_cross_references(obj, current_object_name, known_uids)
 
             yaml_map[uid] = [yaml_data, references]
 
