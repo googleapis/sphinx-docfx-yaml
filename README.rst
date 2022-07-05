@@ -1,101 +1,103 @@
-This is not an officially supported Google product.
+Python Client for Sphinx DocFX YAML Generator API
+=================================================
 
-This is a forked version of the original from https://github.com/docascode/sphinx-docfx-yaml.
+|preview| |pypi| |versions|
 
-Feel free to use this forked repository for personal or experimental use, use the original otherwise.
+`Sphinx DocFX YAML Generator API`_: 
 
-Sphinx DocFX YAML
-=================
+- `Client Library Documentation`_
+- `Product Documentation`_
 
-Sphinx DocFX YAML is an exporter for the Sphinx Autodoc module into `DocFX YAML <https://dotnet.github.io/docfx/spec/metadata_format_spec.html>`_.
+.. |preview| image:: https://img.shields.io/badge/support-preview-orange.svg
+   :target: https://github.com/googleapis/google-cloud-python/blob/main/README.rst#stability-levels
+.. |pypi| image:: https://img.shields.io/pypi/v/gcp-sphinx-docfx-yaml.svg
+   :target: https://pypi.org/project/gcp-sphinx-docfx-yaml/
+.. |versions| image:: https://img.shields.io/pypi/pyversions/gcp-sphinx-docfx-yaml.svg
+   :target: https://pypi.org/project/gcp-sphinx-docfx-yaml/
+.. _Sphinx DocFX YAML Generator API: https://github.com/googleapis/sphinx-docfx-yaml
+.. _Client Library Documentation: https://cloud.google.com/python/docs/reference//latest
+.. _Product Documentation:  https://github.com/googleapis/sphinx-docfx-yaml
 
-You can read the full documentation online at http://sphinx-docfx-yaml.readthedocs.io
+Quick Start
+-----------
 
-Contents
---------
+In order to use this library, you first need to go through the following steps:
 
-.. toctree::
-   :glob:
-   :maxdepth: 2
+1. `Select or create a Cloud Platform project.`_
+2. `Enable billing for your project.`_
+3. `Enable the Sphinx DocFX YAML Generator API.`_
+4. `Setup Authentication.`_
 
-   design
-   layout
-   api
+.. _Select or create a Cloud Platform project.: https://console.cloud.google.com/project
+.. _Enable billing for your project.: https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project
+.. _Enable the Sphinx DocFX YAML Generator API.:  https://github.com/googleapis/sphinx-docfx-yaml
+.. _Setup Authentication.: https://googleapis.dev/python/google-api-core/latest/auth.html
 
-Basic Workflow
---------------
+Installation
+~~~~~~~~~~~~
 
-* Write RST that includes Python `autodoc <www.sphinx-doc.org/en/stable/ext/autodoc.html>`_
-* Render internal doctree into YAML
-* Output YAML into output directory
+Install this library in a `virtualenv`_ using pip. `virtualenv`_ is a tool to
+create isolated Python environments. The basic problem it addresses is one of
+dependencies and versions, and indirectly permissions.
 
-Install
--------
+With `virtualenv`_, it's possible to install this library without needing system
+install permissions, and without clashing with the installed system
+dependencies.
 
-To use this forked version, install GCP docfx-yaml:
-
-.. code:: bash
-
-    pip install gcp-sphinx-docfx-yaml
-
-Then add it to your Sphinx project's ``conf.py``:
-
-.. code:: python
-
-    # Order matters here.
-    # The extension must be defined *after* autodoc,
-    # because it uses a signal that autodoc defines
-    extensions = ['sphinx.ext.autodoc', 'docfx_yaml.extension']
-
-Make sure you are using autodoc in your code somewhere::
-
-    .. automodule:: foo.bar
-
-Then build your documentation::
-
-    make html
-
-Inside your build directory (``_build/html`` usually),
-the ``docfx_yaml`` will contain the YAML files that are output.
-
-Testing
--------
-
-To run the tests in this repository, run:
-
-.. code:: bash
-
-    pip install tox
-    tox -e docs
-
-from the top directory of this repository.
-
-..  Modes
-    -----
-
-    There are two output modes that specify the structure of the YAML files.
-    The first is ``module`` which means that the YAML files will be output in files corresponding to the name of their module.
-    The second modes is ``rst`` which outputs them in the same structure as the RST files they were defined in.
-
-Design
-------
-
-Read more about the design in our :doc:`design`.
-
-Layout
-------
-
-This project has a few different pieces at this point.
-It's primary goal was to integrate the Azure Python SDK into the docfx tooling.
-You can read more about the pieces currently set up in the :doc:`layout`.
+.. _`virtualenv`: https://virtualenv.pypa.io/en/latest/
 
 
-Napoleon Support
-----------------
+Code samples and snippets
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We support ``sphinx.ext.napoleon`` for parsing docstrings in other formats.
-Currently all markup that maps to existing Sphinx `info field lists <http://www.sphinx-doc.org/en/stable/domains.html#info-field-lists>`_ will work,
-along with ``Examples``.
-In order to pull examples out,
-you need the ``napoleon_use_admonition_for_examples`` set to ``True``.
+Code samples and snippets live in the `samples/` folder.
 
+
+Supported Python Versions
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Our client libraries are compatible with all current [active](https://devguide.python.org/devcycle/#in-development-main-branch) and [maintenance](https://devguide.python.org/devcycle/#maintenance-branches) versions of
+Python.
+
+Python >= 3.7
+
+Unsupported Python Versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Python <= 3.6
+
+If you are using an [end-of-life](https://devguide.python.org/devcycle/#end-of-life-branches)
+version of Python, we recommend that you update as soon as possible to an actively supported version.
+
+
+Mac/Linux
+^^^^^^^^^
+
+.. code-block:: console
+
+    pip install virtualenv
+    virtualenv <your-env>
+    source <your-env>/bin/activate
+    <your-env>/bin/pip install gcp-sphinx-docfx-yaml
+
+
+Windows
+^^^^^^^
+
+.. code-block:: console
+
+    pip install virtualenv
+    virtualenv <your-env>
+    <your-env>\Scripts\activate
+    <your-env>\Scripts\pip.exe install gcp-sphinx-docfx-yaml
+
+Next Steps
+~~~~~~~~~~
+
+-  Read the `Client Library Documentation`_ for Sphinx DocFX YAML Generator API
+   to see other available methods on the client.
+-  Read the `Sphinx DocFX YAML Generator API Product documentation`_ to learn
+   more about the product and see How-to Guides.
+-  View this `README`_ to see the full list of Cloud
+   APIs that we cover.
+
+.. _Sphinx DocFX YAML Generator API Product documentation:  https://github.com/googleapis/sphinx-docfx-yaml
+.. _README: https://github.com/googleapis/google-cloud-python/blob/main/README.rst
