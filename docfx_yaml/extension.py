@@ -434,8 +434,8 @@ def _parse_docstring_summary(summary):
     attribute_type_token = ":type:"
     keyword = name = description = var_type = ""
 
-    notice_open_tag = '<aside class="{notice_tag}">\n<b>{notice_name}:</b> '
-    notice_close_tag = '\n</aside>'
+    notice_open_tag = '<aside class="{notice_tag}">\n<b>{notice_name}:</b>'
+    notice_close_tag = '</aside>'
 
     # We need to separate in chunks, which is defined by 3 newline breaks.
     # Otherwise when parsing for code and blocks of stuff, we will not be able
@@ -499,11 +499,13 @@ def _parse_docstring_summary(summary):
                 continue
 
         elif keyword and keyword in NOTICES:
+            # Determine how much code block is indented to format properly.
             if tab_space == -1:
                 parts = [split_part for split_part in part.split("\n") if split_part]
                 tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
                 if tab_space == 0:
-                    raise ValueError(f"Code in the code block should be indented. Please check the docstring: \n{summary}")
+                    raise ValueError("Content in the block should be indented."\
+                                     f"Please check the docstring: \n{summary}")
             if not part.startswith(" "*tab_space):
                 if notice_body:
                     parts = [indent_code_left(part, tab_space) for part in notice_body]
@@ -537,8 +539,8 @@ def _parse_docstring_summary(summary):
                 found_name = False
                 name = part.split("::")[1].strip()
 
+            # Extracts the notice content and format it.
             elif keyword and keyword in NOTICES:
-                print(f'keyword: {keyword}, part:\n {part}\n')
                 summary_parts.append(notice_open_tag.format(
                     notice_tag=keyword, notice_name=NOTICES[keyword]))
                 tab_space = -1
@@ -548,7 +550,8 @@ def _parse_docstring_summary(summary):
                     continue
                 tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
                 if tab_space == 0:
-                    raise ValueError(f"Code in the code block should be indented. Please check the docstring: \n{summary}")
+                    raise ValueError("Content in the block should be indented."\
+                                     f"Please check the docstring: \n{summary}")
                 parts = [indent_code_left(part, tab_space) for part in parts]
                 summary_parts.append("\n".join(parts))
                 summary_parts.append(notice_close_tag)
