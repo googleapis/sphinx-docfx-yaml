@@ -118,8 +118,7 @@ for package in $(echo "${python_bucket_items}" | cut -d "-" -f 5- | rev | cut -d
     nox -s docfx
 
     # Check that documentation is produced. If not, log and continue.
-    file_num=$(ls docs/_build/html/docfx_yaml/ | wc -l)
-    if [ ${file_num} -eq 0 ]; then
+    if [ ! "$(ls docs/_build/html/docfx_yaml/)" ]; then
       empty_packages="${repo}-${tag} ${empty_packages}"
       continue
     fi
