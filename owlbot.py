@@ -46,6 +46,11 @@ s.move(
         ".github/PULL_REQUEST_TEMPLATE.md",
         ".gitignore",
         ".github/workflows", # exclude templated gh actions
-	"README.rst",
+        "README.rst",
     ],
 )
+
+s.replace(
+    ".kokoro/requirements.in",
+    r"nox",
+    "\\g<0>\ntox\nrecommonmark\ndjango==2.2\nipython"
