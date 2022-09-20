@@ -6,3 +6,7 @@ twine
 wheel
 setuptools
 nox
+tox
+recommonmark
+django==2.2
+ipython

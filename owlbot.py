@@ -54,3 +54,4 @@ s.replace(
     ".kokoro/requirements.in",
     r"nox",
     "\\g<0>\ntox\nrecommonmark\ndjango==2.2\nipython"
+)
