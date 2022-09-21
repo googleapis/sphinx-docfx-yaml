@@ -54,5 +54,5 @@ s.move(
 s.replace(
     ".kokoro/requirements.in",
     r"nox",
-    "\\g<0>\ntox\nrecommonmark\ndjango==2.2\nipython"
+    "\\g<0>\ntox\nsphinx==4.5.0\nrecommonmark\ndjango==2.2\nipython\nblack==22.8.0\nparameterized==0.8.1"
 )
