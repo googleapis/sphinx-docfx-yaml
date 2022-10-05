@@ -1433,16 +1433,14 @@ def clean_image_links(mdfile_path: str) -> None:
     """Cleans extra whitespace that breaks image links in index.html file."""
     image_link_pattern='\[\s*!\[image\]\(.*\)\s*\]\(.*\)'
     new_lines = []
-    with open(mdfile_path) as mdfile_iterator:
-        file_content = mdfile_iterator.read()
-        broken_image_links = [
-            [m.start(), m.end()]
-            for m in re.finditer(image_link_pattern, file_content)
-        ]
+    with open(mdfile_path) as mdfile:
+        file_content = mdfile.read()
 
         prev_start = prev_end = 0
 
-        for start, end in broken_image_links:
+        for matched_obj in re.finditer(image_link_pattern, file_content):
+            start = matched_obj.start()
+            end = matched_obj.end()
             matched_str = file_content[start:end]
             # Clean up all whitespaces for the image link.
             clean_str = ''.join(matched_str.split())
@@ -1453,9 +1451,9 @@ def clean_image_links(mdfile_path: str) -> None:
 
         new_lines.append(file_content[prev_end:])
 
-    with open(mdfile_path, 'w') as mdfile_iterator:
+    with open(mdfile_path, 'w') as mdfile:
         new_content = ''.join(new_lines)
-        mdfile_iterator.write(new_content)
+        mdfile.write(new_content)
 
 
 def prepend_markdown_header(filename: str, mdfile: Iterable[str]):
@@ -1496,7 +1494,6 @@ def find_markdown_pages(app, outdir):
     for mdfile in markdown_dir.iterdir():
         if mdfile.is_file() and mdfile.name.lower() not in files_to_ignore:
             mdfile_name = ""
-            highlight_md_codeblocks(markdown_dir / mdfile.name)
 
             # Extract the header name for TOC.
             with open(mdfile) as mdfile_iterator:
@@ -1515,12 +1512,20 @@ def find_markdown_pages(app, outdir):
             if mdfile_name_to_use in files_to_rename:
                 mdfile_name_to_use = files_to_rename[mdfile_name_to_use]
 
-            shutil.copy(mdfile, f"{outdir}/{mdfile_name_to_use}")
+            mdfile_outdir = f"{outdir}/{mdfile_name_to_use}"
 
-            # Do not add index file to the TOC.
+            shutil.copy(mdfile, mdfile_outdir)
+
+            highlight_md_codeblocks(mdfile_outdir)
+            clean_image_links(mdfile_outdir)
+
+            # Use Overview as the name for index file.
             if mdfile_name_to_use == 'index.md':
-                # Clean up any broken image links for the index file.
-                clean_image_links(f"{outdir}/{mdfile_name_to_use}")
+                # Place the Overview page at the top of the list.
+                app.env.markdown_pages.insert(
+                    0,
+                    {'name':'Overview', 'href': 'index.md'}
+                )
                 continue
 
             # Add the file to the TOC later.
@@ -1980,7 +1985,7 @@ def build_finished(app, exception):
             dump(
                 [{
                     'name': app.config.project,
-                    'items': [{'name': 'Overview', 'href': 'index.md'}] + app.env.markdown_pages + pkg_toc_yaml
+                    'items': app.env.markdown_pages + pkg_toc_yaml
                 }],
                 default_flow_style=False,
             )
