@@ -83,12 +83,12 @@ REFMETHOD = 'meth'
 REFFUNCTION = 'func'
 INITPY = '__init__.py'
 # Regex expression for checking references of pattern like ":class:`~package_v1.module`"
-REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_\.\<\> ]*(\(\))?`'
+REF_PATTERN = ':(py:)?(func|class|meth|mod|ref|attr|exc):`~?[a-zA-Z0-9_.<> ]*(\(\))?`'
 # Regex expression for checking references of pattern like "~package_v1.subpackage.module"
-REF_PATTERN_LAST = '~([a-zA-Z0-9_\<\>]*\.)*[a-zA-Z0-9_\<\>]*(\(\))?'
+REF_PATTERN_LAST = '~([a-zA-Z0-9_<>]*\.)*[a-zA-Z0-9_<>]*(\(\))?'
 # Regex expression for checking references of pattern like
 # "[module][google.cloud.cloudkms_v1.module]"
-REF_PATTERN_BRACKETS = '\[[a-zA-Z0-9\_\<\>\-\. ]+\]\[[a-zA-Z0-9\_\<\>\-\. ]+\]'
+REF_PATTERN_BRACKETS = '\[[a-zA-Z0-9_<>\-. ]+\]\[[a-zA-Z0-9_<>\-. ]+\]'
 
 REF_PATTERNS = [
     REF_PATTERN,
@@ -764,53 +764,19 @@ def _extract_docstring_info(summary_info, summary, name):
     return top_summary
 
 
-def reformat_summary(summary: str) -> str:
-    """Applies any style changes to be made specifically for DocFX YAML.
-
-    Makes the following changes:
-      - converts ``text`` to `text`
-      - [add any additional changes to be made]
-
-    Args:
-        summary: The summary to be modified.
-
-    Returns:
-        Converted summary suitable for DocFX YAML.
-    """
-
-    reformatted_lines = []
-
-    single_backtick = '`'
-    double_backtick = '``'
-    triple_backtick = '```'
-    for line in summary.split('\n'):
-        # Check that we're only looking for double backtick (``) and not
-        # comments (```).
-        if triple_backtick not in line and double_backtick in line:
-            reformatted_lines.append(line.replace(double_backtick, single_backtick))
-
-        # Add any additional changes to be made here.
-        #elif:
-
-        else:
-            reformatted_lines.append(line)
-
-    return '\n'.join(reformatted_lines)
-
-
 def _reformat_codeblocks(content: str) -> str:
     """Formats codeblocks from ``` to <pre>."""
-    codeblock_fence = '```'
-    codeblock_current = '<pre>'
-    codeblock_next = '</pre>'
-    # If there is no proper pairs of codeblock fence, don't format docstring.
-    if content.count(codeblock_fence) % 2 != 0:
-        print(f'Docstring is not formatted well, missing proper pairs of codeblock fence: {content}')
+    triple_backtick = '```'
+    current_tag = '<pre>'
+    next_tag = '</pre>'
+    # If there are no proper pairs of triple backticks, don't format docstring.
+    if content.count(triple_backtick) % 2 != 0:
+        print(f'Docstring is not formatted well, missing proper pairs of triple backticks (```): {content}')
         return content
-    while codeblock_fence in content:
-        content = content.replace(codeblock_fence, codeblock_current, 1)
+    while triple_backtick in content:
+        content = content.replace(triple_backtick, current_tag, 1)
         # Alternate between replacing with <pre> and </pre>.
-        codeblock_current, codeblock_next = codeblock_next, codeblock_current
+        current_tag, next_tag = next_tag, current_tag
 
     return content
 
@@ -857,6 +823,36 @@ def reformat_markdown_to_html(content: str) -> str:
     content = _reformat_code(content)
 
     return content
+
+
+def reformat_summary(summary: str) -> str:
+    """Applies any style changes to be made specifically for DocFX YAML.
+
+    Makes the following changes:
+      - converts ``text`` to `text`
+
+    Args:
+        summary: The summary to be modified.
+
+    Returns:
+        Converted summary suitable for DocFX YAML.
+    """
+
+    reformatted_lines = []
+
+    single_backtick = '`'
+    double_backtick = '``'
+    triple_backtick = '```'
+    for line in summary.split('\n'):
+        # Check that we're only looking for double backtick (``) and not
+        # comments (```).
+        if triple_backtick not in line and double_backtick in line:
+            reformatted_lines.append(line.replace(double_backtick, single_backtick))
+
+        else:
+            reformatted_lines.append(line)
+
+    return '\n'.join(reformatted_lines)
 
 
 # Returns appropriate product name to display for given full name of entry.
