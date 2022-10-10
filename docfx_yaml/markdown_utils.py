@@ -16,11 +16,11 @@
 """Markdown related utilities for Sphinx DocFX YAML extension."""
 
 
-from collections.abc import Iterable
 import os
 from pathlib import Path
 import re
 import shutil
+from typing import Iterable
 
 from docuploader import shell
 import sphinx.application
