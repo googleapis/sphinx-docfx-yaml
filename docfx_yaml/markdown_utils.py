@@ -135,7 +135,8 @@ def _extract_header_from_markdown(mdfile: Iterable[str]) -> str:
 
         # Ignore licenses and other non-headers prior to the header.
         # If we've found the header, return the header.
-        if (header := _parse_markdown_header(line, prev_line)) != "":
+        header = _parse_markdown_header(line, prev_line)
+        if header != "":
             return header
 
         prev_line = line
