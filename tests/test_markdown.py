@@ -1,9 +1,4 @@
-from docfx_yaml.markdown_utils import reformat_markdown_to_html
-from docfx_yaml.markdown_utils import _parse_markdown_header
-from docfx_yaml.markdown_utils import _extract_header_from_markdown
-from docfx_yaml.markdown_utils import _highlight_md_codeblocks
-from docfx_yaml.markdown_utils import _clean_image_links
-from docfx_yaml.markdown_utils import _prepend_markdown_header
+from docfx_yaml import markdown_utils
 
 
 import unittest
@@ -39,7 +34,7 @@ class TestGenerate(unittest.TestCase):
                 test_file.write(base_file.read())
                 test_file.flush()
 
-            _highlight_md_codeblocks(test_file.name)
+            markdown_utils._highlight_md_codeblocks(test_file.name)
             test_file.seek(0)
 
             with open(want_filename) as mdfile_want:
@@ -74,7 +69,7 @@ class TestGenerate(unittest.TestCase):
                 test_file.flush()
                 test_file.seek(0)
 
-            _prepend_markdown_header(file_name, test_file)
+            markdown_utils._prepend_markdown_header(file_name, test_file)
             test_file.seek(0)
 
             with open(want_filename) as mdfile_want:
@@ -101,7 +96,7 @@ class TestGenerate(unittest.TestCase):
                 test_file.flush()
                 test_file.seek(0)
 
-            _clean_image_links(test_file.name)
+            markdown_utils._clean_image_links(test_file.name)
             test_file.seek(0)
 
             with open(want_filename) as mdfile_want:
@@ -132,7 +127,7 @@ For example:
     ]
     @parameterized.expand(test_markdown_content)
     def test_reformat_markdown_to_html(self, content, content_want):
-        content_got = reformat_markdown_to_html(content)
+        content_got = markdown_utils.reformat_markdown_to_html(content)
         self.assertEqual(content_want, content_got)
 
 
@@ -182,7 +177,7 @@ For example:
     ]
     @parameterized.expand(test_markdown_content)
     def test_parse_markdown_header(self, header_line, header_line_want, prev_line):
-        header_line_got = _parse_markdown_header(header_line, prev_line)
+        header_line_got = markdown_utils._parse_markdown_header(header_line, prev_line)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -203,7 +198,7 @@ For example:
         header_line_want = "Test header for a simple markdown file."
 
         with open(markdown_filename, 'r') as mdfile:
-            header_line_got = _extract_header_from_markdown(mdfile)
+            header_line_got = markdown_utils._extract_header_from_markdown(mdfile)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -228,7 +223,7 @@ For example:
         header_line_want = "This is a simple alternate header"
 
         with open(markdown_filename, 'r') as mdfile:
-            header_line_got = _extract_header_from_markdown(mdfile)
+            header_line_got = markdown_utils._extract_header_from_markdown(mdfile)
 
         self.assertEqual(header_line_got, header_line_want)
 
@@ -248,7 +243,7 @@ For example:
     def test_extract_header_from_markdown_bad_headers(self, markdown_filename):
         # Check that empty string is returned if no valid header is found.
         with open(markdown_filename, 'r') as mdfile:
-            header_line_got = _extract_header_from_markdown(mdfile)
+            header_line_got = markdown_utils._extract_header_from_markdown(mdfile)
 
         self.assertFalse(header_line_got)
 

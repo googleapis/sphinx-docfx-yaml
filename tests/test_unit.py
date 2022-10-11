@@ -1,14 +1,4 @@
-from docfx_yaml.extension import find_unique_name
-from docfx_yaml.extension import disambiguate_toc_name
-from docfx_yaml.extension import _resolve_reference_in_module_summary
-from docfx_yaml.extension import REF_PATTERN
-from docfx_yaml.extension import REF_PATTERN_LAST
-from docfx_yaml.extension import REF_PATTERN_BRACKETS
-from docfx_yaml.extension import _extract_docstring_info
-from docfx_yaml.extension import find_package_group
-from docfx_yaml.extension import pretty_package_name
-from docfx_yaml.extension import group_by_package
-from docfx_yaml.extension import _parse_docstring_summary
+from docfx_yaml import extension
 
 import unittest
 from parameterized import parameterized
@@ -33,8 +23,8 @@ class TestGenerate(unittest.TestCase):
                 else:
                     entries[word] += 1
 
-        got1 = find_unique_name(entry1.split("."), entries)
-        got2 = find_unique_name(entry2.split("."), entries)
+        got1 = extension.find_unique_name(entry1.split("."), entries)
+        got2 = extension.find_unique_name(entry2.split("."), entries)
 
         self.assertEqual(want1, ".".join(got1))
         self.assertEqual(want2, ".".join(got2))
@@ -52,7 +42,7 @@ class TestGenerate(unittest.TestCase):
 
         with open('tests/yaml_pre.yaml', 'r') as test_file:
             yaml_got = load(test_file, Loader=Loader)
-        disambiguated_names_got = disambiguate_toc_name(yaml_got)
+        disambiguated_names_got = extension.disambiguate_toc_name(yaml_got)
 
         self.assertEqual(yaml_want, yaml_got)
         self.assertEqual(disambiguated_names_want, disambiguated_names_got)
@@ -69,7 +59,7 @@ class TestGenerate(unittest.TestCase):
 
         with open('tests/yaml_pre_duplicate.yaml', 'r') as test_file:
             yaml_got = load(test_file, Loader=Loader)
-        disambiguated_names_got = disambiguate_toc_name(yaml_got)
+        disambiguated_names_got = extension.disambiguate_toc_name(yaml_got)
 
 
         self.assertEqual(yaml_want, yaml_got)
@@ -105,10 +95,10 @@ Raises:
         lines_got = lines_got.split("\n")
         xrefs_got = []
         # Resolve over different regular expressions for different types of reference patterns.
-        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN, lines_got)
         for xref in xrefs:
             xrefs_got.append(xref)
-        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
+        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_LAST, lines_got)
         for xref in xrefs:
             xrefs_got.append(xref)
 
@@ -172,10 +162,10 @@ Args:
         lines_got = lines_got.split("\n")
         xrefs_got = []
         # Resolve over different regular expressions for different types of reference patterns.
-        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN, lines_got)
+        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN, lines_got)
         for xref in xrefs:
             xrefs_got.append(xref)
-        lines_got, xrefs = _resolve_reference_in_module_summary(REF_PATTERN_LAST, lines_got)
+        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_LAST, lines_got)
         for xref in xrefs:
             xrefs_got.append(xref)
 
@@ -255,7 +245,7 @@ The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v
 """
         summary = summary.split("\n")
 
-        summary_got, xrefs_got = _resolve_reference_in_module_summary(REF_PATTERN_BRACKETS, summary)
+        summary_got, xrefs_got = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_BRACKETS, summary)
 
         self.assertEqual(summary_got, summary_want)
         self.assertCountEqual(xrefs_got, xrefs_want)
@@ -264,7 +254,7 @@ The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v
     # Check that other patterns throws an exception.
     def test_reference_check_error(self):
         with self.assertRaises(ValueError):
-            _resolve_reference_in_module_summary('.*', 'not a valid ref line'.split('\n'))
+            extension._resolve_reference_in_module_summary('.*', 'not a valid ref line'.split('\n'))
 
 
     def test_extract_docstring_info_normal_input(self):
@@ -290,7 +280,7 @@ Raises:
     AttributeError: if `condition x`.
 """
 
-        top_summary1_got = _extract_docstring_info(summary_info1_got, summary1, "")
+        top_summary1_got = extension._extract_docstring_info(summary_info1_got, summary1, "")
 
         self.assertEqual(top_summary1_got, self.top_summary1_want)
         self.assertEqual(summary_info1_got, self.summary_info1_want)
@@ -318,7 +308,7 @@ Simple test for docstring.
             'exceptions': []
         }
 
-        top_summary2_got = _extract_docstring_info(summary_info2_got, summary2, "")
+        top_summary2_got = extension._extract_docstring_info(summary_info2_got, summary2, "")
         
         # Output should be same as test 1 with normal input.
         self.assertEqual(top_summary2_got, self.top_summary1_want)
@@ -351,7 +341,7 @@ It could return :param: with :returns as well.
         # Nothing should change
         top_summary3_want = summary3
 
-        top_summary3_got = _extract_docstring_info(summary_info3_got, summary3, "")
+        top_summary3_got = extension._extract_docstring_info(summary_info3_got, summary3, "")
 
         self.assertEqual(top_summary3_got, top_summary3_want)
         self.assertEqual(summary_info3_got, summary_info3_want)
@@ -365,7 +355,7 @@ Description of docstring which should fail.
 :returns:param:
 """
         with self.assertRaises(ValueError):
-            _extract_docstring_info({}, summary4, "error string")
+            extension._extract_docstring_info({}, summary4, "error string")
 
         summary5 = """
 Description of malformed docstring.
@@ -374,7 +364,7 @@ Raises:
     Error that should fail: if condition `x`.
 """
         with self.assertRaises(KeyError):
-            _extract_docstring_info({}, summary5, "malformed docstring")
+            extension._extract_docstring_info({}, summary5, "malformed docstring")
 
 
     def test_extract_docstring_info_with_xref(self):
@@ -424,7 +414,7 @@ Simple test for docstring.
             'exceptions': []
         }
 
-        top_summary_got = _extract_docstring_info(summary_info_got, summary, "")
+        top_summary_got = extension._extract_docstring_info(summary_info_got, summary, "")
         # Same as the top summary from previous example, compare with that
         self.assertEqual(top_summary_got, self.top_summary1_want)
         self.assertDictEqual(summary_info_got, summary_info_want)
@@ -450,7 +440,7 @@ Raises:
             'exceptions': []
         }
 
-        top_summary_got = _extract_docstring_info(summary_info_got, summary, "")
+        top_summary_got = extension._extract_docstring_info(summary_info_got, summary, "")
         self.assertEqual(top_summary_got, "")
         self.assertDictEqual(summary_info_got, self.summary_info1_want)
 
@@ -459,7 +449,7 @@ Raises:
         package_group_want = "google.cloud.spanner_v1beta2"
         uid = "google.cloud.spanner_v1beta2.services.admin_database_v1.types"
 
-        package_group_got = find_package_group(uid)
+        package_group_got = extension.find_package_group(uid)
         self.assertEqual(package_group_got, package_group_want)
 
 
@@ -467,7 +457,7 @@ Raises:
         package_name_want = "Spanner V1beta2"
         package_group = "google.cloud.spanner_v1beta2"
 
-        package_name_got = pretty_package_name(package_group)
+        package_name_got = extension.pretty_package_name(package_group)
         self.assertEqual(package_name_got, package_name_want)
 
 
@@ -586,7 +576,7 @@ Raises:
             }
         ]
 
-        toc_yaml_got = group_by_package(toc_yaml)
+        toc_yaml_got = extension.group_by_package(toc_yaml)
 
         self.assertCountEqual(toc_yaml_got, toc_yaml_want)
 
@@ -658,7 +648,7 @@ You can also pass a mapping object.
 \n            \"client_cert_source\" : get_client_cert
 \n        })
 """
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -672,7 +662,7 @@ And any other documentation that the source code would have could go here.
 """
         summary_want = summary + "\n"
 
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -688,7 +678,7 @@ And any other documentation that the source code would have could go here.
 \n    print(i)
 """
         with self.assertRaises(ValueError):
-            _parse_docstring_summary(summary)
+            extension._parse_docstring_summary(summary)
 
         # Check that notices are processed properly.
         summary_want = \
@@ -719,7 +709,7 @@ hyphenated term notice.
 \n    hyphenated term notice.
 """
 
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -731,7 +721,7 @@ hyphenated term notice.
 this is not a properly formatted warning.
 """
         with self.assertRaises(ValueError):
-            _parse_docstring_summary(summary)
+            extension._parse_docstring_summary(summary)
 
     def test_parse_docstring_summary_attributes(self):
         # Test parsing docstring with attributes.
@@ -753,7 +743,7 @@ this is not a properly formatted warning.
 \n:type: str
 """
 
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
         self.assertCountEqual(attributes_got, attributes_want)
 
         # Check multiple attributes are parsed.
@@ -787,7 +777,7 @@ this is not a properly formatted warning.
 
 \n:type: google.cloud.bigquery_logging_v1.types.TableInsertRequest
 """
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
 
         self.assertCountEqual(attributes_got, attributes_want)
         for attribute_got, attribute_want in zip(attributes_got, attributes_want):
@@ -818,7 +808,7 @@ this is not a properly formatted warning.
 
 \n:type: str
 """
-        summary_got, attributes_got = _parse_docstring_summary(summary)
+        summary_got, attributes_got = extension._parse_docstring_summary(summary)
 
         # Check that we are returned only one item.
         self.assertCountEqual(attributes_got, attributes_want)

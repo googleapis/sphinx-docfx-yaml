@@ -1,11 +1,4 @@
-from docfx_yaml.extension import extract_keyword
-from docfx_yaml.extension import indent_code_left
-from docfx_yaml.extension import find_uid_to_convert
-from docfx_yaml.extension import convert_cross_references
-from docfx_yaml.extension import search_cross_references
-from docfx_yaml.extension import format_code
-from docfx_yaml.extension import extract_product_name
-from docfx_yaml.extension import reformat_summary
+from docfx_yaml import extension
 
 import unittest
 from parameterized import parameterized
@@ -57,7 +50,7 @@ for i in range(10):
     def test_indent_code_left(self, code, code_want):
         parts = code.split("\n")
         tab_space = len(parts[0]) - len(parts[0].lstrip(" "))
-        code_got = indent_code_left(code, tab_space)
+        code_got = extension.indent_code_left(code, tab_space)
         self.assertEqual(code_got, code_want)
 
 
@@ -78,7 +71,7 @@ for i in range(10):
             "        return ('left-indented-blocks')\n"
         ]
         tab_space = len(code[0]) - len(code[0].lstrip(" "))
-        code_got = "\n\n".join([indent_code_left(part, tab_space) for part in code])
+        code_got = "\n\n".join([extension.indent_code_left(part, tab_space) for part in code])
         self.assertEqual(code_got, code_want)
 
 
@@ -87,7 +80,7 @@ for i in range(10):
         keyword_want = "attribute"
 
         keyword_line = ".. attribute:: "
-        keyword_got = extract_keyword(keyword_line)
+        keyword_got = extension.extract_keyword(keyword_line)
 
         self.assertEqual(keyword_got, keyword_want)
 
@@ -96,7 +89,7 @@ for i in range(10):
 
         # Should raise an exception..
         with self.assertRaises(ValueError):
-            keyword_got = extract_keyword(keyword_line)
+            keyword_got = extension.extract_keyword(keyword_line)
 
 
     cross_references_testdata = [
@@ -137,7 +130,7 @@ for i in range(10):
         ]
         current_object_name = "google.cloud.bigquery_storage_v1.types.SplitResponse"
 
-        content_got = convert_cross_references(content, current_object_name, keyword_map)
+        content_got = extension.convert_cross_references(content, current_object_name, keyword_map)
         self.assertEqual(content_got, content_want)
 
 
@@ -155,23 +148,23 @@ for i in range(10):
         ]
         current_name = "SplitRepsonse"
 
-        content_got = convert_cross_references(content, current_name, keyword_map)
+        content_got = extension.convert_cross_references(content, current_name, keyword_map)
 
         # Make sure that same entries are not processed twice.
         # The output should not be different.
         current = content_got
-        current_got = convert_cross_references(current, content, keyword_map)
+        current_got = extension.convert_cross_references(current, content, keyword_map)
         self.assertEqual(content_want, current_got)
 
         # If shorter version of the current name exists, it should not interfere
         # unless strictly necessary.
         keyword_map.append("google.cloud.bigquery_storage_v1.types")
-        long_name_got = convert_cross_references(content, current_name, keyword_map)
+        long_name_got = extension.convert_cross_references(content, current_name, keyword_map)
         self.assertEqual(long_name_got, content_want)
 
         shorter_name_want = "<xref uid=\"google.cloud.bigquery_storage_v1.types\">google.cloud.bigquery_storage_v1.types</xref>"
         shorter_name = "google.cloud.bigquery_storage_v1.types"
-        shorter_name_got = convert_cross_references(shorter_name, current_name, keyword_map)
+        shorter_name_got = extension.convert_cross_references(shorter_name, current_name, keyword_map)
         self.assertEqual(shorter_name_got, shorter_name_want)
 
 
@@ -204,7 +197,7 @@ for i in range(10):
             yaml_pre = load(test_file, Loader=Loader)
 
         for obj in yaml_pre['items']:
-            search_cross_references(obj, current_name, keyword_map)
+            extension.search_cross_references(obj, current_name, keyword_map)
 
         with open('tests/cross_references_post.yaml', 'r') as want_file:
             yaml_post = load(want_file, Loader=Loader)
@@ -218,7 +211,7 @@ for i in range(10):
 
         code = 'batch_predict(*, gcs_source: Optional[Union[str, Sequence[str]]] = None, instances_format: str = "jsonl", gcs_destination_prefix: Optional[str] = None, predictions_format: str = "jsonl", model_parameters: Optional[Dict] = None, machine_type: Optional[str] = None, accelerator_type: Optional[str] = None, explanation_parameters: Optional[google.cloud.aiplatform_v1.types.explanation.ExplanationParameters] = None, labels: Optional[Dict[str, str]] = None, sync: bool = True,)'
 
-        code_got = format_code(code)
+        code_got = extension.format_code(code)
         self.assertEqual(code_want, code_got)
 
 
@@ -226,18 +219,18 @@ for i in range(10):
         # Test to ensure different name formats extract product name properly.
         name_want = "scheduler_v1.types.Digest"
         name = "google.cloud.scheduler_v1.types.Digest"
-        product_name = extract_product_name(name)
+        product_name = extension.extract_product_name(name)
 
         self.assertEqual(name_want, product_name)
 
         non_cloud_name = "google.scheduler_v1.types.Digest"
-        non_cloud_product_name = extract_product_name(non_cloud_name)
+        non_cloud_product_name = extension.extract_product_name(non_cloud_name)
 
         self.assertEqual(name_want, non_cloud_product_name)
 
         short_name_want = "Digest"
         short_name = "scheduler_v1.types.Digest"
-        short_product_name = extract_product_name(short_name)
+        short_product_name = extension.extract_product_name(short_name)
 
         self.assertEqual(short_name_want, short_product_name)
 
@@ -289,7 +282,7 @@ Take a look at <xref uid="google.cloud.resourcemanager_v3.set_iam_policy">docume
 
         index = words.index(current_word)
 
-        cross_reference_got = find_uid_to_convert(
+        cross_reference_got = extension.find_uid_to_convert(
             current_word, words, index, uids, current_object_name, visited_words
         )
         self.assertEqual(cross_reference_got, cross_reference_want)
@@ -333,7 +326,7 @@ For example:
     ]
     @parameterized.expand(test_summary)
     def test_reformat_summary(self, summary, summary_want):
-        summary_got = reformat_summary(summary)
+        summary_got = extension.reformat_summary(summary)
         self.assertEqual(summary_want, summary_got)
 
 

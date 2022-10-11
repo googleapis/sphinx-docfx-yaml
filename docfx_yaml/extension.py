@@ -51,9 +51,7 @@ from .settings import API_ROOT
 from .monkeypatch import patch_docfields
 from .directives import RemarksDirective, TodoDirective
 from .nodes import remarks
-from .markdown_utils import run_sphinx_markdown
-from .markdown_utils import reformat_markdown_to_html
-from .markdown_utils import move_markdown_pages
+from docfx_yaml import markdown_utils
 
 import subprocess
 import ast
@@ -137,7 +135,7 @@ logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 def build_init(app):
     print("Running sphinx-build with Markdown first...")
-    run_sphinx_markdown()
+    markdown_utils.run_sphinx_markdown()
     print("Completed running sphinx-build with Markdown files.")
 
     """
@@ -1465,7 +1463,8 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         current_object_name,
                         known_uids
                     )
-                    param["description"] = reformat_markdown_to_html(param_description)
+                    param["description"] = (
+                        markdown_utils.reformat_markdown_to_html(param_description))
 
                 if param.get("id"):
                     param_id = convert_cross_references(
@@ -1473,7 +1472,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         current_object_name,
                         known_uids
                     )
-                    param["id"] = reformat_markdown_to_html(param_id)
+                    param["id"] = markdown_utils.reformat_markdown_to_html(param_id)
 
                 if param.get("var_type"):
                     param_type = convert_cross_references(
@@ -1481,7 +1480,8 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         current_object_name,
                         known_uids
                     )
-                    param["var_type"] = reformat_markdown_to_html(param_type)
+                    param["var_type"] = (
+                        markdown_utils.reformat_markdown_to_html(param_type))
 
         if obj["syntax"].get("exceptions"):
             for exception in obj["syntax"]["exceptions"]:
@@ -1492,7 +1492,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         known_uids
                     )
                     exception["description"] = (
-                        reformat_markdown_to_html(exception_description))
+                        markdown_utils.reformat_markdown_to_html(exception_description))
 
                 if exception.get("var_type"):
                     exception_type = convert_cross_references(
@@ -1501,7 +1501,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         known_uids
                     )
                     exception["var_type"] = (
-                        reformat_markdown_to_html(exception_type))
+                        markdown_utils.reformat_markdown_to_html(exception_type))
 
         if obj["syntax"].get("returns"):
             for ret in obj["syntax"]["returns"]:
@@ -1511,7 +1511,8 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         current_object_name,
                         known_uids
                     )
-                    ret["description"] = reformat_markdown_to_html(ret_description)
+                    ret["description"] = (
+                        markdown_utils.reformat_markdown_to_html(ret_description))
 
                 if ret.get("var_type"):
                     ret_type = convert_cross_references(
@@ -1519,7 +1520,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                         current_object_name,
                         known_uids
                     )
-                    ret["var_type"] = reformat_markdown_to_html(ret_type)
+                    ret["var_type"] = markdown_utils.reformat_markdown_to_html(ret_type)
 
 
     if obj.get("attributes"):
@@ -1531,7 +1532,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                     known_uids
                 )
                 attribute["description"] = (
-                    reformat_markdown_to_html(attribute_description))
+                    markdown_utils.reformat_markdown_to_html(attribute_description))
 
             if attribute.get("id"):
                 attribute_id = convert_cross_references(
@@ -1539,7 +1540,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                     current_object_name,
                     known_uids
                 )
-                attribute["id"] = reformat_markdown_to_html(attribute_id)
+                attribute["id"] = markdown_utils.reformat_markdown_to_html(attribute_id)
 
             if attribute.get("var_type"):
                 attribute_type = convert_cross_references(
@@ -1547,7 +1548,8 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                     current_object_name,
                     known_uids
                 )
-                attribute["var_type"] = reformat_markdown_to_html(attribute_type)
+                attribute["var_type"] = (
+                    markdown_utils.reformat_markdown_to_html(attribute_type))
 
 
 def build_finished(app, exception):
@@ -1598,7 +1600,7 @@ def build_finished(app, exception):
     ensuredir(normalized_outdir)
 
     # Add markdown pages to the configured output directory.
-    move_markdown_pages(app, normalized_outdir)
+    markdown_utils.move_markdown_pages(app, normalized_outdir)
 
     pkg_toc_yaml = []
     # Used to record filenames dumped to avoid confliction
