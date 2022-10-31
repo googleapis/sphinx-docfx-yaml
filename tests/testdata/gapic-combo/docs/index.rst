@@ -1,50 +1,43 @@
 .. include:: README.rst
 
+.. include:: multiprocessing.rst
+
+
+API Documentation
+-----------------
+
 .. note::
 
-   Because the BigQuery client uses the third-party :mod:`requests` library
-   by default and the BigQuery-Storage client uses :mod:`grpcio` library,
-   both are safe to share instances across threads.  In multiprocessing
-   scenarios, the best practice is to create client instances *after*
-   :class:`multiprocessing.Pool` or :class:`multiprocessing.Process` invokes
-   :func:`os.fork`.
-
-More Examples
-~~~~~~~~~~~~~
+    The client library version (currently ``2.x``) should not be confused with the
+    backend API version (currently ``v1``), hence some references to ``v1`` can be found
+    across the documentation.
 
 .. toctree::
-  :maxdepth: 2
+    :maxdepth: 4
 
-  usage/index
-  Official Google BigQuery How-to Guides <https://cloud.google.com/bigquery/docs/how-to>
+    Publisher Client <pubsub/publisher/index>
+    Subscriber Client <pubsub/subscriber/index>
+    Types <pubsub/types>
 
-API Reference
--------------
-
-.. toctree::
-  :maxdepth: 2
-
-  reference
-  dbapi
-  design/index
 
 Migration Guide
 ---------------
 
-See the guides below for instructions on migrating from older to newer *major* releases
-of this library (from ``1.x`` to ``2.x``, or from ``2.x`` to ``3.x``).
+See the guide below for instructions on migrating to the 2.x release of this library.
 
 .. toctree::
     :maxdepth: 2
 
     UPGRADING
 
+
 Changelog
 ---------
 
-For a list of all ``google-cloud-bigquery`` releases:
+For a list of all ``google-cloud-pubsub`` releases:
 
 .. toctree::
   :maxdepth: 2
 
   changelog
+
