@@ -67,9 +67,17 @@ def test_goldens(update_goldens, test_dir):
                 # Settings to be used for sphinx-build
                 "-D",
                 # Extensions to be added
-                ("extensions=sphinx.ext.autodoc,sphinx.ext.autosummary,docfx_yaml.extension," +
-                 "sphinx.ext.intersphinx,sphinx.ext.coverage,sphinx.ext.napoleon," +
-                 "sphinx.ext.todo,sphinx.ext.viewcode,recommonmark"),
+                (
+                    "extensions=sphinx.ext.autodoc,"
+                    "sphinx.ext.autosummary,"
+                    "docfx_yaml.extension,"
+                    "sphinx.ext.intersphinx,"
+                    "sphinx.ext.coverage,"
+                    "sphinx.ext.napoleon,"
+                    "sphinx.ext.todo,"
+                    "sphinx.ext.viewcode,"
+                    "recommonmark"
+                ),
                 # builder to use
                 "-b",
                 "html",
@@ -89,7 +97,7 @@ def test_goldens(update_goldens, test_dir):
 
     if update_goldens:
         shutil.rmtree(golden_dir, ignore_errors=True)
-        files_to_move = [file for file in out_dir.rglob("*")]
+        files_to_move = out_dir.rglob("*")
 
         # Overwrite incorrect repo data used compared to GH Action.
         incorrect_repo = "git@github.com:googleapis/sphinx-docfx-yaml.git"
