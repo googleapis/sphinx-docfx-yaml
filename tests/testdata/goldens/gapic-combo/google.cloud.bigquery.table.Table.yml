@@ -1,0 +1,1524 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.table.Table.clone_definition
+  - google.cloud.bigquery.table.Table.clustering_fields
+  - google.cloud.bigquery.table.Table.created
+  - google.cloud.bigquery.table.Table.dataset_id
+  - google.cloud.bigquery.table.Table.description
+  - google.cloud.bigquery.table.Table.encryption_configuration
+  - google.cloud.bigquery.table.Table.etag
+  - google.cloud.bigquery.table.Table.expires
+  - google.cloud.bigquery.table.Table.external_data_configuration
+  - google.cloud.bigquery.table.Table.friendly_name
+  - google.cloud.bigquery.table.Table.from_api_repr
+  - google.cloud.bigquery.table.Table.from_string
+  - google.cloud.bigquery.table.Table.full_table_id
+  - google.cloud.bigquery.table.Table.labels
+  - google.cloud.bigquery.table.Table.location
+  - google.cloud.bigquery.table.Table.modified
+  - google.cloud.bigquery.table.Table.mview_enable_refresh
+  - google.cloud.bigquery.table.Table.mview_last_refresh_time
+  - google.cloud.bigquery.table.Table.mview_query
+  - google.cloud.bigquery.table.Table.mview_refresh_interval
+  - google.cloud.bigquery.table.Table.num_bytes
+  - google.cloud.bigquery.table.Table.num_rows
+  - google.cloud.bigquery.table.Table.partition_expiration
+  - google.cloud.bigquery.table.Table.partitioning_type
+  - google.cloud.bigquery.table.Table.path
+  - google.cloud.bigquery.table.Table.project
+  - google.cloud.bigquery.table.Table.range_partitioning
+  - google.cloud.bigquery.table.Table.reference
+  - google.cloud.bigquery.table.Table.require_partition_filter
+  - google.cloud.bigquery.table.Table.schema
+  - google.cloud.bigquery.table.Table.self_link
+  - google.cloud.bigquery.table.Table.snapshot_definition
+  - google.cloud.bigquery.table.Table.streaming_buffer
+  - google.cloud.bigquery.table.Table.table_id
+  - google.cloud.bigquery.table.Table.table_type
+  - google.cloud.bigquery.table.Table.time_partitioning
+  - google.cloud.bigquery.table.Table.to_api_repr
+  - google.cloud.bigquery.table.Table.to_bqstorage
+  - google.cloud.bigquery.table.Table.view_query
+  - google.cloud.bigquery.table.Table.view_use_legacy_sql
+  - google.cloud.bigquery.table.Table.__init__
+  - google.cloud.bigquery.table.Table
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.table._TableBase
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: Table
+  source:
+    id: Table
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 313
+  summary: 'Tables represent a set of rows whose values correspond to a schema.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#resource-table
+
+    '
+  syntax:
+    content: Table(table_ref, schema=None)
+    parameters:
+    - description: A pointer to a table. If <code>table_ref</code> is a string, it
+        must included a project ID, dataset ID, and table ID, each separated by <code>.</code>.
+      id: table_ref
+      var_type: Union[<xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>,
+        str]
+    - description: The table's schema. If any item is a mapping, its content must
+        be compatible with <xref uid="google.cloud.bigquery.schema.SchemaField.from_api_repr">from_api_repr</xref>.
+      id: schema
+      var_type: Optional[Sequence[Union[ <xref uid="google.cloud.bigquery.schema.SchemaField">SchemaField</xref>,
+        Mapping[str, Any] ]]]
+  type: class
+  uid: google.cloud.bigquery.table.Table
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.clone_definition
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: clone_definition
+  source:
+    id: clone_definition
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Information about the clone. This value is set via clone creation.
+
+
+    See: https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.clone_definition
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.clone_definition
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.clustering_fields
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: clustering_fields
+  source:
+    id: clustering_fields
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[List[str], None]: Fields defining clustering for the table
+
+
+    (Defaults to :data:`None`).
+
+
+    Clustering fields are immutable after table creation.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    BigQuery supports clustering for both partitioned and
+
+    non-partitioned tables.
+
+
+    </aside>'
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.clustering_fields
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.created
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: created
+  source:
+    id: created
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[datetime.datetime, None]: Datetime at which the table was
+
+    created (:data:`None` until set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.created
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.dataset_id
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: dataset_id
+  source:
+    id: dataset_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'ID of dataset containing the table.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.dataset_id
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.description
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: description
+  source:
+    id: description
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: Description of the table (defaults to
+
+    :data:`None`).
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.description
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.encryption_configuration
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: encryption_configuration
+  source:
+    id: encryption_configuration
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.encryption_configuration.EncryptionConfiguration">google.cloud.bigquery.encryption_configuration.EncryptionConfiguration</xref>:
+    Custom
+
+    encryption configuration for the table.
+
+
+    Custom encryption configuration (e.g., Cloud KMS keys) or :data:`None`
+
+    if using default encryption.
+
+
+    See `protecting data with Cloud KMS keys
+
+    <https://cloud.google.com/bigquery/docs/customer-managed-encryption>`_
+
+    in the BigQuery documentation.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.encryption_configuration
+- *id006
+- &id007
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.etag
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: etag
+  source:
+    id: etag
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: ETag for the table resource (:data:`None` until
+
+    set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.etag
+- *id007
+- &id008
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.expires
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: expires
+  source:
+    id: expires
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[datetime.datetime, None]: Datetime at which the table will be
+
+    deleted.
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.expires
+- *id008
+- &id009
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.external_data_configuration
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: external_data_configuration
+  source:
+    id: external_data_configuration
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[google.cloud.bigquery.ExternalConfig, None]: Configuration for
+
+    an external data source (defaults to :data:`None`).
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.external_data_configuration
+- *id009
+- &id010
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.friendly_name
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: friendly_name
+  source:
+    id: friendly_name
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: Title of the table (defaults to :data:`None`).
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.friendly_name
+- *id010
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 970
+  summary: 'Factory: construct a table given its API representation
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    exceptions:
+    - description: If the <code>resource</code> lacks the key <code>'tableReference'</code>,
+        or if the <code>dict</code> stored within the key <code>'tableReference'</code>
+        lacks the keys <code>'tableId'</code>, <code>'projectId'</code>, or <code>'datasetId'</code>.
+      var_type: KeyError
+    parameters:
+    - description: Table resource representation from the API
+      id: resource
+      var_type: Dict[str, object]
+    returns:
+    - description: Table parsed from <code>resource</code>.
+      var_type: google.cloud.bigquery.table.Table
+  type: method
+  uid: google.cloud.bigquery.table.Table.from_api_repr
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.from_string
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: from_string
+  source:
+    id: from_string
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 946
+  summary: 'Construct a table from fully-qualified table ID.
+
+    '
+  syntax:
+    content: 'from_string(full_table_id: str)'
+    exceptions:
+    - description: If <code>full_table_id</code> is not a fully-qualified table ID
+        in standard SQL format.
+      var_type: ValueError
+    parameters:
+    - description: A fully-qualified table ID in standard SQL format. Must included
+        a project ID, dataset ID, and table ID, each separated by <code>.</code>.
+      id: full_table_id
+      var_type: str
+    returns:
+    - description: Table parsed from <code>full_table_id</code>.
+      var_type: 'Table .. rubric:: Examples >>> Table.from_string(''my-project.mydataset.mytable'')
+        Table(TableRef...(D...(''my-project'', ''mydataset''), ''mytable''))'
+  type: method
+  uid: google.cloud.bigquery.table.Table.from_string
+- &id011
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.full_table_id
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: full_table_id
+  source:
+    id: full_table_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: ID for the table (:data:`None` until set from the
+
+    server).
+
+
+    In the format `project-id:dataset_id.table_id`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.full_table_id
+- *id011
+- &id012
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.labels
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: labels
+  source:
+    id: labels
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, str]: Labels for the table.
+
+
+    This method always returns a dict. To change a table''s labels,
+
+    modify the dict, then call `Client.update_table`. To delete a
+
+    label, set its value to :data:`None` before updating.
+
+    '
+  syntax:
+    exceptions:
+    - description: If <code>value</code> type is invalid.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.labels
+- *id012
+- &id013
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.location
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: location
+  source:
+    id: location
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: Location in which the table is hosted
+
+
+    Defaults to :data:`None`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.location
+- *id013
+- &id014
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.modified
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: modified
+  source:
+    id: modified
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[datetime.datetime, None]: Datetime at which the table was last
+
+    modified (:data:`None` until set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.modified
+- *id014
+- &id015
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.mview_enable_refresh
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: mview_enable_refresh
+  source:
+    id: mview_enable_refresh
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[bool]: Enable automatic refresh of the materialized view
+
+    when the base table is updated. The default value is :data:`True`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.mview_enable_refresh
+- *id015
+- &id016
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.mview_last_refresh_time
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: mview_last_refresh_time
+  source:
+    id: mview_last_refresh_time
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[datetime.datetime]: Datetime at which the materialized view was
+    last
+
+    refreshed (:data:`None` until set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.mview_last_refresh_time
+- *id016
+- &id017
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.mview_query
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: mview_query
+  source:
+    id: mview_query
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: SQL query defining the table as a materialized
+
+    view (defaults to :data:`None`).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.mview_query
+- *id017
+- &id018
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.mview_refresh_interval
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: mview_refresh_interval
+  source:
+    id: mview_refresh_interval
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[datetime.timedelta]: The maximum frequency at which this
+
+    materialized view will be refreshed. The default value is 1800000
+
+    milliseconds (30 minutes).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.mview_refresh_interval
+- *id018
+- &id019
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.num_bytes
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: num_bytes
+  source:
+    id: num_bytes
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[int, None]: The size of the table in bytes (:data:`None` until
+
+    set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.num_bytes
+- *id019
+- &id020
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.num_rows
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: num_rows
+  source:
+    id: num_rows
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[int, None]: The number of rows in the table (:data:`None`
+
+    until set from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.num_rows
+- *id020
+- &id021
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.partition_expiration
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: partition_expiration
+  source:
+    id: partition_expiration
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[int, None]: Expiration time in milliseconds for a partition.
+
+
+    If `partition_expiration` is set and `type_` is
+
+    not set, `type_` will default to
+
+    <xref uid="google.cloud.bigquery.table.TimePartitioningType.DAY">DAY</xref>.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.partition_expiration
+- *id021
+- &id022
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.partitioning_type
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: partitioning_type
+  source:
+    id: partitioning_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: Time partitioning of the table if it is
+
+    partitioned (Defaults to :data:`None`).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.partitioning_type
+- *id022
+- &id023
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.path
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: path
+  source:
+    id: path
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'URL path for the table''s APIs.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.path
+- *id023
+- &id024
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.project
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: project
+  source:
+    id: project
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Project bound to the table.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.project
+- *id024
+- &id025
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.range_partitioning
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: range_partitioning
+  source:
+    id: range_partitioning
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[<xref uid="google.cloud.bigquery.table.RangePartitioning">google.cloud.bigquery.table.RangePartitioning</xref>]:
+
+    Configures range-based partitioning for a table.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    **Beta**. The integer range partitioning feature is in a
+
+    pre-release state and might change or have limited support.
+
+    </aside>
+
+    Only specify at most one of
+
+    xref_time_partitioning or
+
+    xref_range_partitioning.
+
+    '
+  syntax:
+    exceptions:
+    - description: If the value is not <xref uid="google.cloud.bigquery.table.RangePartitioning">RangePartitioning</xref>
+        or :data:<code>None</code>.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.range_partitioning
+- *id025
+- &id026
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.reference
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: reference
+  source:
+    id: reference
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'A xref_TableReference pointing to
+
+    this table.
+
+    '
+  syntax:
+    returns:
+    - description: pointer to this table.
+      var_type: <xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>
+  type: property
+  uid: google.cloud.bigquery.table.Table.reference
+- *id026
+- &id027
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.require_partition_filter
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: require_partition_filter
+  source:
+    id: require_partition_filter
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: If set to true, queries over the partitioned table require a
+
+    partition filter that can be used for partition elimination to be
+
+    specified.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.require_partition_filter
+- *id027
+- &id028
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.schema
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: schema
+  source:
+    id: schema
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "Sequence[Union[                 xref_SchemaField,                 Mapping[str,\
+    \ Any]         ]]:\n    Table's schema.\n"
+  syntax:
+    exceptions:
+    - description: If <code>schema</code> is not a sequence, or if any item in the
+        sequence is not a <xref uid="google.cloud.bigquery.schema.SchemaField">SchemaField</xref>
+        instance or a compatible mapping representation of the field.
+      var_type: Exception
+  type: property
+  uid: google.cloud.bigquery.table.Table.schema
+- *id028
+- &id029
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.self_link
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: self_link
+  source:
+    id: self_link
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: URL for the table resource (:data:`None` until set
+
+    from the server).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.self_link
+- *id029
+- &id030
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.snapshot_definition
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: snapshot_definition
+  source:
+    id: snapshot_definition
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Information about the snapshot. This value is set via snapshot creation.
+
+
+    See: https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.snapshot_definition
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.snapshot_definition
+- *id030
+- &id031
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.streaming_buffer
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: streaming_buffer
+  source:
+    id: streaming_buffer
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'google.cloud.bigquery.StreamingBuffer: Information about a table''s
+
+    streaming buffer.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.streaming_buffer
+- *id031
+- &id032
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.table_id
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: table_id
+  source:
+    id: table_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The table ID.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.table_id
+- *id032
+- &id033
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.table_type
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: table_type
+  source:
+    id: table_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: The type of the table (:data:`None` until set from
+
+    the server).
+
+
+    Possible values are `''TABLE''`, `''VIEW''`, `''MATERIALIZED_VIEW''` or
+
+    `''EXTERNAL''`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.Table.table_type
+- *id033
+- &id034
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.time_partitioning
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: time_partitioning
+  source:
+    id: time_partitioning
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[<xref uid="google.cloud.bigquery.table.TimePartitioning">google.cloud.bigquery.table.TimePartitioning</xref>]:
+    Configures time-based
+
+    partitioning for a table.
+
+
+    Only specify at most one of
+
+    xref_time_partitioning or
+
+    xref_range_partitioning.
+
+    '
+  syntax:
+    exceptions:
+    - description: If the value is not <xref uid="google.cloud.bigquery.table.TimePartitioning">TimePartitioning</xref>
+        or :data:<code>None</code>.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.time_partitioning
+- *id034
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1013
+  summary: 'Constructs the API resource of this table
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: Table represented as an API resource
+      var_type: Dict[str, object]
+  type: method
+  uid: google.cloud.bigquery.table.Table.to_api_repr
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.to_bqstorage
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_bqstorage
+  source:
+    id: to_bqstorage
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1021
+  summary: 'Construct a BigQuery Storage API representation of this table.
+
+    '
+  syntax:
+    content: to_bqstorage()
+    parameters: []
+    returns:
+    - description: A reference to this table in the BigQuery Storage API.
+      var_type: str
+  type: method
+  uid: google.cloud.bigquery.table.Table.to_bqstorage
+- &id035
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.view_query
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: view_query
+  source:
+    id: view_query
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: SQL query defining the table as a view (defaults
+
+    to :data:`None`).
+
+
+    By default, the query is treated as Standard SQL. To use Legacy
+
+    SQL, set `view_use_legacy_sql` to :data:`True`.
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.view_query
+- *id035
+- &id036
+  attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.view_use_legacy_sql
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: view_use_legacy_sql
+  source:
+    id: view_use_legacy_sql
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Specifies whether to execute the view with Legacy or Standard SQL.
+
+
+    This boolean specifies whether to execute the view with Legacy SQL
+
+    (:data:`True`) or Standard SQL (:data:`False`). The client side default is
+
+    :data:`False`. The server-side default is :data:`True`. If this table is
+
+    not a view, :data:`None` is returned.
+
+    '
+  syntax:
+    exceptions:
+    - description: For invalid value types.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.table.Table.view_use_legacy_sql
+- *id036
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 369
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(table_ref, schema=None)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.Table.__init__
+- attributes: []
+  class: google.cloud.bigquery.table.Table
+  fullName: google.cloud.bigquery.table.Table
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.table._TableBase
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: Table
+  source:
+    id: Table
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 313
+  summary: 'Tables represent a set of rows whose values correspond to a schema.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#resource-table
+
+    '
+  syntax:
+    content: Table(table_ref, schema=None)
+    parameters:
+    - description: A pointer to a table. If <code>table_ref</code> is a string, it
+        must included a project ID, dataset ID, and table ID, each separated by <code>.</code>.
+      id: table_ref
+      var_type: Union[<xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>,
+        str]
+    - description: The table's schema. If any item is a mapping, its content must
+        be compatible with <xref uid="google.cloud.bigquery.schema.SchemaField.from_api_repr">from_api_repr</xref>.
+      id: schema
+      var_type: Optional[Sequence[Union[ <xref uid="google.cloud.bigquery.schema.SchemaField">SchemaField</xref>,
+        Mapping[str, Any] ]]]
+  type: method
+  uid: google.cloud.bigquery.table.Table
+references:
+- fullName: google.cloud.bigquery.table.Table.clone_definition
+  isExternal: false
+  name: clone_definition
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.clone_definition
+- fullName: google.cloud.bigquery.table.Table.clustering_fields
+  isExternal: false
+  name: clustering_fields
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.clustering_fields
+- fullName: google.cloud.bigquery.table.Table.created
+  isExternal: false
+  name: created
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.created
+- fullName: google.cloud.bigquery.table.Table.dataset_id
+  isExternal: false
+  name: dataset_id
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.dataset_id
+- fullName: google.cloud.bigquery.table.Table.description
+  isExternal: false
+  name: description
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.description
+- fullName: google.cloud.bigquery.table.Table.encryption_configuration
+  isExternal: false
+  name: encryption_configuration
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.encryption_configuration
+- fullName: google.cloud.bigquery.table.Table.etag
+  isExternal: false
+  name: etag
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.etag
+- fullName: google.cloud.bigquery.table.Table.expires
+  isExternal: false
+  name: expires
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.expires
+- fullName: google.cloud.bigquery.table.Table.external_data_configuration
+  isExternal: false
+  name: external_data_configuration
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.external_data_configuration
+- fullName: google.cloud.bigquery.table.Table.friendly_name
+  isExternal: false
+  name: friendly_name
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.friendly_name
+- fullName: google.cloud.bigquery.table.Table.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.from_api_repr
+- fullName: google.cloud.bigquery.table.Table.from_string
+  isExternal: false
+  name: from_string
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.from_string
+- fullName: google.cloud.bigquery.table.Table.full_table_id
+  isExternal: false
+  name: full_table_id
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.full_table_id
+- fullName: google.cloud.bigquery.table.Table.labels
+  isExternal: false
+  name: labels
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.labels
+- fullName: google.cloud.bigquery.table.Table.location
+  isExternal: false
+  name: location
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.location
+- fullName: google.cloud.bigquery.table.Table.modified
+  isExternal: false
+  name: modified
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.modified
+- fullName: google.cloud.bigquery.table.Table.mview_enable_refresh
+  isExternal: false
+  name: mview_enable_refresh
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.mview_enable_refresh
+- fullName: google.cloud.bigquery.table.Table.mview_last_refresh_time
+  isExternal: false
+  name: mview_last_refresh_time
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.mview_last_refresh_time
+- fullName: google.cloud.bigquery.table.Table.mview_query
+  isExternal: false
+  name: mview_query
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.mview_query
+- fullName: google.cloud.bigquery.table.Table.mview_refresh_interval
+  isExternal: false
+  name: mview_refresh_interval
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.mview_refresh_interval
+- fullName: google.cloud.bigquery.table.Table.num_bytes
+  isExternal: false
+  name: num_bytes
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.num_bytes
+- fullName: google.cloud.bigquery.table.Table.num_rows
+  isExternal: false
+  name: num_rows
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.num_rows
+- fullName: google.cloud.bigquery.table.Table.partition_expiration
+  isExternal: false
+  name: partition_expiration
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.partition_expiration
+- fullName: google.cloud.bigquery.table.Table.partitioning_type
+  isExternal: false
+  name: partitioning_type
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.partitioning_type
+- fullName: google.cloud.bigquery.table.Table.path
+  isExternal: false
+  name: path
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.path
+- fullName: google.cloud.bigquery.table.Table.project
+  isExternal: false
+  name: project
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.project
+- fullName: google.cloud.bigquery.table.Table.range_partitioning
+  isExternal: false
+  name: range_partitioning
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.range_partitioning
+- fullName: google.cloud.bigquery.table.Table.reference
+  isExternal: false
+  name: reference
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.reference
+- fullName: google.cloud.bigquery.table.Table.require_partition_filter
+  isExternal: false
+  name: require_partition_filter
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.require_partition_filter
+- fullName: google.cloud.bigquery.table.Table.schema
+  isExternal: false
+  name: schema
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.schema
+- fullName: google.cloud.bigquery.table.Table.self_link
+  isExternal: false
+  name: self_link
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.self_link
+- fullName: google.cloud.bigquery.table.Table.snapshot_definition
+  isExternal: false
+  name: snapshot_definition
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.snapshot_definition
+- fullName: google.cloud.bigquery.table.Table.streaming_buffer
+  isExternal: false
+  name: streaming_buffer
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.streaming_buffer
+- fullName: google.cloud.bigquery.table.Table.table_id
+  isExternal: false
+  name: table_id
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.table_id
+- fullName: google.cloud.bigquery.table.Table.table_type
+  isExternal: false
+  name: table_type
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.table_type
+- fullName: google.cloud.bigquery.table.Table.time_partitioning
+  isExternal: false
+  name: time_partitioning
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.time_partitioning
+- fullName: google.cloud.bigquery.table.Table.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.to_api_repr
+- fullName: google.cloud.bigquery.table.Table.to_bqstorage
+  isExternal: false
+  name: to_bqstorage
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.to_bqstorage
+- fullName: google.cloud.bigquery.table.Table.view_query
+  isExternal: false
+  name: view_query
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.view_query
+- fullName: google.cloud.bigquery.table.Table.view_use_legacy_sql
+  isExternal: false
+  name: view_use_legacy_sql
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.view_use_legacy_sql
+- fullName: google.cloud.bigquery.table.Table.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table.__init__
+- fullName: google.cloud.bigquery.table.Table
+  isExternal: false
+  name: Table
+  parent: google.cloud.bigquery.table.Table
+  uid: google.cloud.bigquery.table.Table

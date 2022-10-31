@@ -1,0 +1,80 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.query.ArrayQueryParameter
+  - google.cloud.bigquery.query.ArrayQueryParameterType
+  - google.cloud.bigquery.query.ConnectionProperty
+  - google.cloud.bigquery.query.ScalarQueryParameter
+  - google.cloud.bigquery.query.ScalarQueryParameterType
+  - google.cloud.bigquery.query.SqlParameterScalarTypes
+  - google.cloud.bigquery.query.StructQueryParameter
+  - google.cloud.bigquery.query.StructQueryParameterType
+  - google.cloud.bigquery.query.UDFResource
+  fullName: google.cloud.bigquery.query
+  langs:
+  - python
+  module: google.cloud.bigquery.query
+  name: query
+  source:
+    id: query
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 0
+  summary: 'BigQuery query processing.
+
+
+    '
+  syntax: {}
+  type: module
+  uid: google.cloud.bigquery.query
+references:
+- fullName: google.cloud.bigquery.query.ArrayQueryParameter
+  isExternal: false
+  name: ArrayQueryParameter
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.ArrayQueryParameter
+- fullName: google.cloud.bigquery.query.ArrayQueryParameterType
+  isExternal: false
+  name: ArrayQueryParameterType
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.ArrayQueryParameterType
+- fullName: google.cloud.bigquery.query.ConnectionProperty
+  isExternal: false
+  name: ConnectionProperty
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.ConnectionProperty
+- fullName: google.cloud.bigquery.query.ScalarQueryParameter
+  isExternal: false
+  name: ScalarQueryParameter
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.ScalarQueryParameter
+- fullName: google.cloud.bigquery.query.ScalarQueryParameterType
+  isExternal: false
+  name: ScalarQueryParameterType
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.ScalarQueryParameterType
+- fullName: google.cloud.bigquery.query.SqlParameterScalarTypes
+  isExternal: false
+  name: SqlParameterScalarTypes
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.SqlParameterScalarTypes
+- fullName: google.cloud.bigquery.query.StructQueryParameter
+  isExternal: false
+  name: StructQueryParameter
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.StructQueryParameter
+- fullName: google.cloud.bigquery.query.StructQueryParameterType
+  isExternal: false
+  name: StructQueryParameterType
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.StructQueryParameterType
+- fullName: google.cloud.bigquery.query.UDFResource
+  isExternal: false
+  name: UDFResource
+  parent: google.cloud.bigquery.query
+  uid: google.cloud.bigquery.query.UDFResource

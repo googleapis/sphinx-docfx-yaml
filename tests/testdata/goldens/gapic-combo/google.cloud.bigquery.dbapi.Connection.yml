@@ -1,0 +1,138 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.dbapi.Connection.close
+  - google.cloud.bigquery.dbapi.Connection.commit
+  - google.cloud.bigquery.dbapi.Connection.cursor
+  class: google.cloud.bigquery.dbapi.Connection
+  fullName: google.cloud.bigquery.dbapi.Connection
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: Connection
+  source:
+    id: Connection
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/connection.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/connection.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 24
+  summary: 'DB-API Connection to Google BigQuery.
+
+    '
+  syntax:
+    content: Connection(client=None, bqstorage_client=None)
+    parameters:
+    - description: A REST API client used to connect to BigQuery. If not passed, a
+        client is created using default options inferred from the environment.
+      id: client
+      var_type: Optional[google.cloud.bigquery.Client]
+    - description: A client that uses the faster BigQuery Storage API to fetch rows
+        from BigQuery. If not passed, it is created using the same credentials as
+        <code>client</code> (provided that BigQuery Storage dependencies are installed).
+        If both clients are available, <code>bqstorage_client</code> is used for fetching
+        query results.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+  type: class
+  uid: google.cloud.bigquery.dbapi.Connection
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Connection
+  fullName: google.cloud.bigquery.dbapi.Connection.close
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: close
+  source:
+    id: close
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 65
+  summary: 'Close the connection and any cursors created from it.
+
+
+    Any BigQuery clients explicitly passed to the constructor are *not*
+
+    closed, only those created by the connection instance itself.
+
+
+    '
+  syntax:
+    content: close()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dbapi.Connection.close
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Connection
+  fullName: google.cloud.bigquery.dbapi.Connection.commit
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: commit
+  source:
+    id: commit
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 84
+  summary: 'No-op, but for consistency raise an error if connection is closed.
+
+
+    '
+  syntax:
+    content: commit()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dbapi.Connection.commit
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Connection
+  fullName: google.cloud.bigquery.dbapi.Connection.cursor
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: cursor
+  source:
+    id: cursor
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 87
+  summary: 'Return a new cursor object.
+
+    '
+  syntax:
+    content: cursor()
+    parameters: []
+    returns:
+    - description: A DB-API cursor that uses this connection.
+      var_type: <xref uid="google.cloud.bigquery.dbapi.Cursor">google.cloud.bigquery.dbapi.Cursor</xref>
+  type: method
+  uid: google.cloud.bigquery.dbapi.Connection.cursor
+references:
+- fullName: google.cloud.bigquery.dbapi.Connection.close
+  isExternal: false
+  name: close
+  parent: google.cloud.bigquery.dbapi.Connection
+  uid: google.cloud.bigquery.dbapi.Connection.close
+- fullName: google.cloud.bigquery.dbapi.Connection.commit
+  isExternal: false
+  name: commit
+  parent: google.cloud.bigquery.dbapi.Connection
+  uid: google.cloud.bigquery.dbapi.Connection.commit
+- fullName: google.cloud.bigquery.dbapi.Connection.cursor
+  isExternal: false
+  name: cursor
+  parent: google.cloud.bigquery.dbapi.Connection
+  uid: google.cloud.bigquery.dbapi.Connection.cursor

@@ -1,0 +1,67 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.dbapi.DataError.with_traceback
+  class: google.cloud.bigquery.dbapi.DataError
+  fullName: google.cloud.bigquery.dbapi.DataError
+  inheritance:
+  - inheritance:
+    - inheritance:
+      - inheritance:
+        - inheritance:
+          - type: builtins.object
+          type: builtins.BaseException
+        type: builtins.Exception
+      type: google.cloud.bigquery.dbapi.exceptions.Error
+    type: google.cloud.bigquery.dbapi.exceptions.DatabaseError
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: DataError
+  source:
+    id: DataError
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/exceptions.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/exceptions.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 34
+  summary: 'DB-API error due to problems with the processed data.
+
+
+    '
+  syntax: {}
+  type: class
+  uid: google.cloud.bigquery.dbapi.DataError
+- attributes: []
+  class: google.cloud.bigquery.dbapi.DataError
+  fullName: google.cloud.bigquery.dbapi.DataError.with_traceback
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: with_traceback
+  source:
+    id: with_traceback
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Exception.with_traceback(tb) --
+
+    set self.__traceback__ to tb and return self.
+
+
+    '
+  syntax: {}
+  type: method
+  uid: google.cloud.bigquery.dbapi.DataError.with_traceback
+references:
+- fullName: google.cloud.bigquery.dbapi.DataError.with_traceback
+  isExternal: false
+  name: with_traceback
+  parent: google.cloud.bigquery.dbapi.DataError
+  uid: google.cloud.bigquery.dbapi.DataError.with_traceback

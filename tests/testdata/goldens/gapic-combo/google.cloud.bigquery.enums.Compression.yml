@@ -1,0 +1,149 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.enums.Compression.DEFLATE
+  - google.cloud.bigquery.enums.Compression.GZIP
+  - google.cloud.bigquery.enums.Compression.NONE
+  - google.cloud.bigquery.enums.Compression.SNAPPY
+  class: google.cloud.bigquery.enums.Compression
+  fullName: google.cloud.bigquery.enums.Compression
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: Compression
+  source:
+    id: Compression
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 25
+  summary: 'The compression type to use for exported files. The default value is
+
+    `NONE`.
+
+
+    `DEFLATE` and `SNAPPY` are
+
+    only supported for Avro.
+
+
+    '
+  syntax:
+    content: Compression()
+  type: class
+  uid: google.cloud.bigquery.enums.Compression
+- attributes: []
+  class: google.cloud.bigquery.enums.Compression
+  fullName: google.cloud.bigquery.enums.Compression.DEFLATE
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: DEFLATE
+  source:
+    id: DEFLATE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies DEFLATE format.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Compression.DEFLATE
+- attributes: []
+  class: google.cloud.bigquery.enums.Compression
+  fullName: google.cloud.bigquery.enums.Compression.GZIP
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: GZIP
+  source:
+    id: GZIP
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies GZIP format.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Compression.GZIP
+- attributes: []
+  class: google.cloud.bigquery.enums.Compression
+  fullName: google.cloud.bigquery.enums.Compression.NONE
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: NONE
+  source:
+    id: NONE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies no compression.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Compression.NONE
+- attributes: []
+  class: google.cloud.bigquery.enums.Compression
+  fullName: google.cloud.bigquery.enums.Compression.SNAPPY
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: SNAPPY
+  source:
+    id: SNAPPY
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies SNAPPY format.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Compression.SNAPPY
+references:
+- fullName: google.cloud.bigquery.enums.Compression.DEFLATE
+  isExternal: false
+  name: DEFLATE
+  parent: google.cloud.bigquery.enums.Compression
+  uid: google.cloud.bigquery.enums.Compression.DEFLATE
+- fullName: google.cloud.bigquery.enums.Compression.GZIP
+  isExternal: false
+  name: GZIP
+  parent: google.cloud.bigquery.enums.Compression
+  uid: google.cloud.bigquery.enums.Compression.GZIP
+- fullName: google.cloud.bigquery.enums.Compression.NONE
+  isExternal: false
+  name: NONE
+  parent: google.cloud.bigquery.enums.Compression
+  uid: google.cloud.bigquery.enums.Compression.NONE
+- fullName: google.cloud.bigquery.enums.Compression.SNAPPY
+  isExternal: false
+  name: SNAPPY
+  parent: google.cloud.bigquery.enums.Compression
+  uid: google.cloud.bigquery.enums.Compression.SNAPPY

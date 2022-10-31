@@ -1,0 +1,190 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType.array_element_type
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType.from_api_repr
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType.struct_type
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType.to_api_repr
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType.type_kind
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: StandardSqlDataType
+  source:
+    id: StandardSqlDataType
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 22
+  summary: "The type of a variable, e.g., a function argument.\n\nSee:\nhttps://cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType\n\
+    \nExamples:\n\n```text\nINT64: {type_kind=\"INT64\"}\nARRAY: {type_kind=\"ARRAY\"\
+    , array_element_type=\"STRING\"}\nSTRUCT<x STRING, y ARRAY>: {\n    type_kind=\"\
+    STRUCT\",\n    struct_type={\n        fields=[\n            {name=\"x\", type={type_kind=\"\
+    STRING\"}},\n            {\n                name=\"y\",\n                type={type_kind=\"\
+    ARRAY\", array_element_type=\"DATE\"}\n            }\n        ]\n    }\n}\n```\n"
+  syntax:
+    content: "StandardSqlDataType(\n    type_kind: typing.Optional[\n        google.cloud.bigquery.enums.StandardSqlTypeNames\n\
+      \    ] = StandardSqlTypeNames.TYPE_KIND_UNSPECIFIED,\n    array_element_type:\
+      \ typing.Optional[\n        google.cloud.bigquery.standard_sql.StandardSqlDataType\n\
+      \    ] = None,\n    struct_type: typing.Optional[\n        google.cloud.bigquery.standard_sql.StandardSqlStructType\n\
+      \    ] = None,\n)"
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.array_element_type
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: array_element_type
+  source:
+    id: array_element_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The type of the array''s elements, if type_kind is ARRAY.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.array_element_type
+- *id001
+- attributes: []
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 134
+  summary: 'Construct an SQL data type instance given its API representation.
+
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: typing.Dict[str, typing.Any])'
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.from_api_repr
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.struct_type
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: struct_type
+  source:
+    id: struct_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The fields of this struct, in order, if type_kind is STRUCT.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.struct_type
+- *id002
+- attributes: []
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 130
+  summary: 'Construct the API resource representation of this SQL data type.
+
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.to_api_repr
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.type_kind
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: type_kind
+  source:
+    id: type_kind
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The top level type of this field.
+
+
+    Can be any standard SQL data type, e.g. INT64, DATE, ARRAY.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.type_kind
+- *id003
+references:
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.array_element_type
+  isExternal: false
+  name: array_element_type
+  parent: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.array_element_type
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.from_api_repr
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.struct_type
+  isExternal: false
+  name: struct_type
+  parent: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.struct_type
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.to_api_repr
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType.type_kind
+  isExternal: false
+  name: type_kind
+  parent: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType.type_kind

@@ -1,0 +1,197 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.WriteDisposition.WRITE_APPEND
+  - google.cloud.bigquery.job.WriteDisposition.WRITE_EMPTY
+  - google.cloud.bigquery.job.WriteDisposition.WRITE_TRUNCATE
+  - google.cloud.bigquery.job.WriteDisposition.__init__
+  - google.cloud.bigquery.job.WriteDisposition
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: WriteDisposition
+  source:
+    id: WriteDisposition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 277
+  summary: 'Specifies the action that occurs if destination table already exists.
+
+
+    The default value is `WRITE_APPEND`.
+
+
+    Each action is atomic and only occurs if BigQuery is able to complete
+
+    the job successfully. Creation, truncation and append actions occur as one
+
+    atomic update upon job completion.
+
+
+    '
+  syntax:
+    content: WriteDisposition()
+  type: class
+  uid: google.cloud.bigquery.job.WriteDisposition
+- attributes: []
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_APPEND
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: WRITE_APPEND
+  source:
+    id: WRITE_APPEND
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'If the table already exists, BigQuery appends the data to the table.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_APPEND
+- attributes: []
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_EMPTY
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: WRITE_EMPTY
+  source:
+    id: WRITE_EMPTY
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'If the table already exists and contains data, a ''duplicate'' error is
+
+    returned in the job result.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_EMPTY
+- attributes: []
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_TRUNCATE
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: WRITE_TRUNCATE
+  source:
+    id: WRITE_TRUNCATE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'If the table already exists, BigQuery overwrites the table data.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_TRUNCATE
+- attributes: []
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.WriteDisposition.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.WriteDisposition
+  fullName: google.cloud.bigquery.job.WriteDisposition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: WriteDisposition
+  source:
+    id: WriteDisposition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 277
+  summary: 'Specifies the action that occurs if destination table already exists.
+
+
+    The default value is `WRITE_APPEND`.
+
+
+    Each action is atomic and only occurs if BigQuery is able to complete
+
+    the job successfully. Creation, truncation and append actions occur as one
+
+    atomic update upon job completion.
+
+
+    '
+  syntax:
+    content: WriteDisposition()
+  type: method
+  uid: google.cloud.bigquery.job.WriteDisposition
+references:
+- fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_APPEND
+  isExternal: false
+  name: WRITE_APPEND
+  parent: google.cloud.bigquery.job.WriteDisposition
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_APPEND
+- fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_EMPTY
+  isExternal: false
+  name: WRITE_EMPTY
+  parent: google.cloud.bigquery.job.WriteDisposition
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_EMPTY
+- fullName: google.cloud.bigquery.job.WriteDisposition.WRITE_TRUNCATE
+  isExternal: false
+  name: WRITE_TRUNCATE
+  parent: google.cloud.bigquery.job.WriteDisposition
+  uid: google.cloud.bigquery.job.WriteDisposition.WRITE_TRUNCATE
+- fullName: google.cloud.bigquery.job.WriteDisposition.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.WriteDisposition
+  uid: google.cloud.bigquery.job.WriteDisposition.__init__
+- fullName: google.cloud.bigquery.job.WriteDisposition
+  isExternal: false
+  name: WriteDisposition
+  parent: google.cloud.bigquery.job.WriteDisposition
+  uid: google.cloud.bigquery.job.WriteDisposition

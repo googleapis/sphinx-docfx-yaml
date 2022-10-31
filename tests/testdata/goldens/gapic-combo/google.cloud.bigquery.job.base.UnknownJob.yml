@@ -1,0 +1,1229 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.base.UnknownJob.add_done_callback
+  - google.cloud.bigquery.job.base.UnknownJob.cancel
+  - google.cloud.bigquery.job.base.UnknownJob.cancelled
+  - google.cloud.bigquery.job.base.UnknownJob.created
+  - google.cloud.bigquery.job.base.UnknownJob.done
+  - google.cloud.bigquery.job.base.UnknownJob.ended
+  - google.cloud.bigquery.job.base.UnknownJob.error_result
+  - google.cloud.bigquery.job.base.UnknownJob.errors
+  - google.cloud.bigquery.job.base.UnknownJob.etag
+  - google.cloud.bigquery.job.base.UnknownJob.exception
+  - google.cloud.bigquery.job.base.UnknownJob.exists
+  - google.cloud.bigquery.job.base.UnknownJob.from_api_repr
+  - google.cloud.bigquery.job.base.UnknownJob.job_id
+  - google.cloud.bigquery.job.base.UnknownJob.job_type
+  - google.cloud.bigquery.job.base.UnknownJob.labels
+  - google.cloud.bigquery.job.base.UnknownJob.location
+  - google.cloud.bigquery.job.base.UnknownJob.num_child_jobs
+  - google.cloud.bigquery.job.base.UnknownJob.parent_job_id
+  - google.cloud.bigquery.job.base.UnknownJob.path
+  - google.cloud.bigquery.job.base.UnknownJob.project
+  - google.cloud.bigquery.job.base.UnknownJob.reload
+  - google.cloud.bigquery.job.base.UnknownJob.reservation_usage
+  - google.cloud.bigquery.job.base.UnknownJob.result
+  - google.cloud.bigquery.job.base.UnknownJob.running
+  - google.cloud.bigquery.job.base.UnknownJob.script_statistics
+  - google.cloud.bigquery.job.base.UnknownJob.self_link
+  - google.cloud.bigquery.job.base.UnknownJob.session_info
+  - google.cloud.bigquery.job.base.UnknownJob.set_exception
+  - google.cloud.bigquery.job.base.UnknownJob.set_result
+  - google.cloud.bigquery.job.base.UnknownJob.started
+  - google.cloud.bigquery.job.base.UnknownJob.state
+  - google.cloud.bigquery.job.base.UnknownJob.to_api_repr
+  - google.cloud.bigquery.job.base.UnknownJob.transaction_info
+  - google.cloud.bigquery.job.base.UnknownJob.user_email
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob
+  inheritance:
+  - inheritance:
+    - inheritance:
+      - inheritance:
+        - type: builtins.object
+        type: google.api_core.future.base.Future
+      type: google.api_core.future.polling.PollingFuture
+    type: google.cloud.bigquery.job.base._AsyncJob
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: UnknownJob
+  source:
+    id: UnknownJob
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1025
+  summary: 'A job whose type cannot be determined.
+
+
+    '
+  syntax:
+    content: UnknownJob(job_id, client)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.job.base.UnknownJob
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.add_done_callback
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: add_done_callback
+  source:
+    id: add_done_callback
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 155
+  summary: 'Add a callback to be executed when the operation is complete.
+
+
+    If the operation is not already complete, this will start a helper
+
+    thread to poll for the status of the operation in the background.
+
+    '
+  syntax:
+    content: add_done_callback(fn)
+    parameters:
+    - description: The callback to execute when the operation is complete.
+      id: fn
+      var_type: Callable[Future]
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.add_done_callback
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.cancel
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: cancel
+  source:
+    id: cancel
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 604
+  summary: 'API call:  cancel job via a POST request
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel
+
+    '
+  syntax:
+    content: 'cancel(client=None, retry: retries.Retry = <google.api_core.retry.Retry
+      object>, timeout: float = None)'
+    parameters:
+    - description: The number of seconds to wait for the underlying HTTP transport
+        before using <code>retry</code>
+      id: timeout
+      var_type: Optional[float]
+    - description: the client to use. If not passed, falls back to the <code>client</code>
+        stored on the current dataset.
+      id: client
+      var_type: Optional[<xref uid="google.cloud.bigquery.client.Client">google.cloud.bigquery.client.Client</xref>]
+    - description: How to retry the RPC.
+      id: retry
+      var_type: Optional[google.api_core.retry.Retry]
+    returns:
+    - description: Boolean indicating that the cancel request was sent.
+      var_type: bool
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.cancel
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.cancelled
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: cancelled
+  source:
+    id: cancelled
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 730
+  summary: 'Check if the job has been cancelled.
+
+
+    This always returns False. It''s not possible to check if a job was
+
+    cancelled in the API. This method is here to satisfy the interface
+
+    for `google.api_core.future.Future`.
+
+    '
+  syntax:
+    content: cancelled()
+    parameters: []
+    returns:
+    - description: 'False'
+      var_type: bool
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.cancelled
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.created
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: created
+  source:
+    id: created
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Datetime at which the job was created.
+
+    '
+  syntax:
+    returns:
+    - description: the creation time (None until set from the server).
+      var_type: Optional[datetime.datetime]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.created
+- *id001
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.done
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: done
+  source:
+    id: done
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 672
+  summary: 'Checks if the job is complete.
+
+    '
+  syntax:
+    content: 'done(retry: retries.Retry = <google.api_core.retry.Retry object>, timeout:
+      float = None, reload: bool = True)'
+    parameters:
+    - defaultValue: None
+      description: The number of seconds to wait for the underlying HTTP transport
+        before using <code>retry</code>.
+      id: timeout
+      var_type: Optional[float]
+    - defaultValue: 'True'
+      description: If <code>True</code>, make an API call to refresh the job state
+        of unfinished jobs before checking. Default <code>True</code>.
+      id: reload
+      var_type: Optional[bool]
+    - description: How to retry the RPC. If the job state is <code>DONE</code>, retrying
+        is aborted early, as the job will not change anymore.
+      id: retry
+      var_type: Optional[google.api_core.retry.Retry]
+    returns:
+    - description: True if the job is complete, False otherwise.
+      var_type: bool
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.done
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.ended
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: ended
+  source:
+    id: ended
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Datetime at which the job finished.
+
+    '
+  syntax:
+    returns:
+    - description: the end time (None until set from the server).
+      var_type: Optional[datetime.datetime]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.ended
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.error_result
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: error_result
+  source:
+    id: error_result
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Error information about the job as a whole.
+
+    '
+  syntax:
+    returns:
+    - description: the error information (None until set from the server).
+      var_type: Optional[Mapping]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.error_result
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.errors
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: errors
+  source:
+    id: errors
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Information about individual errors generated by the job.
+
+    '
+  syntax:
+    returns:
+    - description: the error information (None until set from the server).
+      var_type: Optional[List[Mapping]]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.errors
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.etag
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: etag
+  source:
+    id: etag
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'ETag for the job resource.
+
+    '
+  syntax:
+    returns:
+    - description: the ETag (None until set from the server).
+      var_type: Optional[str]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.etag
+- *id005
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.exception
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: exception
+  source:
+    id: exception
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 141
+  summary: 'Get the exception from the operation, blocking if necessary.
+
+    '
+  syntax:
+    content: exception(timeout=None)
+    parameters:
+    - description: How long to wait for the operation to complete. If None, wait indefinitely.
+      id: timeout
+      var_type: int
+    returns:
+    - description: The operation's error.
+      var_type: Optional[google.api_core.GoogleAPICallError]
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.exception
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.exists
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: exists
+  source:
+    id: exists
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 522
+  summary: 'API call:  test for the existence of the job via a GET request
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get
+
+    '
+  syntax:
+    content: 'exists(client=None, retry: retries.Retry = <google.api_core.retry.Retry
+      object>, timeout: float = None)'
+    parameters:
+    - description: The number of seconds to wait for the underlying HTTP transport
+        before using <code>retry</code>.
+      id: timeout
+      var_type: Optional[float]
+    - description: the client to use. If not passed, falls back to the <code>client</code>
+        stored on the current dataset.
+      id: client
+      var_type: Optional[<xref uid="google.cloud.bigquery.client.Client">google.cloud.bigquery.client.Client</xref>]
+    - description: How to retry the RPC.
+      id: retry
+      var_type: Optional[google.api_core.retry.Retry]
+    returns:
+    - description: Boolean indicating existence of the job.
+      var_type: bool
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.exists
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1028
+  summary: 'Construct an UnknownJob from the JSON representation.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict, client)'
+    parameters:
+    - description: JSON representation of a job.
+      id: resource
+      var_type: Dict
+    - description: Client connected to BigQuery API.
+      id: client
+      var_type: <xref uid="google.cloud.bigquery.client.Client">google.cloud.bigquery.client.Client</xref>
+    returns:
+    - description: Job corresponding to the resource.
+      var_type: UnknownJob
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.from_api_repr
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.job_id
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: job_id
+  source:
+    id: job_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: ID of the job.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.job_id
+- *id006
+- &id007
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.job_type
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: job_type
+  source:
+    id: job_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Type of job.
+
+    '
+  syntax:
+    returns:
+    - description: one of 'load', 'copy', 'extract', 'query'.
+      var_type: str
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.job_type
+- *id007
+- &id008
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.labels
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: labels
+  source:
+    id: labels
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, str]: Labels for the job.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.labels
+- *id008
+- &id009
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.location
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: location
+  source:
+    id: location
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: Location where the job runs.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.location
+- *id009
+- &id010
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.num_child_jobs
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: num_child_jobs
+  source:
+    id: num_child_jobs
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The number of child jobs executed.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics.FIELDS.num_child_jobs
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.num_child_jobs
+- *id010
+- &id011
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.parent_job_id
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: parent_job_id
+  source:
+    id: parent_job_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Return the ID of the parent job.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics.FIELDS.parent_job_id
+
+    '
+  syntax:
+    returns:
+    - description: parent job id.
+      var_type: Optional[str]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.parent_job_id
+- *id011
+- &id012
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.path
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: path
+  source:
+    id: path
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'URL path for the job''s APIs.
+
+    '
+  syntax:
+    returns:
+    - description: the path based on project and job ID.
+      var_type: str
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.path
+- *id012
+- &id013
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.project
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: project
+  source:
+    id: project
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Project bound to the job.
+
+    '
+  syntax:
+    returns:
+    - description: the project (derived from the client).
+      var_type: str
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.project
+- *id013
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.reload
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: reload
+  source:
+    id: reload
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 567
+  summary: 'API call:  refresh job properties via a GET request.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get
+
+    '
+  syntax:
+    content: 'reload(client=None, retry: retries.Retry = <google.api_core.retry.Retry
+      object>, timeout: float = None)'
+    parameters:
+    - description: The number of seconds to wait for the underlying HTTP transport
+        before using <code>retry</code>.
+      id: timeout
+      var_type: Optional[float]
+    - description: the client to use. If not passed, falls back to the <code>client</code>
+        stored on the current dataset.
+      id: client
+      var_type: Optional[<xref uid="google.cloud.bigquery.client.Client">google.cloud.bigquery.client.Client</xref>]
+    - description: How to retry the RPC.
+      id: retry
+      var_type: Optional[google.api_core.retry.Retry]
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.reload
+- &id014
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.reservation_usage
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: reservation_usage
+  source:
+    id: reservation_usage
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Job resource usage breakdown by reservation.
+
+    '
+  syntax:
+    returns:
+    - description: Reservation usage stats. Can be empty if not set from the server.
+      var_type: List[<xref uid="google.cloud.bigquery.job.ReservationUsage">google.cloud.bigquery.job.ReservationUsage</xref>]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.reservation_usage
+- *id014
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.result
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: result
+  source:
+    id: result
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 700
+  summary: 'Start the job and wait for it to complete and get the result.
+
+    '
+  syntax:
+    content: 'result(retry: retries.Retry = <google.api_core.retry.Retry object>,
+      timeout: float = None)'
+    exceptions:
+    - description: if the job failed.
+      var_type: google.cloud.exceptions.GoogleAPICallError
+    - description: if the job did not complete in the given timeout.
+      var_type: concurrent.futures.TimeoutError
+    parameters:
+    - defaultValue: None
+      description: The number of seconds to wait for the underlying HTTP transport
+        before using <code>retry</code>. If multiple requests are made under the hood,
+        <code>timeout</code> applies to each individual request.
+      id: timeout
+      var_type: Optional[float]
+    - description: How to retry the RPC. If the job state is <code>DONE</code>, retrying
+        is aborted early, as the job will not change anymore.
+      id: retry
+      var_type: Optional[google.api_core.retry.Retry]
+    returns:
+    - description: This instance.
+      var_type: _AsyncJob
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.result
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.running
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: running
+  source:
+    id: running
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 91
+  summary: 'True if the operation is currently running.
+
+
+    '
+  syntax:
+    content: running()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.running
+- &id015
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.script_statistics
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: script_statistics
+  source:
+    id: script_statistics
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Statistics for a child job of a script.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.script_statistics
+- *id015
+- &id016
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.self_link
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: self_link
+  source:
+    id: self_link
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'URL for the job resource.
+
+    '
+  syntax:
+    returns:
+    - description: the URL (None until set from the server).
+      var_type: Optional[str]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.self_link
+- *id016
+- &id017
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.session_info
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: session_info
+  source:
+    id: session_info
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '[Preview] Information of the session if this job is part of one.
+
+
+    .. versionadded:: 2.29.0
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.session_info
+- *id017
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.set_exception
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: set_exception
+  source:
+    id: set_exception
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 189
+  summary: 'Set the Future''s exception.
+
+
+    '
+  syntax:
+    content: set_exception(exception)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.set_exception
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.set_result
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: set_result
+  source:
+    id: set_result
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/future/polling.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 183
+  summary: 'Set the Future''s result.
+
+
+    '
+  syntax:
+    content: set_result(result)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.set_result
+- &id018
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.started
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: started
+  source:
+    id: started
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Datetime at which the job was started.
+
+    '
+  syntax:
+    returns:
+    - description: the start time (None until set from the server).
+      var_type: Optional[datetime.datetime]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.started
+- *id018
+- &id019
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.state
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: state
+  source:
+    id: state
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Status of the job.
+
+    '
+  syntax:
+    returns:
+    - description: the state (None until set from the server).
+      var_type: Optional[str]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.state
+- *id019
+- attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 475
+  summary: 'Generate a resource for the job.
+
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.UnknownJob.to_api_repr
+- &id020
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.transaction_info
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: transaction_info
+  source:
+    id: transaction_info
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Information of the multi-statement transaction if this job is part of
+    one.
+
+
+    Since a scripting query job can execute multiple transactions, this
+
+    property is only expected on child jobs. Use the
+
+    <xref uid="google.cloud.bigquery.client.Client.list_jobs">list_jobs</xref> method
+    with the
+
+    `parent_job` parameter to iterate over child jobs.
+
+
+    .. versionadded:: 2.24.0
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.transaction_info
+- *id020
+- &id021
+  attributes: []
+  class: google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base.UnknownJob.user_email
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: user_email
+  source:
+    id: user_email
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'E-mail address of user who submitted the job.
+
+    '
+  syntax:
+    returns:
+    - description: the URL (None until set from the server).
+      var_type: Optional[str]
+  type: property
+  uid: google.cloud.bigquery.job.base.UnknownJob.user_email
+- *id021
+references:
+- fullName: google.cloud.bigquery.job.base.UnknownJob.add_done_callback
+  isExternal: false
+  name: add_done_callback
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.add_done_callback
+- fullName: google.cloud.bigquery.job.base.UnknownJob.cancel
+  isExternal: false
+  name: cancel
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.cancel
+- fullName: google.cloud.bigquery.job.base.UnknownJob.cancelled
+  isExternal: false
+  name: cancelled
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.cancelled
+- fullName: google.cloud.bigquery.job.base.UnknownJob.created
+  isExternal: false
+  name: created
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.created
+- fullName: google.cloud.bigquery.job.base.UnknownJob.done
+  isExternal: false
+  name: done
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.done
+- fullName: google.cloud.bigquery.job.base.UnknownJob.ended
+  isExternal: false
+  name: ended
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.ended
+- fullName: google.cloud.bigquery.job.base.UnknownJob.error_result
+  isExternal: false
+  name: error_result
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.error_result
+- fullName: google.cloud.bigquery.job.base.UnknownJob.errors
+  isExternal: false
+  name: errors
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.errors
+- fullName: google.cloud.bigquery.job.base.UnknownJob.etag
+  isExternal: false
+  name: etag
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.etag
+- fullName: google.cloud.bigquery.job.base.UnknownJob.exception
+  isExternal: false
+  name: exception
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.exception
+- fullName: google.cloud.bigquery.job.base.UnknownJob.exists
+  isExternal: false
+  name: exists
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.exists
+- fullName: google.cloud.bigquery.job.base.UnknownJob.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.from_api_repr
+- fullName: google.cloud.bigquery.job.base.UnknownJob.job_id
+  isExternal: false
+  name: job_id
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.job_id
+- fullName: google.cloud.bigquery.job.base.UnknownJob.job_type
+  isExternal: false
+  name: job_type
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.job_type
+- fullName: google.cloud.bigquery.job.base.UnknownJob.labels
+  isExternal: false
+  name: labels
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.labels
+- fullName: google.cloud.bigquery.job.base.UnknownJob.location
+  isExternal: false
+  name: location
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.location
+- fullName: google.cloud.bigquery.job.base.UnknownJob.num_child_jobs
+  isExternal: false
+  name: num_child_jobs
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.num_child_jobs
+- fullName: google.cloud.bigquery.job.base.UnknownJob.parent_job_id
+  isExternal: false
+  name: parent_job_id
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.parent_job_id
+- fullName: google.cloud.bigquery.job.base.UnknownJob.path
+  isExternal: false
+  name: path
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.path
+- fullName: google.cloud.bigquery.job.base.UnknownJob.project
+  isExternal: false
+  name: project
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.project
+- fullName: google.cloud.bigquery.job.base.UnknownJob.reload
+  isExternal: false
+  name: reload
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.reload
+- fullName: google.cloud.bigquery.job.base.UnknownJob.reservation_usage
+  isExternal: false
+  name: reservation_usage
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.reservation_usage
+- fullName: google.cloud.bigquery.job.base.UnknownJob.result
+  isExternal: false
+  name: result
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.result
+- fullName: google.cloud.bigquery.job.base.UnknownJob.running
+  isExternal: false
+  name: running
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.running
+- fullName: google.cloud.bigquery.job.base.UnknownJob.script_statistics
+  isExternal: false
+  name: script_statistics
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.script_statistics
+- fullName: google.cloud.bigquery.job.base.UnknownJob.self_link
+  isExternal: false
+  name: self_link
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.self_link
+- fullName: google.cloud.bigquery.job.base.UnknownJob.session_info
+  isExternal: false
+  name: session_info
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.session_info
+- fullName: google.cloud.bigquery.job.base.UnknownJob.set_exception
+  isExternal: false
+  name: set_exception
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.set_exception
+- fullName: google.cloud.bigquery.job.base.UnknownJob.set_result
+  isExternal: false
+  name: set_result
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.set_result
+- fullName: google.cloud.bigquery.job.base.UnknownJob.started
+  isExternal: false
+  name: started
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.started
+- fullName: google.cloud.bigquery.job.base.UnknownJob.state
+  isExternal: false
+  name: state
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.state
+- fullName: google.cloud.bigquery.job.base.UnknownJob.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.to_api_repr
+- fullName: google.cloud.bigquery.job.base.UnknownJob.transaction_info
+  isExternal: false
+  name: transaction_info
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.transaction_info
+- fullName: google.cloud.bigquery.job.base.UnknownJob.user_email
+  isExternal: false
+  name: user_email
+  parent: google.cloud.bigquery.job.base.UnknownJob
+  uid: google.cloud.bigquery.job.base.UnknownJob.user_email

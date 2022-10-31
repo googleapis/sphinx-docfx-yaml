@@ -1,0 +1,382 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.external_config.BigtableColumn.encoding
+  - google.cloud.bigquery.external_config.BigtableColumn.field_name
+  - google.cloud.bigquery.external_config.BigtableColumn.from_api_repr
+  - google.cloud.bigquery.external_config.BigtableColumn.only_read_latest
+  - google.cloud.bigquery.external_config.BigtableColumn.qualifier_encoded
+  - google.cloud.bigquery.external_config.BigtableColumn.qualifier_string
+  - google.cloud.bigquery.external_config.BigtableColumn.to_api_repr
+  - google.cloud.bigquery.external_config.BigtableColumn.type_
+  - google.cloud.bigquery.external_config.BigtableColumn.__init__
+  - google.cloud.bigquery.external_config.BigtableColumn
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: BigtableColumn
+  source:
+    id: BigtableColumn
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 68
+  summary: 'Options for a Bigtable column.
+
+
+    '
+  syntax:
+    content: BigtableColumn()
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.external_config.BigtableColumn
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.encoding
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: encoding
+  source:
+    id: encoding
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The encoding of the values when the type is not `STRING`
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.encoding
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.encoding
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.field_name
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: field_name
+  source:
+    id: field_name
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: An identifier to use if the qualifier is not a valid BigQuery
+
+    field identifier
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.field_name
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.field_name
+- *id002
+- attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 169
+  summary: 'Factory: construct a `.external_config.BigtableColumn`
+
+    instance given its API representation.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: Definition of a <code>.external_config.BigtableColumn</code> instance
+        in the same representation as is returned from the API.
+      id: resource
+      var_type: Dict[str, Any]
+    returns:
+    - description: Configuration parsed from <code>resource</code>.
+      var_type: external_config.BigtableColumn
+  type: method
+  uid: google.cloud.bigquery.external_config.BigtableColumn.from_api_repr
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.only_read_latest
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: only_read_latest
+  source:
+    id: only_read_latest
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: If this is set, only the latest version of value in this
+
+    column are exposed.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.only_read_latest
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.only_read_latest
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.qualifier_encoded
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: qualifier_encoded
+  source:
+    id: qualifier_encoded
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, bytes]: The qualifier encoded in binary.
+
+
+    The type is `str` (Python 2.x) or `bytes` (Python 3.x). The module
+
+    will handle base64 encoding for you.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.qualifier_encoded
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.qualifier_encoded
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.qualifier_string
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: qualifier_string
+  source:
+    id: qualifier_string
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: A valid UTF-8 string qualifier
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.qualifier_string
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.qualifier_string
+- *id005
+- attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 160
+  summary: 'Build an API representation of this object.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: A dictionary in the format used by the BigQuery API.
+      var_type: Dict[str, Any]
+  type: method
+  uid: google.cloud.bigquery.external_config.BigtableColumn.to_api_repr
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.type_
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: type_
+  source:
+    id: type_
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The type to convert the value in cells of this column.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.FIELDS.type
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.BigtableColumn.type_
+- *id006
+- attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 71
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.external_config.BigtableColumn.__init__
+- attributes: []
+  class: google.cloud.bigquery.external_config.BigtableColumn
+  fullName: google.cloud.bigquery.external_config.BigtableColumn
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: BigtableColumn
+  source:
+    id: BigtableColumn
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 68
+  summary: 'Options for a Bigtable column.
+
+
+    '
+  syntax:
+    content: BigtableColumn()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.external_config.BigtableColumn
+references:
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.encoding
+  isExternal: false
+  name: encoding
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.encoding
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.field_name
+  isExternal: false
+  name: field_name
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.field_name
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.from_api_repr
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.only_read_latest
+  isExternal: false
+  name: only_read_latest
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.only_read_latest
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.qualifier_encoded
+  isExternal: false
+  name: qualifier_encoded
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.qualifier_encoded
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.qualifier_string
+  isExternal: false
+  name: qualifier_string
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.qualifier_string
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.to_api_repr
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.type_
+  isExternal: false
+  name: type_
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.type_
+- fullName: google.cloud.bigquery.external_config.BigtableColumn.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn.__init__
+- fullName: google.cloud.bigquery.external_config.BigtableColumn
+  isExternal: false
+  name: BigtableColumn
+  parent: google.cloud.bigquery.external_config.BigtableColumn
+  uid: google.cloud.bigquery.external_config.BigtableColumn

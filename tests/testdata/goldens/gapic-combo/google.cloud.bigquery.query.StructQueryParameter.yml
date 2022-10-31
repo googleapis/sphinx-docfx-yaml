@@ -1,0 +1,135 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.query.StructQueryParameter.from_api_repr
+  - google.cloud.bigquery.query.StructQueryParameter.positional
+  - google.cloud.bigquery.query.StructQueryParameter.to_api_repr
+  class: google.cloud.bigquery.query.StructQueryParameter
+  fullName: google.cloud.bigquery.query.StructQueryParameter
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.query._AbstractQueryParameter
+  langs:
+  - python
+  module: google.cloud.bigquery.query
+  name: StructQueryParameter
+  source:
+    id: StructQueryParameter
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 670
+  summary: 'Named / positional query parameters for struct values.
+
+    '
+  syntax:
+    content: StructQueryParameter(name, *sub_params)
+    parameters:
+    - description: Parameter name, used via <code>@foo</code> syntax. If None, the
+        parameter can only be addressed via position (<code>?</code>).
+      id: name
+      var_type: Optional[str]
+  type: class
+  uid: google.cloud.bigquery.query.StructQueryParameter
+- attributes: []
+  class: google.cloud.bigquery.query.StructQueryParameter
+  fullName: google.cloud.bigquery.query.StructQueryParameter.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.query
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 719
+  summary: 'Factory: construct parameter from JSON resource.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: JSON mapping of parameter
+      id: resource
+      var_type: Dict
+    returns:
+    - description: Instance
+      var_type: google.cloud.bigquery.query.StructQueryParameter
+  type: method
+  uid: google.cloud.bigquery.query.StructQueryParameter.from_api_repr
+- attributes: []
+  class: google.cloud.bigquery.query.StructQueryParameter
+  fullName: google.cloud.bigquery.query.StructQueryParameter.positional
+  langs:
+  - python
+  module: google.cloud.bigquery.query
+  name: positional
+  source:
+    id: positional
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 703
+  summary: 'Factory for positional parameters.
+
+    '
+  syntax:
+    content: positional(*sub_params)
+    parameters: []
+    returns:
+    - description: Instance without name
+      var_type: google.cloud.bigquery.query.StructQueryParameter
+  type: method
+  uid: google.cloud.bigquery.query.StructQueryParameter.positional
+- attributes: []
+  class: google.cloud.bigquery.query.StructQueryParameter
+  fullName: google.cloud.bigquery.query.StructQueryParameter.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.query
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 760
+  summary: 'Construct JSON API representation for the parameter.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: JSON mapping
+      var_type: Dict
+  type: method
+  uid: google.cloud.bigquery.query.StructQueryParameter.to_api_repr
+references:
+- fullName: google.cloud.bigquery.query.StructQueryParameter.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.query.StructQueryParameter
+  uid: google.cloud.bigquery.query.StructQueryParameter.from_api_repr
+- fullName: google.cloud.bigquery.query.StructQueryParameter.positional
+  isExternal: false
+  name: positional
+  parent: google.cloud.bigquery.query.StructQueryParameter
+  uid: google.cloud.bigquery.query.StructQueryParameter.positional
+- fullName: google.cloud.bigquery.query.StructQueryParameter.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.query.StructQueryParameter
+  uid: google.cloud.bigquery.query.StructQueryParameter.to_api_repr

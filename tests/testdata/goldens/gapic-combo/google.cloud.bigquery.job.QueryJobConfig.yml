@@ -1,0 +1,1129 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.QueryJobConfig.__setattr__
+  - google.cloud.bigquery.job.QueryJobConfig.allow_large_results
+  - google.cloud.bigquery.job.QueryJobConfig.clustering_fields
+  - google.cloud.bigquery.job.QueryJobConfig.connection_properties
+  - google.cloud.bigquery.job.QueryJobConfig.create_disposition
+  - google.cloud.bigquery.job.QueryJobConfig.create_session
+  - google.cloud.bigquery.job.QueryJobConfig.default_dataset
+  - google.cloud.bigquery.job.QueryJobConfig.destination
+  - google.cloud.bigquery.job.QueryJobConfig.destination_encryption_configuration
+  - google.cloud.bigquery.job.QueryJobConfig.dry_run
+  - google.cloud.bigquery.job.QueryJobConfig.flatten_results
+  - google.cloud.bigquery.job.QueryJobConfig.from_api_repr
+  - google.cloud.bigquery.job.QueryJobConfig.labels
+  - google.cloud.bigquery.job.QueryJobConfig.maximum_billing_tier
+  - google.cloud.bigquery.job.QueryJobConfig.maximum_bytes_billed
+  - google.cloud.bigquery.job.QueryJobConfig.priority
+  - google.cloud.bigquery.job.QueryJobConfig.query_parameters
+  - google.cloud.bigquery.job.QueryJobConfig.range_partitioning
+  - google.cloud.bigquery.job.QueryJobConfig.schema_update_options
+  - google.cloud.bigquery.job.QueryJobConfig.script_options
+  - google.cloud.bigquery.job.QueryJobConfig.table_definitions
+  - google.cloud.bigquery.job.QueryJobConfig.time_partitioning
+  - google.cloud.bigquery.job.QueryJobConfig.to_api_repr
+  - google.cloud.bigquery.job.QueryJobConfig.udf_resources
+  - google.cloud.bigquery.job.QueryJobConfig.use_legacy_sql
+  - google.cloud.bigquery.job.QueryJobConfig.use_query_cache
+  - google.cloud.bigquery.job.QueryJobConfig.write_disposition
+  - google.cloud.bigquery.job.QueryJobConfig.__init__
+  - google.cloud.bigquery.job.QueryJobConfig
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.job.base._JobConfig
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryJobConfig
+  source:
+    id: QueryJobConfig
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 265
+  summary: 'Configuration options for query jobs.
+
+
+    All properties in this class are optional. Values which are :data:`None` ->
+
+    server defaults. Set properties on the constructed configuration by using
+
+    the property name as the name of a keyword argument.
+
+
+    '
+  syntax:
+    content: QueryJobConfig(**kwargs)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.job.QueryJobConfig
+- attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 767
+  summary: 'Override to be able to raise error if an unknown property is being set
+
+
+    '
+  syntax:
+    content: __setattr__(name, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.QueryJobConfig.__setattr__
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.allow_large_results
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: allow_large_results
+  source:
+    id: allow_large_results
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Allow large query results tables (legacy SQL, only)
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.allow_large_results
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.allow_large_results
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.clustering_fields
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: clustering_fields
+  source:
+    id: clustering_fields
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[List[str]]: Fields defining clustering for the table
+
+
+    (Defaults to :data:`None`).
+
+
+    Clustering fields are immutable after table creation.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    BigQuery supports clustering for both partitioned and
+
+    non-partitioned tables.
+
+
+    </aside>'
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.clustering_fields
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.connection_properties
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: connection_properties
+  source:
+    id: connection_properties
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Connection properties.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.connection_properties
+
+
+    .. versionadded:: 2.29.0
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.connection_properties
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.create_disposition
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: create_disposition
+  source:
+    id: create_disposition
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.job.CreateDisposition">google.cloud.bigquery.job.CreateDisposition</xref>:
+    Specifies behavior
+
+    for creating tables.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.create_disposition
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.create_disposition
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.create_session
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: create_session
+  source:
+    id: create_session
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '[Preview] If :data:`True`, creates a new session, where
+
+    <xref uid="google.cloud.bigquery.job.QueryJob.session_info">session_info</xref>
+    will contain a
+
+    random server generated session id.
+
+
+    If :data:`False`, runs query with an existing `session_id` passed in
+
+    <xref uid="google.cloud.bigquery.job.QueryJobConfig.connection_properties">connection_properties</xref>,
+
+    otherwise runs query in non-session mode.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.create_session
+
+
+    .. versionadded:: 2.29.0
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.create_session
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.default_dataset
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: default_dataset
+  source:
+    id: default_dataset
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "<xref uid=\"google.cloud.bigquery.dataset.DatasetReference\">google.cloud.bigquery.dataset.DatasetReference</xref>:\
+    \ the default dataset\nto use for unqualified table names in the query or :data:`None`\
+    \ if not\nset.\n\nThe `default_dataset` setter accepts:\n\n- a <xref uid=\"google.cloud.bigquery.dataset.Dataset\"\
+    >Dataset</xref>, or\n- a <xref uid=\"google.cloud.bigquery.dataset.DatasetReference\"\
+    >DatasetReference</xref>, or\n- a `str` of the fully-qualified dataset ID in standard\
+    \ SQL\n  format. The value must included a project ID and dataset ID\n  separated\
+    \ by `.`. For example: `your-project.your_dataset`.\n\nSee\nhttps://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.default_dataset\n\
+    \n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.default_dataset
+- *id006
+- &id007
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.destination
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: destination
+  source:
+    id: destination
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "<xref uid=\"google.cloud.bigquery.table.TableReference\">google.cloud.bigquery.table.TableReference</xref>:\
+    \ table where results are\nwritten or :data:`None` if not set.\n\nThe `destination`\
+    \ setter accepts:\n\n- a <xref uid=\"google.cloud.bigquery.table.Table\">Table</xref>,\
+    \ or\n- a <xref uid=\"google.cloud.bigquery.table.TableReference\">TableReference</xref>,\
+    \ or\n- a `str` of the fully-qualified table ID in standard SQL\n  format. The\
+    \ value must included a project ID, dataset ID, and table\n  ID, each separated\
+    \ by `.`. For example:\n  `your-project.your_dataset.your_table`.\n\nSee\nhttps://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.destination_table\n\
+    \n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.destination
+- *id007
+- &id008
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.destination_encryption_configuration
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: destination_encryption_configuration
+  source:
+    id: destination_encryption_configuration
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.encryption_configuration.EncryptionConfiguration">google.cloud.bigquery.encryption_configuration.EncryptionConfiguration</xref>:
+    Custom
+
+    encryption configuration for the destination table.
+
+
+    Custom encryption configuration (e.g., Cloud KMS keys) or :data:`None`
+
+    if using default encryption.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.destination_encryption_configuration
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.destination_encryption_configuration
+- *id008
+- &id009
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.dry_run
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: dry_run
+  source:
+    id: dry_run
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: :data:`True` if this query should be a dry run to estimate
+
+    costs.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.dry_run
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.dry_run
+- *id009
+- &id010
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.flatten_results
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: flatten_results
+  source:
+    id: flatten_results
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Flatten nested/repeated fields in results. (Legacy SQL only)
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.flatten_results
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.flatten_results
+- *id010
+- attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 910
+  summary: 'Factory: construct a job configuration given its API representation
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: A job configuration in the same representation as is returned from
+        the API.
+      id: resource
+      var_type: Dict
+    returns:
+    - description: Configuration parsed from <code>resource</code>.
+      var_type: google.cloud.bigquery.job._JobConfig
+  type: method
+  uid: google.cloud.bigquery.job.QueryJobConfig.from_api_repr
+- &id011
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.labels
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: labels
+  source:
+    id: labels
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, str]: Labels for the job.
+
+
+    This method always returns a dict. Once a job has been created on the
+
+    server, its labels cannot be modified anymore.
+
+    '
+  syntax:
+    exceptions:
+    - description: If <code>value</code> type is invalid.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.labels
+- *id011
+- &id012
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.maximum_billing_tier
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: maximum_billing_tier
+  source:
+    id: maximum_billing_tier
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: Deprecated. Changes the billing tier to allow high-compute
+
+    queries.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.maximum_billing_tier
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.maximum_billing_tier
+- *id012
+- &id013
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.maximum_bytes_billed
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: maximum_bytes_billed
+  source:
+    id: maximum_bytes_billed
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: Maximum bytes to be billed for this job or :data:`None` if not set.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.maximum_bytes_billed
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.maximum_bytes_billed
+- *id013
+- &id014
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.priority
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: priority
+  source:
+    id: priority
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.job.QueryPriority">google.cloud.bigquery.job.QueryPriority</xref>:
+    Priority of the query.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.priority
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.priority
+- *id014
+- &id015
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.query_parameters
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: query_parameters
+  source:
+    id: query_parameters
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'List[Union[<xref uid="google.cloud.bigquery.query.ArrayQueryParameter">google.cloud.bigquery.query.ArrayQueryParameter</xref>,         <xref
+    uid="google.cloud.bigquery.query.ScalarQueryParameter">google.cloud.bigquery.query.ScalarQueryParameter</xref>,         <xref
+    uid="google.cloud.bigquery.query.StructQueryParameter">google.cloud.bigquery.query.StructQueryParameter</xref>]]:
+    list of parameters
+
+    for parameterized query (empty by default)
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.query_parameters
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.query_parameters
+- *id015
+- &id016
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.range_partitioning
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: range_partitioning
+  source:
+    id: range_partitioning
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[<xref uid="google.cloud.bigquery.table.RangePartitioning">google.cloud.bigquery.table.RangePartitioning</xref>]:
+
+    Configures range-based partitioning for destination table.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    **Beta**. The integer range partitioning feature is in a
+
+    pre-release state and might change or have limited support.
+
+    </aside>
+
+    Only specify at most one of
+
+    xref_time_partitioning or
+
+    xref_range_partitioning.
+
+    '
+  syntax:
+    exceptions:
+    - description: If the value is not <xref uid="google.cloud.bigquery.table.RangePartitioning">RangePartitioning</xref>
+        or :data:<code>None</code>.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.range_partitioning
+- *id016
+- &id017
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.schema_update_options
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: schema_update_options
+  source:
+    id: schema_update_options
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'List[<xref uid="google.cloud.bigquery.job.SchemaUpdateOption">google.cloud.bigquery.job.SchemaUpdateOption</xref>]:
+    Specifies
+
+    updates to the destination table schema to allow as a side effect of
+
+    the query job.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.schema_update_options
+- *id017
+- &id018
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.script_options
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: script_options
+  source:
+    id: script_options
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Options controlling the execution of scripts.
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#scriptoptions
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.script_options
+- *id018
+- &id019
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.table_definitions
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: table_definitions
+  source:
+    id: table_definitions
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, <xref uid="google.cloud.bigquery.external_config.ExternalConfig">google.cloud.bigquery.external_config.ExternalConfig</xref>]:
+
+    Definitions for external tables or :data:`None` if not set.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.external_table_definitions
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.table_definitions
+- *id019
+- &id020
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.time_partitioning
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: time_partitioning
+  source:
+    id: time_partitioning
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[<xref uid="google.cloud.bigquery.table.TimePartitioning">google.cloud.bigquery.table.TimePartitioning</xref>]:
+    Specifies
+
+    time-based partitioning for the destination table.
+
+
+    Only specify at most one of
+
+    xref_time_partitioning or
+
+    xref_range_partitioning.
+
+    '
+  syntax:
+    exceptions:
+    - description: If the value is not <xref uid="google.cloud.bigquery.table.TimePartitioning">TimePartitioning</xref>
+        or :data:<code>None</code>.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.time_partitioning
+- *id020
+- attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 710
+  summary: 'Build an API representation of the query job config.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: A dictionary in the format used by the BigQuery API.
+      var_type: Dict
+  type: method
+  uid: google.cloud.bigquery.job.QueryJobConfig.to_api_repr
+- &id021
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.udf_resources
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: udf_resources
+  source:
+    id: udf_resources
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'List[<xref uid="google.cloud.bigquery.query.UDFResource">google.cloud.bigquery.query.UDFResource</xref>]:
+    user
+
+    defined function resources (empty by default)
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.user_defined_function_resources
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.udf_resources
+- *id021
+- &id022
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.use_legacy_sql
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: use_legacy_sql
+  source:
+    id: use_legacy_sql
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Use legacy SQL syntax.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.use_legacy_sql
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.use_legacy_sql
+- *id022
+- &id023
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.use_query_cache
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: use_query_cache
+  source:
+    id: use_query_cache
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Look for the query result in the cache.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.use_query_cache
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.use_query_cache
+- *id023
+- &id024
+  attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.write_disposition
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: write_disposition
+  source:
+    id: write_disposition
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.job.WriteDisposition">google.cloud.bigquery.job.WriteDisposition</xref>:
+    Action that occurs if
+
+    the destination table already exists.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.FIELDS.write_disposition
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.QueryJobConfig.write_disposition
+- *id024
+- attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 273
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(**kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.QueryJobConfig.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.QueryJobConfig
+  fullName: google.cloud.bigquery.job.QueryJobConfig
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.job.base._JobConfig
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryJobConfig
+  source:
+    id: QueryJobConfig
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 265
+  summary: 'Configuration options for query jobs.
+
+
+    All properties in this class are optional. Values which are :data:`None` ->
+
+    server defaults. Set properties on the constructed configuration by using
+
+    the property name as the name of a keyword argument.
+
+
+    '
+  syntax:
+    content: QueryJobConfig(**kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.QueryJobConfig
+references:
+- fullName: google.cloud.bigquery.job.QueryJobConfig.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.__setattr__
+- fullName: google.cloud.bigquery.job.QueryJobConfig.allow_large_results
+  isExternal: false
+  name: allow_large_results
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.allow_large_results
+- fullName: google.cloud.bigquery.job.QueryJobConfig.clustering_fields
+  isExternal: false
+  name: clustering_fields
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.clustering_fields
+- fullName: google.cloud.bigquery.job.QueryJobConfig.connection_properties
+  isExternal: false
+  name: connection_properties
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.connection_properties
+- fullName: google.cloud.bigquery.job.QueryJobConfig.create_disposition
+  isExternal: false
+  name: create_disposition
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.create_disposition
+- fullName: google.cloud.bigquery.job.QueryJobConfig.create_session
+  isExternal: false
+  name: create_session
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.create_session
+- fullName: google.cloud.bigquery.job.QueryJobConfig.default_dataset
+  isExternal: false
+  name: default_dataset
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.default_dataset
+- fullName: google.cloud.bigquery.job.QueryJobConfig.destination
+  isExternal: false
+  name: destination
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.destination
+- fullName: google.cloud.bigquery.job.QueryJobConfig.destination_encryption_configuration
+  isExternal: false
+  name: destination_encryption_configuration
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.destination_encryption_configuration
+- fullName: google.cloud.bigquery.job.QueryJobConfig.dry_run
+  isExternal: false
+  name: dry_run
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.dry_run
+- fullName: google.cloud.bigquery.job.QueryJobConfig.flatten_results
+  isExternal: false
+  name: flatten_results
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.flatten_results
+- fullName: google.cloud.bigquery.job.QueryJobConfig.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.from_api_repr
+- fullName: google.cloud.bigquery.job.QueryJobConfig.labels
+  isExternal: false
+  name: labels
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.labels
+- fullName: google.cloud.bigquery.job.QueryJobConfig.maximum_billing_tier
+  isExternal: false
+  name: maximum_billing_tier
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.maximum_billing_tier
+- fullName: google.cloud.bigquery.job.QueryJobConfig.maximum_bytes_billed
+  isExternal: false
+  name: maximum_bytes_billed
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.maximum_bytes_billed
+- fullName: google.cloud.bigquery.job.QueryJobConfig.priority
+  isExternal: false
+  name: priority
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.priority
+- fullName: google.cloud.bigquery.job.QueryJobConfig.query_parameters
+  isExternal: false
+  name: query_parameters
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.query_parameters
+- fullName: google.cloud.bigquery.job.QueryJobConfig.range_partitioning
+  isExternal: false
+  name: range_partitioning
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.range_partitioning
+- fullName: google.cloud.bigquery.job.QueryJobConfig.schema_update_options
+  isExternal: false
+  name: schema_update_options
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.schema_update_options
+- fullName: google.cloud.bigquery.job.QueryJobConfig.script_options
+  isExternal: false
+  name: script_options
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.script_options
+- fullName: google.cloud.bigquery.job.QueryJobConfig.table_definitions
+  isExternal: false
+  name: table_definitions
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.table_definitions
+- fullName: google.cloud.bigquery.job.QueryJobConfig.time_partitioning
+  isExternal: false
+  name: time_partitioning
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.time_partitioning
+- fullName: google.cloud.bigquery.job.QueryJobConfig.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.to_api_repr
+- fullName: google.cloud.bigquery.job.QueryJobConfig.udf_resources
+  isExternal: false
+  name: udf_resources
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.udf_resources
+- fullName: google.cloud.bigquery.job.QueryJobConfig.use_legacy_sql
+  isExternal: false
+  name: use_legacy_sql
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.use_legacy_sql
+- fullName: google.cloud.bigquery.job.QueryJobConfig.use_query_cache
+  isExternal: false
+  name: use_query_cache
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.use_query_cache
+- fullName: google.cloud.bigquery.job.QueryJobConfig.write_disposition
+  isExternal: false
+  name: write_disposition
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.write_disposition
+- fullName: google.cloud.bigquery.job.QueryJobConfig.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig.__init__
+- fullName: google.cloud.bigquery.job.QueryJobConfig
+  isExternal: false
+  name: QueryJobConfig
+  parent: google.cloud.bigquery.job.QueryJobConfig
+  uid: google.cloud.bigquery.job.QueryJobConfig

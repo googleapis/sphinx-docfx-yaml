@@ -1,0 +1,163 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.CreateDisposition.CREATE_IF_NEEDED
+  - google.cloud.bigquery.job.CreateDisposition.CREATE_NEVER
+  - google.cloud.bigquery.job.CreateDisposition.__init__
+  - google.cloud.bigquery.job.CreateDisposition
+  class: google.cloud.bigquery.job.CreateDisposition
+  fullName: google.cloud.bigquery.job.CreateDisposition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: CreateDisposition
+  source:
+    id: CreateDisposition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 64
+  summary: 'Specifies whether the job is allowed to create new tables. The default
+
+    value is `CREATE_IF_NEEDED`.
+
+
+    Creation, truncation and append actions occur as one atomic update
+
+    upon job completion.
+
+
+    '
+  syntax:
+    content: CreateDisposition()
+  type: class
+  uid: google.cloud.bigquery.job.CreateDisposition
+- attributes: []
+  class: google.cloud.bigquery.job.CreateDisposition
+  fullName: google.cloud.bigquery.job.CreateDisposition.CREATE_IF_NEEDED
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: CREATE_IF_NEEDED
+  source:
+    id: CREATE_IF_NEEDED
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'If the table does not exist, BigQuery creates the table.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.CreateDisposition.CREATE_IF_NEEDED
+- attributes: []
+  class: google.cloud.bigquery.job.CreateDisposition
+  fullName: google.cloud.bigquery.job.CreateDisposition.CREATE_NEVER
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: CREATE_NEVER
+  source:
+    id: CREATE_NEVER
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The table must already exist. If it does not, a ''notFound'' error is
+
+    returned in the job result.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.CreateDisposition.CREATE_NEVER
+- attributes: []
+  class: google.cloud.bigquery.job.CreateDisposition
+  fullName: google.cloud.bigquery.job.CreateDisposition.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.CreateDisposition.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.CreateDisposition
+  fullName: google.cloud.bigquery.job.CreateDisposition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: CreateDisposition
+  source:
+    id: CreateDisposition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 64
+  summary: 'Specifies whether the job is allowed to create new tables. The default
+
+    value is `CREATE_IF_NEEDED`.
+
+
+    Creation, truncation and append actions occur as one atomic update
+
+    upon job completion.
+
+
+    '
+  syntax:
+    content: CreateDisposition()
+  type: method
+  uid: google.cloud.bigquery.job.CreateDisposition
+references:
+- fullName: google.cloud.bigquery.job.CreateDisposition.CREATE_IF_NEEDED
+  isExternal: false
+  name: CREATE_IF_NEEDED
+  parent: google.cloud.bigquery.job.CreateDisposition
+  uid: google.cloud.bigquery.job.CreateDisposition.CREATE_IF_NEEDED
+- fullName: google.cloud.bigquery.job.CreateDisposition.CREATE_NEVER
+  isExternal: false
+  name: CREATE_NEVER
+  parent: google.cloud.bigquery.job.CreateDisposition
+  uid: google.cloud.bigquery.job.CreateDisposition.CREATE_NEVER
+- fullName: google.cloud.bigquery.job.CreateDisposition.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.CreateDisposition
+  uid: google.cloud.bigquery.job.CreateDisposition.__init__
+- fullName: google.cloud.bigquery.job.CreateDisposition
+  isExternal: false
+  name: CreateDisposition
+  parent: google.cloud.bigquery.job.CreateDisposition
+  uid: google.cloud.bigquery.job.CreateDisposition

@@ -1,0 +1,229 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.table.PartitionRange.end
+  - google.cloud.bigquery.table.PartitionRange.interval
+  - google.cloud.bigquery.table.PartitionRange.start
+  - google.cloud.bigquery.table.PartitionRange.__init__
+  - google.cloud.bigquery.table.PartitionRange
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: PartitionRange
+  source:
+    id: PartitionRange
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 2302
+  summary: 'Definition of the ranges for range partitioning.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    **Beta**. The integer range partitioning feature is in a pre-release
+
+    state and might change or have limited support.
+
+    </aside>'
+  syntax:
+    content: PartitionRange(start=None, end=None, interval=None, _properties=None)
+    parameters:
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.start">start</xref>
+        property.
+      id: start
+      var_type: Optional[int]
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.end">end</xref>
+        property.
+      id: end
+      var_type: Optional[int]
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.interval">interval</xref>
+        property.
+      id: interval
+      var_type: Optional[int]
+    - description: Private. Used to construct object from API resource.
+      id: _properties
+      var_type: Optional[dict]
+  type: class
+  uid: google.cloud.bigquery.table.PartitionRange
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange.end
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: end
+  source:
+    id: end
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: The end of range partitioning, exclusive.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.PartitionRange.end
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange.interval
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: interval
+  source:
+    id: interval
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: The width of each interval.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.PartitionRange.interval
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange.start
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: start
+  source:
+    id: start
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: The start of range partitioning, inclusive.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.PartitionRange.start
+- *id003
+- attributes: []
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 2326
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(start=None, end=None, interval=None, _properties=None)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.PartitionRange.__init__
+- attributes: []
+  class: google.cloud.bigquery.table.PartitionRange
+  fullName: google.cloud.bigquery.table.PartitionRange
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: PartitionRange
+  source:
+    id: PartitionRange
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 2302
+  summary: 'Definition of the ranges for range partitioning.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    **Beta**. The integer range partitioning feature is in a pre-release
+
+    state and might change or have limited support.
+
+    </aside>'
+  syntax:
+    content: PartitionRange(start=None, end=None, interval=None, _properties=None)
+    parameters:
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.start">start</xref>
+        property.
+      id: start
+      var_type: Optional[int]
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.end">end</xref>
+        property.
+      id: end
+      var_type: Optional[int]
+    - description: Sets the <xref uid="google.cloud.bigquery.table.PartitionRange.interval">interval</xref>
+        property.
+      id: interval
+      var_type: Optional[int]
+    - description: Private. Used to construct object from API resource.
+      id: _properties
+      var_type: Optional[dict]
+  type: method
+  uid: google.cloud.bigquery.table.PartitionRange
+references:
+- fullName: google.cloud.bigquery.table.PartitionRange.end
+  isExternal: false
+  name: end
+  parent: google.cloud.bigquery.table.PartitionRange
+  uid: google.cloud.bigquery.table.PartitionRange.end
+- fullName: google.cloud.bigquery.table.PartitionRange.interval
+  isExternal: false
+  name: interval
+  parent: google.cloud.bigquery.table.PartitionRange
+  uid: google.cloud.bigquery.table.PartitionRange.interval
+- fullName: google.cloud.bigquery.table.PartitionRange.start
+  isExternal: false
+  name: start
+  parent: google.cloud.bigquery.table.PartitionRange
+  uid: google.cloud.bigquery.table.PartitionRange.start
+- fullName: google.cloud.bigquery.table.PartitionRange.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.table.PartitionRange
+  uid: google.cloud.bigquery.table.PartitionRange.__init__
+- fullName: google.cloud.bigquery.table.PartitionRange
+  isExternal: false
+  name: PartitionRange
+  parent: google.cloud.bigquery.table.PartitionRange
+  uid: google.cloud.bigquery.table.PartitionRange

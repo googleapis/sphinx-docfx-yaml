@@ -1,0 +1,200 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes:
+  - description: "Required. The top level type of this field.\n   Can be any standard\
+      \ SQL data type (e.g.,\n   \"INT64\", \"DATE\", \"ARRAY\")."
+    id: type_kind
+    var_type: <xref uid="google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind">google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind</xref>
+  - description: "The type of the array's elements, if type_kind = \"ARRAY\".\n  \
+      \ \n   This field is a member of <code>oneof</code>_ <code>sub_type</code>."
+    id: array_element_type
+    var_type: google.cloud.bigquery_v2.types.StandardSqlDataType
+  - description: "The fields of this struct, in order, if type_kind =\n   \"STRUCT\"\
+      .\n   \n   This field is a member of <code>oneof</code>_ <code>sub_type</code>."
+    id: struct_type
+    var_type: <xref uid="google.cloud.bigquery_v2.types.StandardSqlStructType">google.cloud.bigquery_v2.types.StandardSqlStructType</xref>
+  children:
+  - google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind
+  - google.cloud.bigquery_v2.types.StandardSqlDataType.__delattr__
+  - google.cloud.bigquery_v2.types.StandardSqlDataType.__eq__
+  - google.cloud.bigquery_v2.types.StandardSqlDataType.__ne__
+  - google.cloud.bigquery_v2.types.StandardSqlDataType.__setattr__
+  class: google.cloud.bigquery_v2.types.StandardSqlDataType
+  fullName: google.cloud.bigquery_v2.types.StandardSqlDataType
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: proto.message.Message
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: StandardSqlDataType
+  source:
+    id: StandardSqlDataType
+    path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/standard_sql.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/standard_sql.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 30
+  summary: 'The type of a variable, e.g., a function argument. Examples: INT64:
+
+    {type_kind="INT64"} ARRAY: {type_kind="ARRAY",
+
+    array_element_type="STRING"} STRUCT<x STRING, y ARRAY>:
+
+    {type_kind="STRUCT", struct_type={fields=[ {name="x",
+
+    type={type_kind="STRING"}}, {name="y", type={type_kind="ARRAY",
+
+    array_element_type="DATE"}} ]}}
+
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+
+    For each oneof, at most one member field can be set at the same time.
+
+    Setting any member of the oneof automatically clears all other
+
+    members.
+
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    '
+  syntax:
+    content: StandardSqlDataType(mapping=None, *, ignore_unknown_fields=False, **kwargs)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType
+- attributes: []
+  class: google.cloud.bigquery_v2.types.StandardSqlDataType
+  fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__delattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __delattr__
+  source:
+    id: __delattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 701
+  summary: 'Delete the value on the given field.
+
+
+    This is generally equivalent to setting a falsy value.
+
+
+    '
+  syntax:
+    content: __delattr__(key)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__delattr__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.StandardSqlDataType
+  fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__eq__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __eq__
+  source:
+    id: __eq__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 708
+  summary: 'Return True if the messages are equal, False otherwise.
+
+
+    '
+  syntax:
+    content: __eq__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__eq__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.StandardSqlDataType
+  fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__ne__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __ne__
+  source:
+    id: __ne__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 754
+  summary: 'Return True if the messages are unequal, False otherwise.
+
+
+    '
+  syntax:
+    content: __ne__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__ne__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.StandardSqlDataType
+  fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 761
+  summary: 'Set the value on the given field.
+
+
+    For well-known protocol buffer types which are marshalled, either
+
+    the protocol buffer object or the Python equivalent is accepted.
+
+
+    '
+  syntax:
+    content: __setattr__(key, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__setattr__
+references:
+- fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind
+  isExternal: false
+  name: TypeKind
+  parent: google.cloud.bigquery_v2.types.StandardSqlDataType
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind
+- fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__delattr__
+  isExternal: false
+  name: __delattr__
+  parent: google.cloud.bigquery_v2.types.StandardSqlDataType
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__delattr__
+- fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__eq__
+  isExternal: false
+  name: __eq__
+  parent: google.cloud.bigquery_v2.types.StandardSqlDataType
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__eq__
+- fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__ne__
+  isExternal: false
+  name: __ne__
+  parent: google.cloud.bigquery_v2.types.StandardSqlDataType
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__ne__
+- fullName: google.cloud.bigquery_v2.types.StandardSqlDataType.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery_v2.types.StandardSqlDataType
+  uid: google.cloud.bigquery_v2.types.StandardSqlDataType.__setattr__

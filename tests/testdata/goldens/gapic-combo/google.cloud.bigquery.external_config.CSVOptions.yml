@@ -1,0 +1,377 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.external_config.CSVOptions.allow_jagged_rows
+  - google.cloud.bigquery.external_config.CSVOptions.allow_quoted_newlines
+  - google.cloud.bigquery.external_config.CSVOptions.encoding
+  - google.cloud.bigquery.external_config.CSVOptions.field_delimiter
+  - google.cloud.bigquery.external_config.CSVOptions.from_api_repr
+  - google.cloud.bigquery.external_config.CSVOptions.quote_character
+  - google.cloud.bigquery.external_config.CSVOptions.skip_leading_rows
+  - google.cloud.bigquery.external_config.CSVOptions.to_api_repr
+  - google.cloud.bigquery.external_config.CSVOptions.__init__
+  - google.cloud.bigquery.external_config.CSVOptions
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: CSVOptions
+  source:
+    id: CSVOptions
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 371
+  summary: 'Options that describe how to treat CSV files as BigQuery tables.
+
+
+    '
+  syntax:
+    content: CSVOptions()
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.external_config.CSVOptions
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.allow_jagged_rows
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: allow_jagged_rows
+  source:
+    id: allow_jagged_rows
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: If :data:`True`, BigQuery treats missing trailing columns as
+
+    null values. Defaults to :data:`False`.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.allow_jagged_rows
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.allow_jagged_rows
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.allow_quoted_newlines
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: allow_quoted_newlines
+  source:
+    id: allow_quoted_newlines
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: If :data:`True`, quoted data sections that contain newline
+
+    characters in a CSV file are allowed. Defaults to :data:`False`.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.allow_quoted_newlines
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.allow_quoted_newlines
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.encoding
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: encoding
+  source:
+    id: encoding
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The character encoding of the data.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.encoding
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.encoding
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.field_delimiter
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: field_delimiter
+  source:
+    id: field_delimiter
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The separator for fields in a CSV file. Defaults to comma ('','').
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.field_delimiter
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.field_delimiter
+- *id004
+- attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 468
+  summary: 'Factory: construct a `.external_config.CSVOptions` instance
+
+    given its API representation.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: Definition of a <code>.external_config.CSVOptions</code> instance
+        in the same representation as is returned from the API.
+      id: resource
+      var_type: Dict[str, Any]
+    returns:
+    - description: Configuration parsed from <code>resource</code>.
+      var_type: CSVOptions
+  type: method
+  uid: google.cloud.bigquery.external_config.CSVOptions.from_api_repr
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.quote_character
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: quote_character
+  source:
+    id: quote_character
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The value that is used to quote data sections in a CSV file.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.quote
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.quote_character
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.skip_leading_rows
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: skip_leading_rows
+  source:
+    id: skip_leading_rows
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: The number of rows at the top of a CSV file.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.FIELDS.skip_leading_rows
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.external_config.CSVOptions.skip_leading_rows
+- *id006
+- attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 460
+  summary: 'Build an API representation of this object.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: A dictionary in the format used by the BigQuery API.
+      var_type: Dict[str, Any]
+  type: method
+  uid: google.cloud.bigquery.external_config.CSVOptions.to_api_repr
+- attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 377
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.external_config.CSVOptions.__init__
+- attributes: []
+  class: google.cloud.bigquery.external_config.CSVOptions
+  fullName: google.cloud.bigquery.external_config.CSVOptions
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.external_config
+  name: CSVOptions
+  source:
+    id: CSVOptions
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/external_config.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 371
+  summary: 'Options that describe how to treat CSV files as BigQuery tables.
+
+
+    '
+  syntax:
+    content: CSVOptions()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.external_config.CSVOptions
+references:
+- fullName: google.cloud.bigquery.external_config.CSVOptions.allow_jagged_rows
+  isExternal: false
+  name: allow_jagged_rows
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.allow_jagged_rows
+- fullName: google.cloud.bigquery.external_config.CSVOptions.allow_quoted_newlines
+  isExternal: false
+  name: allow_quoted_newlines
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.allow_quoted_newlines
+- fullName: google.cloud.bigquery.external_config.CSVOptions.encoding
+  isExternal: false
+  name: encoding
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.encoding
+- fullName: google.cloud.bigquery.external_config.CSVOptions.field_delimiter
+  isExternal: false
+  name: field_delimiter
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.field_delimiter
+- fullName: google.cloud.bigquery.external_config.CSVOptions.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.from_api_repr
+- fullName: google.cloud.bigquery.external_config.CSVOptions.quote_character
+  isExternal: false
+  name: quote_character
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.quote_character
+- fullName: google.cloud.bigquery.external_config.CSVOptions.skip_leading_rows
+  isExternal: false
+  name: skip_leading_rows
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.skip_leading_rows
+- fullName: google.cloud.bigquery.external_config.CSVOptions.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.to_api_repr
+- fullName: google.cloud.bigquery.external_config.CSVOptions.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions.__init__
+- fullName: google.cloud.bigquery.external_config.CSVOptions
+  isExternal: false
+  name: CSVOptions
+  parent: google.cloud.bigquery.external_config.CSVOptions
+  uid: google.cloud.bigquery.external_config.CSVOptions

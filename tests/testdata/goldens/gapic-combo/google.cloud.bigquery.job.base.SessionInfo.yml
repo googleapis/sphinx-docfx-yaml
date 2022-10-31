@@ -1,0 +1,66 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.base.SessionInfo.session_id
+  class: google.cloud.bigquery.job.base.SessionInfo
+  fullName: google.cloud.bigquery.job.base.SessionInfo
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: SessionInfo
+  source:
+    id: SessionInfo
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1007
+  summary: '[Preview] Information of the session if this job is part of one.
+
+
+    .. versionadded:: 2.29.0
+
+    '
+  syntax:
+    content: SessionInfo(resource)
+    parameters:
+    - description: JSON representation of object.
+      id: resource
+      var_type: Map[str, Any]
+  type: class
+  uid: google.cloud.bigquery.job.base.SessionInfo
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.job.base.SessionInfo
+  fullName: google.cloud.bigquery.job.base.SessionInfo.session_id
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: session_id
+  source:
+    id: session_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The ID of the session.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.SessionInfo.session_id
+- *id001
+references:
+- fullName: google.cloud.bigquery.job.base.SessionInfo.session_id
+  isExternal: false
+  name: session_id
+  parent: google.cloud.bigquery.job.base.SessionInfo
+  uid: google.cloud.bigquery.job.base.SessionInfo.session_id

@@ -1,0 +1,352 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.dbapi.Cursor.close
+  - google.cloud.bigquery.dbapi.Cursor.execute
+  - google.cloud.bigquery.dbapi.Cursor.executemany
+  - google.cloud.bigquery.dbapi.Cursor.fetchall
+  - google.cloud.bigquery.dbapi.Cursor.fetchmany
+  - google.cloud.bigquery.dbapi.Cursor.fetchone
+  - google.cloud.bigquery.dbapi.Cursor.setinputsizes
+  - google.cloud.bigquery.dbapi.Cursor.setoutputsize
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: Cursor
+  source:
+    id: Cursor
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/cursor.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/cursor.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 57
+  summary: 'DB-API Cursor to Google BigQuery.
+
+    '
+  syntax:
+    content: Cursor(connection)
+    parameters:
+    - description: A DB-API connection to Google BigQuery.
+      id: connection
+      var_type: <xref uid="google.cloud.bigquery.dbapi.Connection">google.cloud.bigquery.dbapi.Connection</xref>
+  type: class
+  uid: google.cloud.bigquery.dbapi.Cursor
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.close
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: close
+  source:
+    id: close
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 82
+  summary: 'Mark the cursor as closed, preventing its further use.
+
+
+    '
+  syntax:
+    content: close()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.close
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.execute
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: execute
+  source:
+    id: execute
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 130
+  summary: "Prepare and execute a database operation.\n\n<aside class=\"note\">\n\
+    <b>Note:</b>\nWhen setting query parameters, values which are \"text\"\n(`unicode`\
+    \ in Python2, `str` in Python3) will use\nthe 'STRING' BigQuery type. Values which\
+    \ are \"bytes\" (`str` in\nPython2, `bytes` in Python3), will use using the 'BYTES'\
+    \ type.\n</aside>\n    A `datetime.datetime` parameter without timezone information\
+    \ uses\n    the 'DATETIME' BigQuery type (example: Global Pi Day Celebration\n\
+    \    March 14, 2017 at 1:59pm). A `datetime.datetime` parameter with\n    timezone\
+    \ information uses the 'TIMESTAMP' BigQuery type (example:\n    a wedding on April\
+    \ 29, 2011 at 11am, British Summer Time).\n\n    For more information about BigQuery\
+    \ data types, see:\n    https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types\n\
+    \n    `STRUCT`/`RECORD` and `REPEATED` query parameters are not\n    yet supported.\
+    \ See:\n    https://github.com/GoogleCloudPlatform/google-cloud-python/issues/3524\n"
+  syntax:
+    content: execute(operation, parameters=None, job_id=None, job_config=None)
+    parameters:
+    - description: A Google BigQuery query string.
+      id: operation
+      var_type: str
+    - description: (Optional) dictionary or sequence of parameter values.
+      id: parameters
+      var_type: Union[Mapping[str, Any], Sequence[Any]]
+    - description: (Optional) The job_id to use. If not set, a job ID is generated
+        at random.
+      id: job_id
+      var_type: str
+    - description: (Optional) Extra configuration options for the query job.
+      id: job_config
+      var_type: <xref uid="google.cloud.bigquery.job.QueryJobConfig">google.cloud.bigquery.job.QueryJobConfig</xref>
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.execute
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.executemany
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: executemany
+  source:
+    id: executemany
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 211
+  summary: 'Prepare and execute a database operation multiple times.
+
+    '
+  syntax:
+    content: executemany(operation, seq_of_parameters)
+    parameters:
+    - description: A Google BigQuery query string.
+      id: operation
+      var_type: str
+    - description: Sequence of many sets of parameter values.
+      id: seq_of_parameters
+      var_type: Union[Sequence[Mapping[str, Any], Sequence[Any]]]
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.executemany
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.fetchall
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: fetchall
+  source:
+    id: fetchall
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 370
+  summary: 'Fetch all remaining results from the last `execute*()` call.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    If a dry run query was executed, no rows are returned.
+
+    </aside>'
+  syntax:
+    content: fetchall()
+    exceptions:
+    - description: if called before <code>execute()</code>.
+      var_type: <xref uid="google.cloud.bigquery.dbapi.InterfaceError">google.cloud.bigquery.dbapi.InterfaceError</xref>
+    parameters: []
+    returns:
+    - description: A list of all the rows in the results.
+      var_type: List[Tuple]
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchall
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.fetchmany
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: fetchmany
+  source:
+    id: fetchmany
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 331
+  summary: 'Fetch multiple results from the last `execute*()` call.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    If a dry run query was executed, no rows are returned.
+
+    </aside>
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    The size parameter is not used for the request/response size.
+
+    Set the `arraysize` attribute before calling `execute()` to
+
+    set the batch size.
+
+    </aside>'
+  syntax:
+    content: fetchmany(size=None)
+    exceptions:
+    - description: if called before <code>execute()</code>.
+      var_type: <xref uid="google.cloud.bigquery.dbapi.InterfaceError">google.cloud.bigquery.dbapi.InterfaceError</xref>
+    parameters:
+    - description: (Optional) Maximum number of rows to return. Defaults to the <code>arraysize</code>
+        property value. If <code>arraysize</code> is not set, it defaults to <code>1</code>.
+      id: size
+      var_type: int
+    returns:
+    - description: A list of rows.
+      var_type: List[Tuple]
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchmany
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.fetchone
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: fetchone
+  source:
+    id: fetchone
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 311
+  summary: 'Fetch a single row from the results of the last `execute*()` call.
+
+
+    <aside class="note">
+
+    <b>Note:</b>
+
+    If a dry run query was executed, no rows are returned.
+
+    </aside>'
+  syntax:
+    content: fetchone()
+    exceptions:
+    - description: if called before <code>execute()</code>.
+      var_type: <xref uid="google.cloud.bigquery.dbapi.InterfaceError">google.cloud.bigquery.dbapi.InterfaceError</xref>
+    parameters: []
+    returns:
+    - description: A tuple representing a row or <code>None</code> if no more data
+        is available.
+      var_type: Tuple
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchone
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.setinputsizes
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: setinputsizes
+  source:
+    id: setinputsizes
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 385
+  summary: 'No-op, but for consistency raise an error if cursor is closed.
+
+
+    '
+  syntax:
+    content: setinputsizes(sizes)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.setinputsizes
+- attributes: []
+  class: google.cloud.bigquery.dbapi.Cursor
+  fullName: google.cloud.bigquery.dbapi.Cursor.setoutputsize
+  langs:
+  - python
+  module: google.cloud.bigquery.dbapi
+  name: setoutputsize
+  source:
+    id: setoutputsize
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dbapi/_helpers.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 388
+  summary: 'No-op, but for consistency raise an error if cursor is closed.
+
+
+    '
+  syntax:
+    content: setoutputsize(size, column=None)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dbapi.Cursor.setoutputsize
+references:
+- fullName: google.cloud.bigquery.dbapi.Cursor.close
+  isExternal: false
+  name: close
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.close
+- fullName: google.cloud.bigquery.dbapi.Cursor.execute
+  isExternal: false
+  name: execute
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.execute
+- fullName: google.cloud.bigquery.dbapi.Cursor.executemany
+  isExternal: false
+  name: executemany
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.executemany
+- fullName: google.cloud.bigquery.dbapi.Cursor.fetchall
+  isExternal: false
+  name: fetchall
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchall
+- fullName: google.cloud.bigquery.dbapi.Cursor.fetchmany
+  isExternal: false
+  name: fetchmany
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchmany
+- fullName: google.cloud.bigquery.dbapi.Cursor.fetchone
+  isExternal: false
+  name: fetchone
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.fetchone
+- fullName: google.cloud.bigquery.dbapi.Cursor.setinputsizes
+  isExternal: false
+  name: setinputsizes
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.setinputsizes
+- fullName: google.cloud.bigquery.dbapi.Cursor.setoutputsize
+  isExternal: false
+  name: setoutputsize
+  parent: google.cloud.bigquery.dbapi.Cursor
+  uid: google.cloud.bigquery.dbapi.Cursor.setoutputsize

@@ -1,0 +1,46 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- children:
+  - google.cloud.bigquery.standard_sql.StandardSqlDataType
+  - google.cloud.bigquery.standard_sql.StandardSqlField
+  - google.cloud.bigquery.standard_sql.StandardSqlStructType
+  - google.cloud.bigquery.standard_sql.StandardSqlTableType
+  fullName: google.cloud.bigquery.standard_sql
+  langs:
+  - python
+  module: google.cloud.bigquery.standard_sql
+  name: standard_sql
+  source:
+    id: standard_sql
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/standard_sql.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 0
+  summary: API documentation for `bigquery.standard_sql` module.
+  syntax: {}
+  type: module
+  uid: google.cloud.bigquery.standard_sql
+references:
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlDataType
+  isExternal: false
+  name: StandardSqlDataType
+  parent: google.cloud.bigquery.standard_sql
+  uid: google.cloud.bigquery.standard_sql.StandardSqlDataType
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlField
+  isExternal: false
+  name: StandardSqlField
+  parent: google.cloud.bigquery.standard_sql
+  uid: google.cloud.bigquery.standard_sql.StandardSqlField
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlStructType
+  isExternal: false
+  name: StandardSqlStructType
+  parent: google.cloud.bigquery.standard_sql
+  uid: google.cloud.bigquery.standard_sql.StandardSqlStructType
+- fullName: google.cloud.bigquery.standard_sql.StandardSqlTableType
+  isExternal: false
+  name: StandardSqlTableType
+  parent: google.cloud.bigquery.standard_sql
+  uid: google.cloud.bigquery.standard_sql.StandardSqlTableType

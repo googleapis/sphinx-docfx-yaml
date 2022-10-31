@@ -1,0 +1,97 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.table.CloneDefinition.__init__
+  - google.cloud.bigquery.table.CloneDefinition
+  class: google.cloud.bigquery.table.CloneDefinition
+  fullName: google.cloud.bigquery.table.CloneDefinition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: CloneDefinition
+  source:
+    id: CloneDefinition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1321
+  summary: 'Information about base table and clone time of the clone.
+
+
+    See https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#clonedefinition
+
+    '
+  syntax:
+    content: 'CloneDefinition(resource: typing.Dict[str, typing.Any])'
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.table.CloneDefinition
+- attributes: []
+  class: google.cloud.bigquery.table.CloneDefinition
+  fullName: google.cloud.bigquery.table.CloneDefinition.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1330
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: '__init__(resource: typing.Dict[str, typing.Any])'
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.CloneDefinition.__init__
+- attributes: []
+  class: google.cloud.bigquery.table.CloneDefinition
+  fullName: google.cloud.bigquery.table.CloneDefinition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: CloneDefinition
+  source:
+    id: CloneDefinition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1321
+  summary: 'Information about base table and clone time of the clone.
+
+
+    See https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#clonedefinition
+
+    '
+  syntax:
+    content: 'CloneDefinition(resource: typing.Dict[str, typing.Any])'
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.CloneDefinition
+references:
+- fullName: google.cloud.bigquery.table.CloneDefinition.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.table.CloneDefinition
+  uid: google.cloud.bigquery.table.CloneDefinition.__init__
+- fullName: google.cloud.bigquery.table.CloneDefinition
+  isExternal: false
+  name: CloneDefinition
+  parent: google.cloud.bigquery.table.CloneDefinition
+  uid: google.cloud.bigquery.table.CloneDefinition

@@ -1,0 +1,138 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.QueryPlanEntryStep.from_api_repr
+  - google.cloud.bigquery.job.QueryPlanEntryStep.__init__
+  - google.cloud.bigquery.job.QueryPlanEntryStep
+  class: google.cloud.bigquery.job.QueryPlanEntryStep
+  fullName: google.cloud.bigquery.job.QueryPlanEntryStep
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryPlanEntryStep
+  source:
+    id: QueryPlanEntryStep
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1782
+  summary: 'Map a single step in a query plan entry.
+
+    '
+  syntax:
+    content: QueryPlanEntryStep(kind, substeps)
+    parameters:
+    - description: step type.
+      id: kind
+      var_type: str
+    - description: names of substeps.
+      id: substeps
+      var_type: List
+  type: class
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPlanEntryStep
+  fullName: google.cloud.bigquery.job.QueryPlanEntryStep.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1794
+  summary: 'Factory: construct instance from the JSON repr.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: JSON representation of the entry.
+      id: resource
+      var_type: Dict
+    returns:
+    - description: New instance built from the resource.
+      var_type: google.cloud.bigquery.job.QueryPlanEntryStep
+  type: method
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep.from_api_repr
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPlanEntryStep
+  fullName: google.cloud.bigquery.job.QueryPlanEntryStep.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1790
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(kind, substeps)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPlanEntryStep
+  fullName: google.cloud.bigquery.job.QueryPlanEntryStep
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryPlanEntryStep
+  source:
+    id: QueryPlanEntryStep
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1782
+  summary: 'Map a single step in a query plan entry.
+
+    '
+  syntax:
+    content: QueryPlanEntryStep(kind, substeps)
+    parameters:
+    - description: step type.
+      id: kind
+      var_type: str
+    - description: names of substeps.
+      id: substeps
+      var_type: List
+  type: method
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep
+references:
+- fullName: google.cloud.bigquery.job.QueryPlanEntryStep.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.job.QueryPlanEntryStep
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep.from_api_repr
+- fullName: google.cloud.bigquery.job.QueryPlanEntryStep.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.QueryPlanEntryStep
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep.__init__
+- fullName: google.cloud.bigquery.job.QueryPlanEntryStep
+  isExternal: false
+  name: QueryPlanEntryStep
+  parent: google.cloud.bigquery.job.QueryPlanEntryStep
+  uid: google.cloud.bigquery.job.QueryPlanEntryStep

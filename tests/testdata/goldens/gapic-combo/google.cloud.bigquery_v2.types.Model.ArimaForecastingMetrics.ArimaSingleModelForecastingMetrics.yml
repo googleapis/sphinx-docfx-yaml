@@ -1,0 +1,202 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes:
+  - description: Non-seasonal order.
+    id: non_seasonal_order
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.ArimaOrder">google.cloud.bigquery_v2.types.Model.ArimaOrder</xref>
+  - description: Arima fitting metrics.
+    id: arima_fitting_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics">google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics</xref>
+  - description: "Is arima model fitted with drift or not. It\n   is always false\
+      \ when d is not 1."
+    id: has_drift
+    var_type: bool
+  - description: "The time_series_id value for this time series. It will be\n   one\
+      \ of the unique values from the time_series_id_column\n   specified during ARIMA\
+      \ model training. Only present when\n   time_series_id_column training option\
+      \ was used."
+    id: time_series_id
+    var_type: str
+  - description: "The tuple of time_series_ids identifying this time series.\n   It\
+      \ will be one of the unique tuples of values present in the\n   time_series_id_columns\
+      \ specified during ARIMA model\n   training. Only present when time_series_id_columns\
+      \ training\n   option was used and the order of values here are same as the\n\
+      \   order of time_series_id_columns."
+    id: time_series_ids
+    var_type: Sequence[str]
+  - description: "Seasonal periods. Repeated because multiple\n   periods are supported\
+      \ for one time series."
+    id: seasonal_periods
+    var_type: Sequence[<xref uid="google.cloud.bigquery_v2.types.Model.SeasonalPeriod.SeasonalPeriodType">google.cloud.bigquery_v2.types.Model.SeasonalPeriod.SeasonalPeriodType</xref>]
+  - description: "If true, holiday_effect is a part of time series\n   decomposition\
+      \ result."
+    id: has_holiday_effect
+    var_type: google.protobuf.wrappers_pb2.BoolValue
+  - description: "If true, spikes_and_dips is a part of time series\n   decomposition\
+      \ result."
+    id: has_spikes_and_dips
+    var_type: google.protobuf.wrappers_pb2.BoolValue
+  - description: "If true, step_changes is a part of time series decomposition\n \
+      \  result."
+    id: has_step_changes
+    var_type: google.protobuf.wrappers_pb2.BoolValue
+  children:
+  - google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__delattr__
+  - google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__eq__
+  - google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__ne__
+  - google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__setattr__
+  class: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: proto.message.Message
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  name: ArimaSingleModelForecastingMetrics
+  source:
+    id: ArimaSingleModelForecastingMetrics
+    path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 804
+  summary: 'Model evaluation metrics for a single ARIMA forecasting
+
+    model.
+
+    '
+  syntax:
+    content: "ArimaSingleModelForecastingMetrics(\n    mapping=None, *, ignore_unknown_fields=False,\
+      \ **kwargs\n)"
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__delattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  name: __delattr__
+  source:
+    id: __delattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 701
+  summary: 'Delete the value on the given field.
+
+
+    This is generally equivalent to setting a falsy value.
+
+
+    '
+  syntax:
+    content: __delattr__(key)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__delattr__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__eq__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  name: __eq__
+  source:
+    id: __eq__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 708
+  summary: 'Return True if the messages are equal, False otherwise.
+
+
+    '
+  syntax:
+    content: __eq__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__eq__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__ne__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  name: __ne__
+  source:
+    id: __ne__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 754
+  summary: 'Return True if the messages are unequal, False otherwise.
+
+
+    '
+  syntax:
+    content: __ne__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__ne__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 761
+  summary: 'Set the value on the given field.
+
+
+    For well-known protocol buffer types which are marshalled, either
+
+    the protocol buffer object or the Python equivalent is accepted.
+
+
+    '
+  syntax:
+    content: __setattr__(key, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__setattr__
+references:
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__delattr__
+  isExternal: false
+  name: __delattr__
+  parent: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__delattr__
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__eq__
+  isExternal: false
+  name: __eq__
+  parent: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__eq__
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__ne__
+  isExternal: false
+  name: __ne__
+  parent: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__ne__
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics.__setattr__

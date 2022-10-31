@@ -1,0 +1,91 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.enums.Encoding.ISO_8859_1
+  - google.cloud.bigquery.enums.Encoding.UTF_8
+  class: google.cloud.bigquery.enums.Encoding
+  fullName: google.cloud.bigquery.enums.Encoding
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: Encoding
+  source:
+    id: Encoding
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 99
+  summary: 'The character encoding of the data. The default is `UTF_8`.
+
+
+    BigQuery decodes the data after the raw, binary data has been
+
+    split using the values of the quote and fieldDelimiter properties.
+
+
+    '
+  syntax:
+    content: Encoding()
+  type: class
+  uid: google.cloud.bigquery.enums.Encoding
+- attributes: []
+  class: google.cloud.bigquery.enums.Encoding
+  fullName: google.cloud.bigquery.enums.Encoding.ISO_8859_1
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: ISO_8859_1
+  source:
+    id: ISO_8859_1
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies ISO-8859-1 encoding.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Encoding.ISO_8859_1
+- attributes: []
+  class: google.cloud.bigquery.enums.Encoding
+  fullName: google.cloud.bigquery.enums.Encoding.UTF_8
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: UTF_8
+  source:
+    id: UTF_8
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies UTF-8 encoding.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.Encoding.UTF_8
+references:
+- fullName: google.cloud.bigquery.enums.Encoding.ISO_8859_1
+  isExternal: false
+  name: ISO_8859_1
+  parent: google.cloud.bigquery.enums.Encoding
+  uid: google.cloud.bigquery.enums.Encoding.ISO_8859_1
+- fullName: google.cloud.bigquery.enums.Encoding.UTF_8
+  isExternal: false
+  name: UTF_8
+  parent: google.cloud.bigquery.enums.Encoding
+  uid: google.cloud.bigquery.enums.Encoding.UTF_8

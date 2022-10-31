@@ -1,0 +1,151 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.QueryPriority.BATCH
+  - google.cloud.bigquery.job.QueryPriority.INTERACTIVE
+  - google.cloud.bigquery.job.QueryPriority.__init__
+  - google.cloud.bigquery.job.QueryPriority
+  class: google.cloud.bigquery.job.QueryPriority
+  fullName: google.cloud.bigquery.job.QueryPriority
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryPriority
+  source:
+    id: QueryPriority
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 113
+  summary: 'Specifies a priority for the query. The default value is
+
+    `INTERACTIVE`.
+
+
+    '
+  syntax:
+    content: QueryPriority()
+  type: class
+  uid: google.cloud.bigquery.job.QueryPriority
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPriority
+  fullName: google.cloud.bigquery.job.QueryPriority.BATCH
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: BATCH
+  source:
+    id: BATCH
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies batch priority.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.QueryPriority.BATCH
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPriority
+  fullName: google.cloud.bigquery.job.QueryPriority.INTERACTIVE
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: INTERACTIVE
+  source:
+    id: INTERACTIVE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies interactive priority.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.QueryPriority.INTERACTIVE
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPriority
+  fullName: google.cloud.bigquery.job.QueryPriority.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.QueryPriority.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.QueryPriority
+  fullName: google.cloud.bigquery.job.QueryPriority
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: QueryPriority
+  source:
+    id: QueryPriority
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 113
+  summary: 'Specifies a priority for the query. The default value is
+
+    `INTERACTIVE`.
+
+
+    '
+  syntax:
+    content: QueryPriority()
+  type: method
+  uid: google.cloud.bigquery.job.QueryPriority
+references:
+- fullName: google.cloud.bigquery.job.QueryPriority.BATCH
+  isExternal: false
+  name: BATCH
+  parent: google.cloud.bigquery.job.QueryPriority
+  uid: google.cloud.bigquery.job.QueryPriority.BATCH
+- fullName: google.cloud.bigquery.job.QueryPriority.INTERACTIVE
+  isExternal: false
+  name: INTERACTIVE
+  parent: google.cloud.bigquery.job.QueryPriority
+  uid: google.cloud.bigquery.job.QueryPriority.INTERACTIVE
+- fullName: google.cloud.bigquery.job.QueryPriority.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.QueryPriority
+  uid: google.cloud.bigquery.job.QueryPriority.__init__
+- fullName: google.cloud.bigquery.job.QueryPriority
+  isExternal: false
+  name: QueryPriority
+  parent: google.cloud.bigquery.job.QueryPriority
+  uid: google.cloud.bigquery.job.QueryPriority

@@ -1,0 +1,237 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.OperationType.CLONE
+  - google.cloud.bigquery.job.OperationType.COPY
+  - google.cloud.bigquery.job.OperationType.OPERATION_TYPE_UNSPECIFIED
+  - google.cloud.bigquery.job.OperationType.RESTORE
+  - google.cloud.bigquery.job.OperationType.SNAPSHOT
+  - google.cloud.bigquery.job.OperationType.__init__
+  - google.cloud.bigquery.job.OperationType
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: OperationType
+  source:
+    id: OperationType
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/copy_.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/copy_.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 28
+  summary: 'Different operation types supported in table copy job.
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#operationtype
+
+
+    '
+  syntax:
+    content: OperationType()
+  type: class
+  uid: google.cloud.bigquery.job.OperationType
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.CLONE
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: CLONE
+  source:
+    id: CLONE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The source table type is TABLE and the destination table type is CLONE.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.OperationType.CLONE
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.COPY
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: COPY
+  source:
+    id: COPY
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The source and destination table have the same table type.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.OperationType.COPY
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.OPERATION_TYPE_UNSPECIFIED
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: OPERATION_TYPE_UNSPECIFIED
+  source:
+    id: OPERATION_TYPE_UNSPECIFIED
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Unspecified operation type.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.OperationType.OPERATION_TYPE_UNSPECIFIED
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.RESTORE
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: RESTORE
+  source:
+    id: RESTORE
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The source table type is SNAPSHOT and the destination table type is TABLE.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.OperationType.RESTORE
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.SNAPSHOT
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: SNAPSHOT
+  source:
+    id: SNAPSHOT
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The source table type is TABLE and the destination table type is SNAPSHOT.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.OperationType.SNAPSHOT
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.OperationType.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.OperationType
+  fullName: google.cloud.bigquery.job.OperationType
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: OperationType
+  source:
+    id: OperationType
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/copy_.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/copy_.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 28
+  summary: 'Different operation types supported in table copy job.
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#operationtype
+
+
+    '
+  syntax:
+    content: OperationType()
+  type: method
+  uid: google.cloud.bigquery.job.OperationType
+references:
+- fullName: google.cloud.bigquery.job.OperationType.CLONE
+  isExternal: false
+  name: CLONE
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.CLONE
+- fullName: google.cloud.bigquery.job.OperationType.COPY
+  isExternal: false
+  name: COPY
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.COPY
+- fullName: google.cloud.bigquery.job.OperationType.OPERATION_TYPE_UNSPECIFIED
+  isExternal: false
+  name: OPERATION_TYPE_UNSPECIFIED
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.OPERATION_TYPE_UNSPECIFIED
+- fullName: google.cloud.bigquery.job.OperationType.RESTORE
+  isExternal: false
+  name: RESTORE
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.RESTORE
+- fullName: google.cloud.bigquery.job.OperationType.SNAPSHOT
+  isExternal: false
+  name: SNAPSHOT
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.SNAPSHOT
+- fullName: google.cloud.bigquery.job.OperationType.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType.__init__
+- fullName: google.cloud.bigquery.job.OperationType
+  isExternal: false
+  name: OperationType
+  parent: google.cloud.bigquery.job.OperationType
+  uid: google.cloud.bigquery.job.OperationType

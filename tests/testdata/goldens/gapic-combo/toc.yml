@@ -1,0 +1,439 @@
+- items:
+  - href: index.md
+    name: Overview
+  - href: enums.md
+    name: BigQuery Enums
+  - href: job_base.md
+    name: Common Job Resource Classes
+  - href: changelog.md
+    name: Changelog
+  - href: dbapi.md
+    name: DB-API Reference
+  - href: format_options.md
+    name: BigQuery Format Options
+  - href: query.md
+    name: Query Resource Classes
+  - href: upgrading.md
+    name: 3.0.0 Migration Guide
+  - href: magics.md
+    name: IPython Magics for BigQuery
+  - items:
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.dbapi
+      - name: Connection
+        uid: google.cloud.bigquery.dbapi.Connection
+      - name: Cursor
+        uid: google.cloud.bigquery.dbapi.Cursor
+      - name: DataError
+        uid: google.cloud.bigquery.dbapi.DataError
+      - name: DatabaseError
+        uid: google.cloud.bigquery.dbapi.DatabaseError
+      - name: Error
+        uid: google.cloud.bigquery.dbapi.Error
+      - name: IntegrityError
+        uid: google.cloud.bigquery.dbapi.IntegrityError
+      - name: InterfaceError
+        uid: google.cloud.bigquery.dbapi.InterfaceError
+      - name: InternalError
+        uid: google.cloud.bigquery.dbapi.InternalError
+      - name: NotSupportedError
+        uid: google.cloud.bigquery.dbapi.NotSupportedError
+      - name: OperationalError
+        uid: google.cloud.bigquery.dbapi.OperationalError
+      - name: ProgrammingError
+        uid: google.cloud.bigquery.dbapi.ProgrammingError
+      - name: Warning
+        uid: google.cloud.bigquery.dbapi.Warning
+      name: dbapi
+      uid: google.cloud.bigquery.dbapi
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.enums
+      - name: AutoRowIDs
+        uid: google.cloud.bigquery.enums.AutoRowIDs
+      - name: Compression
+        uid: google.cloud.bigquery.enums.Compression
+      - name: CreateDisposition
+        uid: google.cloud.bigquery.enums.CreateDisposition
+      - name: DecimalTargetType
+        uid: google.cloud.bigquery.enums.DecimalTargetType
+      - name: DestinationFormat
+        uid: google.cloud.bigquery.enums.DestinationFormat
+      - name: DeterminismLevel
+        uid: google.cloud.bigquery.enums.DeterminismLevel
+      - name: Encoding
+        uid: google.cloud.bigquery.enums.Encoding
+      - name: EntityTypes
+        uid: google.cloud.bigquery.enums.EntityTypes
+      - name: KeyResultStatementKind
+        uid: google.cloud.bigquery.enums.KeyResultStatementKind
+      - name: QueryApiMethod
+        uid: google.cloud.bigquery.enums.QueryApiMethod
+      - name: QueryPriority
+        uid: google.cloud.bigquery.enums.QueryPriority
+      - name: SchemaUpdateOption
+        uid: google.cloud.bigquery.enums.SchemaUpdateOption
+      - name: SourceFormat
+        uid: google.cloud.bigquery.enums.SourceFormat
+      - name: SqlTypeNames
+        uid: google.cloud.bigquery.enums.SqlTypeNames
+      - name: StandardSqlTypeNames
+        uid: google.cloud.bigquery.enums.StandardSqlTypeNames
+      - name: WriteDisposition
+        uid: google.cloud.bigquery.enums.WriteDisposition
+      name: enums
+      uid: google.cloud.bigquery.enums
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.format_options
+      - name: AvroOptions
+        uid: google.cloud.bigquery.format_options.AvroOptions
+      - name: ParquetOptions
+        uid: google.cloud.bigquery.format_options.ParquetOptions
+      name: format_options
+      uid: google.cloud.bigquery.format_options
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.job.base
+      - name: ReservationUsage
+        uid: google.cloud.bigquery.job.base.ReservationUsage
+      - name: ScriptStackFrame
+        uid: google.cloud.bigquery.job.base.ScriptStackFrame
+      - name: ScriptStatistics
+        uid: google.cloud.bigquery.job.base.ScriptStatistics
+      - name: SessionInfo
+        uid: google.cloud.bigquery.job.base.SessionInfo
+      - name: TransactionInfo
+        uid: google.cloud.bigquery.job.base.TransactionInfo
+      - name: UnknownJob
+        uid: google.cloud.bigquery.job.base.UnknownJob
+      name: base
+      uid: google.cloud.bigquery.job.base
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.magics.magics
+      - name: Context
+        uid: google.cloud.bigquery.magics.magics.Context
+      name: bigquery.magics
+      uid: google.cloud.bigquery.magics.magics
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.query
+      - name: ArrayQueryParameter
+        uid: google.cloud.bigquery.query.ArrayQueryParameter
+      - name: ArrayQueryParameterType
+        uid: google.cloud.bigquery.query.ArrayQueryParameterType
+      - name: ConnectionProperty
+        uid: google.cloud.bigquery.query.ConnectionProperty
+      - name: ScalarQueryParameter
+        uid: google.cloud.bigquery.query.ScalarQueryParameter
+      - name: ScalarQueryParameterType
+        uid: google.cloud.bigquery.query.ScalarQueryParameterType
+      - name: SqlParameterScalarTypes
+        uid: google.cloud.bigquery.query.SqlParameterScalarTypes
+      - name: StructQueryParameter
+        uid: google.cloud.bigquery.query.StructQueryParameter
+      - name: StructQueryParameterType
+        uid: google.cloud.bigquery.query.StructQueryParameterType
+      - name: UDFResource
+        uid: google.cloud.bigquery.query.UDFResource
+      name: query
+      uid: google.cloud.bigquery.query
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery.standard_sql
+      - name: StandardSqlDataType
+        uid: google.cloud.bigquery.standard_sql.StandardSqlDataType
+      - name: StandardSqlField
+        uid: google.cloud.bigquery.standard_sql.StandardSqlField
+      - name: StandardSqlStructType
+        uid: google.cloud.bigquery.standard_sql.StandardSqlStructType
+      - name: StandardSqlTableType
+        uid: google.cloud.bigquery.standard_sql.StandardSqlTableType
+      name: standard_sql
+      uid: google.cloud.bigquery.standard_sql
+    - name: Client
+      uid: google.cloud.bigquery.client.Client
+    - name: AccessEntry
+      uid: google.cloud.bigquery.dataset.AccessEntry
+    - name: Dataset
+      uid: google.cloud.bigquery.dataset.Dataset
+    - name: DatasetListItem
+      uid: google.cloud.bigquery.dataset.DatasetListItem
+    - name: DatasetReference
+      uid: google.cloud.bigquery.dataset.DatasetReference
+    - name: EncryptionConfiguration
+      uid: google.cloud.bigquery.encryption_configuration.EncryptionConfiguration
+    - name: BigtableColumn
+      uid: google.cloud.bigquery.external_config.BigtableColumn
+    - name: BigtableColumnFamily
+      uid: google.cloud.bigquery.external_config.BigtableColumnFamily
+    - name: BigtableOptions
+      uid: google.cloud.bigquery.external_config.BigtableOptions
+    - name: CSVOptions
+      uid: google.cloud.bigquery.external_config.CSVOptions
+    - name: ExternalConfig
+      uid: google.cloud.bigquery.external_config.ExternalConfig
+    - name: ExternalSourceFormat
+      uid: google.cloud.bigquery.external_config.ExternalSourceFormat
+    - name: GoogleSheetsOptions
+      uid: google.cloud.bigquery.external_config.GoogleSheetsOptions
+    - name: Compression
+      uid: google.cloud.bigquery.job.Compression
+    - name: CopyJob
+      uid: google.cloud.bigquery.job.CopyJob
+    - name: CopyJobConfig
+      uid: google.cloud.bigquery.job.CopyJobConfig
+    - name: CreateDisposition
+      uid: google.cloud.bigquery.job.CreateDisposition
+    - name: DestinationFormat
+      uid: google.cloud.bigquery.job.DestinationFormat
+    - name: DmlStats
+      uid: google.cloud.bigquery.job.DmlStats
+    - name: Encoding
+      uid: google.cloud.bigquery.job.Encoding
+    - name: ExtractJob
+      uid: google.cloud.bigquery.job.ExtractJob
+    - name: ExtractJobConfig
+      uid: google.cloud.bigquery.job.ExtractJobConfig
+    - name: LoadJob
+      uid: google.cloud.bigquery.job.LoadJob
+    - name: LoadJobConfig
+      uid: google.cloud.bigquery.job.LoadJobConfig
+    - name: OperationType
+      uid: google.cloud.bigquery.job.OperationType
+    - name: QueryJob
+      uid: google.cloud.bigquery.job.QueryJob
+    - name: QueryJobConfig
+      uid: google.cloud.bigquery.job.QueryJobConfig
+    - name: QueryPlanEntry
+      uid: google.cloud.bigquery.job.QueryPlanEntry
+    - name: QueryPlanEntryStep
+      uid: google.cloud.bigquery.job.QueryPlanEntryStep
+    - name: QueryPriority
+      uid: google.cloud.bigquery.job.QueryPriority
+    - name: ReservationUsage
+      uid: google.cloud.bigquery.job.ReservationUsage
+    - name: SchemaUpdateOption
+      uid: google.cloud.bigquery.job.SchemaUpdateOption
+    - name: SourceFormat
+      uid: google.cloud.bigquery.job.SourceFormat
+    - name: WriteDisposition
+      uid: google.cloud.bigquery.job.WriteDisposition
+    - name: Model
+      uid: google.cloud.bigquery.model.Model
+    - name: ModelReference
+      uid: google.cloud.bigquery.model.ModelReference
+    - name: DeterminismLevel
+      uid: google.cloud.bigquery.routine.DeterminismLevel
+    - name: Routine
+      uid: google.cloud.bigquery.routine.Routine
+    - name: RoutineArgument
+      uid: google.cloud.bigquery.routine.RoutineArgument
+    - name: RoutineReference
+      uid: google.cloud.bigquery.routine.RoutineReference
+    - name: RoutineType
+      uid: google.cloud.bigquery.routine.RoutineType
+    - name: PolicyTagList
+      uid: google.cloud.bigquery.schema.PolicyTagList
+    - name: SchemaField
+      uid: google.cloud.bigquery.schema.SchemaField
+    - name: CloneDefinition
+      uid: google.cloud.bigquery.table.CloneDefinition
+    - name: PartitionRange
+      uid: google.cloud.bigquery.table.PartitionRange
+    - name: RangePartitioning
+      uid: google.cloud.bigquery.table.RangePartitioning
+    - name: Row
+      uid: google.cloud.bigquery.table.Row
+    - name: RowIterator
+      uid: google.cloud.bigquery.table.RowIterator
+    - name: SnapshotDefinition
+      uid: google.cloud.bigquery.table.SnapshotDefinition
+    - name: Table
+      uid: google.cloud.bigquery.table.Table
+    - name: TableListItem
+      uid: google.cloud.bigquery.table.TableListItem
+    - name: TableReference
+      uid: google.cloud.bigquery.table.TableReference
+    - name: TimePartitioning
+      uid: google.cloud.bigquery.table.TimePartitioning
+    - name: TimePartitioningType
+      uid: google.cloud.bigquery.table.TimePartitioningType
+    name: Bigquery
+  - items:
+    - items:
+      - name: Overview
+        uid: google.cloud.bigquery_v2.types
+      - name: DeleteModelRequest
+        uid: google.cloud.bigquery_v2.types.DeleteModelRequest
+      - name: EncryptionConfiguration
+        uid: google.cloud.bigquery_v2.types.EncryptionConfiguration
+      - name: GetModelRequest
+        uid: google.cloud.bigquery_v2.types.GetModelRequest
+      - name: ListModelsRequest
+        uid: google.cloud.bigquery_v2.types.ListModelsRequest
+      - name: ListModelsResponse
+        uid: google.cloud.bigquery_v2.types.ListModelsResponse
+      - items:
+        - name: Overview
+          uid: google.cloud.bigquery_v2.types.Model
+        - name: AggregateClassificationMetrics
+          uid: google.cloud.bigquery_v2.types.Model.AggregateClassificationMetrics
+        - name: ArimaFittingMetrics
+          uid: google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+          - name: ArimaSingleModelForecastingMetrics
+            uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics.ArimaSingleModelForecastingMetrics
+          name: ArimaForecastingMetrics
+          uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+        - name: ArimaOrder
+          uid: google.cloud.bigquery_v2.types.Model.ArimaOrder
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics
+          - name: BinaryConfusionMatrix
+            uid: google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics.BinaryConfusionMatrix
+          name: BinaryClassificationMetrics
+          uid: google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics
+          - items:
+            - name: Overview
+              uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster
+            - items:
+              - name: Overview
+                uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster.FeatureValue
+              - items:
+                - name: Overview
+                  uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster.FeatureValue.CategoricalValue
+                - name: CategoryCount
+                  uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster.FeatureValue.CategoricalValue.CategoryCount
+                name: CategoricalValue
+                uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster.FeatureValue.CategoricalValue
+              name: FeatureValue
+              uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster.FeatureValue
+            name: Cluster
+            uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics.Cluster
+          name: ClusteringMetrics
+          uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics
+        - name: DataFrequency
+          uid: google.cloud.bigquery_v2.types.Model.DataFrequency
+        - name: DataSplitMethod
+          uid: google.cloud.bigquery_v2.types.Model.DataSplitMethod
+        - name: DataSplitResult
+          uid: google.cloud.bigquery_v2.types.Model.DataSplitResult
+        - name: DistanceType
+          uid: google.cloud.bigquery_v2.types.Model.DistanceType
+        - name: EvaluationMetrics
+          uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+        - name: FeedbackType
+          uid: google.cloud.bigquery_v2.types.Model.FeedbackType
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.GlobalExplanation
+          - name: Explanation
+            uid: google.cloud.bigquery_v2.types.Model.GlobalExplanation.Explanation
+          name: GlobalExplanation
+          uid: google.cloud.bigquery_v2.types.Model.GlobalExplanation
+        - name: HolidayRegion
+          uid: google.cloud.bigquery_v2.types.Model.HolidayRegion
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.KmeansEnums
+          - name: KmeansInitializationMethod
+            uid: google.cloud.bigquery_v2.types.Model.KmeansEnums.KmeansInitializationMethod
+          name: KmeansEnums
+          uid: google.cloud.bigquery_v2.types.Model.KmeansEnums
+        - name: LabelsEntry
+          uid: google.cloud.bigquery_v2.types.Model.LabelsEntry
+        - name: LearnRateStrategy
+          uid: google.cloud.bigquery_v2.types.Model.LearnRateStrategy
+        - name: LossType
+          uid: google.cloud.bigquery_v2.types.Model.LossType
+        - name: ModelType
+          uid: google.cloud.bigquery_v2.types.Model.ModelType
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics
+          - items:
+            - name: Overview
+              uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics.ConfusionMatrix
+            - name: Entry
+              uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics.ConfusionMatrix.Entry
+            - name: Row
+              uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics.ConfusionMatrix.Row
+            name: ConfusionMatrix
+            uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics.ConfusionMatrix
+          name: MultiClassClassificationMetrics
+          uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics
+        - name: OptimizationStrategy
+          uid: google.cloud.bigquery_v2.types.Model.OptimizationStrategy
+        - name: RankingMetrics
+          uid: google.cloud.bigquery_v2.types.Model.RankingMetrics
+        - name: RegressionMetrics
+          uid: google.cloud.bigquery_v2.types.Model.RegressionMetrics
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.SeasonalPeriod
+          - name: SeasonalPeriodType
+            uid: google.cloud.bigquery_v2.types.Model.SeasonalPeriod.SeasonalPeriodType
+          name: SeasonalPeriod
+          uid: google.cloud.bigquery_v2.types.Model.SeasonalPeriod
+        - items:
+          - name: Overview
+            uid: google.cloud.bigquery_v2.types.Model.TrainingRun
+          - items:
+            - name: Overview
+              uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult
+            - items:
+              - name: Overview
+                uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult.ArimaResult
+              - name: ArimaCoefficients
+                uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult.ArimaResult.ArimaCoefficients
+              - name: ArimaModelInfo
+                uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult.ArimaResult.ArimaModelInfo
+              name: ArimaResult
+              uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult.ArimaResult
+            - name: ClusterInfo
+              uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult.ClusterInfo
+            name: IterationResult
+            uid: google.cloud.bigquery_v2.types.Model.TrainingRun.IterationResult
+          - items:
+            - name: Overview
+              uid: google.cloud.bigquery_v2.types.Model.TrainingRun.TrainingOptions
+            - name: LabelClassWeightsEntry
+              uid: google.cloud.bigquery_v2.types.Model.TrainingRun.TrainingOptions.LabelClassWeightsEntry
+            name: TrainingOptions
+            uid: google.cloud.bigquery_v2.types.Model.TrainingRun.TrainingOptions
+          name: TrainingRun
+          uid: google.cloud.bigquery_v2.types.Model.TrainingRun
+        name: Model
+        uid: google.cloud.bigquery_v2.types.Model
+      - name: ModelReference
+        uid: google.cloud.bigquery_v2.types.ModelReference
+      - name: PatchModelRequest
+        uid: google.cloud.bigquery_v2.types.PatchModelRequest
+      - items:
+        - name: Overview
+          uid: google.cloud.bigquery_v2.types.StandardSqlDataType
+        - name: TypeKind
+          uid: google.cloud.bigquery_v2.types.StandardSqlDataType.TypeKind
+        name: StandardSqlDataType
+        uid: google.cloud.bigquery_v2.types.StandardSqlDataType
+      - name: StandardSqlField
+        uid: google.cloud.bigquery_v2.types.StandardSqlField
+      - name: StandardSqlStructType
+        uid: google.cloud.bigquery_v2.types.StandardSqlStructType
+      - name: StandardSqlTableType
+        uid: google.cloud.bigquery_v2.types.StandardSqlTableType
+      - name: TableReference
+        uid: google.cloud.bigquery_v2.types.TableReference
+      name: types
+      uid: google.cloud.bigquery_v2.types
+    name: Bigquery V2
+  name: google-cloud-bigquery

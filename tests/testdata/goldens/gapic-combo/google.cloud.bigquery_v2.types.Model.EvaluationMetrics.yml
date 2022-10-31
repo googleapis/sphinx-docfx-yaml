@@ -1,0 +1,203 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes:
+  - description: "Populated for regression models and explicit\n   feedback type matrix\
+      \ factorization models.\n   \n   This field is a member of <code>oneof</code>_\
+      \ <code>metrics</code>."
+    id: regression_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.RegressionMetrics">google.cloud.bigquery_v2.types.Model.RegressionMetrics</xref>
+  - description: "Populated for binary\n   classification/classifier models.\n   \n\
+      \   This field is a member of <code>oneof</code>_ <code>metrics</code>."
+    id: binary_classification_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics">google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics</xref>
+  - description: "Populated for multi-class\n   classification/classifier models.\n\
+      \   \n   This field is a member of <code>oneof</code>_ <code>metrics</code>."
+    id: multi_class_classification_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics">google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics</xref>
+  - description: "Populated for clustering models.\n   \n   This field is a member\
+      \ of <code>oneof</code>_ <code>metrics</code>."
+    id: clustering_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.ClusteringMetrics">google.cloud.bigquery_v2.types.Model.ClusteringMetrics</xref>
+  - description: "Populated for implicit feedback type matrix\n   factorization models.\n\
+      \   \n   This field is a member of <code>oneof</code>_ <code>metrics</code>."
+    id: ranking_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.RankingMetrics">google.cloud.bigquery_v2.types.Model.RankingMetrics</xref>
+  - description: "Populated for ARIMA models.\n   \n   This field is a member of <code>oneof</code>_\
+      \ <code>metrics</code>."
+    id: arima_forecasting_metrics
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics">google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics</xref>
+  children:
+  - google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__delattr__
+  - google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__eq__
+  - google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__ne__
+  - google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__setattr__
+  class: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: proto.message.Message
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model
+  name: EvaluationMetrics
+  source:
+    id: EvaluationMetrics
+    path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 914
+  summary: 'Evaluation metrics of a model. These are either computed on
+
+    all training data or just the eval data based on whether eval
+
+    data was used during training. These are not present for
+
+    imported models.
+
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+
+    For each oneof, at most one member field can be set at the same time.
+
+    Setting any member of the oneof automatically clears all other
+
+    members.
+
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    '
+  syntax:
+    content: EvaluationMetrics(mapping=None, *, ignore_unknown_fields=False, **kwargs)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__delattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model
+  name: __delattr__
+  source:
+    id: __delattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 701
+  summary: 'Delete the value on the given field.
+
+
+    This is generally equivalent to setting a falsy value.
+
+
+    '
+  syntax:
+    content: __delattr__(key)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__delattr__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__eq__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model
+  name: __eq__
+  source:
+    id: __eq__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 708
+  summary: 'Return True if the messages are equal, False otherwise.
+
+
+    '
+  syntax:
+    content: __eq__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__eq__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__ne__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model
+  name: __ne__
+  source:
+    id: __ne__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 754
+  summary: 'Return True if the messages are unequal, False otherwise.
+
+
+    '
+  syntax:
+    content: __ne__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__ne__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types.Model
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 761
+  summary: 'Set the value on the given field.
+
+
+    For well-known protocol buffer types which are marshalled, either
+
+    the protocol buffer object or the Python equivalent is accepted.
+
+
+    '
+  syntax:
+    content: __setattr__(key, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__setattr__
+references:
+- fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__delattr__
+  isExternal: false
+  name: __delattr__
+  parent: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__delattr__
+- fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__eq__
+  isExternal: false
+  name: __eq__
+  parent: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__eq__
+- fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__ne__
+  isExternal: false
+  name: __ne__
+  parent: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__ne__
+- fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics.__setattr__

@@ -1,0 +1,424 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.ExtractJobConfig.__setattr__
+  - google.cloud.bigquery.job.ExtractJobConfig.compression
+  - google.cloud.bigquery.job.ExtractJobConfig.destination_format
+  - google.cloud.bigquery.job.ExtractJobConfig.field_delimiter
+  - google.cloud.bigquery.job.ExtractJobConfig.from_api_repr
+  - google.cloud.bigquery.job.ExtractJobConfig.labels
+  - google.cloud.bigquery.job.ExtractJobConfig.print_header
+  - google.cloud.bigquery.job.ExtractJobConfig.to_api_repr
+  - google.cloud.bigquery.job.ExtractJobConfig.use_avro_logical_types
+  - google.cloud.bigquery.job.ExtractJobConfig.__init__
+  - google.cloud.bigquery.job.ExtractJobConfig
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.job.base._JobConfig
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: ExtractJobConfig
+  source:
+    id: ExtractJobConfig
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 27
+  summary: 'Configuration options for extract jobs.
+
+
+    All properties in this class are optional. Values which are :data:`None` ->
+
+    server defaults. Set properties on the constructed configuration by using
+
+    the property name as the name of a keyword argument.
+
+
+    '
+  syntax:
+    content: ExtractJobConfig(**kwargs)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.job.ExtractJobConfig
+- attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 767
+  summary: 'Override to be able to raise error if an unknown property is being set
+
+
+    '
+  syntax:
+    content: __setattr__(name, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.ExtractJobConfig.__setattr__
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.compression
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: compression
+  source:
+    id: compression
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.job.Compression">google.cloud.bigquery.job.Compression</xref>:
+    Compression type to use for
+
+    exported files.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract.FIELDS.compression
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.compression
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.destination_format
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: destination_format
+  source:
+    id: destination_format
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.job.DestinationFormat">google.cloud.bigquery.job.DestinationFormat</xref>:
+    Exported file format.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract.FIELDS.destination_format
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.destination_format
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.field_delimiter
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: field_delimiter
+  source:
+    id: field_delimiter
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: Delimiter to use between fields in the exported data.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract.FIELDS.field_delimiter
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.field_delimiter
+- *id003
+- attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 910
+  summary: 'Factory: construct a job configuration given its API representation
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: A job configuration in the same representation as is returned from
+        the API.
+      id: resource
+      var_type: Dict
+    returns:
+    - description: Configuration parsed from <code>resource</code>.
+      var_type: google.cloud.bigquery.job._JobConfig
+  type: method
+  uid: google.cloud.bigquery.job.ExtractJobConfig.from_api_repr
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.labels
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: labels
+  source:
+    id: labels
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, str]: Labels for the job.
+
+
+    This method always returns a dict. Once a job has been created on the
+
+    server, its labels cannot be modified anymore.
+
+    '
+  syntax:
+    exceptions:
+    - description: If <code>value</code> type is invalid.
+      var_type: ValueError
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.labels
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.print_header
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: print_header
+  source:
+    id: print_header
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: Print a header row in the exported data.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract.FIELDS.print_header
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.print_header
+- *id005
+- attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 865
+  summary: 'Build an API representation of the job config.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: A dictionary in the format used by the BigQuery API.
+      var_type: Dict
+  type: method
+  uid: google.cloud.bigquery.job.ExtractJobConfig.to_api_repr
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.use_avro_logical_types
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: use_avro_logical_types
+  source:
+    id: use_avro_logical_types
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'bool: For loads of Avro data, governs whether Avro logical types are
+
+    converted to their corresponding BigQuery types (e.g. TIMESTAMP) rather than
+
+    raw types (e.g. INTEGER).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.ExtractJobConfig.use_avro_logical_types
+- *id006
+- attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 35
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(**kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.ExtractJobConfig.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.ExtractJobConfig
+  fullName: google.cloud.bigquery.job.ExtractJobConfig
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: google.cloud.bigquery.job.base._JobConfig
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: ExtractJobConfig
+  source:
+    id: ExtractJobConfig
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/extract.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 27
+  summary: 'Configuration options for extract jobs.
+
+
+    All properties in this class are optional. Values which are :data:`None` ->
+
+    server defaults. Set properties on the constructed configuration by using
+
+    the property name as the name of a keyword argument.
+
+
+    '
+  syntax:
+    content: ExtractJobConfig(**kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.ExtractJobConfig
+references:
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.__setattr__
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.compression
+  isExternal: false
+  name: compression
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.compression
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.destination_format
+  isExternal: false
+  name: destination_format
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.destination_format
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.field_delimiter
+  isExternal: false
+  name: field_delimiter
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.field_delimiter
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.from_api_repr
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.labels
+  isExternal: false
+  name: labels
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.labels
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.print_header
+  isExternal: false
+  name: print_header
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.print_header
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.to_api_repr
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.use_avro_logical_types
+  isExternal: false
+  name: use_avro_logical_types
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.use_avro_logical_types
+- fullName: google.cloud.bigquery.job.ExtractJobConfig.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig.__init__
+- fullName: google.cloud.bigquery.job.ExtractJobConfig
+  isExternal: false
+  name: ExtractJobConfig
+  parent: google.cloud.bigquery.job.ExtractJobConfig
+  uid: google.cloud.bigquery.job.ExtractJobConfig

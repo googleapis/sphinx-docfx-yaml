@@ -1,0 +1,186 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.base.ReservationUsage
+  - google.cloud.bigquery.job.base.ReservationUsage.count
+  - google.cloud.bigquery.job.base.ReservationUsage.index
+  - google.cloud.bigquery.job.base.ReservationUsage.name
+  - google.cloud.bigquery.job.base.ReservationUsage.slot_ms
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: ReservationUsage
+  source:
+    id: ReservationUsage
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Job resource usage for a reservation.
+
+
+    '
+  syntax:
+    content: ReservationUsage(name, slot_ms)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.job.base.ReservationUsage
+- attributes: []
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: ReservationUsage
+  source:
+    id: ReservationUsage
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Create new instance of ReservationUsage(name, slot_ms)
+
+
+    '
+  syntax:
+    content: ReservationUsage(name, slot_ms)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.ReservationUsage
+- attributes: []
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage.count
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: count
+  source:
+    id: count
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Return number of occurrences of value.
+
+
+    '
+  syntax:
+    content: count(value, /)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.ReservationUsage.count
+- attributes: []
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage.index
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: index
+  source:
+    id: index
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Return first index of value.
+
+
+    Raises ValueError if the value is not present.
+
+
+    '
+  syntax:
+    content: index(value, start=0, stop=9223372036854775807, /)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.base.ReservationUsage.index
+- attributes: []
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage.name
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: name
+  source:
+    id: name
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Reservation name or "unreserved" for on-demand resources usage.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.base.ReservationUsage.name
+- attributes: []
+  class: google.cloud.bigquery.job.base.ReservationUsage
+  fullName: google.cloud.bigquery.job.base.ReservationUsage.slot_ms
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: slot_ms
+  source:
+    id: slot_ms
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Total slot milliseconds used by the reservation for a particular job.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.base.ReservationUsage.slot_ms
+references:
+- fullName: google.cloud.bigquery.job.base.ReservationUsage
+  isExternal: false
+  name: ReservationUsage
+  parent: google.cloud.bigquery.job.base.ReservationUsage
+  uid: google.cloud.bigquery.job.base.ReservationUsage
+- fullName: google.cloud.bigquery.job.base.ReservationUsage.count
+  isExternal: false
+  name: count
+  parent: google.cloud.bigquery.job.base.ReservationUsage
+  uid: google.cloud.bigquery.job.base.ReservationUsage.count
+- fullName: google.cloud.bigquery.job.base.ReservationUsage.index
+  isExternal: false
+  name: index
+  parent: google.cloud.bigquery.job.base.ReservationUsage
+  uid: google.cloud.bigquery.job.base.ReservationUsage.index
+- fullName: google.cloud.bigquery.job.base.ReservationUsage.name
+  isExternal: false
+  name: name
+  parent: google.cloud.bigquery.job.base.ReservationUsage
+  uid: google.cloud.bigquery.job.base.ReservationUsage.name
+- fullName: google.cloud.bigquery.job.base.ReservationUsage.slot_ms
+  isExternal: false
+  name: slot_ms
+  parent: google.cloud.bigquery.job.base.ReservationUsage
+  uid: google.cloud.bigquery.job.base.ReservationUsage.slot_ms

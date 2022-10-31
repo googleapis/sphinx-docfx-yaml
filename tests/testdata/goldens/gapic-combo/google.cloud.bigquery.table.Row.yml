@@ -1,0 +1,257 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.table.Row.get
+  - google.cloud.bigquery.table.Row.items
+  - google.cloud.bigquery.table.Row.keys
+  - google.cloud.bigquery.table.Row.values
+  - google.cloud.bigquery.table.Row.__init__
+  - google.cloud.bigquery.table.Row
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: Row
+  source:
+    id: Row
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1344
+  summary: 'A BigQuery row.
+
+
+    Values can be accessed by position (index), by key like a dict,
+
+    or as properties.
+
+    '
+  syntax:
+    content: Row(values, field_to_index)
+    parameters:
+    - description: The row values
+      id: values
+      var_type: Sequence[object]
+    - description: A mapping from schema field names to indexes
+      id: field_to_index
+      var_type: Dict[str, int]
+  type: class
+  uid: google.cloud.bigquery.table.Row
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row.get
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: get
+  source:
+    id: get
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1399
+  summary: 'Return a value for key, with a default value if it does not exist.
+
+    '
+  syntax:
+    content: 'get(key: str, default: typing.Optional[typing.Any] = None)'
+    parameters:
+    - description: The key of the column to access
+      id: key
+      var_type: str
+    - defaultValue: None
+      description: The default value to use if the key does not exist. (Defaults to
+        :data:<code>None</code>.)
+      id: default
+      var_type: object
+    returns:
+    - description: The value associated with the provided key, or a default value.
+      var_type: 'object .. rubric:: Examples When the key exists, the value associated
+        with it is returned. >>> Row((''a'', ''b''), {''x'': 0, ''y'': 1}).get(''x'')
+        ''a'' The default value is :data:<code>None</code> when the key does not exist.
+        >>> Row((''a'', ''b''), {''x'': 0, ''y'': 1}).get(''z'') None The default
+        value can be overrided with the <code>default</code> parameter. >>> Row((''a'',
+        ''b''), {''x'': 0, ''y'': 1}).get(''z'', '''') '''' >>> Row((''a'', ''b''),
+        {''x'': 0, ''y'': 1}).get(''z'', default = '''') '''''
+  type: method
+  uid: google.cloud.bigquery.table.Row.get
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row.items
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: items
+  source:
+    id: items
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1384
+  summary: 'Return items as `(key, value)` pairs.
+
+    '
+  syntax:
+    content: items()
+    parameters: []
+    returns:
+    - description: The <code>(key, value)</code> pairs representing this row.
+      var_type: 'Iterable[Tuple[str, object]] .. rubric:: Examples >>> list(Row((''a'',
+        ''b''), {''x'': 0, ''y'': 1}).items()) [(''x'', ''a''), (''y'', ''b'')]'
+  type: method
+  uid: google.cloud.bigquery.table.Row.items
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row.keys
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: keys
+  source:
+    id: keys
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1371
+  summary: 'Return the keys for using a row as a dict.
+
+    '
+  syntax:
+    content: keys()
+    parameters: []
+    returns:
+    - description: The keys corresponding to the columns of a row
+      var_type: 'Iterable[str] .. rubric:: Examples >>> list(Row((''a'', ''b''), {''x'':
+        0, ''y'': 1}).keys()) [''x'', ''y'']'
+  type: method
+  uid: google.cloud.bigquery.table.Row.keys
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row.values
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: values
+  source:
+    id: values
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1363
+  summary: 'Return the values included in this row.
+
+    '
+  syntax:
+    content: values()
+    parameters: []
+    returns:
+    - description: A sequence of length <code>len(row)</code>.
+      var_type: Sequence[object]
+  type: method
+  uid: google.cloud.bigquery.table.Row.values
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1359
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(values, field_to_index)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.Row.__init__
+- attributes: []
+  class: google.cloud.bigquery.table.Row
+  fullName: google.cloud.bigquery.table.Row
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: Row
+  source:
+    id: Row
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1344
+  summary: 'A BigQuery row.
+
+
+    Values can be accessed by position (index), by key like a dict,
+
+    or as properties.
+
+    '
+  syntax:
+    content: Row(values, field_to_index)
+    parameters:
+    - description: The row values
+      id: values
+      var_type: Sequence[object]
+    - description: A mapping from schema field names to indexes
+      id: field_to_index
+      var_type: Dict[str, int]
+  type: method
+  uid: google.cloud.bigquery.table.Row
+references:
+- fullName: google.cloud.bigquery.table.Row.get
+  isExternal: false
+  name: get
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row.get
+- fullName: google.cloud.bigquery.table.Row.items
+  isExternal: false
+  name: items
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row.items
+- fullName: google.cloud.bigquery.table.Row.keys
+  isExternal: false
+  name: keys
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row.keys
+- fullName: google.cloud.bigquery.table.Row.values
+  isExternal: false
+  name: values
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row.values
+- fullName: google.cloud.bigquery.table.Row.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row.__init__
+- fullName: google.cloud.bigquery.table.Row
+  isExternal: false
+  name: Row
+  parent: google.cloud.bigquery.table.Row
+  uid: google.cloud.bigquery.table.Row

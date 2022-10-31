@@ -1,0 +1,95 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.enums.CreateDisposition.CREATE_IF_NEEDED
+  - google.cloud.bigquery.enums.CreateDisposition.CREATE_NEVER
+  class: google.cloud.bigquery.enums.CreateDisposition
+  fullName: google.cloud.bigquery.enums.CreateDisposition
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: CreateDisposition
+  source:
+    id: CreateDisposition
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 64
+  summary: 'Specifies whether the job is allowed to create new tables. The default
+
+    value is `CREATE_IF_NEEDED`.
+
+
+    Creation, truncation and append actions occur as one atomic update
+
+    upon job completion.
+
+
+    '
+  syntax:
+    content: CreateDisposition()
+  type: class
+  uid: google.cloud.bigquery.enums.CreateDisposition
+- attributes: []
+  class: google.cloud.bigquery.enums.CreateDisposition
+  fullName: google.cloud.bigquery.enums.CreateDisposition.CREATE_IF_NEEDED
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: CREATE_IF_NEEDED
+  source:
+    id: CREATE_IF_NEEDED
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'If the table does not exist, BigQuery creates the table.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.CreateDisposition.CREATE_IF_NEEDED
+- attributes: []
+  class: google.cloud.bigquery.enums.CreateDisposition
+  fullName: google.cloud.bigquery.enums.CreateDisposition.CREATE_NEVER
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: CREATE_NEVER
+  source:
+    id: CREATE_NEVER
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The table must already exist. If it does not, a ''notFound'' error is
+
+    returned in the job result.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.CreateDisposition.CREATE_NEVER
+references:
+- fullName: google.cloud.bigquery.enums.CreateDisposition.CREATE_IF_NEEDED
+  isExternal: false
+  name: CREATE_IF_NEEDED
+  parent: google.cloud.bigquery.enums.CreateDisposition
+  uid: google.cloud.bigquery.enums.CreateDisposition.CREATE_IF_NEEDED
+- fullName: google.cloud.bigquery.enums.CreateDisposition.CREATE_NEVER
+  isExternal: false
+  name: CREATE_NEVER
+  parent: google.cloud.bigquery.enums.CreateDisposition
+  uid: google.cloud.bigquery.enums.CreateDisposition.CREATE_NEVER

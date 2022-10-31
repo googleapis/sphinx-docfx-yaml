@@ -1,0 +1,350 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.DmlStats
+  - google.cloud.bigquery.job.DmlStats.count
+  - google.cloud.bigquery.job.DmlStats.deleted_row_count
+  - google.cloud.bigquery.job.DmlStats.index
+  - google.cloud.bigquery.job.DmlStats.inserted_row_count
+  - google.cloud.bigquery.job.DmlStats.updated_row_count
+  - google.cloud.bigquery.job.DmlStats.__init__
+  - google.cloud.bigquery.job.DmlStats.from_api_repr
+  - google.cloud.bigquery.job.DmlStats
+  - google.cloud.bigquery.job.DmlStats
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: DmlStats
+  source:
+    id: DmlStats
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 162
+  summary: 'Detailed statistics for DML statements.
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats
+
+
+    '
+  syntax:
+    content: "DmlStats(\n    inserted_row_count: int = 0, deleted_row_count: int =\
+      \ 0, updated_row_count: int = 0\n)"
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.job.DmlStats
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: DmlStats
+  source:
+    id: DmlStats
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 162
+  summary: 'Create new instance of DmlStats(inserted_row_count, deleted_row_count,
+    updated_row_count)
+
+
+    '
+  syntax:
+    content: "DmlStats(\n    inserted_row_count: int = 0, deleted_row_count: int =\
+      \ 0, updated_row_count: int = 0\n)"
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.count
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: count
+  source:
+    id: count
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Return number of occurrences of value.
+
+
+    '
+  syntax:
+    content: count(value, /)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats.count
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.deleted_row_count
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: deleted_row_count
+  source:
+    id: deleted_row_count
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Number of deleted rows. populated by DML DELETE, MERGE and TRUNCATE statements.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.DmlStats.deleted_row_count
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.index
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: index
+  source:
+    id: index
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Return first index of value.
+
+
+    Raises ValueError if the value is not present.
+
+
+    '
+  syntax:
+    content: index(value, start=0, stop=9223372036854775807, /)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats.index
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.inserted_row_count
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: inserted_row_count
+  source:
+    id: inserted_row_count
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Number of inserted rows. Populated by DML INSERT and MERGE statements.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.DmlStats.inserted_row_count
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.updated_row_count
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: updated_row_count
+  source:
+    id: updated_row_count
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Number of updated rows. Populated by DML UPDATE and MERGE statements.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.DmlStats.updated_row_count
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats.__init__
+- class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 178
+  summary: API documentation for `bigquery.job.DmlStats.from_api_repr` method.
+  syntax:
+    content: from_api_repr(stats)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats.from_api_repr
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: DmlStats
+  source:
+    id: DmlStats
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 162
+  summary: 'Detailed statistics for DML statements.
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats
+
+
+    '
+  syntax:
+    content: "DmlStats(\n    inserted_row_count: int = 0, deleted_row_count: int =\
+      \ 0, updated_row_count: int = 0\n)"
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats
+- attributes: []
+  class: google.cloud.bigquery.job.DmlStats
+  fullName: google.cloud.bigquery.job.DmlStats
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: builtins.tuple
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: DmlStats
+  source:
+    id: DmlStats
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/query.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 162
+  summary: 'Create new instance of DmlStats(inserted_row_count, deleted_row_count,
+    updated_row_count)
+
+
+    '
+  syntax:
+    content: "DmlStats(\n    inserted_row_count: int = 0, deleted_row_count: int =\
+      \ 0, updated_row_count: int = 0\n)"
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.DmlStats
+references:
+- fullName: google.cloud.bigquery.job.DmlStats
+  isExternal: false
+  name: DmlStats
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats
+- fullName: google.cloud.bigquery.job.DmlStats.count
+  isExternal: false
+  name: count
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.count
+- fullName: google.cloud.bigquery.job.DmlStats.deleted_row_count
+  isExternal: false
+  name: deleted_row_count
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.deleted_row_count
+- fullName: google.cloud.bigquery.job.DmlStats.index
+  isExternal: false
+  name: index
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.index
+- fullName: google.cloud.bigquery.job.DmlStats.inserted_row_count
+  isExternal: false
+  name: inserted_row_count
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.inserted_row_count
+- fullName: google.cloud.bigquery.job.DmlStats.updated_row_count
+  isExternal: false
+  name: updated_row_count
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.updated_row_count
+- fullName: google.cloud.bigquery.job.DmlStats.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.__init__
+- fullName: google.cloud.bigquery.job.DmlStats.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats.from_api_repr
+- fullName: google.cloud.bigquery.job.DmlStats
+  isExternal: false
+  name: DmlStats
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats
+- fullName: google.cloud.bigquery.job.DmlStats
+  isExternal: false
+  name: DmlStats
+  parent: google.cloud.bigquery.job.DmlStats
+  uid: google.cloud.bigquery.job.DmlStats

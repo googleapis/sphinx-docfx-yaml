@@ -1,0 +1,120 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.enums.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  - google.cloud.bigquery.enums.DeterminismLevel.DETERMINISTIC
+  - google.cloud.bigquery.enums.DeterminismLevel.NOT_DETERMINISTIC
+  class: google.cloud.bigquery.enums.DeterminismLevel
+  fullName: google.cloud.bigquery.enums.DeterminismLevel
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: DeterminismLevel
+  source:
+    id: DeterminismLevel
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 298
+  summary: 'Specifies determinism level for JavaScript user-defined functions (UDFs).
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#DeterminismLevel
+
+
+    '
+  syntax:
+    content: DeterminismLevel()
+  type: class
+  uid: google.cloud.bigquery.enums.DeterminismLevel
+- attributes: []
+  class: google.cloud.bigquery.enums.DeterminismLevel
+  fullName: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: DETERMINISM_LEVEL_UNSPECIFIED
+  source:
+    id: DETERMINISM_LEVEL_UNSPECIFIED
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The determinism of the UDF is unspecified.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+- attributes: []
+  class: google.cloud.bigquery.enums.DeterminismLevel
+  fullName: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISTIC
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: DETERMINISTIC
+  source:
+    id: DETERMINISTIC
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The UDF is deterministic, meaning that 2 function calls with the same
+    inputs
+
+    always produce the same result, even across 2 query runs.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISTIC
+- attributes: []
+  class: google.cloud.bigquery.enums.DeterminismLevel
+  fullName: google.cloud.bigquery.enums.DeterminismLevel.NOT_DETERMINISTIC
+  langs:
+  - python
+  module: google.cloud.bigquery.enums
+  name: NOT_DETERMINISTIC
+  source:
+    id: NOT_DETERMINISTIC
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The UDF is not deterministic.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.enums.DeterminismLevel.NOT_DETERMINISTIC
+references:
+- fullName: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  isExternal: false
+  name: DETERMINISM_LEVEL_UNSPECIFIED
+  parent: google.cloud.bigquery.enums.DeterminismLevel
+  uid: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+- fullName: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISTIC
+  isExternal: false
+  name: DETERMINISTIC
+  parent: google.cloud.bigquery.enums.DeterminismLevel
+  uid: google.cloud.bigquery.enums.DeterminismLevel.DETERMINISTIC
+- fullName: google.cloud.bigquery.enums.DeterminismLevel.NOT_DETERMINISTIC
+  isExternal: false
+  name: NOT_DETERMINISTIC
+  parent: google.cloud.bigquery.enums.DeterminismLevel
+  uid: google.cloud.bigquery.enums.DeterminismLevel.NOT_DETERMINISTIC

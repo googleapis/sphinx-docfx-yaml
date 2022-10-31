@@ -1,0 +1,372 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes:
+  - description: Output only. A hash of this resource.
+    id: etag
+    var_type: str
+  - description: Required. Unique identifier for this model.
+    id: model_reference
+    var_type: <xref uid="google.cloud.bigquery_v2.types.ModelReference">google.cloud.bigquery_v2.types.ModelReference</xref>
+  - description: "Output only. The time when this model was\n   created, in millisecs\
+      \ since the epoch."
+    id: creation_time
+    var_type: int
+  - description: "Output only. The time when this model was\n   last modified, in\
+      \ millisecs since the epoch."
+    id: last_modified_time
+    var_type: int
+  - description: "Optional. A user-friendly description of this\n   model."
+    id: description
+    var_type: str
+  - description: Optional. A descriptive name for this model.
+    id: friendly_name
+    var_type: str
+  - description: "The labels associated with this model. You\n   can use these to\
+      \ organize and group your models.\n   Label keys and values can be no longer\
+      \ than 63\n   characters, can only contain lowercase letters,\n   numeric characters,\
+      \ underscores and dashes.\n   International characters are allowed. Label\n\
+      \   values are optional. Label keys must start with\n   a letter and each label\
+      \ in the list must have a\n   different key."
+    id: labels
+    var_type: Mapping[str, str]
+  - description: "Optional. The time when this model expires,\n   in milliseconds\
+      \ since the epoch. If not present,\n   the model will persist indefinitely.\
+      \ Expired\n   models will be deleted and their storage\n   reclaimed.  The defaultTableExpirationMs\n\
+      \   property of the encapsulating dataset can be\n   used to set a default expirationTime\
+      \ on newly\n   created models."
+    id: expiration_time
+    var_type: int
+  - description: "Output only. The geographic location where\n   the model resides.\
+      \ This value is inherited from\n   the dataset."
+    id: location
+    var_type: str
+  - description: "Custom encryption configuration (e.g., Cloud\n   KMS keys). This\
+      \ shows the encryption\n   configuration of the model data while stored in\n\
+      \   BigQuery storage. This field can be used with\n   PatchModel to update encryption\
+      \ key for an\n   already encrypted model."
+    id: encryption_configuration
+    var_type: <xref uid="google.cloud.bigquery_v2.types.EncryptionConfiguration">google.cloud.bigquery_v2.types.EncryptionConfiguration</xref>
+  - description: Output only. Type of the model resource.
+    id: model_type
+    var_type: <xref uid="google.cloud.bigquery_v2.types.Model.ModelType">google.cloud.bigquery_v2.types.Model.ModelType</xref>
+  - description: "Output only. Information for all training runs in increasing\n \
+      \  order of start_time."
+    id: training_runs
+    var_type: Sequence[<xref uid="google.cloud.bigquery_v2.types.Model.TrainingRun">google.cloud.bigquery_v2.types.Model.TrainingRun</xref>]
+  - description: "Output only. Input feature columns that were\n   used to train this\
+      \ model."
+    id: feature_columns
+    var_type: Sequence[<xref uid="google.cloud.bigquery_v2.types.StandardSqlField">google.cloud.bigquery_v2.types.StandardSqlField</xref>]
+  - description: "Output only. Label columns that were used to train this\n   model.\
+      \ The output of the model will have a <code>predicted_</code>\n   prefix to\
+      \ these columns."
+    id: label_columns
+    var_type: Sequence[<xref uid="google.cloud.bigquery_v2.types.StandardSqlField">google.cloud.bigquery_v2.types.StandardSqlField</xref>]
+  - description: The best trial_id across all training runs.
+    id: best_trial_id
+    var_type: int
+  children:
+  - google.cloud.bigquery_v2.types.Model.AggregateClassificationMetrics
+  - google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics
+  - google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  - google.cloud.bigquery_v2.types.Model.ArimaOrder
+  - google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics
+  - google.cloud.bigquery_v2.types.Model.ClusteringMetrics
+  - google.cloud.bigquery_v2.types.Model.DataFrequency
+  - google.cloud.bigquery_v2.types.Model.DataSplitMethod
+  - google.cloud.bigquery_v2.types.Model.DataSplitResult
+  - google.cloud.bigquery_v2.types.Model.DistanceType
+  - google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  - google.cloud.bigquery_v2.types.Model.FeedbackType
+  - google.cloud.bigquery_v2.types.Model.GlobalExplanation
+  - google.cloud.bigquery_v2.types.Model.HolidayRegion
+  - google.cloud.bigquery_v2.types.Model.KmeansEnums
+  - google.cloud.bigquery_v2.types.Model.LabelsEntry
+  - google.cloud.bigquery_v2.types.Model.LearnRateStrategy
+  - google.cloud.bigquery_v2.types.Model.LossType
+  - google.cloud.bigquery_v2.types.Model.ModelType
+  - google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics
+  - google.cloud.bigquery_v2.types.Model.OptimizationStrategy
+  - google.cloud.bigquery_v2.types.Model.RankingMetrics
+  - google.cloud.bigquery_v2.types.Model.RegressionMetrics
+  - google.cloud.bigquery_v2.types.Model.SeasonalPeriod
+  - google.cloud.bigquery_v2.types.Model.TrainingRun
+  - google.cloud.bigquery_v2.types.Model.__delattr__
+  - google.cloud.bigquery_v2.types.Model.__eq__
+  - google.cloud.bigquery_v2.types.Model.__ne__
+  - google.cloud.bigquery_v2.types.Model.__setattr__
+  class: google.cloud.bigquery_v2.types.Model
+  fullName: google.cloud.bigquery_v2.types.Model
+  inheritance:
+  - inheritance:
+    - type: builtins.object
+    type: proto.message.Message
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: Model
+  source:
+    id: Model
+    path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery_v2/types/model.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 39
+  summary: ''
+  syntax:
+    content: Model(mapping=None, *, ignore_unknown_fields=False, **kwargs)
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery_v2.types.Model
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model
+  fullName: google.cloud.bigquery_v2.types.Model.__delattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __delattr__
+  source:
+    id: __delattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 701
+  summary: 'Delete the value on the given field.
+
+
+    This is generally equivalent to setting a falsy value.
+
+
+    '
+  syntax:
+    content: __delattr__(key)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.__delattr__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model
+  fullName: google.cloud.bigquery_v2.types.Model.__eq__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __eq__
+  source:
+    id: __eq__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 708
+  summary: 'Return True if the messages are equal, False otherwise.
+
+
+    '
+  syntax:
+    content: __eq__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.__eq__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model
+  fullName: google.cloud.bigquery_v2.types.Model.__ne__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __ne__
+  source:
+    id: __ne__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 754
+  summary: 'Return True if the messages are unequal, False otherwise.
+
+
+    '
+  syntax:
+    content: __ne__(other)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.__ne__
+- attributes: []
+  class: google.cloud.bigquery_v2.types.Model
+  fullName: google.cloud.bigquery_v2.types.Model.__setattr__
+  langs:
+  - python
+  module: google.cloud.bigquery_v2.types
+  name: __setattr__
+  source:
+    id: __setattr__
+    path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/proto/message.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 761
+  summary: 'Set the value on the given field.
+
+
+    For well-known protocol buffer types which are marshalled, either
+
+    the protocol buffer object or the Python equivalent is accepted.
+
+
+    '
+  syntax:
+    content: __setattr__(key, value)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery_v2.types.Model.__setattr__
+references:
+- fullName: google.cloud.bigquery_v2.types.Model.AggregateClassificationMetrics
+  isExternal: false
+  name: AggregateClassificationMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.AggregateClassificationMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics
+  isExternal: false
+  name: ArimaFittingMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.ArimaFittingMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+  isExternal: false
+  name: ArimaForecastingMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.ArimaForecastingMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.ArimaOrder
+  isExternal: false
+  name: ArimaOrder
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.ArimaOrder
+- fullName: google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics
+  isExternal: false
+  name: BinaryClassificationMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.BinaryClassificationMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.ClusteringMetrics
+  isExternal: false
+  name: ClusteringMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.ClusteringMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.DataFrequency
+  isExternal: false
+  name: DataFrequency
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.DataFrequency
+- fullName: google.cloud.bigquery_v2.types.Model.DataSplitMethod
+  isExternal: false
+  name: DataSplitMethod
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.DataSplitMethod
+- fullName: google.cloud.bigquery_v2.types.Model.DataSplitResult
+  isExternal: false
+  name: DataSplitResult
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.DataSplitResult
+- fullName: google.cloud.bigquery_v2.types.Model.DistanceType
+  isExternal: false
+  name: DistanceType
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.DistanceType
+- fullName: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+  isExternal: false
+  name: EvaluationMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.EvaluationMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.FeedbackType
+  isExternal: false
+  name: FeedbackType
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.FeedbackType
+- fullName: google.cloud.bigquery_v2.types.Model.GlobalExplanation
+  isExternal: false
+  name: GlobalExplanation
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.GlobalExplanation
+- fullName: google.cloud.bigquery_v2.types.Model.HolidayRegion
+  isExternal: false
+  name: HolidayRegion
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.HolidayRegion
+- fullName: google.cloud.bigquery_v2.types.Model.KmeansEnums
+  isExternal: false
+  name: KmeansEnums
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.KmeansEnums
+- fullName: google.cloud.bigquery_v2.types.Model.LabelsEntry
+  isExternal: false
+  name: LabelsEntry
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.LabelsEntry
+- fullName: google.cloud.bigquery_v2.types.Model.LearnRateStrategy
+  isExternal: false
+  name: LearnRateStrategy
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.LearnRateStrategy
+- fullName: google.cloud.bigquery_v2.types.Model.LossType
+  isExternal: false
+  name: LossType
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.LossType
+- fullName: google.cloud.bigquery_v2.types.Model.ModelType
+  isExternal: false
+  name: ModelType
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.ModelType
+- fullName: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics
+  isExternal: false
+  name: MultiClassClassificationMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.MultiClassClassificationMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.OptimizationStrategy
+  isExternal: false
+  name: OptimizationStrategy
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.OptimizationStrategy
+- fullName: google.cloud.bigquery_v2.types.Model.RankingMetrics
+  isExternal: false
+  name: RankingMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.RankingMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.RegressionMetrics
+  isExternal: false
+  name: RegressionMetrics
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.RegressionMetrics
+- fullName: google.cloud.bigquery_v2.types.Model.SeasonalPeriod
+  isExternal: false
+  name: SeasonalPeriod
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.SeasonalPeriod
+- fullName: google.cloud.bigquery_v2.types.Model.TrainingRun
+  isExternal: false
+  name: TrainingRun
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.TrainingRun
+- fullName: google.cloud.bigquery_v2.types.Model.__delattr__
+  isExternal: false
+  name: __delattr__
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.__delattr__
+- fullName: google.cloud.bigquery_v2.types.Model.__eq__
+  isExternal: false
+  name: __eq__
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.__eq__
+- fullName: google.cloud.bigquery_v2.types.Model.__ne__
+  isExternal: false
+  name: __ne__
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.__ne__
+- fullName: google.cloud.bigquery_v2.types.Model.__setattr__
+  isExternal: false
+  name: __setattr__
+  parent: google.cloud.bigquery_v2.types.Model
+  uid: google.cloud.bigquery_v2.types.Model.__setattr__

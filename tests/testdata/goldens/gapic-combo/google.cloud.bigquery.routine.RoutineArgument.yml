@@ -1,0 +1,311 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.routine.RoutineArgument.data_type
+  - google.cloud.bigquery.routine.RoutineArgument.from_api_repr
+  - google.cloud.bigquery.routine.RoutineArgument.kind
+  - google.cloud.bigquery.routine.RoutineArgument.mode
+  - google.cloud.bigquery.routine.RoutineArgument.name
+  - google.cloud.bigquery.routine.RoutineArgument.to_api_repr
+  - google.cloud.bigquery.routine.RoutineArgument.__init__
+  - google.cloud.bigquery.routine.RoutineArgument
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: RoutineArgument
+  source:
+    id: RoutineArgument
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 334
+  summary: 'Input/output argument of a function or a stored procedure.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#argument
+
+    '
+  syntax:
+    content: RoutineArgument(**kwargs)
+    parameters:
+    - description: Initial property values.
+      id: <code>**kwargs</code>
+      var_type: Dict
+  type: class
+  uid: google.cloud.bigquery.routine.RoutineArgument
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.data_type
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: data_type
+  source:
+    id: data_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[google.cloud.bigquery.StandardSqlDataType]: Type
+
+    of a variable, e.g., a function argument.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#Argument.FIELDS.data_type
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.RoutineArgument.data_type
+- *id001
+- attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 417
+  summary: 'Factory: construct a routine argument given its API representation.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: Resource, as returned from the API.
+      id: resource
+      var_type: Dict[str, object]
+    returns:
+    - description: Python object, as parsed from <code>resource</code>.
+      var_type: google.cloud.bigquery.routine.RoutineArgument
+  type: method
+  uid: google.cloud.bigquery.routine.RoutineArgument.from_api_repr
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.kind
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: kind
+  source:
+    id: kind
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: The kind of argument, for example `FIXED_TYPE` or
+
+    `ANY_TYPE`.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#Argument.FIELDS.argument_kind
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.RoutineArgument.kind
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.mode
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: mode
+  source:
+    id: mode
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: The input/output mode of the argument.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.RoutineArgument.mode
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.name
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: name
+  source:
+    id: name
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: Name of this argument.
+
+
+    Can be absent for function return argument.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.RoutineArgument.name
+- *id004
+- attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 432
+  summary: 'Construct the API resource representation of this routine argument.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: Routine argument represented as an API resource.
+      var_type: Dict[str, object]
+  type: method
+  uid: google.cloud.bigquery.routine.RoutineArgument.to_api_repr
+- attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 355
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(**kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.routine.RoutineArgument.__init__
+- attributes: []
+  class: google.cloud.bigquery.routine.RoutineArgument
+  fullName: google.cloud.bigquery.routine.RoutineArgument
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: RoutineArgument
+  source:
+    id: RoutineArgument
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 334
+  summary: 'Input/output argument of a function or a stored procedure.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#argument
+
+    '
+  syntax:
+    content: RoutineArgument(**kwargs)
+    parameters:
+    - description: Initial property values.
+      id: <code>**kwargs</code>
+      var_type: Dict
+  type: method
+  uid: google.cloud.bigquery.routine.RoutineArgument
+references:
+- fullName: google.cloud.bigquery.routine.RoutineArgument.data_type
+  isExternal: false
+  name: data_type
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.data_type
+- fullName: google.cloud.bigquery.routine.RoutineArgument.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.from_api_repr
+- fullName: google.cloud.bigquery.routine.RoutineArgument.kind
+  isExternal: false
+  name: kind
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.kind
+- fullName: google.cloud.bigquery.routine.RoutineArgument.mode
+  isExternal: false
+  name: mode
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.mode
+- fullName: google.cloud.bigquery.routine.RoutineArgument.name
+  isExternal: false
+  name: name
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.name
+- fullName: google.cloud.bigquery.routine.RoutineArgument.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.to_api_repr
+- fullName: google.cloud.bigquery.routine.RoutineArgument.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument.__init__
+- fullName: google.cloud.bigquery.routine.RoutineArgument
+  isExternal: false
+  name: RoutineArgument
+  parent: google.cloud.bigquery.routine.RoutineArgument
+  uid: google.cloud.bigquery.routine.RoutineArgument

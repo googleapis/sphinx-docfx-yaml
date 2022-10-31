@@ -1,0 +1,62 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.base.ReservationUsage
+  - google.cloud.bigquery.job.base.ScriptStackFrame
+  - google.cloud.bigquery.job.base.ScriptStatistics
+  - google.cloud.bigquery.job.base.SessionInfo
+  - google.cloud.bigquery.job.base.TransactionInfo
+  - google.cloud.bigquery.job.base.UnknownJob
+  fullName: google.cloud.bigquery.job.base
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: base
+  source:
+    id: base
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 0
+  summary: 'Base classes and helpers for job classes.
+
+
+    '
+  syntax: {}
+  type: module
+  uid: google.cloud.bigquery.job.base
+references:
+- fullName: google.cloud.bigquery.job.base.ReservationUsage
+  isExternal: false
+  name: ReservationUsage
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.ReservationUsage
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame
+  isExternal: false
+  name: ScriptStackFrame
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame
+- fullName: google.cloud.bigquery.job.base.ScriptStatistics
+  isExternal: false
+  name: ScriptStatistics
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.ScriptStatistics
+- fullName: google.cloud.bigquery.job.base.SessionInfo
+  isExternal: false
+  name: SessionInfo
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.SessionInfo
+- fullName: google.cloud.bigquery.job.base.TransactionInfo
+  isExternal: false
+  name: TransactionInfo
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.TransactionInfo
+- fullName: google.cloud.bigquery.job.base.UnknownJob
+  isExternal: false
+  name: UnknownJob
+  parent: google.cloud.bigquery.job.base
+  uid: google.cloud.bigquery.job.base.UnknownJob

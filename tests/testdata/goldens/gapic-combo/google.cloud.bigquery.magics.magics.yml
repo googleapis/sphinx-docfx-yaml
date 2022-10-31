@@ -1,0 +1,70 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: bigquery.magics
+  source:
+    id: magics
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/magics/magics.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/magics/magics.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 0
+  summary: "IPython Magics\n\n.. function:: %%bigquery\n\n    IPython cell magic to\
+    \ run a query and display the result as a DataFrame\n\n    .. code-block:: python\n\
+    \n        %%bigquery [<destination_var>] [--project <project>] [--use_legacy_sql]\n\
+    \                   [--verbose] [--params <params>]\n        <query>\n\n    Parameters:\n\
+    \n    * `<destination_var>` (Optional[line argument]):\n        variable to store\
+    \ the query results. The results are not displayed if\n        this parameter\
+    \ is used. If an error occurs during the query execution,\n        the corresponding\
+    \ `QueryJob` instance (if available) is stored in\n        the variable instead.\n\
+    \    * `--destination_table` (Optional[line argument]):\n        A dataset and\
+    \ table to store the query results. If table does not exists,\n        it will\
+    \ be created. If table already exists, its data will be overwritten.\n       \
+    \ Variable should be in a format <dataset_id>.<table_id>.\n    * `--no_query_cache`\
+    \ (Optional[line argument]):\n        Do not use cached query results.\n    *\
+    \ `--project <project>` (Optional[line argument]):\n        Project to use for\
+    \ running the query. Defaults to the context\n        <xref uid=\"google.cloud.bigquery.magics.Context.project\"\
+    >project</xref>.\n    * `--use_bqstorage_api` (Optional[line argument]):\n   \
+    \     [Deprecated] Not used anymore, as BigQuery Storage API is used by default.\n\
+    \    * `--use_rest_api` (Optional[line argument]):\n        Use the BigQuery REST\
+    \ API instead of the Storage API.\n    * `--use_legacy_sql` (Optional[line argument]):\n\
+    \        Runs the query using Legacy SQL syntax. Defaults to Standard SQL if\n\
+    \        this argument not used.\n    * `--verbose` (Optional[line argument]):\n\
+    \        If this flag is used, information including the query job ID and the\n\
+    \        amount of time for the query to complete will not be cleared after the\n\
+    \        query is finished. By default, this information will be displayed but\n\
+    \        will be cleared after the query is finished.\n    * `--params <params>`\
+    \ (Optional[line argument]):\n        If present, the argument following the `--params`\
+    \ flag must be\n        either:\n\n        * `str` - A JSON string representation\
+    \ of a dictionary in the\n          format `{\"param_name\": \"param_value\"}`\
+    \ (ex. `{\"num\": 17}`). Use\n          of the parameter in the query should be\
+    \ indicated with\n          `@param_name`. See `In[5]` in the Examples section\
+    \ below.\n\n        * `dict` reference - A reference to a `dict` in the format\n\
+    \          `{\"param_name\": \"param_value\"}`, where the value types must be\
+    \ JSON\n          serializable. The variable reference is indicated by a `$` before\n\
+    \          the variable name (ex. `$my_dict_var`). See `In[6]` and `In[7]`\n \
+    \         in the Examples section below.\n\n    * `<query>` (required, cell argument):\n\
+    \        SQL query to run. If the query does not contain any whitespace (aside\n\
+    \        from leading and trailing whitespace), it is assumed to represent a\n\
+    \        fully-qualified table ID, and the latter's data will be fetched.\n\n\
+    \    Returns:\n        A `pandas.DataFrame` with the query results.\n\n    ..\
+    \ note::\n        All queries run using this magic will run using the context\n\
+    \        <xref uid=\"google.cloud.bigquery.magics.Context.credentials\">credentials</xref>.\n\
+    \n"
+  syntax: {}
+  type: module
+  uid: google.cloud.bigquery.magics.magics
+references:
+- fullName: google.cloud.bigquery.magics.magics.Context
+  isExternal: false
+  name: Context
+  parent: google.cloud.bigquery.magics.magics
+  uid: google.cloud.bigquery.magics.magics.Context

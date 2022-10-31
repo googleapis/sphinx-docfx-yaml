@@ -1,0 +1,239 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.magics.magics.Context.bigquery_client_options
+  - google.cloud.bigquery.magics.magics.Context.bqstorage_client_options
+  - google.cloud.bigquery.magics.magics.Context.credentials
+  - google.cloud.bigquery.magics.magics.Context.default_query_job_config
+  - google.cloud.bigquery.magics.magics.Context.progress_bar_type
+  - google.cloud.bigquery.magics.magics.Context.project
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: Context
+  source:
+    id: Context
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/magics/magics.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/magics/magics.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 114
+  summary: 'Storage for objects to be used throughout an IPython notebook session.
+
+
+    A Context object is initialized when the `magics` module is imported,
+
+    and can be found at `google.cloud.bigquery.magics.context`.
+
+
+    '
+  syntax:
+    content: Context()
+    parameters: []
+  type: class
+  uid: google.cloud.bigquery.magics.magics.Context
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.bigquery_client_options
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: bigquery_client_options
+  source:
+    id: bigquery_client_options
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "google.api_core.client_options.ClientOptions: client options to be\nused\
+    \ through IPython magics.\n\nNote::\n    The client options do not need to be\
+    \ explicitly defined if no\n    special network connections are required. Normally\
+    \ you would be\n    using the https://bigquery.googleapis.com/ end point.\n\n\
+    Example:\n    Manually setting the endpoint:\n\n    >>> from google.cloud.bigquery\
+    \ import magics\n    >>> client_options = {}\n    >>> client_options['api_endpoint']\
+    \ = \"https://some.special.url\"\n    >>> magics.context.bigquery_client_options\
+    \ = client_options\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.bigquery_client_options
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.bqstorage_client_options
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: bqstorage_client_options
+  source:
+    id: bqstorage_client_options
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "google.api_core.client_options.ClientOptions: client options to be\nused\
+    \ through IPython magics for the storage client.\n\nNote::\n    The client options\
+    \ do not need to be explicitly defined if no\n    special network connections\
+    \ are required. Normally you would be\n    using the https://bigquerystorage.googleapis.com/\
+    \ end point.\n\nExample:\n    Manually setting the endpoint:\n\n    >>> from google.cloud.bigquery\
+    \ import magics\n    >>> client_options = {}\n    >>> client_options['api_endpoint']\
+    \ = \"https://some.special.url\"\n    >>> magics.context.bqstorage_client_options\
+    \ = client_options\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.bqstorage_client_options
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.credentials
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: credentials
+  source:
+    id: credentials
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "google.auth.credentials.Credentials: Credentials to use for queries\n\
+    performed through IPython magics.\n\nNote:\n    These credentials do not need\
+    \ to be explicitly defined if you are\n    using Application Default Credentials.\
+    \ If you are not using\n    Application Default Credentials, manually construct\
+    \ a\n    `google.auth.credentials.Credentials` object and set it as\n    the context\
+    \ credentials as demonstrated in the example below. See\n    `auth docs`_ for\
+    \ more information on obtaining credentials.\n\nExample:\n    Manually setting\
+    \ the context credentials:\n\n    >>> from google.cloud.bigquery import magics\n\
+    \    >>> from google.oauth2 import service_account\n    >>> credentials = (service_account\n\
+    \    ...     .Credentials.from_service_account_file(\n    ...         '/path/to/key.json'))\n\
+    \    >>> magics.context.credentials = credentials\n\n\n.. _auth docs: http://google-auth.readthedocs.io\n\
+    \    /en/latest/user-guide.html#obtaining-credentials\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.credentials
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.default_query_job_config
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: default_query_job_config
+  source:
+    id: default_query_job_config
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "<xref uid=\"google.cloud.bigquery.job.QueryJobConfig\">google.cloud.bigquery.job.QueryJobConfig</xref>:\
+    \ Default job\nconfiguration for queries.\n\nThe context's <xref uid=\"google.cloud.bigquery.job.QueryJobConfig\"\
+    >QueryJobConfig</xref> is\nused for queries. Some properties can be overridden\
+    \ with arguments to\nthe magics.\n\nExample:\n    Manually setting the default\
+    \ value for `maximum_bytes_billed`\n    to 100 MB:\n\n    >>> from google.cloud.bigquery\
+    \ import magics\n    >>> magics.context.default_query_job_config.maximum_bytes_billed\
+    \ = 100000000\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.default_query_job_config
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.progress_bar_type
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: progress_bar_type
+  source:
+    id: progress_bar_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "str: Default progress bar type to use to display progress bar while\n\
+    executing queries through IPython magics.\n\nNote::\n    Install the `tqdm` package\
+    \ to use this feature.\n\nExample:\n    Manually setting the progress_bar_type:\n\
+    \n    >>> from google.cloud.bigquery import magics\n    >>> magics.context.progress_bar_type\
+    \ = \"tqdm_notebook\"\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.progress_bar_type
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.magics.magics.Context
+  fullName: google.cloud.bigquery.magics.magics.Context.project
+  langs:
+  - python
+  module: google.cloud.bigquery.magics.magics
+  name: project
+  source:
+    id: project
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "str: Default project to use for queries performed through IPython\nmagics.\n\
+    \nNote:\n    The project does not need to be explicitly defined if you have an\n\
+    \    environment default project set. If you do not have a default\n    project\
+    \ set in your environment, manually assign the project as\n    demonstrated in\
+    \ the example below.\n\nExample:\n    Manually setting the context project:\n\n\
+    \    >>> from google.cloud.bigquery import magics\n    >>> magics.context.project\
+    \ = 'my-project'\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.magics.magics.Context.project
+- *id006
+references:
+- fullName: google.cloud.bigquery.magics.magics.Context.bigquery_client_options
+  isExternal: false
+  name: bigquery_client_options
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.bigquery_client_options
+- fullName: google.cloud.bigquery.magics.magics.Context.bqstorage_client_options
+  isExternal: false
+  name: bqstorage_client_options
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.bqstorage_client_options
+- fullName: google.cloud.bigquery.magics.magics.Context.credentials
+  isExternal: false
+  name: credentials
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.credentials
+- fullName: google.cloud.bigquery.magics.magics.Context.default_query_job_config
+  isExternal: false
+  name: default_query_job_config
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.default_query_job_config
+- fullName: google.cloud.bigquery.magics.magics.Context.progress_bar_type
+  isExternal: false
+  name: progress_bar_type
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.progress_bar_type
+- fullName: google.cloud.bigquery.magics.magics.Context.project
+  isExternal: false
+  name: project
+  parent: google.cloud.bigquery.magics.magics.Context
+  uid: google.cloud.bigquery.magics.magics.Context.project

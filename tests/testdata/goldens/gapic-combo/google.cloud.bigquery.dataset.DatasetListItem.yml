@@ -1,0 +1,436 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.dataset.DatasetListItem.dataset_id
+  - google.cloud.bigquery.dataset.DatasetListItem.friendly_name
+  - google.cloud.bigquery.dataset.DatasetListItem.full_dataset_id
+  - google.cloud.bigquery.dataset.DatasetListItem.labels
+  - google.cloud.bigquery.dataset.DatasetListItem.model
+  - google.cloud.bigquery.dataset.DatasetListItem.project
+  - google.cloud.bigquery.dataset.DatasetListItem.reference
+  - google.cloud.bigquery.dataset.DatasetListItem.routine
+  - google.cloud.bigquery.dataset.DatasetListItem.table
+  - google.cloud.bigquery.dataset.DatasetListItem.__init__
+  - google.cloud.bigquery.dataset.DatasetListItem
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: DatasetListItem
+  source:
+    id: DatasetListItem
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 835
+  summary: 'A read-only dataset resource from a list operation.
+
+
+    For performance reasons, the BigQuery API only includes some of the
+
+    dataset properties when listing datasets. Notably,
+
+    xref_access_entries is missing.
+
+
+    For a full list of the properties that the BigQuery API returns, see the
+
+    `REST documentation for datasets.list
+
+    <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list>`_.
+
+
+
+
+    '
+  syntax:
+    content: DatasetListItem(resource)
+    exceptions:
+    - description: If <code>datasetReference</code> or one of its required members
+        is missing from <code>resource</code>.
+      var_type: ValueError
+    parameters:
+    - description: A dataset-like resource object from a dataset list response. A
+        <code>datasetReference</code> property is required.
+      id: resource
+      var_type: Dict[str, str]
+  type: class
+  uid: google.cloud.bigquery.dataset.DatasetListItem
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.dataset_id
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: dataset_id
+  source:
+    id: dataset_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: Dataset ID.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.dataset_id
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.friendly_name
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: friendly_name
+  source:
+    id: friendly_name
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: Title of the dataset as set by the user
+
+    (defaults to :data:`None`).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.friendly_name
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.full_dataset_id
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: full_dataset_id
+  source:
+    id: full_dataset_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Union[str, None]: ID for the dataset resource (:data:`None` until
+
+    set from the server)
+
+
+    In the format `project_id:dataset_id`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.full_dataset_id
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.labels
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: labels
+  source:
+    id: labels
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Dict[str, str]: Labels for the dataset.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.labels
+- *id004
+- attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.model
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: model
+  source:
+    id: model
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 47
+  summary: 'Constructs a ModelReference.
+
+    '
+  syntax:
+    content: model(model_id)
+    parameters:
+    - description: the ID of the model.
+      id: model_id
+      var_type: str
+    returns:
+    - description: A ModelReference for a model in this dataset.
+      var_type: <xref uid="google.cloud.bigquery.model.ModelReference">google.cloud.bigquery.model.ModelReference</xref>
+  type: method
+  uid: google.cloud.bigquery.dataset.DatasetListItem.model
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.project
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: project
+  source:
+    id: project
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: Project bound to the dataset.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.project
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.reference
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: reference
+  source:
+    id: reference
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.dataset.DatasetReference">google.cloud.bigquery.dataset.DatasetReference</xref>:
+    A reference to this
+
+    dataset.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.dataset.DatasetListItem.reference
+- *id006
+- attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.routine
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: routine
+  source:
+    id: routine
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 62
+  summary: 'Constructs a RoutineReference.
+
+    '
+  syntax:
+    content: routine(routine_id)
+    parameters:
+    - description: the ID of the routine.
+      id: routine_id
+      var_type: str
+    returns:
+    - description: A RoutineReference for a routine in this dataset.
+      var_type: <xref uid="google.cloud.bigquery.routine.RoutineReference">google.cloud.bigquery.routine.RoutineReference</xref>
+  type: method
+  uid: google.cloud.bigquery.dataset.DatasetListItem.routine
+- attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.table
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: table
+  source:
+    id: table
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 34
+  summary: 'Constructs a TableReference.
+
+    '
+  syntax:
+    content: 'table(table_id: str)'
+    parameters:
+    - description: The ID of the table.
+      id: table_id
+      var_type: str
+    returns:
+    - description: A table reference for a table in this dataset.
+      var_type: <xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>
+  type: method
+  uid: google.cloud.bigquery.dataset.DatasetListItem.table
+- attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 858
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(resource)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.dataset.DatasetListItem.__init__
+- attributes: []
+  class: google.cloud.bigquery.dataset.DatasetListItem
+  fullName: google.cloud.bigquery.dataset.DatasetListItem
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.dataset
+  name: DatasetListItem
+  source:
+    id: DatasetListItem
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/dataset.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 835
+  summary: 'A read-only dataset resource from a list operation.
+
+
+    For performance reasons, the BigQuery API only includes some of the
+
+    dataset properties when listing datasets. Notably,
+
+    xref_access_entries is missing.
+
+
+    For a full list of the properties that the BigQuery API returns, see the
+
+    `REST documentation for datasets.list
+
+    <https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list>`_.
+
+
+
+
+    '
+  syntax:
+    content: DatasetListItem(resource)
+    exceptions:
+    - description: If <code>datasetReference</code> or one of its required members
+        is missing from <code>resource</code>.
+      var_type: ValueError
+    parameters:
+    - description: A dataset-like resource object from a dataset list response. A
+        <code>datasetReference</code> property is required.
+      id: resource
+      var_type: Dict[str, str]
+  type: method
+  uid: google.cloud.bigquery.dataset.DatasetListItem
+references:
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.dataset_id
+  isExternal: false
+  name: dataset_id
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.dataset_id
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.friendly_name
+  isExternal: false
+  name: friendly_name
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.friendly_name
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.full_dataset_id
+  isExternal: false
+  name: full_dataset_id
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.full_dataset_id
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.labels
+  isExternal: false
+  name: labels
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.labels
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.model
+  isExternal: false
+  name: model
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.model
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.project
+  isExternal: false
+  name: project
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.project
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.reference
+  isExternal: false
+  name: reference
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.reference
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.routine
+  isExternal: false
+  name: routine
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.routine
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.table
+  isExternal: false
+  name: table
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.table
+- fullName: google.cloud.bigquery.dataset.DatasetListItem.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem.__init__
+- fullName: google.cloud.bigquery.dataset.DatasetListItem
+  isExternal: false
+  name: DatasetListItem
+  parent: google.cloud.bigquery.dataset.DatasetListItem
+  uid: google.cloud.bigquery.dataset.DatasetListItem

@@ -1,0 +1,151 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_ADDITION
+  - google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_RELAXATION
+  - google.cloud.bigquery.job.SchemaUpdateOption.__init__
+  - google.cloud.bigquery.job.SchemaUpdateOption
+  class: google.cloud.bigquery.job.SchemaUpdateOption
+  fullName: google.cloud.bigquery.job.SchemaUpdateOption
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: SchemaUpdateOption
+  source:
+    id: SchemaUpdateOption
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 164
+  summary: 'Specifies an update to the destination table schema as a side effect of
+
+    a load job.
+
+
+    '
+  syntax:
+    content: SchemaUpdateOption()
+  type: class
+  uid: google.cloud.bigquery.job.SchemaUpdateOption
+- attributes: []
+  class: google.cloud.bigquery.job.SchemaUpdateOption
+  fullName: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_ADDITION
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: ALLOW_FIELD_ADDITION
+  source:
+    id: ALLOW_FIELD_ADDITION
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Allow adding a nullable field to the schema.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_ADDITION
+- attributes: []
+  class: google.cloud.bigquery.job.SchemaUpdateOption
+  fullName: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_RELAXATION
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: ALLOW_FIELD_RELAXATION
+  source:
+    id: ALLOW_FIELD_RELAXATION
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Allow relaxing a required field in the original schema to nullable.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_RELAXATION
+- attributes: []
+  class: google.cloud.bigquery.job.SchemaUpdateOption
+  fullName: google.cloud.bigquery.job.SchemaUpdateOption.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.SchemaUpdateOption
+  fullName: google.cloud.bigquery.job.SchemaUpdateOption
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: SchemaUpdateOption
+  source:
+    id: SchemaUpdateOption
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 164
+  summary: 'Specifies an update to the destination table schema as a side effect of
+
+    a load job.
+
+
+    '
+  syntax:
+    content: SchemaUpdateOption()
+  type: method
+  uid: google.cloud.bigquery.job.SchemaUpdateOption
+references:
+- fullName: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_ADDITION
+  isExternal: false
+  name: ALLOW_FIELD_ADDITION
+  parent: google.cloud.bigquery.job.SchemaUpdateOption
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_ADDITION
+- fullName: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_RELAXATION
+  isExternal: false
+  name: ALLOW_FIELD_RELAXATION
+  parent: google.cloud.bigquery.job.SchemaUpdateOption
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.ALLOW_FIELD_RELAXATION
+- fullName: google.cloud.bigquery.job.SchemaUpdateOption.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.SchemaUpdateOption
+  uid: google.cloud.bigquery.job.SchemaUpdateOption.__init__
+- fullName: google.cloud.bigquery.job.SchemaUpdateOption
+  isExternal: false
+  name: SchemaUpdateOption
+  parent: google.cloud.bigquery.job.SchemaUpdateOption
+  uid: google.cloud.bigquery.job.SchemaUpdateOption

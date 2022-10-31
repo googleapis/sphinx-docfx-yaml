@@ -1,0 +1,157 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.Encoding.ISO_8859_1
+  - google.cloud.bigquery.job.Encoding.UTF_8
+  - google.cloud.bigquery.job.Encoding.__init__
+  - google.cloud.bigquery.job.Encoding
+  class: google.cloud.bigquery.job.Encoding
+  fullName: google.cloud.bigquery.job.Encoding
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: Encoding
+  source:
+    id: Encoding
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 99
+  summary: 'The character encoding of the data. The default is `UTF_8`.
+
+
+    BigQuery decodes the data after the raw, binary data has been
+
+    split using the values of the quote and fieldDelimiter properties.
+
+
+    '
+  syntax:
+    content: Encoding()
+  type: class
+  uid: google.cloud.bigquery.job.Encoding
+- attributes: []
+  class: google.cloud.bigquery.job.Encoding
+  fullName: google.cloud.bigquery.job.Encoding.ISO_8859_1
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: ISO_8859_1
+  source:
+    id: ISO_8859_1
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies ISO-8859-1 encoding.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.Encoding.ISO_8859_1
+- attributes: []
+  class: google.cloud.bigquery.job.Encoding
+  fullName: google.cloud.bigquery.job.Encoding.UTF_8
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: UTF_8
+  source:
+    id: UTF_8
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Specifies UTF-8 encoding.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.job.Encoding.UTF_8
+- attributes: []
+  class: google.cloud.bigquery.job.Encoding
+  fullName: google.cloud.bigquery.job.Encoding.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.job.Encoding.__init__
+- attributes: []
+  class: google.cloud.bigquery.job.Encoding
+  fullName: google.cloud.bigquery.job.Encoding
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job
+  name: Encoding
+  source:
+    id: Encoding
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 99
+  summary: 'The character encoding of the data. The default is `UTF_8`.
+
+
+    BigQuery decodes the data after the raw, binary data has been
+
+    split using the values of the quote and fieldDelimiter properties.
+
+
+    '
+  syntax:
+    content: Encoding()
+  type: method
+  uid: google.cloud.bigquery.job.Encoding
+references:
+- fullName: google.cloud.bigquery.job.Encoding.ISO_8859_1
+  isExternal: false
+  name: ISO_8859_1
+  parent: google.cloud.bigquery.job.Encoding
+  uid: google.cloud.bigquery.job.Encoding.ISO_8859_1
+- fullName: google.cloud.bigquery.job.Encoding.UTF_8
+  isExternal: false
+  name: UTF_8
+  parent: google.cloud.bigquery.job.Encoding
+  uid: google.cloud.bigquery.job.Encoding.UTF_8
+- fullName: google.cloud.bigquery.job.Encoding.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.job.Encoding
+  uid: google.cloud.bigquery.job.Encoding.__init__
+- fullName: google.cloud.bigquery.job.Encoding
+  isExternal: false
+  name: Encoding
+  parent: google.cloud.bigquery.job.Encoding
+  uid: google.cloud.bigquery.job.Encoding

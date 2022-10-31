@@ -1,0 +1,184 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.routine.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  - google.cloud.bigquery.routine.DeterminismLevel.DETERMINISTIC
+  - google.cloud.bigquery.routine.DeterminismLevel.NOT_DETERMINISTIC
+  - google.cloud.bigquery.routine.DeterminismLevel.__init__
+  - google.cloud.bigquery.routine.DeterminismLevel
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: DeterminismLevel
+  source:
+    id: DeterminismLevel
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 298
+  summary: 'Specifies determinism level for JavaScript user-defined functions (UDFs).
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#DeterminismLevel
+
+
+    '
+  syntax:
+    content: DeterminismLevel()
+  type: class
+  uid: google.cloud.bigquery.routine.DeterminismLevel
+- attributes: []
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: DETERMINISM_LEVEL_UNSPECIFIED
+  source:
+    id: DETERMINISM_LEVEL_UNSPECIFIED
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The determinism of the UDF is unspecified.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+- attributes: []
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISTIC
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: DETERMINISTIC
+  source:
+    id: DETERMINISTIC
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The UDF is deterministic, meaning that 2 function calls with the same
+    inputs
+
+    always produce the same result, even across 2 query runs.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISTIC
+- attributes: []
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel.NOT_DETERMINISTIC
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: NOT_DETERMINISTIC
+  source:
+    id: NOT_DETERMINISTIC
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The UDF is not deterministic.
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.routine.DeterminismLevel.NOT_DETERMINISTIC
+- attributes: []
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: __init__
+  source:
+    id: __init__
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__()
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.routine.DeterminismLevel.__init__
+- attributes: []
+  class: google.cloud.bigquery.routine.DeterminismLevel
+  fullName: google.cloud.bigquery.routine.DeterminismLevel
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: DeterminismLevel
+  source:
+    id: DeterminismLevel
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/enums.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 298
+  summary: 'Specifies determinism level for JavaScript user-defined functions (UDFs).
+
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#DeterminismLevel
+
+
+    '
+  syntax:
+    content: DeterminismLevel()
+  type: method
+  uid: google.cloud.bigquery.routine.DeterminismLevel
+references:
+- fullName: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+  isExternal: false
+  name: DETERMINISM_LEVEL_UNSPECIFIED
+  parent: google.cloud.bigquery.routine.DeterminismLevel
+  uid: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISM_LEVEL_UNSPECIFIED
+- fullName: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISTIC
+  isExternal: false
+  name: DETERMINISTIC
+  parent: google.cloud.bigquery.routine.DeterminismLevel
+  uid: google.cloud.bigquery.routine.DeterminismLevel.DETERMINISTIC
+- fullName: google.cloud.bigquery.routine.DeterminismLevel.NOT_DETERMINISTIC
+  isExternal: false
+  name: NOT_DETERMINISTIC
+  parent: google.cloud.bigquery.routine.DeterminismLevel
+  uid: google.cloud.bigquery.routine.DeterminismLevel.NOT_DETERMINISTIC
+- fullName: google.cloud.bigquery.routine.DeterminismLevel.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.routine.DeterminismLevel
+  uid: google.cloud.bigquery.routine.DeterminismLevel.__init__
+- fullName: google.cloud.bigquery.routine.DeterminismLevel
+  isExternal: false
+  name: DeterminismLevel
+  parent: google.cloud.bigquery.routine.DeterminismLevel
+  uid: google.cloud.bigquery.routine.DeterminismLevel

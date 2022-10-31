@@ -1,0 +1,862 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.table.RowIterator.__iter__
+  - google.cloud.bigquery.table.RowIterator.client
+  - google.cloud.bigquery.table.RowIterator.item_to_value
+  - google.cloud.bigquery.table.RowIterator.max_results
+  - google.cloud.bigquery.table.RowIterator.next_page_token
+  - google.cloud.bigquery.table.RowIterator.num_results
+  - google.cloud.bigquery.table.RowIterator.page_number
+  - google.cloud.bigquery.table.RowIterator.pages
+  - google.cloud.bigquery.table.RowIterator.schema
+  - google.cloud.bigquery.table.RowIterator.to_arrow
+  - google.cloud.bigquery.table.RowIterator.to_arrow_iterable
+  - google.cloud.bigquery.table.RowIterator.to_dataframe
+  - google.cloud.bigquery.table.RowIterator.to_dataframe_iterable
+  - google.cloud.bigquery.table.RowIterator.to_geodataframe
+  - google.cloud.bigquery.table.RowIterator.total_rows
+  - google.cloud.bigquery.table.RowIterator.__init__
+  - google.cloud.bigquery.table.RowIterator
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator
+  inheritance:
+  - inheritance:
+    - inheritance:
+      - type: builtins.object
+      type: google.api_core.page_iterator.Iterator
+    type: google.api_core.page_iterator.HTTPIterator
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: RowIterator
+  source:
+    id: RowIterator
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1481
+  summary: 'A class for iterating through HTTP/JSON API row list responses.
+
+    '
+  syntax:
+    content: "RowIterator(\n    client,\n    api_request,\n    path,\n    schema,\n\
+      \    page_token=None,\n    max_results=None,\n    page_size=None,\n    extra_params=None,\n\
+      \    table=None,\n    selected_fields=None,\n    total_rows=None,\n    first_page_response=None,\n\
+      )"
+    parameters:
+    - description: The API client instance. This should always be non-<code>None</code>,
+        except for subclasses that do not use it, namely the <code>_EmptyRowIterator</code>.
+      id: client
+      var_type: Optional[google.cloud.bigquery.Client]
+    - description: The function to use to make API requests.
+      id: api_request
+      var_type: Callable[google.cloud._http.JSONConnection.api_request]
+    - description: The method path to query for the list of items.
+      id: path
+      var_type: str
+    - description: The table's schema. If any item is a mapping, its content must
+        be compatible with <xref uid="google.cloud.bigquery.schema.SchemaField.from_api_repr">from_api_repr</xref>.
+      id: schema
+      var_type: Sequence[Union[ <xref uid="google.cloud.bigquery.schema.SchemaField">SchemaField</xref>,
+        Mapping[str, Any] ]]
+    - description: A token identifying a page in a result set to start fetching results
+        from.
+      id: page_token
+      var_type: str
+    - description: The maximum number of results to fetch.
+      id: max_results
+      var_type: Optional[int]
+    - description: The maximum number of rows in each page of results from this request.
+        Non-positive values are ignored. Defaults to a sensible value set by the API.
+      id: page_size
+      var_type: Optional[int]
+    - description: Extra query string parameters for the API call.
+      id: extra_params
+      var_type: Optional[Dict[str, object]]
+    - description: The table which these rows belong to, or a reference to it. Used
+        to call the BigQuery Storage API to fetch rows.
+      id: table
+      var_type: Optional[Union[ <xref uid="google.cloud.bigquery.table.Table">google.cloud.bigquery.table.Table</xref>,
+        <xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>,
+        ]]
+    - description: A subset of columns to select from this table.
+      id: selected_fields
+      var_type: Optional[Sequence[<xref uid="google.cloud.bigquery.schema.SchemaField">google.cloud.bigquery.schema.SchemaField</xref>]]
+    - description: Total number of rows in the table.
+      id: total_rows
+      var_type: Optional[int]
+    - description: API response for the first page of results. These are returned
+        when the first page is requested.
+      id: first_page_response
+      var_type: Optional[dict]
+  type: class
+  uid: google.cloud.bigquery.table.RowIterator
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.__iter__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __iter__
+  source:
+    id: __iter__
+    path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/page_iterator.py
+    remote:
+      branch: add_goldens
+      path: .tox/update_goldens/lib/python3.9/site-packages/google/api_core/page_iterator.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 213
+  summary: 'Iterator for each item returned.
+
+    '
+  syntax:
+    content: __iter__()
+    exceptions:
+    - description: If the iterator has already been started.
+      var_type: ValueError
+    parameters: []
+    returns:
+    - description: A generator of items from the API.
+      var_type: types.GeneratorType[Any]
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.__iter__
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.client
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: client
+  source:
+    id: client
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The client that created this iterator.
+
+
+    :type: Optional[Any]
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.client
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.item_to_value
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: item_to_value
+  source:
+    id: item_to_value
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Callable to convert an item from the type
+
+    in the raw API response into the native object. Will be called with
+
+    the iterator and a
+
+    single item.
+
+
+    :type: Callable[Iterator, Any]
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.item_to_value
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.max_results
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: max_results
+  source:
+    id: max_results
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The maximum number of results to fetch
+
+
+    :type: int
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.max_results
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.next_page_token
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: next_page_token
+  source:
+    id: next_page_token
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The token for the next page of results. If this is set before
+
+    the iterator starts, it effectively offsets the iterator to a
+
+    specific starting point.
+
+
+    :type: str
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.next_page_token
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.num_results
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: num_results
+  source:
+    id: num_results
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The total number of results fetched so far.
+
+
+    :type: int
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.num_results
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.page_number
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: page_number
+  source:
+    id: page_number
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The current page of results.
+
+
+    :type: int
+
+
+    '
+  syntax: {}
+  type: attribute
+  uid: google.cloud.bigquery.table.RowIterator.page_number
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.pages
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: pages
+  source:
+    id: pages
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Iterator of pages in the response.
+
+    '
+  syntax:
+    exceptions:
+    - description: If the iterator has already been started.
+      var_type: ValueError
+    returns:
+    - description: A generator of page instances.
+      var_type: types.GeneratorType[google.api_core.page_iterator.Page]
+  type: property
+  uid: google.cloud.bigquery.table.RowIterator.pages
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.schema
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: schema
+  source:
+    id: schema
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'List[<xref uid="google.cloud.bigquery.schema.SchemaField">google.cloud.bigquery.schema.SchemaField</xref>]:
+    The subset of
+
+    columns to be read from the table.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.RowIterator.schema
+- *id002
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.to_arrow
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_arrow
+  source:
+    id: to_arrow
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1710
+  summary: '[Beta] Create a class:`pyarrow.Table` by loading all pages of a
+
+    table or query.
+
+    '
+  syntax:
+    content: "to_arrow(\n    progress_bar_type: str = None,\n    bqstorage_client:\
+      \ typing.Optional[bigquery_storage.BigQueryReadClient] = None,\n    create_bqstorage_client:\
+      \ bool = True,\n)"
+    parameters:
+    - defaultValue: None
+      description: 'If set, use the <code>tqdm <https://tqdm.github.io/></code>_ library
+        to display a progress bar while the data downloads. Install the <code>tqdm</code>
+        package to use this feature. Possible values of <code>progress_bar_type</code>
+        include: <code>None</code> No progress bar. <code>''tqdm''</code> Use the
+        <code>tqdm.tqdm</code> function to print a progress bar to :data:<code>sys.stdout</code>.
+        <code>''tqdm_notebook''</code> Use the <code>tqdm.notebook.tqdm</code> function
+        to display a progress bar as a Jupyter notebook widget. <code>''tqdm_gui''</code>
+        Use the <code>tqdm.tqdm_gui</code> function to display a progress bar as a
+        graphical dialog box.'
+      id: progress_bar_type
+      var_type: Optional[str]
+    - defaultValue: None
+      description: A BigQuery Storage API client. If supplied, use the faster BigQuery
+        Storage API to fetch rows from BigQuery. This API is a billable API. This
+        method requires <code>google-cloud-bigquery-storage</code> library. This method
+        only exposes a subset of the capabilities of the BigQuery Storage API. For
+        full access to all features (projections, filters, snapshots) use the Storage
+        API directly.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+    - defaultValue: 'True'
+      description: 'If <code>True</code> (default), create a BigQuery Storage API
+        client using the default API settings. The BigQuery Storage API is a faster
+        way to fetch rows from BigQuery. See the <code>bqstorage_client</code> parameter
+        for more information. This argument does nothing if <code>bqstorage_client</code>
+        is supplied. .. versionadded:: 1.24.0'
+      id: create_bqstorage_client
+      var_type: Optional[bool]
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.to_arrow
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.to_arrow_iterable
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_arrow_iterable
+  source:
+    id: to_arrow_iterable
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1654
+  summary: '[Beta] Create an iterable of class:`pyarrow.RecordBatch`, to process the
+    table as a stream.
+
+    '
+  syntax:
+    content: 'to_arrow_iterable(bqstorage_client: bigquery_storage.BigQueryReadClient
+      = None, max_queue_size: int = <object object>)'
+    parameters:
+    - defaultValue: None
+      description: The maximum number of result pages to hold in the internal queue
+        when streaming query results over the BigQuery Storage API. Ignored if Storage
+        API is not used. By default, the max queue size is set to the number of BQ
+        Storage streams created by the server. If <code>max_queue_size</code> is :data:<code>None</code>,
+        the queue size is infinite.
+      id: max_queue_size
+      var_type: Optional[int]
+    - description: A BigQuery Storage API client. If supplied, use the faster BigQuery
+        Storage API to fetch rows from BigQuery. This method requires the <code>pyarrow</code>
+        and <code>google-cloud-bigquery-storage</code> libraries. This method only
+        exposes a subset of the capabilities of the BigQuery Storage API. For full
+        access to all features (projections, filters, snapshots) use the Storage API
+        directly.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+    returns:
+    - description: A generator of <code>pyarrow.RecordBatch</code>.
+      var_type: 'pyarrow.RecordBatch .. versionadded:: 2.31.0'
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.to_arrow_iterable
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.to_dataframe
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_dataframe
+  source:
+    id: to_dataframe
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1888
+  summary: 'Create a pandas DataFrame by loading all pages of a query.
+
+    '
+  syntax:
+    content: "to_dataframe(\n    bqstorage_client: typing.Optional[bigquery_storage.BigQueryReadClient]\
+      \ = None,\n    dtypes: typing.Dict[str, typing.Any] = None,\n    progress_bar_type:\
+      \ str = None,\n    create_bqstorage_client: bool = True,\n    geography_as_object:\
+      \ bool = False,\n)"
+    exceptions:
+    - description: If the <code>pandas</code> library cannot be imported, or the <xref
+        uid="google.cloud.bigquery_storage_v1">bigquery_storage_v1</xref> module is
+        required but cannot be imported. Also if <code>geography_as_object</code>
+        is <code>True</code>, but the <code>shapely</code> library cannot be imported.
+      var_type: ValueError
+    parameters:
+    - defaultValue: None
+      description: A BigQuery Storage API client. If supplied, use the faster BigQuery
+        Storage API to fetch rows from BigQuery. This method requires <code>google-cloud-bigquery-storage</code>
+        library. This method only exposes a subset of the capabilities of the BigQuery
+        Storage API. For full access to all features (projections, filters, snapshots)
+        use the Storage API directly.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+    - defaultValue: None
+      description: A dictionary of column names pandas <code>dtype</code>s. The provided
+        <code>dtype</code> is used when constructing the series for the column specified.
+        Otherwise, the default pandas behavior is used.
+      id: dtypes
+      var_type: Optional[Map[str, Union[str, pandas.Series.dtype]]]
+    - defaultValue: None
+      description: 'If set, use the <code>tqdm <https://tqdm.github.io/></code>_ library
+        to display a progress bar while the data downloads. Install the <code>tqdm</code>
+        package to use this feature. Possible values of <code>progress_bar_type</code>
+        include: <code>None</code> No progress bar. <code>''tqdm''</code> Use the
+        <code>tqdm.tqdm</code> function to print a progress bar to :data:<code>sys.stdout</code>.
+        <code>''tqdm_notebook''</code> Use the <code>tqdm.notebook.tqdm</code> function
+        to display a progress bar as a Jupyter notebook widget. <code>''tqdm_gui''</code>
+        Use the <code>tqdm.tqdm_gui</code> function to display a progress bar as a
+        graphical dialog box. .. versionadded:: 1.11.0'
+      id: progress_bar_type
+      var_type: Optional[str]
+    - defaultValue: 'True'
+      description: 'If <code>True</code> (default), create a BigQuery Storage API
+        client using the default API settings. The BigQuery Storage API is a faster
+        way to fetch rows from BigQuery. See the <code>bqstorage_client</code> parameter
+        for more information. This argument does nothing if <code>bqstorage_client</code>
+        is supplied. .. versionadded:: 1.24.0'
+      id: create_bqstorage_client
+      var_type: Optional[bool]
+    - defaultValue: 'False'
+      description: 'If <code>True</code>, convert GEOGRAPHY data to <code>shapely</code>
+        geometry objects. If <code>False</code> (default), don''t cast geography data
+        to <code>shapely</code> geometry objects. .. versionadded:: 2.24.0'
+      id: geography_as_object
+      var_type: Optional[bool]
+    returns:
+    - description: A <code>pandas.DataFrame</code> populated with row data and column
+        headers from the query results. The column headers are derived from the destination
+        table's schema.
+      var_type: pandas.DataFrame
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.to_dataframe
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.to_dataframe_iterable
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_dataframe_iterable
+  source:
+    id: to_dataframe_iterable
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1812
+  summary: 'Create an iterable of pandas DataFrames, to process the table as a stream.
+
+    '
+  syntax:
+    content: 'to_dataframe_iterable(bqstorage_client: typing.Optional[bigquery_storage.BigQueryReadClient]
+      = None, dtypes: typing.Dict[str, typing.Any] = None, max_queue_size: int = <object
+      object>)'
+    exceptions:
+    - description: If the <code>pandas</code> library cannot be imported.
+      var_type: ValueError
+    parameters:
+    - defaultValue: None
+      description: A BigQuery Storage API client. If supplied, use the faster BigQuery
+        Storage API to fetch rows from BigQuery. This method requires <code>google-cloud-bigquery-storage</code>
+        library. This method only exposes a subset of the capabilities of the BigQuery
+        Storage API. For full access to all features (projections, filters, snapshots)
+        use the Storage API directly.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+    - defaultValue: None
+      description: A dictionary of column names pandas <code>dtype</code>s. The provided
+        <code>dtype</code> is used when constructing the series for the column specified.
+        Otherwise, the default pandas behavior is used.
+      id: dtypes
+      var_type: Optional[Map[str, Union[str, pandas.Series.dtype]]]
+    - description: 'The maximum number of result pages to hold in the internal queue
+        when streaming query results over the BigQuery Storage API. Ignored if Storage
+        API is not used. By default, the max queue size is set to the number of BQ
+        Storage streams created by the server. If <code>max_queue_size</code> is :data:<code>None</code>,
+        the queue size is infinite. .. versionadded:: 2.14.0'
+      id: max_queue_size
+      var_type: Optional[int]
+    returns:
+    - description: A generator of <code>pandas.DataFrame</code>.
+      var_type: pandas.DataFrame
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.to_dataframe_iterable
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.to_geodataframe
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: to_geodataframe
+  source:
+    id: to_geodataframe
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 2041
+  summary: 'Create a GeoPandas GeoDataFrame by loading all pages of a query.
+
+    '
+  syntax:
+    content: "to_geodataframe(\n    bqstorage_client: bigquery_storage.BigQueryReadClient\
+      \ = None,\n    dtypes: typing.Dict[str, typing.Any] = None,\n    progress_bar_type:\
+      \ str = None,\n    create_bqstorage_client: bool = True,\n    geography_column:\
+      \ typing.Optional[str] = None,\n)"
+    exceptions:
+    - description: 'If the <code>geopandas</code> library cannot be imported, or the
+        <xref uid="google.cloud.bigquery_storage_v1">bigquery_storage_v1</xref> module
+        is required but cannot be imported. .. versionadded:: 2.24.0'
+      var_type: ValueError
+    parameters:
+    - defaultValue: None
+      description: A dictionary of column names pandas <code>dtype</code>s. The provided
+        <code>dtype</code> is used when constructing the series for the column specified.
+        Otherwise, the default pandas behavior is used.
+      id: dtypes
+      var_type: Optional[Map[str, Union[str, pandas.Series.dtype]]]
+    - defaultValue: None
+      description: 'If set, use the <code>tqdm <https://tqdm.github.io/></code>_ library
+        to display a progress bar while the data downloads. Install the <code>tqdm</code>
+        package to use this feature. Possible values of <code>progress_bar_type</code>
+        include: <code>None</code> No progress bar. <code>''tqdm''</code> Use the
+        <code>tqdm.tqdm</code> function to print a progress bar to :data:<code>sys.stdout</code>.
+        <code>''tqdm_notebook''</code> Use the <code>tqdm.notebook.tqdm</code> function
+        to display a progress bar as a Jupyter notebook widget. <code>''tqdm_gui''</code>
+        Use the <code>tqdm.tqdm_gui</code> function to display a progress bar as a
+        graphical dialog box.'
+      id: progress_bar_type
+      var_type: Optional[str]
+    - defaultValue: 'True'
+      description: If <code>True</code> (default), create a BigQuery Storage API client
+        using the default API settings. The BigQuery Storage API is a faster way to
+        fetch rows from BigQuery. See the <code>bqstorage_client</code> parameter
+        for more information. This argument does nothing if <code>bqstorage_client</code>
+        is supplied.
+      id: create_bqstorage_client
+      var_type: Optional[bool]
+    - defaultValue: None
+      description: If there are more than one GEOGRAPHY column, identifies which one
+        to use to construct a geopandas GeoDataFrame. This option can be ommitted
+        if there's only one GEOGRAPHY column.
+      id: geography_column
+      var_type: Optional[str]
+    - description: A BigQuery Storage API client. If supplied, use the faster BigQuery
+        Storage API to fetch rows from BigQuery. This method requires the <code>pyarrow</code>
+        and <code>google-cloud-bigquery-storage</code> libraries. This method only
+        exposes a subset of the capabilities of the BigQuery Storage API. For full
+        access to all features (projections, filters, snapshots) use the Storage API
+        directly.
+      id: bqstorage_client
+      var_type: Optional[google.cloud.bigquery_storage_v1.BigQueryReadClient]
+    returns:
+    - description: A <code>geopandas.GeoDataFrame</code> populated with row data and
+        column headers from the query results. The column headers are derived from
+        the destination table's schema.
+      var_type: geopandas.GeoDataFrame
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.to_geodataframe
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.total_rows
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: total_rows
+  source:
+    id: total_rows
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: The total number of rows in the table.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.table.RowIterator.total_rows
+- *id003
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1521
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: "__init__(\n    client,\n    api_request,\n    path,\n    schema,\n \
+      \   page_token=None,\n    max_results=None,\n    page_size=None,\n    extra_params=None,\n\
+      \    table=None,\n    selected_fields=None,\n    total_rows=None,\n    first_page_response=None,\n\
+      )"
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator.__init__
+- attributes: []
+  class: google.cloud.bigquery.table.RowIterator
+  fullName: google.cloud.bigquery.table.RowIterator
+  inheritance:
+  - inheritance:
+    - inheritance:
+      - type: builtins.object
+      type: google.api_core.page_iterator.Iterator
+    type: google.api_core.page_iterator.HTTPIterator
+  langs:
+  - python
+  module: google.cloud.bigquery.table
+  name: RowIterator
+  source:
+    id: RowIterator
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/table.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 1481
+  summary: 'A class for iterating through HTTP/JSON API row list responses.
+
+    '
+  syntax:
+    content: "RowIterator(\n    client,\n    api_request,\n    path,\n    schema,\n\
+      \    page_token=None,\n    max_results=None,\n    page_size=None,\n    extra_params=None,\n\
+      \    table=None,\n    selected_fields=None,\n    total_rows=None,\n    first_page_response=None,\n\
+      )"
+    parameters:
+    - description: The API client instance. This should always be non-<code>None</code>,
+        except for subclasses that do not use it, namely the <code>_EmptyRowIterator</code>.
+      id: client
+      var_type: Optional[google.cloud.bigquery.Client]
+    - description: The function to use to make API requests.
+      id: api_request
+      var_type: Callable[google.cloud._http.JSONConnection.api_request]
+    - description: The method path to query for the list of items.
+      id: path
+      var_type: str
+    - description: The table's schema. If any item is a mapping, its content must
+        be compatible with <xref uid="google.cloud.bigquery.schema.SchemaField.from_api_repr">from_api_repr</xref>.
+      id: schema
+      var_type: Sequence[Union[ <xref uid="google.cloud.bigquery.schema.SchemaField">SchemaField</xref>,
+        Mapping[str, Any] ]]
+    - description: A token identifying a page in a result set to start fetching results
+        from.
+      id: page_token
+      var_type: str
+    - description: The maximum number of results to fetch.
+      id: max_results
+      var_type: Optional[int]
+    - description: The maximum number of rows in each page of results from this request.
+        Non-positive values are ignored. Defaults to a sensible value set by the API.
+      id: page_size
+      var_type: Optional[int]
+    - description: Extra query string parameters for the API call.
+      id: extra_params
+      var_type: Optional[Dict[str, object]]
+    - description: The table which these rows belong to, or a reference to it. Used
+        to call the BigQuery Storage API to fetch rows.
+      id: table
+      var_type: Optional[Union[ <xref uid="google.cloud.bigquery.table.Table">google.cloud.bigquery.table.Table</xref>,
+        <xref uid="google.cloud.bigquery.table.TableReference">google.cloud.bigquery.table.TableReference</xref>,
+        ]]
+    - description: A subset of columns to select from this table.
+      id: selected_fields
+      var_type: Optional[Sequence[<xref uid="google.cloud.bigquery.schema.SchemaField">google.cloud.bigquery.schema.SchemaField</xref>]]
+    - description: Total number of rows in the table.
+      id: total_rows
+      var_type: Optional[int]
+    - description: API response for the first page of results. These are returned
+        when the first page is requested.
+      id: first_page_response
+      var_type: Optional[dict]
+  type: method
+  uid: google.cloud.bigquery.table.RowIterator
+references:
+- fullName: google.cloud.bigquery.table.RowIterator.__iter__
+  isExternal: false
+  name: __iter__
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.__iter__
+- fullName: google.cloud.bigquery.table.RowIterator.client
+  isExternal: false
+  name: client
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.client
+- fullName: google.cloud.bigquery.table.RowIterator.item_to_value
+  isExternal: false
+  name: item_to_value
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.item_to_value
+- fullName: google.cloud.bigquery.table.RowIterator.max_results
+  isExternal: false
+  name: max_results
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.max_results
+- fullName: google.cloud.bigquery.table.RowIterator.next_page_token
+  isExternal: false
+  name: next_page_token
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.next_page_token
+- fullName: google.cloud.bigquery.table.RowIterator.num_results
+  isExternal: false
+  name: num_results
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.num_results
+- fullName: google.cloud.bigquery.table.RowIterator.page_number
+  isExternal: false
+  name: page_number
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.page_number
+- fullName: google.cloud.bigquery.table.RowIterator.pages
+  isExternal: false
+  name: pages
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.pages
+- fullName: google.cloud.bigquery.table.RowIterator.schema
+  isExternal: false
+  name: schema
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.schema
+- fullName: google.cloud.bigquery.table.RowIterator.to_arrow
+  isExternal: false
+  name: to_arrow
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.to_arrow
+- fullName: google.cloud.bigquery.table.RowIterator.to_arrow_iterable
+  isExternal: false
+  name: to_arrow_iterable
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.to_arrow_iterable
+- fullName: google.cloud.bigquery.table.RowIterator.to_dataframe
+  isExternal: false
+  name: to_dataframe
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.to_dataframe
+- fullName: google.cloud.bigquery.table.RowIterator.to_dataframe_iterable
+  isExternal: false
+  name: to_dataframe_iterable
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.to_dataframe_iterable
+- fullName: google.cloud.bigquery.table.RowIterator.to_geodataframe
+  isExternal: false
+  name: to_geodataframe
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.to_geodataframe
+- fullName: google.cloud.bigquery.table.RowIterator.total_rows
+  isExternal: false
+  name: total_rows
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.total_rows
+- fullName: google.cloud.bigquery.table.RowIterator.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator.__init__
+- fullName: google.cloud.bigquery.table.RowIterator
+  isExternal: false
+  name: RowIterator
+  parent: google.cloud.bigquery.table.RowIterator
+  uid: google.cloud.bigquery.table.RowIterator

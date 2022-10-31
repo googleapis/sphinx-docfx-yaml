@@ -1,0 +1,761 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.routine.Routine.arguments
+  - google.cloud.bigquery.routine.Routine.body
+  - google.cloud.bigquery.routine.Routine.created
+  - google.cloud.bigquery.routine.Routine.dataset_id
+  - google.cloud.bigquery.routine.Routine.description
+  - google.cloud.bigquery.routine.Routine.determinism_level
+  - google.cloud.bigquery.routine.Routine.etag
+  - google.cloud.bigquery.routine.Routine.from_api_repr
+  - google.cloud.bigquery.routine.Routine.imported_libraries
+  - google.cloud.bigquery.routine.Routine.language
+  - google.cloud.bigquery.routine.Routine.modified
+  - google.cloud.bigquery.routine.Routine.path
+  - google.cloud.bigquery.routine.Routine.project
+  - google.cloud.bigquery.routine.Routine.reference
+  - google.cloud.bigquery.routine.Routine.return_table_type
+  - google.cloud.bigquery.routine.Routine.return_type
+  - google.cloud.bigquery.routine.Routine.routine_id
+  - google.cloud.bigquery.routine.Routine.to_api_repr
+  - google.cloud.bigquery.routine.Routine.type_
+  - google.cloud.bigquery.routine.Routine.__init__
+  - google.cloud.bigquery.routine.Routine
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: Routine
+  source:
+    id: Routine
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 41
+  summary: 'Resource representing a user-defined routine.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines
+
+    '
+  syntax:
+    content: Routine(routine_ref, **kwargs)
+    parameters:
+    - description: A pointer to a routine. If <code>routine_ref</code> is a string,
+        it must included a project ID, dataset ID, and routine ID, each separated
+        by <code>.</code>.
+      id: routine_ref
+      var_type: Union[str, <xref uid="google.cloud.bigquery.routine.RoutineReference">google.cloud.bigquery.routine.RoutineReference</xref>]
+    - description: Initial property values.
+      id: <code>**kwargs</code>
+      var_type: Dict
+  type: class
+  uid: google.cloud.bigquery.routine.Routine
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.arguments
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: arguments
+  source:
+    id: arguments
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'List[<xref uid="google.cloud.bigquery.routine.RoutineArgument">google.cloud.bigquery.routine.RoutineArgument</xref>]:
+    Input/output
+
+    argument of a function or a stored procedure.
+
+
+    In-place modification is not supported. To set, replace the entire
+
+    property value with the modified list of
+
+    <xref uid="google.cloud.bigquery.routine.RoutineArgument">RoutineArgument</xref>
+    objects.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.arguments
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.body
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: body
+  source:
+    id: body
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The body of the routine.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.body
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.created
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: created
+  source:
+    id: created
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[datetime.datetime]: Datetime at which the routine was
+
+    created (:data:`None` until set from the server).
+
+
+    Read-only.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.created
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.dataset_id
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: dataset_id
+  source:
+    id: dataset_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: ID of dataset containing the routine.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.dataset_id
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.description
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: description
+  source:
+    id: description
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: Description of the routine (defaults to
+
+    :data:`None`).
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.description
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.determinism_level
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: determinism_level
+  source:
+    id: determinism_level
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: (experimental) The determinism level of the JavaScript
+    UDF
+
+    if defined.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.determinism_level
+- *id006
+- &id007
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.etag
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: etag
+  source:
+    id: etag
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: ETag for the resource (:data:`None` until set from the
+
+    server).
+
+
+    Read-only.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.etag
+- *id007
+- attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.from_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: from_api_repr
+  source:
+    id: from_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 300
+  summary: 'Factory: construct a routine given its API representation.
+
+    '
+  syntax:
+    content: 'from_api_repr(resource: dict)'
+    parameters:
+    - description: Resource, as returned from the API.
+      id: resource
+      var_type: Dict[str, object]
+    returns:
+    - description: Python object, as parsed from <code>resource</code>.
+      var_type: google.cloud.bigquery.routine.Routine
+  type: method
+  uid: google.cloud.bigquery.routine.Routine.from_api_repr
+- &id008
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.imported_libraries
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: imported_libraries
+  source:
+    id: imported_libraries
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: "List[str]: The path of the imported JavaScript libraries.\n\nThe <xref\
+    \ uid=\"google.cloud.bigquery.routine.Routine.language\">language</xref> must\n\
+    equal `JAVACRIPT`.\n\nExamples:\n    Set the `imported_libraries` to a list of\
+    \ Google Cloud Storage\n    URIs.\n\n    .. code-block:: python\n\n       routine\
+    \ = bigquery.Routine(\"proj.dataset.routine_id\")\n       routine.imported_libraries\
+    \ = [\n           \"gs://cloud-samples-data/bigquery/udfs/max-value.js\",\n  \
+    \     ]\n\n"
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.imported_libraries
+- *id008
+- &id009
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.language
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: language
+  source:
+    id: language
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: The language of the routine.
+
+
+    Defaults to `SQL`.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.language
+- *id009
+- &id010
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.modified
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: modified
+  source:
+    id: modified
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[datetime.datetime]: Datetime at which the routine was
+
+    last modified (:data:`None` until set from the server).
+
+
+    Read-only.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.modified
+- *id010
+- &id011
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.path
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: path
+  source:
+    id: path
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: URL path for the routine''s APIs.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.path
+- *id011
+- &id012
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.project
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: project
+  source:
+    id: project
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: ID of the project containing the routine.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.project
+- *id012
+- &id013
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.reference
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: reference
+  source:
+    id: reference
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: '<xref uid="google.cloud.bigquery.routine.RoutineReference">google.cloud.bigquery.routine.RoutineReference</xref>:
+    Reference
+
+    describing the ID of this routine.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.reference
+- *id013
+- &id014
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.return_table_type
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: return_table_type
+  source:
+    id: return_table_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'The return type of a Table Valued Function (TVF) routine.
+
+
+    .. versionadded:: 2.22.0
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.return_table_type
+- *id014
+- &id015
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.return_type
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: return_type
+  source:
+    id: return_type
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'google.cloud.bigquery.StandardSqlDataType: Return type of
+
+    the routine.
+
+
+    If absent, the return type is inferred from
+
+    <xref uid="google.cloud.bigquery.routine.Routine.body">body</xref> at query time
+    in
+
+    each query that references this routine. If present, then the
+
+    evaluated result will be cast to the specified returned type at query
+
+    time.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine.FIELDS.return_type
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.return_type
+- *id015
+- &id016
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.routine_id
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: routine_id
+  source:
+    id: routine_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The routine ID.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.routine_id
+- *id016
+- attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.to_api_repr
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: to_api_repr
+  source:
+    id: to_api_repr
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 316
+  summary: 'Construct the API resource representation of this routine.
+
+    '
+  syntax:
+    content: to_api_repr()
+    parameters: []
+    returns:
+    - description: Routine represented as an API resource.
+      var_type: Dict[str, object]
+  type: method
+  uid: google.cloud.bigquery.routine.Routine.to_api_repr
+- &id017
+  attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.type_
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: type_
+  source:
+    id: type_
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: The fine-grained type of the routine.
+
+
+    See:
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineType
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.routine.Routine.type_
+- *id017
+- attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine.__init__
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: __init__
+  source:
+    id: __init__
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 72
+  summary: 'Initialize self.  See help(type(self)) for accurate signature.
+
+
+    '
+  syntax:
+    content: __init__(routine_ref, **kwargs)
+    parameters: []
+  type: method
+  uid: google.cloud.bigquery.routine.Routine.__init__
+- attributes: []
+  class: google.cloud.bigquery.routine.Routine
+  fullName: google.cloud.bigquery.routine.Routine
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.routine
+  name: Routine
+  source:
+    id: Routine
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/routine/routine.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 41
+  summary: 'Resource representing a user-defined routine.
+
+
+    See
+
+    https://cloud.google.com/bigquery/docs/reference/rest/v2/routines
+
+    '
+  syntax:
+    content: Routine(routine_ref, **kwargs)
+    parameters:
+    - description: A pointer to a routine. If <code>routine_ref</code> is a string,
+        it must included a project ID, dataset ID, and routine ID, each separated
+        by <code>.</code>.
+      id: routine_ref
+      var_type: Union[str, <xref uid="google.cloud.bigquery.routine.RoutineReference">google.cloud.bigquery.routine.RoutineReference</xref>]
+    - description: Initial property values.
+      id: <code>**kwargs</code>
+      var_type: Dict
+  type: method
+  uid: google.cloud.bigquery.routine.Routine
+references:
+- fullName: google.cloud.bigquery.routine.Routine.arguments
+  isExternal: false
+  name: arguments
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.arguments
+- fullName: google.cloud.bigquery.routine.Routine.body
+  isExternal: false
+  name: body
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.body
+- fullName: google.cloud.bigquery.routine.Routine.created
+  isExternal: false
+  name: created
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.created
+- fullName: google.cloud.bigquery.routine.Routine.dataset_id
+  isExternal: false
+  name: dataset_id
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.dataset_id
+- fullName: google.cloud.bigquery.routine.Routine.description
+  isExternal: false
+  name: description
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.description
+- fullName: google.cloud.bigquery.routine.Routine.determinism_level
+  isExternal: false
+  name: determinism_level
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.determinism_level
+- fullName: google.cloud.bigquery.routine.Routine.etag
+  isExternal: false
+  name: etag
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.etag
+- fullName: google.cloud.bigquery.routine.Routine.from_api_repr
+  isExternal: false
+  name: from_api_repr
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.from_api_repr
+- fullName: google.cloud.bigquery.routine.Routine.imported_libraries
+  isExternal: false
+  name: imported_libraries
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.imported_libraries
+- fullName: google.cloud.bigquery.routine.Routine.language
+  isExternal: false
+  name: language
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.language
+- fullName: google.cloud.bigquery.routine.Routine.modified
+  isExternal: false
+  name: modified
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.modified
+- fullName: google.cloud.bigquery.routine.Routine.path
+  isExternal: false
+  name: path
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.path
+- fullName: google.cloud.bigquery.routine.Routine.project
+  isExternal: false
+  name: project
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.project
+- fullName: google.cloud.bigquery.routine.Routine.reference
+  isExternal: false
+  name: reference
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.reference
+- fullName: google.cloud.bigquery.routine.Routine.return_table_type
+  isExternal: false
+  name: return_table_type
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.return_table_type
+- fullName: google.cloud.bigquery.routine.Routine.return_type
+  isExternal: false
+  name: return_type
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.return_type
+- fullName: google.cloud.bigquery.routine.Routine.routine_id
+  isExternal: false
+  name: routine_id
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.routine_id
+- fullName: google.cloud.bigquery.routine.Routine.to_api_repr
+  isExternal: false
+  name: to_api_repr
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.to_api_repr
+- fullName: google.cloud.bigquery.routine.Routine.type_
+  isExternal: false
+  name: type_
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.type_
+- fullName: google.cloud.bigquery.routine.Routine.__init__
+  isExternal: false
+  name: __init__
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine.__init__
+- fullName: google.cloud.bigquery.routine.Routine
+  isExternal: false
+  name: Routine
+  parent: google.cloud.bigquery.routine.Routine
+  uid: google.cloud.bigquery.routine.Routine

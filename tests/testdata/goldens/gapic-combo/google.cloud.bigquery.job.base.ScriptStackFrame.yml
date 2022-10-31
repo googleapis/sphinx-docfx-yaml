@@ -1,0 +1,218 @@
+### YamlMime:UniversalReference
+api_name: []
+items:
+- attributes: []
+  children:
+  - google.cloud.bigquery.job.base.ScriptStackFrame.end_column
+  - google.cloud.bigquery.job.base.ScriptStackFrame.end_line
+  - google.cloud.bigquery.job.base.ScriptStackFrame.procedure_id
+  - google.cloud.bigquery.job.base.ScriptStackFrame.start_column
+  - google.cloud.bigquery.job.base.ScriptStackFrame.start_line
+  - google.cloud.bigquery.job.base.ScriptStackFrame.text
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame
+  inheritance:
+  - type: builtins.object
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: ScriptStackFrame
+  source:
+    id: ScriptStackFrame
+    path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+    remote:
+      branch: add_goldens
+      path: tests/testdata/gapic-combo/google/cloud/bigquery/job/base.py
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: 930
+  summary: 'Stack frame showing the line/column/procedure name where the current
+
+    evaluation happened.
+
+    '
+  syntax:
+    content: ScriptStackFrame(resource)
+    parameters:
+    - description: JSON representation of object.
+      id: resource
+      var_type: Map[str, Any]
+  type: class
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame
+- &id001
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.end_column
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: end_column
+  source:
+    id: end_column
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: One-based end column.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.end_column
+- *id001
+- &id002
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.end_line
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: end_line
+  source:
+    id: end_line
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: One-based end line.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.end_line
+- *id002
+- &id003
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.procedure_id
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: procedure_id
+  source:
+    id: procedure_id
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'Optional[str]: Name of the active procedure.
+
+
+    Omitted if in a top-level script.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.procedure_id
+- *id003
+- &id004
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.start_column
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: start_column
+  source:
+    id: start_column
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: One-based start column.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.start_column
+- *id004
+- &id005
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.start_line
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: start_line
+  source:
+    id: start_line
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'int: One-based start line.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.start_line
+- *id005
+- &id006
+  attributes: []
+  class: google.cloud.bigquery.job.base.ScriptStackFrame
+  fullName: google.cloud.bigquery.job.base.ScriptStackFrame.text
+  langs:
+  - python
+  module: google.cloud.bigquery.job.base
+  name: text
+  source:
+    id: text
+    path: null
+    remote:
+      branch: add_goldens
+      path: null
+      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+    startLine: null
+  summary: 'str: Text of the current statement/expression.
+
+
+    '
+  syntax: {}
+  type: property
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.text
+- *id006
+references:
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.end_column
+  isExternal: false
+  name: end_column
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.end_column
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.end_line
+  isExternal: false
+  name: end_line
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.end_line
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.procedure_id
+  isExternal: false
+  name: procedure_id
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.procedure_id
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.start_column
+  isExternal: false
+  name: start_column
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.start_column
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.start_line
+  isExternal: false
+  name: start_line
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.start_line
+- fullName: google.cloud.bigquery.job.base.ScriptStackFrame.text
+  isExternal: false
+  name: text
+  parent: google.cloud.bigquery.job.base.ScriptStackFrame
+  uid: google.cloud.bigquery.job.base.ScriptStackFrame.text
