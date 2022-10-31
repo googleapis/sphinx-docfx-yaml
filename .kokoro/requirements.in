@@ -1,3 +1,10 @@
+# Library specific installations
+google-cloud-aiplatform[prediction]
+django==2.2
+ipython
+grpcio-status==1.48.2 # must be pinned due to protobuf compatibility.
+
+# General installations
 gcp-docuploader
 gcp-releasetool
 importlib-metadata
@@ -9,7 +16,5 @@ nox
 tox
 sphinx==4.5.0
 recommonmark
-django==2.2
-ipython
 black==22.8.0
 parameterized==0.8.1
