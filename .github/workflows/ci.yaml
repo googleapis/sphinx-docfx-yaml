@@ -21,11 +21,5 @@ jobs:
           pip install tox
       - name: Run tests
         run: |
-          tox -e docs
-      - name: Run unittest
-        run: |
-          tox -e unittest
-      - name: Run librarytest
-        run: |
-          tox -e librarytest
+          tox -e tests
 
