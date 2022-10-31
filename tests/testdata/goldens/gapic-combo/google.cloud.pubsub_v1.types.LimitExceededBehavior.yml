@@ -22,7 +22,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/types.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 87
   summary: 'The possible actions when exceeding the publish flow control limits.
 

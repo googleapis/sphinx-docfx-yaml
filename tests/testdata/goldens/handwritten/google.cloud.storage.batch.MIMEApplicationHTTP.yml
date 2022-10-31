@@ -26,7 +26,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/batch.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 34
   summary: 'MIME type for `application/http`.
 
@@ -74,7 +74,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/batch.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 34
   summary: 'Create an application/* type MIME document.
 

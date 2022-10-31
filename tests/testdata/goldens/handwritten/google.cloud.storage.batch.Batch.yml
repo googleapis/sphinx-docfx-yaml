@@ -25,7 +25,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/batch.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 131
   summary: 'Proxy an underlying connection, batching up change operations.
 
@@ -51,7 +51,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/batch.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 275
   summary: 'Return the topmost batch, or None.
 
@@ -75,7 +75,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/batch.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 250
   summary: 'Submit a single `multipart/mixed` request with deferred requests.
 

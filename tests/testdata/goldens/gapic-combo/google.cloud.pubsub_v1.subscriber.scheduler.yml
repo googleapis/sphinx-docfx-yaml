@@ -16,7 +16,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/subscriber/scheduler.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 0
   summary: 'Schedulers provide means to *schedule* callbacks asynchronously.
 

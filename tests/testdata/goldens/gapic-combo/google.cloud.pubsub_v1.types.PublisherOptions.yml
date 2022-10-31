@@ -24,7 +24,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/types.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 112
   summary: 'The options for the publisher client.
 
@@ -56,7 +56,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/types.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 112
   summary: 'Create new instance of PublisherOptions(enable_message_ordering, flow_control,
     retry, timeout)
@@ -85,7 +85,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Whether to order messages in a batch by a supplied ordering key.
 
@@ -107,7 +107,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Flow control settings for message publishing by the client. By default
     the publisher client does not do any throttling.
@@ -130,7 +130,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retry settings for message publishing by the client. This should be an
     instance of `google.api_core.retry.Retry`.
@@ -153,7 +153,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Timeout settings for message publishing by the client. It should be compatible
     with `.pubsub_v1.types.TimeoutType`.

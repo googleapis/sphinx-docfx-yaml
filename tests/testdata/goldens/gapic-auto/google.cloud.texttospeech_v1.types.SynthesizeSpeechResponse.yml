@@ -26,7 +26,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-auto/google/cloud/texttospeech_v1/types/cloud_tts.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 368
   summary: 'The message returned to the client by the `SynthesizeSpeech`
 

@@ -35,7 +35,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 228
   summary: 'A file-like object that writes to a blob.
 
@@ -100,7 +100,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 429
   summary: 'Flush and close the IO object.
 
@@ -127,7 +127,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 419
   summary: 'Flush write buffers, if applicable.
 
@@ -154,7 +154,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 438
   summary: 'Return whether object was opened for reading.
 
@@ -181,7 +181,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 444
   summary: 'Return whether object supports random access.
 
@@ -210,7 +210,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 416
   summary: 'Return current stream position.
 
@@ -234,7 +234,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 441
   summary: 'Return whether object was opened for writing.
 
@@ -261,7 +261,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/fileio.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 349
   summary: 'Write the given buffer to the IO stream.
 

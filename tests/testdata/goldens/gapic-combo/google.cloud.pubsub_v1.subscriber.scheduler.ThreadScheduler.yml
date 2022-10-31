@@ -22,7 +22,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/subscriber/scheduler.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 89
   summary: "A thread pool-based scheduler. It must not be shared across\n   SubscriberClients.\n\
     \nThis scheduler is useful in typical I/O-bound message processing.\n"
@@ -46,7 +46,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Queue: A thread-safe queue used for communication between callbacks
 
@@ -71,7 +71,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/subscriber/scheduler.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 116
   summary: 'Schedule the callback to be called asynchronously in a thread pool.
 
@@ -94,7 +94,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/subscriber/scheduler.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 136
   summary: 'Shut down the scheduler and immediately end all pending callbacks.
 

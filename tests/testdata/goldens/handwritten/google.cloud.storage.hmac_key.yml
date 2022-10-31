@@ -15,7 +15,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/hmac_key.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 0
   summary: 'Configure HMAC keys that can be used to authenticate requests to Google
     Cloud Storage.

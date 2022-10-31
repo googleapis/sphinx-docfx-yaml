@@ -18,7 +18,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/pubsub_v1/services/publisher/pagers.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 158
   summary: 'A pager for iterating through `list_topic_subscriptions` requests.
 
@@ -73,7 +73,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/pubsub_v1/services/publisher/pagers.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 158
   summary: 'Instantiate the pager.
 

@@ -81,7 +81,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 145
   summary: 'A wrapper around Cloud Storage''s concept of an `Object`.
 
@@ -135,7 +135,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 145
   summary: "property `name`\n    Get the blob's name.\n\n"
   syntax:
@@ -157,7 +157,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Allowed values for `storage_class`.
 
@@ -195,7 +195,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Create our ACL on demand.
 
@@ -219,7 +219,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Bucket which contains the object.
 
@@ -245,7 +245,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -269,7 +269,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Get the blob''s default chunk size.
 
@@ -295,7 +295,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'The client bound to this blob.
 
@@ -319,7 +319,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Number of underlying components that make up this object.
 
@@ -349,7 +349,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3298
   summary: 'Concatenate source blobs into this one.
 
@@ -419,7 +419,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -443,7 +443,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -467,7 +467,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -491,7 +491,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -515,7 +515,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -538,7 +538,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 2830
   summary: "Create a resumable upload session.\n\nResumable upload sessions allow\
     \ you to start an upload session from\none client and complete the session in\
@@ -648,7 +648,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the custom time for the object.
 
@@ -677,7 +677,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 714
   summary: 'Deletes a blob from Cloud Storage.
 
@@ -733,7 +733,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 1282
   summary: 'Download the contents of this blob as a bytes object.
 
@@ -830,7 +830,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 1405
   summary: '(Deprecated) Download the contents of this blob as a bytes object.
 
@@ -925,7 +925,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 1517
   summary: 'Download the contents of this blob as text (*not* bytes).
 
@@ -1015,7 +1015,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 1010
   summary: 'DEPRECATED. Download the contents of this blob into a file-like object.
 
@@ -1130,7 +1130,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 1146
   summary: 'Download the contents of this blob into a named file.
 
@@ -1233,7 +1233,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the customer-supplied encryption key for the object.
 
@@ -1261,7 +1261,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the ETag for the object.
 
@@ -1293,7 +1293,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -1316,7 +1316,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 619
   summary: 'Determines whether or not this blob exists.
 
@@ -1378,7 +1378,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 382
   summary: 'Get a constructor for blob object by URI.
 
@@ -1424,7 +1424,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 413
   summary: 'Generates a signed URL for this blob.
 
@@ -1568,7 +1568,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the generation for the object.
 
@@ -1597,7 +1597,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3009
   summary: 'Retrieve the IAM policy for the object.
 
@@ -1661,7 +1661,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the ID for the object.
 
@@ -1694,7 +1694,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Resource name of Cloud KMS key used to encrypt the blob''s contents.
 
@@ -1720,7 +1720,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3245
   summary: 'Update blob''s ACL, revoking read access for anonymous users.
 
@@ -1768,7 +1768,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3192
   summary: 'Update blob''s ACL, granting read access to anonymous users.
 
@@ -1817,7 +1817,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -1841,7 +1841,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the media download URI for the object.
 
@@ -1871,7 +1871,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: "Retrieve arbitrary/application specific metadata for the object.\n\nSee\
     \ https://cloud.google.com/storage/docs/json_api/v1/objects\n\n:setter: Update\
@@ -1899,7 +1899,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the metageneration for the object.
 
@@ -1928,7 +1928,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3712
   summary: 'Create a file handler for file-like I/O to or from this blob.
 
@@ -2079,7 +2079,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve info about the owner of the object.
 
@@ -2108,7 +2108,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/_helpers.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 281
   summary: 'Sends all changed properties in a PATCH request.
 
@@ -2163,7 +2163,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Getter property for the URL path to this Blob.
 
@@ -2188,7 +2188,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 293
   summary: 'Relative URL path for a blob.
 
@@ -2221,7 +2221,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'The public URL for this blob.
 
@@ -2251,7 +2251,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/_helpers.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 169
   summary: 'Reload properties from Cloud Storage.
 
@@ -2314,7 +2314,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve timestamp at which the object''s retention period expires.
 
@@ -2343,7 +2343,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3431
   summary: 'Rewrite source blob into this one.
 
@@ -2436,7 +2436,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the URI for the object.
 
@@ -2465,7 +2465,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3077
   summary: 'Update the IAM policy for the bucket.
 
@@ -2523,7 +2523,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Size of the object, in bytes.
 
@@ -2553,7 +2553,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -2577,7 +2577,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Scalar property getter.
 
@@ -2600,7 +2600,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3138
   summary: 'API call:  test permissions
 
@@ -2658,7 +2658,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the timestamp at which the object was created.
 
@@ -2688,7 +2688,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the timestamp at which the object was deleted.
 
@@ -2718,7 +2718,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/_helpers.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 352
   summary: 'Sends all properties in a PUT request.
 
@@ -2772,7 +2772,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 3585
   summary: 'Update blob''s storage class via a rewrite-in-place. This helper will
 
@@ -2869,7 +2869,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Retrieve the timestamp at which the object was updated.
 
@@ -2898,7 +2898,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 2388
   summary: "Upload the contents of this blob from a file-like object.\n\nThe content\
     \ type of the upload will be determined in order\nof precedence:\n\n- The value\
@@ -3010,7 +3010,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 2558
   summary: "Upload this blob's contents from the content of a named file.\n\nThe content\
     \ type of the upload will be determined in order\nof precedence:\n\n- The value\
@@ -3107,7 +3107,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/handwritten/google/cloud/storage/blob.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 2699
   summary: "Upload contents of this blob from the provided string.\n\n<aside class=\"\
     note\">\n<b>Note:</b>\nThe effect of uploading to an existing blob depends on\
@@ -3202,7 +3202,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'Project ID billed for API requests made via this blob.
 

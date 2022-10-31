@@ -23,7 +23,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/types.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 63
   summary: 'The settings for batch publishing the messages.
 
@@ -52,7 +52,7 @@ items:
     remote:
       branch: add_goldens
       path: tests/testdata/gapic-combo/google/cloud/pubsub_v1/types.py
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: 63
   summary: 'Create new instance of BatchSettings(max_bytes, max_latency, max_messages)
 
@@ -77,7 +77,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'The maximum total size of the messages to collect before automatically
     publishing the batch, including any byte size overhead of the publish request
@@ -101,7 +101,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'The maximum number of seconds to wait for additional messages before automatically
     publishing the batch.
@@ -124,7 +124,7 @@ items:
     remote:
       branch: add_goldens
       path: null
-      repo: git@github.com:googleapis/sphinx-docfx-yaml.git
+      repo: https://github.com/googleapis/sphinx-docfx-yaml
     startLine: null
   summary: 'The maximum number of messages to collect before automatically publishing
     the batch.
