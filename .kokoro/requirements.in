@@ -1,10 +1,12 @@
-# Library specific installations
+# Library specific extra installations.
+# Extra installations are required to ensure all documentation can be
+# generated and not missed out with the generate-docs script.
 google-cloud-aiplatform[prediction]
 django==2.2
 ipython
 grpcio-status==1.48.2 # must be pinned due to protobuf compatibility.
 
-# General installations
+# General installations.
 gcp-docuploader
 gcp-releasetool
 importlib-metadata
