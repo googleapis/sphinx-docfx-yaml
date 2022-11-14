@@ -1557,7 +1557,7 @@ _toc_yaml_type_alias = dict[str, any]
 
 def merge_markdown_and_package_toc(
     app,
-    pkg_toc_yaml: _toc_yaml_type_alias,
+    pkg_toc_yaml: list[_toc_yaml_type_alias],
     markdown_toc_yaml: _toc_yaml_type_alias,
     known_uids: set[str],
 ) -> tuple[MutableSet[str], list[_toc_yaml_type_alias]]:
@@ -1575,7 +1575,7 @@ def merge_markdown_and_package_toc(
     """
     added_pages = set()
 
-    pkg_toc_queue = [pkg_toc_yaml]
+    pkg_toc_queue = [package for package in pkg_toc_yaml]
     for entry in pkg_toc_queue:
         if (children := entry.get('items')):
             pkg_toc_queue.extend(children)
@@ -1611,7 +1611,7 @@ def merge_markdown_and_package_toc(
         page['href'] for page in top_level_pages
     })
 
-    return added_pages, top_level_pages + [pkg_toc_yaml]
+    return added_pages, top_level_pages + pkg_toc_yaml
 
 
 def build_finished(app, exception):
@@ -1872,7 +1872,7 @@ def build_finished(app, exception):
     }
 
     added_pages, pkg_toc_yaml = merge_markdown_and_package_toc(
-        app, pkg_toc_yaml[0], app.env.markdown_pages, known_uids)
+        app, pkg_toc_yaml, app.env.markdown_pages, known_uids)
 
     # Remove unused pages after merging the table of contents.
     if added_pages:
