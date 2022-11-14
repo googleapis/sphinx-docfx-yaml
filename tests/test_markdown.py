@@ -8,6 +8,7 @@ import pathlib
 import os
 from yaml import load, Loader
 
+import pytest
 import tempfile
 
 class TestGenerate(unittest.TestCase):
@@ -271,7 +272,10 @@ For example:
 
         self.assertFalse(os.path.isfile(outdir / 'does_not_exist.md'))
 
-        markdown_utils.remove_unused_pages(added_page, all_pages, outdir)
+        try:
+            markdown_utils.remove_unused_pages(added_page, all_pages, outdir)
+        except FileNotFoundError:
+            pytest.fail('Should not have thrown an exception.')
 
 
 if __name__ == '__main__':
