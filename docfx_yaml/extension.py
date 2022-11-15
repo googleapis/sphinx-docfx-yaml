@@ -1537,7 +1537,6 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
 _toc_yaml_type_alias = dict[str, any]
 
 def merge_markdown_and_package_toc(
-    app: sphinx.application,
     pkg_toc_yaml: list[_toc_yaml_type_alias],
     markdown_toc_yaml: _toc_yaml_type_alias,
     known_uids: set[str],
@@ -1546,7 +1545,6 @@ def merge_markdown_and_package_toc(
     Merges the markdown and package table of contents.
 
     Args:
-        app: Sphinx application.
         pkg_toc_yaml: table of content for package files.
         markdown_toc_yaml: table fo content for markdown files.
 
@@ -1562,7 +1560,6 @@ def merge_markdown_and_package_toc(
         for entry in toc_yaml_entry:
             if (children := entry.get('items')):
                 entries.extend(_flatten_toc(children))
-                entries.extend(children)
         return entries
 
     added_pages = set()
@@ -1851,7 +1848,7 @@ def build_finished(app, exception):
     }
 
     added_pages, pkg_toc_yaml = merge_markdown_and_package_toc(
-        app, pkg_toc_yaml, app.env.markdown_pages, known_uids)
+        pkg_toc_yaml, app.env.markdown_pages, known_uids)
 
     # Remove unused pages after merging the table of contents.
     if added_pages:
