@@ -1558,18 +1558,18 @@ def merge_markdown_and_package_toc(
         toc_yaml_entry: list[_toc_yaml_type_alias],
     ) -> list[_toc_yaml_type_alias]:
         """Flattens and retrieves all children within pkg_toc_yaml."""
-        toc_queue = list(toc_yaml_entry)
-        for entry in toc_queue:
+        entries = list(toc_yaml_entry)
+        for entry in toc_yaml_entry:
             if (children := entry.get('items')):
-                toc_queue.extend(_flatten_toc(children))
-                toc_queue.extend(children)
-        return toc_queue
+                entries.extend(_flatten_toc(children))
+                entries.extend(children)
+        return entries
 
     added_pages = set()
 
-    pkg_toc_queue = _flatten_toc(pkg_toc_yaml)
+    pkg_toc_entries = _flatten_toc(pkg_toc_yaml)
 
-    for entry in pkg_toc_queue:
+    for entry in pkg_toc_entries:
         entry_name = entry['name'].lower()
         if entry_name not in markdown_toc_yaml:
             continue
