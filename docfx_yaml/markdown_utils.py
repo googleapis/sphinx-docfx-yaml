@@ -262,7 +262,7 @@ def move_markdown_pages(
     base_markdown_dir = Path(app.builder.outdir).parent / "markdown"
 
     markdown_dir = (
-        base_markdown_dir / '/'.join(cwd)
+        base_markdown_dir.joinpath(*cwd)
         if cwd
         else base_markdown_dir
     )

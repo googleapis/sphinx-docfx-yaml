@@ -41,6 +41,7 @@ except ImportError:
 
 from yaml import safe_dump as dump
 
+import sphinx.application
 from sphinx.util.console import darkgreen, bold
 from sphinx.util import ensuredir
 from sphinx.errors import ExtensionError
@@ -1556,7 +1557,7 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
 _toc_yaml_type_alias = dict[str, any]
 
 def merge_markdown_and_package_toc(
-    app,
+    app: sphinx.application,
     pkg_toc_yaml: list[_toc_yaml_type_alias],
     markdown_toc_yaml: _toc_yaml_type_alias,
     known_uids: set[str],
@@ -1573,12 +1574,22 @@ def merge_markdown_and_package_toc(
         A set of markdown pages that has been added, and the merged table of
         contents file, with files in the correct position.
     """
+    def _flatten_toc(
+        toc_yaml_entry: list[_toc_yaml_type_alias],
+    ) -> list[_toc_yaml_type_alias]:
+        """Flattens and retrieves all children within pkg_toc_yaml."""
+        toc_queue = list(toc_yaml_entry)
+        for entry in toc_queue:
+            if (children := entry.get('items')):
+                toc_queue.extend(_flatten_toc(children))
+                toc_queue.extend(children)
+        return toc_queue
+
     added_pages = set()
 
-    pkg_toc_queue = [package for package in pkg_toc_yaml]
+    pkg_toc_queue = _flatten_toc(pkg_toc_yaml)
+
     for entry in pkg_toc_queue:
-        if (children := entry.get('items')):
-            pkg_toc_queue.extend(children)
         entry_name = entry['name'].lower()
         if entry_name not in markdown_toc_yaml:
             continue
