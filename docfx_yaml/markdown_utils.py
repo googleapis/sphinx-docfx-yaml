@@ -166,7 +166,6 @@ def _remove_license(mdfile_path: str) -> None:
 
     # Strip the license.
     file_content = file_content[end_index + len(comment_tag_end):]
-    print(f"file_content: {file_content}")
 
     # Reset file position to the beginning to write
     with open(mdfile_path, 'w') as mdfile:
