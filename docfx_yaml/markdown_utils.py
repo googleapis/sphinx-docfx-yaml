@@ -301,14 +301,14 @@ def move_markdown_pages(
     # Used to keep track of the index page entry to insert later.
     index_page_entry = None
 
-    list_of_markdown_file_names = [
+    markdown_file_names = {
         mdfile.name.lower()
         for mdfile in markdown_dir.iterdir()
-    ]
+    }
 
     # If there is an index.md and no readme.md, use the index.md. Otherwise, we ignore the index.md.
-    if ("index.md" in list_of_markdown_file_names and
-        "readme.md" not in list_of_markdown_file_names):
+    if ("index.md" in markdown_file_names and
+        "readme.md" not in markdown_file_names):
         files_to_ignore.remove("index.md")
 
     # For each file, if it is a markdown file move to the top level pages.
