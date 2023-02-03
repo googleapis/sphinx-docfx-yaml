@@ -301,10 +301,9 @@ def move_markdown_pages(
     # Used to keep track of the index page entry to insert later.
     index_page_entry = None
 
-    markdown_files = markdown_dir.iterdir()
     list_of_markdown_file_names = [
         mdfile.name.lower()
-        for mdfile in markdown_files
+        for mdfile in markdown_dir.iterdir()
     ]
 
     # If a custom index.md file is preferred, use this instead of README.md.
@@ -313,7 +312,7 @@ def move_markdown_pages(
         files_to_ignore.remove("index.md")
 
     # For each file, if it is a markdown file move to the top level pages.
-    for mdfile in markdown_files:
+    for mdfile in markdown_dir.iterdir():
         if mdfile.is_dir():
             cwd.append(mdfile.name)
             move_markdown_pages(app, outdir, cwd)
@@ -354,16 +353,16 @@ def move_markdown_pages(
             _highlight_md_codeblocks(mdfile_outdir)
             _clean_image_links(mdfile_outdir)
 
-            # Use Overview as the name for top-level index file.
-            if 'index.md' in mdfile_name_to_use:
-                # Save the index page entry.
-                index_page_entry = {
-                    'name': name if cwd else 'Overview',
-                    'href': mdfile_name_to_use if cwd else 'index.md',
-                }
-                continue
-
             if not cwd:
+                # Use Overview as the name for top-level index file.
+                if 'index.md' in mdfile_name_to_use:
+                    # Save the index page entry.
+                    index_page_entry = {
+                        'name': 'Overview',
+                        'href': 'index.md',
+                    }
+                    continue
+
                 # Use '/' to reserve for top level pages.
                 app.env.markdown_pages['/'].append({
                     'name': name,
