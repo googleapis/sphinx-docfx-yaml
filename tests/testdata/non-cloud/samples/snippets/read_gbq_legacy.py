@@ -10,7 +10,6 @@ import pandas_gbq
 
 
 def main(project_id):
-    # [START bigquery_pandas_gbq_read_gbq_legacy]
     sql = """
     SELECT country_name, alpha_2_code
     FROM [bigquery-public-data:utility_us.country_code_iso]
@@ -23,7 +22,6 @@ def main(project_id):
         # pandas-gbq version 0.10.0, the default dialect is "standard".
         dialect="legacy",
     )
-    # [END bigquery_pandas_gbq_read_gbq_legacy]
     print(df)
     return df
 

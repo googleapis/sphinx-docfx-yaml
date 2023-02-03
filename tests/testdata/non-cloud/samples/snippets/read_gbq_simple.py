@@ -8,7 +8,6 @@ import argparse
 
 
 def main(project_id):
-    # [START bigquery_pandas_gbq_read_gbq_simple]
     import pandas_gbq
 
     # TODO: Set project_id to your Google Cloud Platform project ID.
@@ -20,7 +19,6 @@ def main(project_id):
     WHERE alpha_2_code LIKE 'A%'
     """
     df = pandas_gbq.read_gbq(sql, project_id=project_id)
-    # [END bigquery_pandas_gbq_read_gbq_simple]
     print(df)
     return df
 
