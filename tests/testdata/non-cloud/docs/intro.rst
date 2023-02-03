@@ -30,8 +30,8 @@ download the results as a :class:`pandas.DataFrame` object.
 .. literalinclude:: samples/snippets/read_gbq_simple.py
    :language: python
    :dedent: 4
-   :start-after: [START bigquery_pandas_gbq_read_gbq_simple]
-   :end-before: [END bigquery_pandas_gbq_read_gbq_simple]
+   :start-after: [S bigquery_pandas_gbq_read_gbq_simple]
+   :end-before: [E bigquery_pandas_gbq_read_gbq_simple]
 
 By default, queries use standard SQL syntax. Visit the :doc:`reading tables
 guide <reading>` to learn about the available options.
@@ -60,8 +60,8 @@ Use the :func:`pandas_gbq.to_gbq` function to write a
 .. literalinclude:: samples/snippets/to_gbq_simple.py
    :language: python
    :dedent: 4
-   :start-after: [START bigquery_pandas_gbq_to_gbq_simple]
-   :end-before: [END bigquery_pandas_gbq_to_gbq_simple]
+   :start-after: [S bigquery_pandas_gbq_to_gbq_simple]
+   :end-before: [E bigquery_pandas_gbq_to_gbq_simple]
 
 The destination table and destination dataset will automatically be created.
 By default, writes to BigQuery fail if the table already exists. Visit the

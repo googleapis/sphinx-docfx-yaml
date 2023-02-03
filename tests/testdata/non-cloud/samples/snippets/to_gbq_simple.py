@@ -8,6 +8,7 @@ import argparse
 
 
 def main(project_id, table_id):
+    # [S bigquery_pandas_gbq_to_gbq_simple]
     import pandas
     import pandas_gbq
 
@@ -30,6 +31,7 @@ def main(project_id, table_id):
     )
 
     pandas_gbq.to_gbq(df, table_id, project_id=project_id)
+    # [E bigquery_pandas_gbq_to_gbq_simple]
 
 
 if __name__ == "__main__":

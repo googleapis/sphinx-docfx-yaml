@@ -9,8 +9,8 @@ download the results as a :class:`pandas.DataFrame` object.
 .. literalinclude:: samples/snippets/read_gbq_simple.py
    :language: python
    :dedent: 4
-   :start-after: [START bigquery_pandas_gbq_read_gbq_simple]
-   :end-before: [END bigquery_pandas_gbq_read_gbq_simple]
+   :start-after: [S bigquery_pandas_gbq_read_gbq_simple]
+   :end-before: [E bigquery_pandas_gbq_read_gbq_simple]
 
 .. note::
 
@@ -40,8 +40,8 @@ default value is ``'standard'``.
 .. literalinclude:: samples/snippets/read_gbq_legacy.py
    :language: python
    :dedent: 4
-   :start-after: [START bigquery_pandas_gbq_read_gbq_legacy]
-   :end-before: [END bigquery_pandas_gbq_read_gbq_legacy]
+   :start-after: [S bigquery_pandas_gbq_read_gbq_legacy]
+   :end-before: [E bigquery_pandas_gbq_read_gbq_legacy]
 
 * `Standard SQL reference
   <https://cloud.google.com/bigquery/docs/reference/standard-sql/>`__

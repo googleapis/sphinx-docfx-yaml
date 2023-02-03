@@ -9,8 +9,8 @@ Use the :func:`pandas_gbq.to_gbq` function to write a
 .. literalinclude:: samples/snippets/to_gbq_simple.py
    :language: python
    :dedent: 4
-   :start-after: [START bigquery_pandas_gbq_to_gbq_simple]
-   :end-before: [END bigquery_pandas_gbq_to_gbq_simple]
+   :start-after: [S bigquery_pandas_gbq_to_gbq_simple]
+   :end-before: [E bigquery_pandas_gbq_to_gbq_simple]
 
 The destination table and destination dataset will automatically be created
 if they do not already exist.
