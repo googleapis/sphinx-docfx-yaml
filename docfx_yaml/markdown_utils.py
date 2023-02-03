@@ -306,7 +306,7 @@ def move_markdown_pages(
         for mdfile in markdown_dir.iterdir()
     ]
 
-    # If a custom index.md file is preferred, use this instead of README.md.
+    # If there is an index.md and no readme.md, use the index.md. Otherwise, we ignore the index.md.
     if ("index.md" in list_of_markdown_file_names and
         "readme.md" not in list_of_markdown_file_names):
         files_to_ignore.remove("index.md")
