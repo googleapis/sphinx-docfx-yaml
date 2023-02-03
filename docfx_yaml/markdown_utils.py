@@ -301,8 +301,19 @@ def move_markdown_pages(
     # Used to keep track of the index page entry to insert later.
     index_page_entry = None
 
+    markdown_files = markdown_dir.iterdir()
+    list_of_markdown_file_names = [
+        mdfile.name.lower()
+        for mdfile in markdown_files
+    ]
+
+    # If a custom index.md file is preferred, use this instead of README.md.
+    if ("index.md" in list_of_markdown_file_names and
+        "readme.md" not in list_of_markdown_file_names):
+        files_to_ignore.remove("index.md")
+
     # For each file, if it is a markdown file move to the top level pages.
-    for mdfile in markdown_dir.iterdir():
+    for mdfile in markdown_files:
         if mdfile.is_dir():
             cwd.append(mdfile.name)
             move_markdown_pages(app, outdir, cwd)
@@ -332,6 +343,9 @@ def move_markdown_pages(
             if mdfile_name_to_use in files_to_rename:
                 mdfile_name_to_use = files_to_rename[mdfile_name_to_use]
 
+            if cwd and mdfile_name_to_use == "index.md":
+                mdfile_name_to_use = f"{'_'.join(cwd)}_{mdfile_name_to_use}"
+
             mdfile_outdir = f"{outdir}/{mdfile_name_to_use}"
 
             shutil.copy(mdfile, mdfile_outdir)
@@ -340,12 +354,12 @@ def move_markdown_pages(
             _highlight_md_codeblocks(mdfile_outdir)
             _clean_image_links(mdfile_outdir)
 
-            # Use Overview as the name for index file.
-            if mdfile_name_to_use == 'index.md':
+            # Use Overview as the name for top-level index file.
+            if 'index.md' in mdfile_name_to_use:
                 # Save the index page entry.
                 index_page_entry = {
-                    'name': 'Overview',
-                    'href': 'index.md',
+                    'name': name if cwd else 'Overview',
+                    'href': mdfile_name_to_use if cwd else 'index.md',
                 }
                 continue
 
