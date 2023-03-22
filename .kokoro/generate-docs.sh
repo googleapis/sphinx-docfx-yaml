@@ -169,7 +169,7 @@ if [ -n "${monorepo_packages}" ]; then
   cd google-cloud-python/packages
 
   # TODO (https://github.com/googleapis/sphinx-docfx-yaml/issues/287): support
-  # mutl-version build for the monorepo.
+  # multi-version build for the monorepo.
   for monorepo_package in $(echo ${monorepo_packages}); do
     cd ${monorepo_package}
 
