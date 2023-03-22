@@ -59,7 +59,8 @@ for package in $(echo "${python_bucket_items}" | cut -d "-" -f 5- | rev | cut -d
 
   # If the pacakage is part of the monorepo, we'll process this later.
   if [[ "${repo}" == "google-cloud-python" ]]; then
-    monorepo_packages="$(cat docs.metadata | grep "distribution_name" | cut -d "\"" -f 2) ${monorepo_packages}"
+    # Add an extra whitespace at the end to be used as a natural separator.
+    monorepo_packages+="$(cat docs.metadata | grep "distribution_name" | cut -d "\"" -f 2) "
     cd ..
     rm -rf ${tarball}
     continue
