@@ -1821,6 +1821,9 @@ def build_finished(app, exception):
         markdown_utils.remove_unused_pages(
             added_pages, app.env.moved_markdown_pages, normalized_outdir)
 
+    # Add Summary page as second entry into the table of contents.
+    pkg_toc_yaml.insert(1, {'name': 'Summary', 'href': 'summary.yml'})
+
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
         writable.write(
@@ -1832,6 +1835,10 @@ def build_finished(app, exception):
                 default_flow_style=False,
             )
         )
+
+    summary_page_file = os.path.join(normalized_outdir, 'summary.yml')
+    summary_page_children = []
+    summary_page_references = []
 
     # Output files
     for uid, data in iter(yaml_map.items()):
@@ -1875,7 +1882,39 @@ def build_finished(app, exception):
 
         file_name_set.add(filename)
 
-    index_file = os.path.join(normalized_outdir, 'index.yml')
+        # Add short detail to summary page
+        types_for_summary = [MODULE, CLASS]
+        for item in yaml_data:
+            if not item.get('type') in types_for_summary:
+                continue
+            summary_page_children.append(item.get('uid', '')),
+            summary_page_references.append({
+                'uid': item.get('uid', ''),
+                'name': item.get('name', ''),
+                'fullName': item.get('uid', ''),
+                'isExternal': False,
+            })
+
+    with open(summary_page_file, 'w') as summary_file_obj:
+        summary_file_obj.write('### YamlMime:UniversalReference\n')
+        dump(
+            {
+                'items': [{
+                    'uid': 'summary',
+                    'name': f'{app.config.project} Summary',
+                    'fullName': 'Summary',
+                    'langs': ['python'],
+                    'type': 'package',
+                    'summary': f'Summary of entries of {app.config.project}',
+                    'children': summary_page_children,
+                }],
+                'references': summary_page_references,
+            },
+            summary_file_obj,
+            default_flow_style=False
+        )
+
+    index_file = os.path.join(normalized_outdir, 'index_file.yml')
     index_children = []
     index_references = []
     for package in pkg_toc_yaml_with_uid:
