@@ -47,8 +47,8 @@ from sphinx.util.console import darkgreen, bold
 from sphinx.util import ensuredir
 from sphinx.errors import ExtensionError
 from sphinx.util.nodes import make_refnode
-from sphinxcontrib.napoleon.docstring import GoogleDocstring
-from sphinxcontrib.napoleon import Config, _process_docstring
+from sphinx.ext.napoleon import Config, _process_docstring
+from sphinx.ext.napoleon.docstring import GoogleDocstring
 
 from .utils import transform_node, transform_string
 from .settings import API_ROOT
@@ -133,6 +133,7 @@ NOTICES = {
     DEPRECATED: 'deprecated',
 }
 
+logger = sphinx.util.logging.getLogger(__name__)
 # Disable blib2to3 output that clutters debugging log.
 logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
@@ -222,11 +223,11 @@ def _get_cls_module(_type, name):
 
 def _create_reference(datam, parent, is_external=False):
     return {
-        'uid': datam['uid'],
+        'uid': datam.get('uid'),
         'parent': parent,
         'isExternal': is_external,
-        'name': datam['source']['id'],
-        'fullName': datam['fullName'],
+        'name': datam['source'].get('id') if datam.get('source') else '',
+        'fullName': datam.get('fullName'),
     }
 
 
@@ -1647,7 +1648,7 @@ def build_finished(app, exception):
                     arg_params = arg_params[1:]
                     obj['syntax']['parameters'] = arg_params
                 if obj['uid'] in app.env.docfx_info_field_data and \
-                    obj['type'] == app.env.docfx_info_field_data[obj['uid']]['type']:
+                    obj['type'] == app.env.docfx_info_field_data[obj['uid']].get('type'):
                     # Avoid entities with same uid and diff type.
                     del(app.env.docfx_info_field_data[obj['uid']]['type']) # Delete `type` temporarily
                     if 'syntax' not in obj:
@@ -1657,9 +1658,9 @@ def build_finished(app, exception):
                         doc_params = app.env.docfx_info_field_data[obj['uid']].get('parameters', [])
                         if arg_params and doc_params:
                             if len(arg_params) - len(doc_params) > 0:
-                                app.warn(
+                                logger.warning(
                                     "Documented params don't match size of params:"
-                                    " {}".format(obj['uid']))
+                                    f" {obj['uid']}")
                             # Zip 2 param lists until the long one is exhausted
                             for args, docs in zip_longest(arg_params, doc_params, fillvalue={}):
                                 if len(args) == 0:
