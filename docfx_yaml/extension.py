@@ -731,6 +731,7 @@ def extract_product_name(name):
 
     return product_name
 
+
 def _extract_type_name(annotation: Any) -> str:
     """Extracts the type name for the given inspected object.
 
