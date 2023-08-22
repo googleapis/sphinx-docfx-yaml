@@ -32,7 +32,7 @@ from collections.abc import MutableSet
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional
 from black import InvalidInput
 
 try:
@@ -731,6 +731,51 @@ def extract_product_name(name):
 
     return product_name
 
+def _extract_type_name(annotation: Any) -> str:
+    """Extracts the type name for the given inspected object.
+
+    Used to identify and extract the type hints given through inspecting the
+    source code. Carefully extracts only the relevant part for the given
+    annotation.
+
+    Args:
+        annotation: the inspected object in its type format.
+
+    Returns:
+        The extracted type hint in human-readable string format.
+    """
+    type_name = ""
+    # Extract names for simple types.
+    try:
+        return annotation.__name__
+    except AttributeError:
+        pass
+
+    # Try to extract names for more complicated types.
+    type_name = str(annotation)
+    if not annotation.__args__:
+        return type_name
+
+    # If ForwardRef references are found, recursively remove them.
+    prefix_to_remove_start = "[ForwardRef('"
+    if prefix_to_remove_start not in type_name:
+        return type_name
+
+    prefix_to_remove_end = "')]"
+    prefix_start_len = len(prefix_to_remove_start)
+    prefix_end_len = len(prefix_to_remove_end)
+
+    while prefix_to_remove_start in type_name:
+        start_index = type_name.find(prefix_to_remove_start)
+        end_index = type_name.find(prefix_to_remove_end, start_index)
+        type_name = ''.join([
+            type_name[:start_index],
+            type_name[start_index+prefix_start_len:end_index],
+            type_name[end_index+prefix_end_len:],
+        ])
+
+    return type_name
+
 
 def _create_datam(app, cls, module, name, _type, obj, lines=None):
     """
@@ -767,19 +812,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 for annotation in argspec.annotations:
                     if annotation == "return":
                         continue
-                    # Extract names for simple types.
                     try:
-                        type_map[annotation] = (argspec.annotations[annotation]).__name__
-                    # Try to extract names for more complicated types.
+                        type_map[annotation] = _extract_type_name(
+                            argspec.annotations[annotation])
                     except AttributeError:
-                        vartype = argspec.annotations[annotation]
-                        try:
-                            type_map[annotation] = str(vartype._name)
-                            if vartype.__args__:
-                                type_map[annotation] += str(vartype.__args__)[:-2] + ")"
-                        except AttributeError:
-                            print(f"Could not parse argument information for {annotation}.")
-                            continue
+                        print(f"Could not parse argument information for {annotation}.")
+                        continue
 
             # Add up the number of arguments. `argspec.args` contains a list of
             # all the arguments from the function.
@@ -808,9 +846,13 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                         # Find the index of the current default value argument
                         index = len(args) + count - offset_count
 
-                        # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
-                        # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
-                        if 'object at 0x' not in str(default):
+                        # Only add defaultValue when str(default) doesn't
+                        # contain object address string, for example:
+                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0
+                        # inspect.getargspec method will return wrong defaults
+                        # which contain object address for some default values,
+                        # like sys.stdout.
+                        if 'at 0x' not in str(default):
                             args[index]['defaultValue'] = str(default)
                 # If we cannot find the argument, it is missing a type and was taken out intentionally.
                 except IndexError:
@@ -936,12 +978,23 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             if arg['id'] in variables:
                 # Retrieve argument info from extracted map of variable info
                 arg_var = variables[arg['id']]
-                arg['var_type'] = arg_var.get('var_type')
                 arg['description'] = arg_var.get('description')
 
-            # Only add arguments with type and description.
-            if not (arg.get('var_type') and arg.get('description')):
+            # Ignore the entry if we're missing the description.
+            if not arg.get('description'):
                 incomplete_args.append(arg)
+                continue
+
+            if (arg_var_type := arg_var.get('var_type')):
+                arg['var_type'] = arg_var_type
+                continue
+
+            # Use the default type if it could not be parsed. If the type is not
+            # documented or missing from type_hint, ignore the entry.
+            if not arg.get('var_type'):
+                incomplete_args.append(arg)
+                continue
+
 
         # Remove any arguments with missing type or description from the YAML.
         for incomplete_arg in incomplete_args:
