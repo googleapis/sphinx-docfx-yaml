@@ -758,11 +758,11 @@ def _extract_type_name(annotation: Any) -> str:
         return type_name
 
     # If ForwardRef references are found, recursively remove them.
-    prefix_to_remove_start = "[ForwardRef('"
+    prefix_to_remove_start = "ForwardRef('"
     if prefix_to_remove_start not in type_name:
         return type_name
 
-    prefix_to_remove_end = "')]"
+    prefix_to_remove_end = "')"
     prefix_start_len = len(prefix_to_remove_start)
     prefix_end_len = len(prefix_to_remove_end)
 
