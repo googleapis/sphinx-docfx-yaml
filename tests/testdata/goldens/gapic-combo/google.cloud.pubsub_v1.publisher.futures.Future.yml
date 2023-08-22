@@ -84,7 +84,7 @@ items:
         completed or been cancelled then the callable will be called immediately.
         These callables are called in the order that they were added.
       id: callback
-      var_type: typing.Callable[pubsub_v1.publisher.futures.Future, typing.Any]
+      var_type: typing.Callable[[pubsub_v1.publisher.futures.Future], typing.Any]
   type: method
   uid: google.cloud.pubsub_v1.publisher.futures.Future.add_done_callback
 - attributes: []

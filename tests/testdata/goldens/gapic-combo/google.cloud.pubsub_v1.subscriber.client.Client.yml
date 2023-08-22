@@ -1706,7 +1706,7 @@ items:
         only argument and will be called from a different thread/ process depending
         on the scheduling strategy.
       id: callback
-      var_type: typing.Callable[subscriber.message.Message, typing.Any]
+      var_type: typing.Callable[[subscriber.message.Message], typing.Any]
     - defaultValue: ()
       description: The flow control settings. Use this to prevent situations where
         you are inundated with too many messages at once.
@@ -1718,7 +1718,7 @@ items:
         controls how callbacks are executed concurrently. This object must not be
         shared across multiple <code>SubscriberClient</code> instances.
       id: scheduler
-      var_type: typing.Optionalsubscriber.scheduler.ThreadScheduler
+      var_type: typing.Optional[subscriber.scheduler.ThreadScheduler]
     - defaultValue: 'False'
       description: If set to <code>True</code>, flow control at the Cloud Pub/Sub
         server is disabled, though client-side flow control is still enabled. If set
