@@ -734,11 +734,14 @@ def extract_product_name(name):
 
 def _extract_type_name(annotation: Any) -> str:
     """Extracts the type name for the given inspected object.
+
     Used to identify and extract the type hints given through inspecting the
     source code. Carefully extracts only the relevant part for the given
     annotation.
+
     Args:
         annotation: the inspected object in its type format.
+
     Returns:
         The extracted type hint in human-readable string format.
     """
