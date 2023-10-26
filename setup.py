@@ -25,6 +25,7 @@ dependencies = [
     'recommonmark',
     'sphinx==5.3.0',
     'sphinx-markdown-builder==0.5.5',
+    'sphinxcontrib.napoleon',
     'unidecode',
     'wheel>=0.24.0'
 ]
