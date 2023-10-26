@@ -23,8 +23,8 @@ dependencies = [
     'gcp-docuploader',
     'PyYAML',
     'recommonmark',
-    'sphinx==7.0.1',
-    'sphinx-markdown-builder',
+    'sphinx==5.3.0',
+    'sphinx-markdown-builder==0.5.5',
     'unidecode',
     'wheel>=0.24.0'
 ]
