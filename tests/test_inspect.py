@@ -39,7 +39,7 @@ class TestGenerate(unittest.TestCase):
     ]
     @parameterized.expand(types_to_test)
     def test_extracts_annotations(self, type_to_test, expected_type_name):
-        """Extracts annotations for ones without __args__."""
+        """Extracts annotations from test method, compares to expected name."""
         def test_method(name: type_to_test):
             pass
 
