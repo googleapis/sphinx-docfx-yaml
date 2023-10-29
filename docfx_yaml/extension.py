@@ -740,7 +740,9 @@ def _extract_type_name(annotation: Any) -> str:
     annotation.
 
     Args:
-        annotation: the inspected object in its type format.
+        annotation: the inspected object in its type format. The type hint used
+            is `Any`, because it's the type of the object inspected itself,
+            which can come as any type available.
 
     Returns:
         The extracted type hint in human-readable string format.
