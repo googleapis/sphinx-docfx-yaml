@@ -988,8 +988,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 arg['var_type'] = arg_var_type
                 continue
 
-            # Use the default type if it could not be parsed. If the type is not
-            # documented or missing from type_hint, ignore the entry.
+            # If the type is not documented or missing from type_hint,
+            # ignore the entry.
             if not arg.get('var_type'):
                 incomplete_args.append(arg)
                 continue
