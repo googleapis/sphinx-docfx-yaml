@@ -847,12 +847,13 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
                         # Only add defaultValue when str(default) doesn't
                         # contain object address string, for example:
-                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0
-                        # inspect.getargspec method will return wrong defaults
-                        # which contain object address for some default values,
+                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
+                        # otherwise inspect.getargspec method will return wrong
+                        # defaults which contain object address for some,
                         # like sys.stdout.
-                        if 'at 0x' not in str(default):
-                            args[index]['defaultValue'] = str(default)
+                        default_string = str(default)
+                        if 'at 0x' not in default_string:
+                            args[index]['defaultValue'] = default_string
                 # If we cannot find the argument, it is missing a type and was taken out intentionally.
                 except IndexError:
                     pass
