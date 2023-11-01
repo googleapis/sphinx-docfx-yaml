@@ -40,7 +40,6 @@ RUN apt-get update \
     libssl-dev \
     libsqlite3-dev \
     portaudio19-dev \
-    python3.10-distutils \
     redis-server \
     software-properties-common \
     ssh \
@@ -53,10 +52,12 @@ RUN apt-get update \
     wget \
     zlib1g-dev \
   && add-apt-repository universe \
+  && add-apt-repository ppa:deadsnakes/ppa \
   && apt-get update \
   && apt-get -y install jq \
   && apt-get clean autoclean \
   && apt-get autoremove -y \
+  && apt install python3.10-distutils \
   && rm -rf /var/lib/apt/lists/* \
   && rm -f /var/cache/apt/archives/*.deb
 
