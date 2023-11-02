@@ -83,4 +83,10 @@ RUN apt install -y python3-pip
 # Test pip
 RUN python3.10 -m pip
 
-CMD ["python3.10"]
+# Make Python3.10 the default version
+RUN unlink /usr/bin/python3 && ln -s /usr/local/bin/python3.10 /usr/bin/python3
+
+# Test version
+RUN python3 --version
+
+CMD ["python3"]
