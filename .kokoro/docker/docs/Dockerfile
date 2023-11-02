@@ -83,4 +83,4 @@ RUN apt install -y python3-pip
 # Test pip
 RUN python3.10 -m pip
 
-CMD ["python3"]
+CMD ["python3.10"]
