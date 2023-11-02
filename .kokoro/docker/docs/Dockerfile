@@ -57,7 +57,7 @@ RUN apt-get update \
   && apt-get -y install jq \
   && apt-get clean autoclean \
   && apt-get autoremove -y \
-  && apt install python3.10-distutils \
+  && apt install -y python3.10-distutils \
   && rm -rf /var/lib/apt/lists/* \
   && rm -f /var/cache/apt/archives/*.deb
 
@@ -78,9 +78,7 @@ RUN ./Python-3.10.13/configure --enable-optimizations
 RUN make altinstall
 
 ###################### Install pip
-RUN wget -O /tmp/get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
-  && python3 /tmp/get-pip.py \
-  && rm /tmp/get-pip.py
+RUN apt install -y python3-pip
 
 # Test pip
 RUN python3.10 -m pip
