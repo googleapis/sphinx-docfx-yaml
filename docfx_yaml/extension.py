@@ -32,7 +32,7 @@ from collections.abc import MutableSet
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
-from typing import Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional
 from black import InvalidInput
 
 try:
@@ -47,8 +47,9 @@ from sphinx.util.console import darkgreen, bold
 from sphinx.util import ensuredir
 from sphinx.errors import ExtensionError
 from sphinx.util.nodes import make_refnode
-from sphinxcontrib.napoleon.docstring import GoogleDocstring
-from sphinxcontrib.napoleon import Config, _process_docstring
+from sphinx.ext.napoleon import GoogleDocstring
+from sphinx.ext.napoleon import Config
+from sphinx.ext.napoleon import _process_docstring
 
 from .utils import transform_node, transform_string
 from .settings import API_ROOT
@@ -732,6 +733,50 @@ def extract_product_name(name):
     return product_name
 
 
+def _extract_type_name(annotation: Any) -> str:
+    """Extracts the type name for the given inspected object.
+
+    Used to identify and extract the type hints given through inspecting the
+    source code. Carefully extracts only the relevant part for the given
+    annotation.
+
+    Args:
+        annotation: the inspected object in its type format. The type hint used
+            is `Any`, because it's the type of the object inspected itself,
+            which can come as any type available.
+
+    Returns:
+        The extracted type hint in human-readable string format.
+    """
+
+    annotation_dir = dir(annotation)
+    if '__args__' not in annotation_dir:
+        return annotation.__name__
+
+    # Try to extract names for more complicated types.
+    type_name = str(annotation)
+
+    # If ForwardRef references are found, recursively remove them.
+    prefix_to_remove_start = "ForwardRef('"
+    if prefix_to_remove_start not in type_name:
+        return type_name
+
+    prefix_to_remove_end = "')"
+    prefix_start_len = len(prefix_to_remove_start)
+    prefix_end_len = len(prefix_to_remove_end)
+
+    while prefix_to_remove_start in type_name:
+        start_index = type_name.find(prefix_to_remove_start)
+        end_index = type_name.find(prefix_to_remove_end, start_index)
+        type_name = ''.join([
+            type_name[:start_index],
+            type_name[start_index+prefix_start_len:end_index],
+            type_name[end_index+prefix_end_len:],
+        ])
+
+    return type_name
+
+
 def _create_datam(app, cls, module, name, _type, obj, lines=None):
     """
     Build the data structure for an autodoc class
@@ -767,19 +812,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 for annotation in argspec.annotations:
                     if annotation == "return":
                         continue
-                    # Extract names for simple types.
                     try:
-                        type_map[annotation] = (argspec.annotations[annotation]).__name__
-                    # Try to extract names for more complicated types.
+                        type_map[annotation] = _extract_type_name(
+                            argspec.annotations[annotation])
                     except AttributeError:
-                        vartype = argspec.annotations[annotation]
-                        try:
-                            type_map[annotation] = str(vartype._name)
-                            if vartype.__args__:
-                                type_map[annotation] += str(vartype.__args__)[:-2] + ")"
-                        except AttributeError:
-                            print(f"Could not parse argument information for {annotation}.")
-                            continue
+                        print(f"Could not parse argument information for {annotation}.")
+                        continue
 
             # Add up the number of arguments. `argspec.args` contains a list of
             # all the arguments from the function.
@@ -808,10 +846,15 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                         # Find the index of the current default value argument
                         index = len(args) + count - offset_count
 
-                        # Only add defaultValue when str(default) doesn't contain object address string(object at 0x)
-                        # inspect.getargspec method will return wrong defaults which contain object address for some default values, like sys.stdout
-                        if 'object at 0x' not in str(default):
-                            args[index]['defaultValue'] = str(default)
+                        # Only add defaultValue when str(default) doesn't
+                        # contain object address string, for example:
+                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
+                        # otherwise inspect.getargspec method will return wrong
+                        # defaults which contain object address for some,
+                        # like sys.stdout.
+                        default_string = str(default)
+                        if 'at 0x' not in default_string:
+                            args[index]['defaultValue'] = default_string
                 # If we cannot find the argument, it is missing a type and was taken out intentionally.
                 except IndexError:
                     pass
@@ -936,12 +979,23 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             if arg['id'] in variables:
                 # Retrieve argument info from extracted map of variable info
                 arg_var = variables[arg['id']]
-                arg['var_type'] = arg_var.get('var_type')
                 arg['description'] = arg_var.get('description')
 
-            # Only add arguments with type and description.
-            if not (arg.get('var_type') and arg.get('description')):
+            # Ignore the entry if we're missing the description.
+            if not arg.get('description'):
                 incomplete_args.append(arg)
+                continue
+
+            if (arg_var_type := arg_var.get('var_type')):
+                arg['var_type'] = arg_var_type
+                continue
+
+            # If the type is not documented or missing from type_hint,
+            # ignore the entry.
+            if not arg.get('var_type'):
+                incomplete_args.append(arg)
+                continue
+
 
         # Remove any arguments with missing type or description from the YAML.
         for incomplete_arg in incomplete_args:
@@ -1342,7 +1396,14 @@ def find_uid_to_convert(
     return None
 
 
-def convert_cross_references(content: str, current_object_name: str, known_uids: List[str]) -> str:
+# TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/331): Improve
+# converting cross references for code content.
+def convert_cross_references(
+    content: str,
+    current_object_name: str,
+    known_uids: List[str],
+    ignore_examples: Optional[bool] = False,
+) -> str:
     """Finds and replaces references that should be a cross reference in given content.
 
     This should not convert any references that contain `current_object_name`,
@@ -1354,10 +1415,13 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
         content: body of content to parse and look for references in
         current_object_name: the name of the current Python object being processed
         known_uids: list of uid references to look for
+        ignore_examples: Don't convert references in example content
+            if set to True. False by default.
 
     Returns:
         content that has been modified with proper cross references if found.
     """
+    example_text = "Examples:"
     words = content.split(" ")
 
     # Contains a list of words that is not a valid reference or converted
@@ -1375,19 +1439,26 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
     }
     known_uids.extend(hard_coded_references.keys())
 
+    # Used to keep track of current position to avoid converting if needed.
+    example_index = len(content)
     for index, word in enumerate(words):
+        if ignore_examples and example_text in word:
+            example_index = index
         uid = find_uid_to_convert(
             word, words, index, known_uids, current_object_name, processed_words, hard_coded_references
         )
 
-        if uid:
+        # If the reference is found after example section, ignore it.
+        if uid and (
+            not ignore_examples or
+            (ignore_examples and index < example_index)
+        ):
             cross_reference = f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>" \
                 if uid in hard_coded_references else \
                 f"<xref uid=\"{uid}\">{uid}</xref>"
 
             processed_words.append(word.replace(uid, cross_reference))
             print(f"Converted {uid} into cross reference in: \n{content}")
-
         else:
             # If cross reference has not been found, add current unchanged content.
             processed_words.append(word)
@@ -1399,7 +1470,12 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
 # For now, we inspect summary, syntax and attributes.
 def search_cross_references(obj, current_object_name: str, known_uids: List[str]):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, known_uids)
+        obj["summary"] = convert_cross_references(
+            obj["summary"],
+            current_object_name,
+            known_uids,
+            ignore_examples=True,
+        )
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):

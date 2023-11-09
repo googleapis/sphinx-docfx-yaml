@@ -122,13 +122,32 @@
         uid: google.cloud.pubsub_v1.types.EnumValueOptions
       - name: ExpirationPolicy
         uid: google.cloud.pubsub_v1.types.ExpirationPolicy
-      - name: ExtensionRangeOptions
+      - items:
+        - name: Overview
+          uid: google.cloud.pubsub_v1.types.ExtensionRangeOptions
+        - name: Declaration
+          uid: google.cloud.pubsub_v1.types.ExtensionRangeOptions.Declaration
+        name: ExtensionRangeOptions
         uid: google.cloud.pubsub_v1.types.ExtensionRangeOptions
+      - name: FeatureSet
+        uid: google.cloud.pubsub_v1.types.FeatureSet
+      - items:
+        - name: Overview
+          uid: google.cloud.pubsub_v1.types.FeatureSetDefaults
+        - name: FeatureSetEditionDefault
+          uid: google.cloud.pubsub_v1.types.FeatureSetDefaults.FeatureSetEditionDefault
+        name: FeatureSetDefaults
+        uid: google.cloud.pubsub_v1.types.FeatureSetDefaults
       - name: FieldDescriptorProto
         uid: google.cloud.pubsub_v1.types.FieldDescriptorProto
       - name: FieldMask
         uid: google.cloud.pubsub_v1.types.FieldMask
-      - name: FieldOptions
+      - items:
+        - name: Overview
+          uid: google.cloud.pubsub_v1.types.FieldOptions
+        - name: EditionDefault
+          uid: google.cloud.pubsub_v1.types.FieldOptions.EditionDefault
+        name: FieldOptions
         uid: google.cloud.pubsub_v1.types.FieldOptions
       - name: FileDescriptorProto
         uid: google.cloud.pubsub_v1.types.FileDescriptorProto
