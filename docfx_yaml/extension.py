@@ -47,8 +47,9 @@ from sphinx.util.console import darkgreen, bold
 from sphinx.util import ensuredir
 from sphinx.errors import ExtensionError
 from sphinx.util.nodes import make_refnode
-from sphinxcontrib.napoleon.docstring import GoogleDocstring
-from sphinxcontrib.napoleon import Config, _process_docstring
+from sphinx.ext.napoleon import GoogleDocstring
+from sphinx.ext.napoleon import Config
+from sphinx.ext.napoleon import _process_docstring
 
 from .utils import transform_node, transform_string
 from .settings import API_ROOT
@@ -1395,7 +1396,14 @@ def find_uid_to_convert(
     return None
 
 
-def convert_cross_references(content: str, current_object_name: str, known_uids: List[str]) -> str:
+# TODO(https://github.com/googleapis/sphinx-docfx-yaml/issues/331): Improve
+# converting cross references for code content.
+def convert_cross_references(
+    content: str,
+    current_object_name: str,
+    known_uids: List[str],
+    ignore_examples: Optional[bool] = False,
+) -> str:
     """Finds and replaces references that should be a cross reference in given content.
 
     This should not convert any references that contain `current_object_name`,
@@ -1407,10 +1415,13 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
         content: body of content to parse and look for references in
         current_object_name: the name of the current Python object being processed
         known_uids: list of uid references to look for
+        ignore_examples: Don't convert references in example content
+            if set to True. False by default.
 
     Returns:
         content that has been modified with proper cross references if found.
     """
+    example_text = "Examples:"
     words = content.split(" ")
 
     # Contains a list of words that is not a valid reference or converted
@@ -1428,19 +1439,26 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
     }
     known_uids.extend(hard_coded_references.keys())
 
+    # Used to keep track of current position to avoid converting if needed.
+    example_index = len(content)
     for index, word in enumerate(words):
+        if ignore_examples and example_text in word:
+            example_index = index
         uid = find_uid_to_convert(
             word, words, index, known_uids, current_object_name, processed_words, hard_coded_references
         )
 
-        if uid:
+        # If the reference is found after example section, ignore it.
+        if uid and (
+            not ignore_examples or
+            (ignore_examples and index < example_index)
+        ):
             cross_reference = f"<a href=\"{hard_coded_references[uid]}\">{uid}</a>" \
                 if uid in hard_coded_references else \
                 f"<xref uid=\"{uid}\">{uid}</xref>"
 
             processed_words.append(word.replace(uid, cross_reference))
             print(f"Converted {uid} into cross reference in: \n{content}")
-
         else:
             # If cross reference has not been found, add current unchanged content.
             processed_words.append(word)
@@ -1452,7 +1470,12 @@ def convert_cross_references(content: str, current_object_name: str, known_uids:
 # For now, we inspect summary, syntax and attributes.
 def search_cross_references(obj, current_object_name: str, known_uids: List[str]):
     if obj.get("summary"):
-        obj["summary"] = convert_cross_references(obj["summary"], current_object_name, known_uids)
+        obj["summary"] = convert_cross_references(
+            obj["summary"],
+            current_object_name,
+            known_uids,
+            ignore_examples=True,
+        )
 
     if obj.get("syntax"):
         if obj["syntax"].get("parameters"):
