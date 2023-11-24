@@ -438,18 +438,24 @@ class MarkdownTranslator(nodes.NodeVisitor):
 
     def visit_productionlist(self, node):
         self.new_state()
-        names = []
-        for production in node:
-            names.append(production['tokenname'])
-        maxlen = max(len(name) for name in names)
+        maxlen = 0
         lastname = None
+
         for production in node:
-            if production['tokenname']:
-                self.add_text(production['tokenname'].ljust(maxlen) + ' ::=')
-                lastname = production['tokenname']
+            tokenname = production['tokenname']
+            astext = production.astext()
+
+            if tokenname:
+                self.add_text(tokenname.ljust(maxlen) + ' ::=')
+                lastname = tokenname
             elif lastname is not None:
-                self.add_text('%s    ' % (' '*len(lastname)))
-            self.add_text(production.astext() + self.nl)
+                self.add_text('%s    ' % (' ' * len(lastname)))
+
+            self.add_text(astext + self.nl)
+
+            if tokenname:
+                maxlen = max(maxlen, len(tokenname))
+
         self.end_state(wrap=False)
         raise nodes.SkipNode
 
