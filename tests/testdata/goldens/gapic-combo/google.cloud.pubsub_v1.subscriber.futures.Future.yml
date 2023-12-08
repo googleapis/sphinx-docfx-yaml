@@ -68,7 +68,7 @@ items:
   source:
     id: add_done_callback
     path: concurrent/futures/_base.py
-    startLine: 410
+    startLine: 408
   summary: 'Attaches a callable that will be called when the future finishes.
 
     '
@@ -133,7 +133,7 @@ items:
   source:
     id: done
     path: concurrent/futures/_base.py
-    startLine: 395
+    startLine: 393
   summary: 'Return True if the future was cancelled or finished executing.
 
 
@@ -153,7 +153,7 @@ items:
   source:
     id: exception
     path: concurrent/futures/_base.py
-    startLine: 465
+    startLine: 463
   summary: 'Return the exception raised by the call that the future represents.
 
     '
@@ -187,8 +187,7 @@ items:
 
     '
   syntax:
-    content: "result(\n    timeout: typing.Optional[typing.Union[int, float]] = None\n\
-      ) -> google.cloud.pubsub_v1.subscriber.exceptions.AcknowledgeStatus"
+    content: "result(\n    timeout: typing.Union[int, float] = None\n) -> google.cloud.pubsub_v1.subscriber.exceptions.AcknowledgeStatus"
     exceptions:
     - description: If the request times out.
       var_type: concurrent.futures.TimeoutError

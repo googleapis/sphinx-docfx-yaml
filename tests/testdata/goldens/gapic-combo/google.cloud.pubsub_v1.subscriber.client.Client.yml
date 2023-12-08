@@ -149,13 +149,11 @@ items:
     ,\n        ack_ids=['ack_ids_value1', 'ack_ids_value2'],\n    )\n\n    # Make\
     \ the request\n    client.acknowledge(request=request)\n```\n"
   syntax:
-    content: "acknowledge(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.AcknowledgeRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    ack_ids: typing.Optional[typing.Sequence[str]] = None,\n    retry: typing.Union[\n\
-      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ None"
+    content: "acknowledge(\n    request: typing.Union[google.cloud.pubsub_v1.types.AcknowledgeRequest,\
+      \ dict] = None,\n    *,\n    subscription: str = None,\n    ack_ids: typing.Sequence[str]\
+      \ = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> None"
     parameters:
     - defaultValue: None
       description: The request object. Request for the Acknowledge method.
@@ -392,13 +390,11 @@ items:
     \ the request\n    response = client.create_snapshot(request=request)\n\n    #\
     \ Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "create_snapshot(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.CreateSnapshotRequest,\
-      \ dict]\n    ] = None,\n    *,\n    name: typing.Optional[str] = None,\n   \
-      \ subscription: typing.Optional[str] = None,\n    retry: typing.Union[\n   \
-      \     google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.cloud.pubsub_v1.types.Snapshot"
+    content: "create_snapshot(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.CreateSnapshotRequest,\
+      \ dict\n    ] = None,\n    *,\n    name: str = None,\n    subscription: str\
+      \ = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.pubsub_v1.types.Snapshot"
     parameters:
     - defaultValue: None
       description: The request object. Request for the <code>CreateSnapshot</code>
@@ -471,14 +467,13 @@ items:
     \ = client.create_subscription(request=request)\n\n    # Handle the response\n\
     \    print(response)\n```\n"
   syntax:
-    content: "create_subscription(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.Subscription,\
-      \ dict]\n    ] = None,\n    *,\n    name: typing.Optional[str] = None,\n   \
-      \ topic: typing.Optional[str] = None,\n    push_config: typing.Optional[google.cloud.pubsub_v1.types.PushConfig]\
-      \ = None,\n    ack_deadline_seconds: typing.Optional[int] = None,\n    retry:\
-      \ typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.cloud.pubsub_v1.types.Subscription"
+    content: "create_subscription(\n    request: typing.Union[google.cloud.pubsub_v1.types.Subscription,\
+      \ dict] = None,\n    *,\n    name: str = None,\n    topic: str = None,\n   \
+      \ push_config: google.cloud.pubsub_v1.types.PushConfig = None,\n    ack_deadline_seconds:\
+      \ int = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+      \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \ str]] = ()\n) -> google.cloud.pubsub_v1.types.Subscription"
     parameters:
     - defaultValue: None
       description: The request object. A subscription resource.
@@ -573,12 +568,11 @@ items:
     snapshot_value\",\n    )\n\n    # Make the request\n    client.delete_snapshot(request=request)\n\
     ```\n"
   syntax:
-    content: "delete_snapshot(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.DeleteSnapshotRequest,\
-      \ dict]\n    ] = None,\n    *,\n    snapshot: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ None"
+    content: "delete_snapshot(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.DeleteSnapshotRequest,\
+      \ dict\n    ] = None,\n    *,\n    snapshot: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> None"
     parameters:
     - defaultValue: None
       description: The request object. Request for the <code>DeleteSnapshot</code>
@@ -627,12 +621,11 @@ items:
     subscription_value\",\n    )\n\n    # Make the request\n    client.delete_subscription(request=request)\n\
     ```\n"
   syntax:
-    content: "delete_subscription(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.DeleteSubscriptionRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ None"
+    content: "delete_subscription(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.DeleteSubscriptionRequest,\
+      \ dict\n    ] = None,\n    *,\n    subscription: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> None"
     parameters:
     - defaultValue: None
       description: The request object. Request for the DeleteSubscription method.
@@ -748,10 +741,10 @@ items:
 
     '
   syntax:
-    content: "get_iam_policy(\n    request: typing.Optional[google.iam.v1.iam_policy_pb2.GetIamPolicyRequest]\
+    content: "get_iam_policy(\n    request: google.iam.v1.iam_policy_pb2.GetIamPolicyRequest\
       \ = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.iam.v1.policy_pb2.Policy"
     parameters:
     - defaultValue: None
@@ -885,12 +878,11 @@ items:
     ,\n    )\n\n    # Make the request\n    response = client.get_snapshot(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "get_snapshot(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.GetSnapshotRequest,\
-      \ dict]\n    ] = None,\n    *,\n    snapshot: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.cloud.pubsub_v1.types.Snapshot"
+    content: "get_snapshot(\n    request: typing.Union[google.cloud.pubsub_v1.types.GetSnapshotRequest,\
+      \ dict] = None,\n    *,\n    snapshot: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.pubsub_v1.types.Snapshot"
     parameters:
     - defaultValue: None
       description: The request object. Request for the GetSnapshot method.
@@ -940,12 +932,11 @@ items:
     subscription_value\",\n    )\n\n    # Make the request\n    response = client.get_subscription(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "get_subscription(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.GetSubscriptionRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.cloud.pubsub_v1.types.Subscription"
+    content: "get_subscription(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.GetSubscriptionRequest,\
+      \ dict\n    ] = None,\n    *,\n    subscription: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.pubsub_v1.types.Subscription"
     parameters:
     - defaultValue: None
       description: The request object. Request for the GetSubscription method.
@@ -996,12 +987,11 @@ items:
     \n    # Handle the response\n    for response in page_result:\n        print(response)\n\
     ```\n"
   syntax:
-    content: "list_snapshots(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.ListSnapshotsRequest,\
-      \ dict]\n    ] = None,\n    *,\n    project: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.pubsub_v1.services.subscriber.pagers.ListSnapshotsPager"
+    content: "list_snapshots(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.ListSnapshotsRequest,\
+      \ dict\n    ] = None,\n    *,\n    project: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.pubsub_v1.services.subscriber.pagers.ListSnapshotsPager"
     parameters:
     - defaultValue: None
       description: The request object. Request for the <code>ListSnapshots</code>
@@ -1052,12 +1042,11 @@ items:
     \n    # Handle the response\n    for response in page_result:\n        print(response)\n\
     ```\n"
   syntax:
-    content: "list_subscriptions(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.ListSubscriptionsRequest,\
-      \ dict]\n    ] = None,\n    *,\n    project: typing.Optional[str] = None,\n\
-      \    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.pubsub_v1.services.subscriber.pagers.ListSubscriptionsPager"
+    content: "list_subscriptions(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.ListSubscriptionsRequest,\
+      \ dict\n    ] = None,\n    *,\n    project: str = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.pubsub_v1.services.subscriber.pagers.ListSubscriptionsPager"
     parameters:
     - defaultValue: None
       description: The request object. Request for the <code>ListSubscriptions</code>
@@ -1112,13 +1101,12 @@ items:
     \        ack_deadline_seconds=2066,\n    )\n\n    # Make the request\n    client.modify_ack_deadline(request=request)\n\
     ```\n"
   syntax:
-    content: "modify_ack_deadline(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.ModifyAckDeadlineRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    ack_ids: typing.Optional[typing.Sequence[str]] = None,\n    ack_deadline_seconds:\
-      \ typing.Optional[int] = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
-      \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
-      \ str]] = ()\n) -> None"
+    content: "modify_ack_deadline(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.ModifyAckDeadlineRequest,\
+      \ dict\n    ] = None,\n    *,\n    subscription: str = None,\n    ack_ids: typing.Sequence[str]\
+      \ = None,\n    ack_deadline_seconds: int = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> None"
     parameters:
     - defaultValue: None
       description: The request object. Request for the ModifyAckDeadline method.
@@ -1183,13 +1171,12 @@ items:
     subscription_value\",\n    )\n\n    # Make the request\n    client.modify_push_config(request=request)\n\
     ```\n"
   syntax:
-    content: "modify_push_config(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.ModifyPushConfigRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    push_config: typing.Optional[google.cloud.pubsub_v1.types.PushConfig] =\
-      \ None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ None"
+    content: "modify_push_config(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.ModifyPushConfigRequest,\
+      \ dict\n    ] = None,\n    *,\n    subscription: str = None,\n    push_config:\
+      \ google.cloud.pubsub_v1.types.PushConfig = None,\n    retry: typing.Union[\n\
+      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> None"
     parameters:
     - defaultValue: None
       description: The request object. Request for the ModifyPushConfig method.
@@ -1405,13 +1392,12 @@ items:
     \ client.pull(request=request)\n\n    # Handle the response\n    print(response)\n\
     ```\n"
   syntax:
-    content: "pull(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.PullRequest,\
-      \ dict]\n    ] = None,\n    *,\n    subscription: typing.Optional[str] = None,\n\
-      \    return_immediately: typing.Optional[bool] = None,\n    max_messages: typing.Optional[int]\
-      \ = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
-      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
-      \ google.cloud.pubsub_v1.types.PullResponse"
+    content: "pull(\n    request: typing.Union[google.cloud.pubsub_v1.types.PullRequest,\
+      \ dict] = None,\n    *,\n    subscription: str = None,\n    return_immediately:\
+      \ bool = None,\n    max_messages: int = None,\n    retry: typing.Union[\n  \
+      \      google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
+      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.pubsub_v1.types.PullResponse"
     parameters:
     - defaultValue: None
       description: The request object. Request for the <code>Pull</code> method.
@@ -1482,10 +1468,10 @@ items:
     ,\n    )\n\n    # Make the request\n    response = client.seek(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "seek(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.SeekRequest,\
-      \ dict]\n    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+    content: "seek(\n    request: typing.Union[google.cloud.pubsub_v1.types.SeekRequest,\
+      \ dict] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.cloud.pubsub_v1.types.SeekResponse"
     parameters:
     - defaultValue: None
@@ -1524,10 +1510,10 @@ items:
 
     '
   syntax:
-    content: "set_iam_policy(\n    request: typing.Optional[google.iam.v1.iam_policy_pb2.SetIamPolicyRequest]\
+    content: "set_iam_policy(\n    request: google.iam.v1.iam_policy_pb2.SetIamPolicyRequest\
       \ = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.iam.v1.policy_pb2.Policy"
     parameters:
     - defaultValue: None
@@ -1623,10 +1609,10 @@ items:
     \    stream = client.streaming_pull(requests=request_generator())\n\n    # Handle\
     \ the response\n    for response in stream:\n        print(response)\n```\n"
   syntax:
-    content: "streaming_pull(\n    requests: typing.Optional[\n        typing.Iterator[google.cloud.pubsub_v1.types.StreamingPullRequest]\n\
-      \    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+    content: "streaming_pull(\n    requests: typing.Iterator[google.cloud.pubsub_v1.types.StreamingPullRequest]\
+      \ = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> typing.Iterable[google.cloud.pubsub_v1.types.StreamingPullResponse]"
     parameters:
     - defaultValue: None
@@ -1793,10 +1779,10 @@ items:
     \   policy for a function.\n\nIf the function does not exist, this will return\
     \ an empty set\nof permissions, not a NOT_FOUND error.\n"
   syntax:
-    content: "test_iam_permissions(\n    request: typing.Optional[\n        google.iam.v1.iam_policy_pb2.TestIamPermissionsRequest\n\
-      \    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+    content: "test_iam_permissions(\n    request: google.iam.v1.iam_policy_pb2.TestIamPermissionsRequest\
+      \ = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.iam.v1.iam_policy_pb2.TestIamPermissionsResponse"
     parameters:
     - defaultValue: None
@@ -1885,10 +1871,10 @@ items:
     \ Make the request\n    response = client.update_snapshot(request=request)\n\n\
     \    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "update_snapshot(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.UpdateSnapshotRequest,\
-      \ dict]\n    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+    content: "update_snapshot(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.UpdateSnapshotRequest,\
+      \ dict\n    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.cloud.pubsub_v1.types.Snapshot"
     parameters:
     - defaultValue: None
@@ -1937,10 +1923,10 @@ items:
     \   )\n\n    # Make the request\n    response = client.update_subscription(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "update_subscription(\n    request: typing.Optional[\n        typing.Union[google.cloud.pubsub_v1.types.UpdateSubscriptionRequest,\
-      \ dict]\n    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+    content: "update_subscription(\n    request: typing.Union[\n        google.cloud.pubsub_v1.types.UpdateSubscriptionRequest,\
+      \ dict\n    ] = None,\n    *,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
       \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
-      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \    timeout: float = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
       \ str]] = ()\n) -> google.cloud.pubsub_v1.types.Subscription"
     parameters:
     - defaultValue: None

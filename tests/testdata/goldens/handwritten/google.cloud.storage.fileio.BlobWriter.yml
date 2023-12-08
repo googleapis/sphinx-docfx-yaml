@@ -218,15 +218,15 @@ items:
     id: write
     path: tests/testdata/handwritten/google/cloud/storage/fileio.py
     startLine: 349
-  summary: 'Write the given buffer to the IO stream.
+  summary: 'Write buffer b to the IO stream.
 
 
-    Returns the number of bytes written, which is always the length of b
+    Return the number of bytes written, which is always
 
-    in bytes.
+    the length of b in bytes.
 
 
-    Raises BlockingIOError if the buffer is full and the
+    Raise BlockingIOError if the buffer is full and the
 
     underlying raw stream cannot accept more data at the moment.
 

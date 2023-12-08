@@ -20,7 +20,8 @@ items:
 
     '
   syntax:
-    content: TimepointType(value)
+    content: "TimepointType(\n    value,\n    names=None,\n    *values,\n    module=None,\n\
+      \    qualname=None,\n    type=None,\n    start=1,\n    boundary=None\n)"
     parameters: []
   type: class
   uid: google.cloud.texttospeech_v1beta1.types.SynthesizeSpeechRequest.TimepointType
