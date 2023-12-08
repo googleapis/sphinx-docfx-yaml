@@ -143,7 +143,7 @@ items:
   source:
     id: done
     path: concurrent/futures/_base.py
-    startLine: 393
+    startLine: 395
   summary: 'Return True if the future was cancelled or finished executing.
 
 
@@ -163,7 +163,7 @@ items:
   source:
     id: exception
     path: concurrent/futures/_base.py
-    startLine: 463
+    startLine: 465
   summary: 'Return the exception raised by the call that the future represents.
 
     '
@@ -197,7 +197,8 @@ items:
 
     '
   syntax:
-    content: 'result(timeout: typing.Union[int, float] = None) -> str'
+    content: 'result(timeout: typing.Optional[typing.Union[int, float]] = None) ->
+      str'
     exceptions:
     - description: If the request times out.
       var_type: concurrent.futures.TimeoutError

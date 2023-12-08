@@ -18,9 +18,7 @@ items:
 
     '
   syntax:
-    content: "LimitExceededBehavior(\n    value,\n    names=None,\n    *values,\n\
-      \    module=None,\n    qualname=None,\n    type=None,\n    start=1,\n    boundary=None\n\
-      )"
+    content: LimitExceededBehavior(value)
     parameters: []
   type: class
   uid: google.cloud.pubsub_v1.types.LimitExceededBehavior

@@ -389,11 +389,13 @@ items:
     \n    # Make the request\n    response = client.list_voices(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "list_voices(\n    request: typing.Union[\n        google.cloud.texttospeech_v1.types.cloud_tts.ListVoicesRequest,\
-      \ dict\n    ] = None,\n    *,\n    language_code: str = None,\n    retry: typing.Union[\n\
-      \        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
-      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.texttospeech_v1.types.cloud_tts.ListVoicesResponse"
+    content: "list_voices(\n    request: typing.Optional[\n        typing.Union[\n\
+      \            google.cloud.texttospeech_v1.types.cloud_tts.ListVoicesRequest,\
+      \ dict\n        ]\n    ] = None,\n    *,\n    language_code: typing.Optional[str]\
+      \ = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
+      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: typing.Optional[float]\
+      \ = None,\n    metadata: typing.Sequence[typing.Tuple[str, str]] = ()\n) ->\
+      \ google.cloud.texttospeech_v1.types.cloud_tts.ListVoicesResponse"
     parameters:
     - defaultValue: None
       description: The request object. The top-level message sent by the client for
@@ -593,13 +595,16 @@ items:
     \    )\n\n    # Make the request\n    response = client.synthesize_speech(request=request)\n\
     \n    # Handle the response\n    print(response)\n```\n"
   syntax:
-    content: "synthesize_speech(\n    request: typing.Union[\n        google.cloud.texttospeech_v1.types.cloud_tts.SynthesizeSpeechRequest,\
-      \ dict\n    ] = None,\n    *,\n    input: google.cloud.texttospeech_v1.types.cloud_tts.SynthesisInput\
-      \ = None,\n    voice: google.cloud.texttospeech_v1.types.cloud_tts.VoiceSelectionParams\
-      \ = None,\n    audio_config: google.cloud.texttospeech_v1.types.cloud_tts.AudioConfig\
-      \ = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry, google.api_core.gapic_v1.method._MethodDefault\n\
-      \    ] = _MethodDefault._DEFAULT_VALUE,\n    timeout: float = None,\n    metadata:\
-      \ typing.Sequence[typing.Tuple[str, str]] = ()\n) -> google.cloud.texttospeech_v1.types.cloud_tts.SynthesizeSpeechResponse"
+    content: "synthesize_speech(\n    request: typing.Optional[\n        typing.Union[\n\
+      \            google.cloud.texttospeech_v1.types.cloud_tts.SynthesizeSpeechRequest,\
+      \ dict\n        ]\n    ] = None,\n    *,\n    input: typing.Optional[\n    \
+      \    google.cloud.texttospeech_v1.types.cloud_tts.SynthesisInput\n    ] = None,\n\
+      \    voice: typing.Optional[\n        google.cloud.texttospeech_v1.types.cloud_tts.VoiceSelectionParams\n\
+      \    ] = None,\n    audio_config: typing.Optional[\n        google.cloud.texttospeech_v1.types.cloud_tts.AudioConfig\n\
+      \    ] = None,\n    retry: typing.Union[\n        google.api_core.retry.Retry,\
+      \ google.api_core.gapic_v1.method._MethodDefault\n    ] = _MethodDefault._DEFAULT_VALUE,\n\
+      \    timeout: typing.Optional[float] = None,\n    metadata: typing.Sequence[typing.Tuple[str,\
+      \ str]] = ()\n) -> google.cloud.texttospeech_v1.types.cloud_tts.SynthesizeSpeechResponse"
     parameters:
     - defaultValue: None
       description: The request object. The top-level message sent by the client for
