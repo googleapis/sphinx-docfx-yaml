@@ -50,7 +50,7 @@ def test_goldens(update_goldens, test_dir):
                 "pip",
                 "install",
                 "-e",
-                ".[all]",
+                ".",
                 "recommonmark",
             ],
             cwd=source_dir,
