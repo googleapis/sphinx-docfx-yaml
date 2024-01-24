@@ -1,0 +1,16 @@
+cachetools==5.3.2
+certifi==2023.11.17
+charset-normalizer==3.3.2
+google-api-core==2.15.0
+google-auth==2.26.2
+google-cloud-core==2.4.1
+google-crc32c==1.5.0
+google-resumable-media==2.7.0
+googleapis-common-protos==1.62.0
+idna==3.6
+protobuf==4.25.2
+pyasn1==0.5.1
+pyasn1-modules==0.3.0
+requests==2.31.0
+rsa==4.9
+urllib3==2.1.0
