@@ -1,5 +1,46 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.7...v3.0.0) (2023-11-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* Bump minimum version to 3.10 ([#334](https://github.com/googleapis/sphinx-docfx-yaml/issues/334))
+
+### Features
+
+* Bump minimum version to 3.10 ([#334](https://github.com/googleapis/sphinx-docfx-yaml/issues/334)) ([97c34cb](https://github.com/googleapis/sphinx-docfx-yaml/commit/97c34cbd2e2167e68224db1c3bc1775dddc9f6c3))
+
+## [2.0.7](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.6...v2.0.7) (2023-11-01)
+
+
+### Bug Fixes
+
+* Ignore cross reference conversion in examples ([#332](https://github.com/googleapis/sphinx-docfx-yaml/issues/332)) ([bbfa011](https://github.com/googleapis/sphinx-docfx-yaml/commit/bbfa01175d1b1cb4ccd670cbaa1ebfa511e61e8b))
+
+## [2.0.6](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.5...v2.0.6) (2023-10-30)
+
+
+### Bug Fixes
+
+* Refactor type hint retrieval ([#312](https://github.com/googleapis/sphinx-docfx-yaml/issues/312)) ([0c91f60](https://github.com/googleapis/sphinx-docfx-yaml/commit/0c91f60fb2eab8b184b1228d5f3eb133be7ae201))
+* Support docstrings without type added ([#311](https://github.com/googleapis/sphinx-docfx-yaml/issues/311)) ([d214d64](https://github.com/googleapis/sphinx-docfx-yaml/commit/d214d64c54d06fa715535b14932ac1ad67fa0d09))
+* Update annotation name extraction logic and add unit tests ([#320](https://github.com/googleapis/sphinx-docfx-yaml/issues/320)) ([220951d](https://github.com/googleapis/sphinx-docfx-yaml/commit/220951d341c27d345679f64fb67968320168e428))
+
+## [2.0.5](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.4...v2.0.5) (2023-06-27)
+
+
+### Bug Fixes
+
+* Pin markdown builder version ([#306](https://github.com/googleapis/sphinx-docfx-yaml/issues/306)) ([0d1879d](https://github.com/googleapis/sphinx-docfx-yaml/commit/0d1879df6446f70e088c8d5ac7df6a9a743a47c9))
+
+## [2.0.4](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.3...v2.0.4) (2023-06-02)
+
+
+### Bug Fixes
+
+* Allow top level page to only have index page ([#301](https://github.com/googleapis/sphinx-docfx-yaml/issues/301)) ([85c049a](https://github.com/googleapis/sphinx-docfx-yaml/commit/85c049a55f29ca78a1263e3f9ec4a3f5e4d5cad0))
+
 ## [2.0.3](https://github.com/googleapis/sphinx-docfx-yaml/compare/v2.0.2...v2.0.3) (2023-03-22)
 
 
