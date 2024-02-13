@@ -1898,7 +1898,17 @@ def build_finished(app, exception):
             added_pages, app.env.moved_markdown_pages, normalized_outdir)
 
     # Add Summary page as second entry into the table of contents.
-    pkg_toc_yaml.insert(1, {'name': 'Summary', 'href': 'summary.yml'})
+    pkg_toc_yaml.insert(
+        1,
+        {
+            'name': f'{app.config.project} APIs',
+            'items': [
+                {'name': 'Classes', 'href': 'summary_class.yml'},
+                {'name': 'Methods', 'href': 'summary_method.yml'},
+                {'name': 'Properties and Attributes', 'href': 'summary_property.yml'},
+            ],
+        }
+    )
 
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
@@ -1912,9 +1922,14 @@ def build_finished(app, exception):
             )
         )
 
-    summary_page_file = os.path.join(normalized_outdir, 'summary.yml')
-    summary_page_children = []
-    summary_page_references = []
+    summary_page_by_type = {
+        CLASS: [[], []],
+        METHOD: [[], []],
+        PROPERTY: [[], []],
+    }
+    class_summary_file = os.path.join(normalized_outdir, 'summary_class.yml')
+    method_summary_file = os.path.join(normalized_outdir, 'summary_method.yml')
+    property_summary_file = os.path.join(normalized_outdir, 'summary_property.yml')
 
     # Output files
     for uid, data in iter(yaml_map.items()):
@@ -1959,32 +1974,54 @@ def build_finished(app, exception):
         file_name_set.add(filename)
 
         # Add short detail to summary page
-        types_for_summary = [MODULE, CLASS]
+        types_for_summary = [MODULE, CLASS, METHOD, FUNCTION, PROPERTY, ATTRIBUTE]
         for item in yaml_data:
-            if not item.get('type') in types_for_summary:
+            if not ((item_type := item.get('type')) in types_for_summary):
                 continue
-            summary_page_children.append(item.get('uid', '')),
-            summary_page_references.append({
+            if item_type == MODULE:
+              type_to_use = CLASS
+            elif item_type == FUNCTION:
+              type_to_use = METHOD
+            elif item_type == ATTRIBUTE:
+              type_to_use = PROPERTY
+            else:
+              type_to_use = item_type
+            summary_page_by_type[type_to_use][0].append(item.get('uid', ''))
+            summary_page_by_type[type_to_use][1].append({
                 'uid': item.get('uid', ''),
                 'name': item.get('name', ''),
                 'fullName': item.get('uid', ''),
                 'isExternal': False,
             })
 
-    with open(summary_page_file, 'w') as summary_file_obj:
+    for page_type in summary_page_by_type:
+      if not (summary_page_by_type[page_type][0] or summary_page_by_type[page_type][1]):
+        continue
+      if page_type == CLASS:
+        file_name_to_use = class_summary_file
+        entry_name = 'Classes'
+      elif page_type == METHOD:
+        file_name_to_use = method_summary_file
+        entry_name = 'Methods'
+      else:
+        file_name_to_use = property_summary_file
+        entry_name = 'Properties and Attributes'
+      with open(file_name_to_use, 'w') as summary_file_obj:
         summary_file_obj.write('### YamlMime:UniversalReference\n')
         dump(
             {
                 'items': [{
-                    'uid': 'summary',
-                    'name': f'{app.config.project} Summary',
-                    'fullName': 'Summary',
+                    'uid': f'{page_type.lower()}-summary',
+                    'name': entry_name,
+                    #'name': f'{app.config.project} Summary',
+                    'fullName': f'{entry_name} Summary',
                     'langs': ['python'],
                     'type': 'package',
-                    'summary': f'Summary of entries of {app.config.project}',
-                    'children': summary_page_children,
+                    #'summary': f'Summary of entries of {app.config.project}',
+                    'summary': f'Summary of entries of {entry_name} for {app.config.project}.',
+                    'children': summary_page_by_type[page_type][0],
                 }],
-                'references': summary_page_references,
+                'references': summary_page_by_type[page_type][1],
             },
             summary_file_obj,
             default_flow_style=False
