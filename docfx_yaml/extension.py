@@ -1903,6 +1903,7 @@ def build_finished(app, exception):
         {
             'name': f'{app.config.project} APIs',
             'items': [
+                {'name': 'Overview', 'href': 'summary_overview.md'},
                 {'name': 'Classes', 'href': 'summary_class.yml'},
                 {'name': 'Methods', 'href': 'summary_method.yml'},
                 {'name': 'Properties and Attributes', 'href': 'summary_property.yml'},
@@ -1975,9 +1976,11 @@ def build_finished(app, exception):
 
         # Add short detail to summary page
         types_for_summary = [MODULE, CLASS, METHOD, FUNCTION, PROPERTY, ATTRIBUTE]
+        cgc_url = f"https://cloud.google.com/python/docs/reference/{app.config.project}/latest/"
         for item in yaml_data:
             if not ((item_type := item.get('type')) in types_for_summary):
                 continue
+            uid = item.get('uid', '')
             if item_type == MODULE:
               type_to_use = CLASS
             elif item_type == FUNCTION:
@@ -1986,30 +1989,81 @@ def build_finished(app, exception):
               type_to_use = PROPERTY
             else:
               type_to_use = item_type
-            summary_page_by_type[type_to_use][0].append(item.get('uid', ''))
+            item_to_add = item.get('uid', '') if type_to_use == CLASS else f"{item.get('uid', '')}-summary"
+            if item_to_add not in summary_page_by_type[type_to_use][0]:
+                summary_page_by_type[type_to_use][0].append(item_to_add)
+            if type_to_use == METHOD or type_to_use == PROPERTY:
+                # class_name = '.'.join(uid.split('.')[:-1])
+                # name_to_use = f"<xref uid={class_name}>{item.get('name', '')}</xref>"
+                name_to_use = item.get('name', '')
+                class_name = item.get('class', '')
+                if not class_name:
+                    class_name = item.get('module', '')
+                anchor_name = f"#{'_'.join(class_name.split('.'))}_{name_to_use}"
+                first_summary_line = item.get('summary', '').split('\n\n')[0]
+                summary_to_use = f"{first_summary_line}\n\nSee more: [{class_name}]({cgc_url}{class_name}{anchor_name})"
+                fields = {
+                    'uid': f"{uid}-summary",
+                    'name': name_to_use,
+                    'summary': summary_to_use,
+                    'fullName': item.get('uid', ''),
+                    'type': 'method',
+                }
+                if type_to_use == METHOD:
+                    fields['syntax'] = {
+                        'content': item.get('syntax').get('content') if item.get('syntax') else ''
+                    }
+                summary_page_by_type[type_to_use][1].append(fields)
+                continue
+
+            if type_to_use == CLASS:
+                name_to_use = f"[item.get('name', '')]({cgc_url}{uid})"
+            else:
+                class_name = item.get('class', '')
+                if not class_name:
+                    class_name = item.get('module', '')
+                # name_to_use = f"<xref uid={class_name}>{item.get('name', '')}</xref>"
+                name_to_use = f"[{item.get('name', '')}]({cgc_url}{class_name})"
             summary_page_by_type[type_to_use][1].append({
-                'uid': item.get('uid', ''),
-                'name': item.get('name', ''),
+                'uid': uid,
+                'name': name_to_use,
                 'fullName': item.get('uid', ''),
                 'isExternal': False,
             })
 
     for page_type in summary_page_by_type:
-      if not (summary_page_by_type[page_type][0] or summary_page_by_type[page_type][1]):
-        continue
-      if page_type == CLASS:
-        file_name_to_use = class_summary_file
-        entry_name = 'Classes'
-      elif page_type == METHOD:
-        file_name_to_use = method_summary_file
-        entry_name = 'Methods'
-      else:
-        file_name_to_use = property_summary_file
-        entry_name = 'Properties and Attributes'
-      with open(file_name_to_use, 'w') as summary_file_obj:
-        summary_file_obj.write('### YamlMime:UniversalReference\n')
-        dump(
-            {
+        if not (summary_page_by_type[page_type][0] or summary_page_by_type[page_type][1]):
+            continue
+        if page_type == CLASS:
+            file_name_to_use = class_summary_file
+            entry_name = 'Classes'
+        elif page_type == METHOD:
+            file_name_to_use = method_summary_file
+            entry_name = 'Methods'
+        else:
+            file_name_to_use = property_summary_file
+            entry_name = 'Properties and Attributes'
+        with open(file_name_to_use, 'w') as summary_file_obj:
+            summary_file_obj.write('### YamlMime:UniversalReference\n')
+            if page_type == METHOD or page_type == PROPERTY:
+                dump(
+                {
+                    'items': [{
+                        'uid': f'{page_type.lower()}-summary',
+                        'name': entry_name,
+                        'fullName': f'{entry_name} Summary',
+                        'langs': ['python'],
+                        'type': 'package',
+                        'summary': f'Summary of entries of {entry_name} for {app.config.project}.',
+                        'children': summary_page_by_type[page_type][0],
+                    }] + summary_page_by_type[page_type][1],
+                },
+                summary_file_obj,
+                default_flow_style=False
+                )
+                continue
+
+            dump({
                 'items': [{
                     'uid': f'{page_type.lower()}-summary',
                     'name': entry_name,
@@ -2025,7 +2079,7 @@ def build_finished(app, exception):
             },
             summary_file_obj,
             default_flow_style=False
-        )
+            )
 
     index_file = os.path.join(normalized_outdir, 'index_file.yml')
     index_children = []
