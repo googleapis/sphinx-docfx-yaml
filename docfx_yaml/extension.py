@@ -1904,9 +1904,9 @@ def build_finished(app, exception):
             'name': f'{app.config.project} APIs',
             'items': [
                 {'name': 'Overview', 'href': 'summary_overview.md'},
-                {'name': 'Classes', 'href': 'summary_class.yml'},
-                {'name': 'Methods', 'href': 'summary_method.yml'},
-                {'name': 'Properties and Attributes', 'href': 'summary_property.yml'},
+                {'name': 'Classes', 'href': 'summary_class.html'},
+                {'name': 'Methods', 'href': 'summary_method.html'},
+                {'name': 'Properties and Attributes', 'href': 'summary_property.html'},
             ],
         }
     )
@@ -1995,11 +1995,12 @@ def build_finished(app, exception):
             if type_to_use == METHOD or type_to_use == PROPERTY:
                 # class_name = '.'.join(uid.split('.')[:-1])
                 # name_to_use = f"<xref uid={class_name}>{item.get('name', '')}</xref>"
-                name_to_use = item.get('name', '')
+                short_name = item.get('name', '')
+                name_to_use = item.get('uid', '')
                 class_name = item.get('class', '')
                 if not class_name:
                     class_name = item.get('module', '')
-                anchor_name = f"#{'_'.join(class_name.split('.'))}_{name_to_use}"
+                anchor_name = f"#{'_'.join(class_name.split('.'))}_{short_name}"
                 first_summary_line = item.get('summary', '').split('\n\n')[0]
                 summary_to_use = f"{first_summary_line}\n\nSee more: [{class_name}]({cgc_url}{class_name}{anchor_name})"
                 fields = {
@@ -2017,7 +2018,7 @@ def build_finished(app, exception):
                 continue
 
             if type_to_use == CLASS:
-                name_to_use = f"[item.get('name', '')]({cgc_url}{uid})"
+                name_to_use = f"[{item.get('uid', '')}]({cgc_url}{uid})"
             else:
                 class_name = item.get('class', '')
                 if not class_name:
