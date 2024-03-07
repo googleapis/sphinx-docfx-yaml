@@ -2002,7 +2002,7 @@ def build_finished(app, exception):
                     class_name = item.get('module', '')
                 anchor_name = f"#{'_'.join(class_name.split('.'))}_{short_name}"
                 first_summary_line = item.get('summary', '').split('\n\n')[0]
-                summary_to_use = f"{first_summary_line}\n\nSee more: [{class_name}]({cgc_url}{class_name}{anchor_name})"
+                summary_to_use = f"{first_summary_line}\n\nSee more: [{name_to_use}]({cgc_url}{class_name}{anchor_name})"
                 fields = {
                     'uid': f"{uid}-summary",
                     'name': name_to_use,
