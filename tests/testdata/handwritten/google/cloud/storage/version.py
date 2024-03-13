@@ -13,4 +13,4 @@
 # limitations under the License.
 
 # Original snapshotted version is 2.13.0.
-__version__ = "2.12.0"
+__version__ = "3.0.0"
