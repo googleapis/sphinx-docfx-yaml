@@ -28,7 +28,7 @@ import black
 import logging
 
 from collections import defaultdict
-from collections.abc import MutableSet
+from collections.abc import MutableSet, Mapping, Sequence
 from pathlib import Path
 from functools import partial
 from itertools import zip_longest
@@ -132,6 +132,21 @@ NOTICES = {
     BETA: 'Beta',
     PREVIEW: 'Preview',
     DEPRECATED: 'deprecated',
+}
+
+_SUMMARY_TYPE_BY_ITEM_TYPE = {
+    # Modules and Classes are similar types.
+    MODULE: CLASS,
+    CLASS: CLASS,
+}
+# Construct a mapping of name and content for each unique summary type entry.
+_ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE = {
+    summary_type: [[], []]  # entry name then entry content
+    for summary_type in set(_SUMMARY_TYPE_BY_ITEM_TYPE.values())
+}
+# Mapping for each summary page entry's file name and entry name.
+_FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE = {
+    CLASS: ('summary_class.yml', "Classes"),
 }
 
 # Disable blib2to3 output that clutters debugging log.
@@ -1348,6 +1363,57 @@ def pretty_package_name(package_group):
     return " ".join(capitalized_name)
 
 
+def _find_summary_details(
+    yaml_data: dict[str, Any],
+    summary_type: str,
+    cgc_url: str,
+) -> dict[str, Any]:
+    """Finds the summary details to add for a given entry."""
+    uid = yaml_data.get("uid", "")
+    item_to_add = uid if summary_type == CLASS else f"{uid}-summary"
+
+    if item_to_add not in _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][0]:
+        _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][0].append(
+            item_to_add
+        )
+
+    if summary_type in [CLASS]:
+        name_to_use = f"[{uid}]({cgc_url}{uid})"
+
+    return {
+        "uid": uid,
+        "name": name_to_use,
+        "fullName": uid,
+        "isExternal": False,
+    }
+
+
+def _render_summary_content(
+    children_name_and_summary_content: Sequence[Sequence[str]],
+    entry_name: str,
+    summary_type: str,
+    library_name: str,
+) -> Mapping[str, Any]:
+    """Returns the summary content in appropriate YAML format to write."""
+    summary_content = {}
+
+    if summary_type in [CLASS]:
+        summary_content = {
+            "items": [{
+                'uid': f'{summary_type.lower()}-summary',
+                'name': entry_name,
+                'fullName': f'{entry_name} Summary',
+                'langs': ['python'],
+                'type': 'package',
+                'summary': f'Summary of entries of {entry_name} for {library_name}.',
+                'children': children_name_and_summary_content[0],
+            }],
+            'references': children_name_and_summary_content[1],
+        }
+
+    return summary_content
+
+
 def find_uid_to_convert(
     current_word: str,
     words: List[str],
@@ -1897,6 +1963,21 @@ def build_finished(app, exception):
         markdown_utils.remove_unused_pages(
             added_pages, app.env.moved_markdown_pages, normalized_outdir)
 
+    # Add summary pages as the second entry into the table of contents.
+    pkg_toc_yaml.insert(
+        1,
+        {
+            "name": f"{app.config.project} APIs",
+            "items": [
+                {"name": "Classes", "href": "summary_class.yml"},
+            ],
+        }
+    )
+    cgc_url = (
+        "https://cloud.google.com/python/docs/reference/"
+        f"{app.config.project}/latest/"
+    )
+
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
         writable.write(
@@ -1950,6 +2031,41 @@ def build_finished(app, exception):
                 raise ValueError("Unable to dump object\n{0}".format(yaml_data)) from e
 
         file_name_set.add(filename)
+
+        for entry in yaml_data:
+            summary_type = _SUMMARY_TYPE_BY_ITEM_TYPE.get(entry.get("type"))
+            if not (summary_type):
+              continue
+
+            _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][1].append(
+                _find_summary_details(entry, summary_type, cgc_url)
+            )
+
+    for summary_type in _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE:
+        children_names_and_content = (
+            _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type]
+        )
+        if not all(children_names_and_content):
+            continue
+
+        file_name, entry_name = _FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE[summary_type]
+
+        dump_content = _render_summary_content(
+            children_names_and_content,
+            entry_name,
+            summary_type,
+            app.config.project,
+        )
+
+        file_path_to_use = os.path.join(normalized_outdir, file_name)
+        with open(file_path_to_use, "w") as summary_file_obj:
+            summary_file_obj.write("### YamlMime:UniversalReference\n")
+            dump(
+                dump_content,
+                summary_file_obj,
+                default_flow_style=False,
+            )
+
 
     index_file = os.path.join(normalized_outdir, 'index.yml')
     index_children = []
