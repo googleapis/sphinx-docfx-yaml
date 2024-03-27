@@ -1363,11 +1363,15 @@ def pretty_package_name(package_group):
     return " ".join(capitalized_name)
 
 
+# Type alias used for yaml entries.
+_yaml_type_alias = dict[str, any]
+
+
 def _find_summary_details(
-    yaml_data: dict[str, Any],
+    yaml_data: _yaml_type_alias,
     summary_type: str,
     cgc_url: str,
-) -> dict[str, Any]:
+) -> _yaml_type_alias:
     """Finds the summary details to add for a given entry."""
     uid = yaml_data.get("uid", "")
     item_to_add = uid if summary_type == CLASS else f"{uid}-summary"
@@ -1393,7 +1397,7 @@ def _render_summary_content(
     entry_name: str,
     summary_type: str,
     library_name: str,
-) -> Mapping[str, Any]:
+) -> _yaml_type_alias:
     """Returns the summary content in appropriate YAML format to write."""
     summary_content = {}
 
@@ -1641,14 +1645,11 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                     markdown_utils.reformat_markdown_to_html(attribute_type))
 
 
-# Type alias used for toc_yaml entries.
-_toc_yaml_type_alias = dict[str, any]
-
 def merge_markdown_and_package_toc(
-    pkg_toc_yaml: list[_toc_yaml_type_alias],
-    markdown_toc_yaml: _toc_yaml_type_alias,
+    pkg_toc_yaml: list[_yaml_type_alias],
+    markdown_toc_yaml: _yaml_type_alias,
     known_uids: set[str],
-) -> tuple[MutableSet[str], list[_toc_yaml_type_alias]]:
+) -> tuple[MutableSet[str], list[_yaml_type_alias]]:
     """
     Merges the markdown and package table of contents.
 
@@ -1661,8 +1662,8 @@ def merge_markdown_and_package_toc(
         contents file, with files in the correct position.
     """
     def _flatten_toc(
-        toc_yaml_entry: list[_toc_yaml_type_alias],
-    ) -> list[_toc_yaml_type_alias]:
+        toc_yaml_entry: list[_yaml_type_alias],
+    ) -> list[_yaml_type_alias]:
         """Flattens and retrieves all children within pkg_toc_yaml."""
         entries = list(toc_yaml_entry)
         for entry in toc_yaml_entry:
