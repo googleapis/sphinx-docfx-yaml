@@ -1367,11 +1367,11 @@ def pretty_package_name(package_group):
 _yaml_type_alias = dict[str, any]
 
 
-def _find_summary_details(
+def _find_and_add_summary_details(
     yaml_data: _yaml_type_alias,
     summary_type: str,
     cgc_url: str,
-) -> _yaml_type_alias:
+) -> None:
     """Finds the summary details to add for a given entry."""
     uid = yaml_data.get("uid", "")
     item_to_add = uid if summary_type == CLASS else f"{uid}-summary"
@@ -1384,16 +1384,16 @@ def _find_summary_details(
     if summary_type in [CLASS]:
         name_to_use = f"[{uid}]({cgc_url}{uid})"
 
-    return {
+    _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][1].append({
         "uid": uid,
         "name": name_to_use,
         "fullName": uid,
         "isExternal": False,
-    }
+    })
 
 
 def _render_summary_content(
-    children_name_and_summary_content: Sequence[Sequence[str]],
+    children_name_and_summary_content: Sequence[Sequence[str | _yaml_type_alias]],
     entry_name: str,
     summary_type: str,
     library_name: str,
@@ -1974,10 +1974,6 @@ def build_finished(app, exception):
             ],
         }
     )
-    cgc_url = (
-        "https://cloud.google.com/python/docs/reference/"
-        f"{app.config.project}/latest/"
-    )
 
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
@@ -1991,6 +1987,11 @@ def build_finished(app, exception):
             )
         )
 
+    cgc_url = (
+        "https://cloud.google.com/python/docs/reference/"
+        f"{app.config.project}/latest/"
+    )
+    yaml_entry_line = "### YamlMime:UniversalReference\n"
     # Output files
     for uid, data in iter(yaml_map.items()):
 
@@ -2017,7 +2018,7 @@ def build_finished(app, exception):
             app.info(bold('[docfx_yaml] ') + darkgreen('Outputting %s' % filename))
 
         with open(out_file, 'w') as out_file_obj:
-            out_file_obj.write('### YamlMime:UniversalReference\n')
+            out_file_obj.write(yaml_entry_line)
             try:
                 dump(
                     {
@@ -2038,9 +2039,7 @@ def build_finished(app, exception):
             if not (summary_type):
               continue
 
-            _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][1].append(
-                _find_summary_details(entry, summary_type, cgc_url)
-            )
+            _find_and_add_summary_details(entry, summary_type, cgc_url)
 
     for summary_type in _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE:
         children_names_and_content = (
@@ -2060,7 +2059,7 @@ def build_finished(app, exception):
 
         file_path_to_use = os.path.join(normalized_outdir, file_name)
         with open(file_path_to_use, "w") as summary_file_obj:
-            summary_file_obj.write("### YamlMime:UniversalReference\n")
+            summary_file_obj.write(yaml_entry_line)
             dump(
                 dump_content,
                 summary_file_obj,
