@@ -26,6 +26,7 @@ import copy
 import shutil
 import black
 import logging
+import json
 
 from collections import defaultdict
 from collections.abc import MutableSet, Mapping, Sequence
@@ -161,7 +162,25 @@ _FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE = {
 logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 
+def _grab_repo_metadata() -> Mapping[str, str] | None:
+    """Retrieves the repository's metadata info if found."""
+    try:
+        with open('.repo-metadata.json', 'r') as metadata_file:
+            json_content = json.load(metadata_file)
+        # Return outside of context manager for safe close
+        return json_content
+    except Exception:
+        return None
+
+
 def build_init(app):
+    print("Retrieving repository metadata.")
+    if not (repo_metadata := _grab_repo_metadata()):
+        print("Failed to retrieve repository metadata.")
+        app.env.library_shortname = ""
+    else:
+        print("Successfully retrieved repository metadata.")
+        app.env.library_shortname = repo_metadata["name"]
     print("Running sphinx-build with Markdown first...")
     markdown_utils.run_sphinx_markdown()
     print("Completed running sphinx-build with Markdown files.")
@@ -2017,7 +2036,7 @@ def build_finished(app, exception):
     pkg_toc_yaml.insert(
         1,
         {
-            "name": f"{app.config.project} APIs",
+            "name": f"{app.env.library_shortname} APIs",
             "items": [
                 {"name": "Classes", "href": "summary_class.yml"},
                 {"name": "Methods", "href": "summary_method.yml"},
@@ -2040,7 +2059,7 @@ def build_finished(app, exception):
 
     cgc_url = (
         "https://cloud.google.com/python/docs/reference/"
-        f"{app.config.project}/latest/"
+        f"{app.env.library_shortname}/latest/"
     )
     yaml_entry_line = "### YamlMime:UniversalReference\n"
     # Output files
@@ -2105,7 +2124,7 @@ def build_finished(app, exception):
             children_names_and_content,
             entry_name,
             summary_type,
-            app.config.project,
+            app.env.library_shortname,
         )
 
         file_path_to_use = os.path.join(normalized_outdir, file_name)
