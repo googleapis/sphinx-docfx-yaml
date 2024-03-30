@@ -1405,7 +1405,7 @@ def _find_and_add_summary_details(
     name_to_use = uid
     if not (class_name := yaml_data.get("class", "")):
         class_name = yaml_data.get("module", "")
-    anchor_name = f"#{'_'.join(class_name.split('.'))}_{short_name}"
+    anchor_name = f"#{class_name.replace('.', '_')}_{short_name}"
     # Extract the first summary line by attempting to detect the first sentence.
     summary = yaml_data.get("summary", "")
     first_summary_line = min(
