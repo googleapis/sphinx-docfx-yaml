@@ -2032,18 +2032,19 @@ def build_finished(app, exception):
         markdown_utils.remove_unused_pages(
             added_pages, app.env.moved_markdown_pages, normalized_outdir)
 
-    # Add summary pages as the second entry into the table of contents.
-    pkg_toc_yaml.insert(
-        1,
-        {
-            "name": f"{app.env.library_shortname} APIs",
-            "items": [
-                {"name": "Classes", "href": "summary_class.yml"},
-                {"name": "Methods", "href": "summary_method.yml"},
-                {"name": "Properties and Attributes", "href": "summary_property.yml"},
-            ],
-        }
-    )
+    if app.env.library_shortname:
+        # Add summary pages as the second entry into the table of contents.
+        pkg_toc_yaml.insert(
+            1,
+            {
+                "name": f"{app.env.library_shortname} APIs",
+                "items": [
+                    {"name": "Classes", "href": "summary_class.yml"},
+                    {"name": "Methods", "href": "summary_method.yml"},
+                    {"name": "Properties and Attributes", "href": "summary_property.yml"},
+                ],
+            }
+        )
 
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
@@ -2105,9 +2106,11 @@ def build_finished(app, exception):
         file_name_set.add(filename)
 
         for entry in yaml_data:
+            if not app.env.library_shortname:
+                continue
             summary_type = _SUMMARY_TYPE_BY_ITEM_TYPE.get(entry.get("type"))
             if not (summary_type):
-              continue
+                continue
 
             _find_and_add_summary_details(entry, summary_type, cgc_url)
 
