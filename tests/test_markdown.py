@@ -316,7 +316,7 @@ For example:
             # The content should be the same as base, and not throw any errors.
             "tests/markdown_example_base.md",
             "tests/markdown_example_does_not_exist.md",
-            "tests/markdown_example_dne_expected.md",
+            "tests/markdown_example_base.md",
         ],
         [
             # The content should be the same as base, and not throw any errors.

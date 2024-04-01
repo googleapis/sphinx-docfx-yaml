@@ -315,7 +315,7 @@ def move_markdown_pages(
 
         "reference.md", # Reference docs overlap with Overview. Will try and incorporate this in later.
                         # See https://github.com/googleapis/sphinx-docfx-yaml/issues/106.
-        "overview_content.md",  # Will be included in the summary_overview page.
+        "overview_content.md",  # Content will be merged into summary_overview page.
     ]
 
     # Use this to move the page but do not add them in the TOC.
