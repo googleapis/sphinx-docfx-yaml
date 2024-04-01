@@ -18,21 +18,22 @@ Sphinx DocFX YAML Top-level Extension.
 
 This extension allows you to automagically generate DocFX YAML from your Python AutoAPI docs.
 """
-import ast
-import os
-import inspect
-import re
-import copy
-import shutil
-import black
-import logging
 
+import ast
 from collections import defaultdict
-from collections.abc import MutableSet
-from pathlib import Path
+from collections.abc import Mapping, MutableSet, Sequence
+import copy
 from functools import partial
+import inspect
 from itertools import zip_longest
+import json
+import logging
+import os
+from pathlib import Path
+import re
+import shutil
 from typing import Any, Dict, Iterable, List, Optional
+import black
 from black import InvalidInput
 
 try:
@@ -134,11 +135,52 @@ NOTICES = {
     DEPRECATED: 'deprecated',
 }
 
+_SUMMARY_TYPE_BY_ITEM_TYPE = {
+    # Modules and Classes are similar types.
+    MODULE: CLASS,
+    CLASS: CLASS,
+    # Methods and Functions are similar types.
+    METHOD: METHOD,
+    FUNCTION: METHOD,
+    # Properties and Attributes are similar types.
+    PROPERTY: PROPERTY,
+    ATTRIBUTE: PROPERTY,
+}
+# Construct a mapping of name and content for each unique summary type entry.
+_ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE = {
+    summary_type: [[], []]  # entry name then entry content
+    for summary_type in set(_SUMMARY_TYPE_BY_ITEM_TYPE.values())
+}
+# Mapping for each summary page entry's file name and entry name.
+_FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE = {
+    CLASS: ('summary_class.yml', "Classes"),
+    METHOD: ('summary_method.yml', "Methods"),
+    PROPERTY: ('summary_property.yml', "Properties and Attributes"),
+}
+
 # Disable blib2to3 output that clutters debugging log.
 logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 
+def _grab_repo_metadata() -> Mapping[str, str] | None:
+    """Retrieves the repository's metadata info if found."""
+    try:
+        with open('.repo-metadata.json', 'r') as metadata_file:
+            json_content = json.load(metadata_file)
+        # Return outside of context manager for safe close
+        return json_content
+    except Exception:
+        return None
+
+
 def build_init(app):
+    print("Retrieving repository metadata.")
+    if not (repo_metadata := _grab_repo_metadata()):
+        print("Failed to retrieve repository metadata.")
+        app.env.library_shortname = ""
+    else:
+        print("Successfully retrieved repository metadata.")
+        app.env.library_shortname = repo_metadata["name"]
     print("Running sphinx-build with Markdown first...")
     markdown_utils.run_sphinx_markdown()
     print("Completed running sphinx-build with Markdown files.")
@@ -1348,6 +1390,102 @@ def pretty_package_name(package_group):
     return " ".join(capitalized_name)
 
 
+# Type alias used for yaml entries.
+_yaml_type_alias = dict[str, any]
+
+
+def _find_and_add_summary_details(
+    yaml_data: _yaml_type_alias,
+    summary_type: str,
+    cgc_url: str,
+) -> None:
+    """Finds the summary details to add for a given entry."""
+    uid = yaml_data.get("uid", "")
+    item_to_add = uid if summary_type == CLASS else f"{uid}-summary"
+
+    if item_to_add not in _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][0]:
+        _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][0].append(
+            item_to_add
+        )
+
+    if summary_type in [CLASS]:
+        name_to_use = f"[{uid}]({cgc_url}{uid})"
+
+        _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][1].append({
+            "uid": uid,
+            "name": name_to_use,
+            "fullName": uid,
+            "isExternal": False,
+        })
+        return
+
+    # if summary_type in [METHOD, PROPERTY]:
+    short_name = yaml_data.get("name", "")
+    name_to_use = uid
+    if not (class_name := yaml_data.get("class", "")):
+        class_name = yaml_data.get("module", "")
+    anchor_name = f"#{class_name.replace('.', '_')}_{short_name}"
+    # Extract the first summary line by attempting to detect the first sentence.
+    summary = yaml_data.get("summary", "")
+    first_summary_line = min(
+        summary.split(". ")[0],
+        summary.split(".\n")[0],
+        summary.split("\n\n")[0],
+        key=len,
+    )
+    if first_summary_line and first_summary_line[-1] != ".":
+      first_summary_line += "."
+
+    summary_to_use = (
+        f"{first_summary_line}\n\n"
+        f"See more: [{name_to_use}]({cgc_url}{class_name}{anchor_name})"
+    )
+
+    fields = {
+        "uid": f"{uid}-summary",
+        "name": name_to_use,
+        "summary": summary_to_use,
+        "fullName": uid,
+        "type": 'method',
+    }
+
+    if summary_type == METHOD:
+        fields["syntax"] = {
+            "content": yaml_data.get("syntax").get("content") if yaml_data.get("syntax") else ""
+        }
+    _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type][1].append(
+        fields
+    )
+
+
+def _render_summary_content(
+    children_name_and_summary_content: Sequence[Sequence[str | _yaml_type_alias]],
+    entry_name: str,
+    summary_type: str,
+    library_name: str,
+) -> _yaml_type_alias:
+    """Returns the summary content in appropriate YAML format to write."""
+    summary_content = {
+        "items": [{
+            'uid': f'{summary_type.lower()}-summary',
+            'name': entry_name,
+            'fullName': f'{entry_name} Summary',
+            'langs': ['python'],
+            'type': 'package',
+            'summary': f'Summary of entries of {entry_name} for {library_name}.',
+            'children': children_name_and_summary_content[0],
+        }]
+    }
+
+    if summary_type in [CLASS]:
+        summary_content["references"] = children_name_and_summary_content[1]
+
+    if summary_type in [METHOD, PROPERTY]:
+        summary_content["items"].extend(children_name_and_summary_content[1])
+
+    return summary_content
+
+
 def find_uid_to_convert(
     current_word: str,
     words: List[str],
@@ -1575,14 +1713,11 @@ def search_cross_references(obj, current_object_name: str, known_uids: List[str]
                     markdown_utils.reformat_markdown_to_html(attribute_type))
 
 
-# Type alias used for toc_yaml entries.
-_toc_yaml_type_alias = dict[str, any]
-
 def merge_markdown_and_package_toc(
-    pkg_toc_yaml: list[_toc_yaml_type_alias],
-    markdown_toc_yaml: _toc_yaml_type_alias,
+    pkg_toc_yaml: list[_yaml_type_alias],
+    markdown_toc_yaml: _yaml_type_alias,
     known_uids: set[str],
-) -> tuple[MutableSet[str], list[_toc_yaml_type_alias]]:
+) -> tuple[MutableSet[str], list[_yaml_type_alias]]:
     """
     Merges the markdown and package table of contents.
 
@@ -1595,8 +1730,8 @@ def merge_markdown_and_package_toc(
         contents file, with files in the correct position.
     """
     def _flatten_toc(
-        toc_yaml_entry: list[_toc_yaml_type_alias],
-    ) -> list[_toc_yaml_type_alias]:
+        toc_yaml_entry: list[_yaml_type_alias],
+    ) -> list[_yaml_type_alias]:
         """Flattens and retrieves all children within pkg_toc_yaml."""
         entries = list(toc_yaml_entry)
         for entry in toc_yaml_entry:
@@ -1897,6 +2032,21 @@ def build_finished(app, exception):
         markdown_utils.remove_unused_pages(
             added_pages, app.env.moved_markdown_pages, normalized_outdir)
 
+    if app.env.library_shortname:
+        # Add summary pages as the second entry into the table of contents.
+        pkg_toc_yaml.insert(
+            1,
+            {
+                "name": f"{app.env.library_shortname} APIs",
+                "items": [
+                    {"name": "Overview", "href": "summary_overview.md"},
+                    {"name": "Classes", "href": "summary_class.yml"},
+                    {"name": "Methods", "href": "summary_method.yml"},
+                    {"name": "Properties and Attributes", "href": "summary_property.yml"},
+                ],
+            }
+        )
+
     toc_file = os.path.join(normalized_outdir, 'toc.yml')
     with open(toc_file, 'w') as writable:
         writable.write(
@@ -1909,6 +2059,11 @@ def build_finished(app, exception):
             )
         )
 
+    cgc_url = (
+        "https://cloud.google.com/python/docs/reference/"
+        f"{app.env.library_shortname}/latest/"
+    )
+    yaml_entry_line = "### YamlMime:UniversalReference\n"
     # Output files
     for uid, data in iter(yaml_map.items()):
 
@@ -1935,7 +2090,7 @@ def build_finished(app, exception):
             app.info(bold('[docfx_yaml] ') + darkgreen('Outputting %s' % filename))
 
         with open(out_file, 'w') as out_file_obj:
-            out_file_obj.write('### YamlMime:UniversalReference\n')
+            out_file_obj.write(yaml_entry_line)
             try:
                 dump(
                     {
@@ -1950,6 +2105,41 @@ def build_finished(app, exception):
                 raise ValueError("Unable to dump object\n{0}".format(yaml_data)) from e
 
         file_name_set.add(filename)
+
+        for entry in yaml_data:
+            if not app.env.library_shortname:
+                break
+            summary_type = _SUMMARY_TYPE_BY_ITEM_TYPE.get(entry.get("type"))
+            if not (summary_type):
+                continue
+
+            _find_and_add_summary_details(entry, summary_type, cgc_url)
+
+    for summary_type in _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE:
+        children_names_and_content = (
+            _ENTRY_NAME_AND_ENTRY_CONTENT_BY_SUMMARY_TYPE[summary_type]
+        )
+        if not all(children_names_and_content):
+            continue
+
+        file_name, entry_name = _FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE[summary_type]
+
+        dump_content = _render_summary_content(
+            children_names_and_content,
+            entry_name,
+            summary_type,
+            app.env.library_shortname,
+        )
+
+        file_path_to_use = os.path.join(normalized_outdir, file_name)
+        with open(file_path_to_use, "w") as summary_file_obj:
+            summary_file_obj.write(yaml_entry_line)
+            dump(
+                dump_content,
+                summary_file_obj,
+                default_flow_style=False,
+            )
+
 
     index_file = os.path.join(normalized_outdir, 'index.yml')
     index_children = []
