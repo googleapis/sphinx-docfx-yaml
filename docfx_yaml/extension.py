@@ -18,22 +18,22 @@ Sphinx DocFX YAML Top-level Extension.
 
 This extension allows you to automagically generate DocFX YAML from your Python AutoAPI docs.
 """
-import ast
-import os
-import inspect
-import re
-import copy
-import shutil
-import black
-import logging
-import json
 
+import ast
 from collections import defaultdict
-from collections.abc import MutableSet, Mapping, Sequence
-from pathlib import Path
+from collections.abc import Mapping, MutableSet, Sequence
+import copy
 from functools import partial
+import inspect
 from itertools import zip_longest
+import json
+import logging
+import os
+from pathlib import Path
+import re
+import shutil
 from typing import Any, Dict, Iterable, List, Optional
+import black
 from black import InvalidInput
 
 try:
@@ -2108,7 +2108,7 @@ def build_finished(app, exception):
 
         for entry in yaml_data:
             if not app.env.library_shortname:
-                continue
+                break
             summary_type = _SUMMARY_TYPE_BY_ITEM_TYPE.get(entry.get("type"))
             if not (summary_type):
                 continue
