@@ -426,10 +426,12 @@ def _parse_enum_content(parts: Sequence[str]) -> Sequence[Mapping[str, str]]:
                     " docstring:\n\n{}".format("\n".join(parts))
                 )
             # Add the new enum and start collecting new entry.
-            enum_content.append({
-                "var_name": enum_name,
-                "description": "".join(enum_description),
-            })
+            new_entry = {
+                "id": enum_name,
+                "description": " ".join(enum_description),
+            }
+            if all(new_entry.values()):
+                enum_content.append(new_entry)
             enum_description = []
             # Only collect the name, not the value.
             enum_name = part.split(" ")[0]
@@ -442,10 +444,12 @@ def _parse_enum_content(parts: Sequence[str]) -> Sequence[Mapping[str, str]]:
             "The enum docstring is not formatted well. Check the"
             " docstring:\n\n{}".format("\n".join(parts))
         )
-    enum_content.append({
-        "var_name": enum_name,
-        "description": "".join(enum_description),
-    })
+    new_entry = {
+        "id": enum_name,
+        "description": " ".join(enum_description),
+    }
+    if all(new_entry.values()):
+      enum_content.append(new_entry)
 
     return enum_content
 
