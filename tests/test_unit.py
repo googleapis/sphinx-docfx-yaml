@@ -96,8 +96,8 @@ Returns:
     ~google.cloud.requests.Response: The HTTP response returned by ``transport``.
 
 Raises:
-    ~google.cloud.resumable_media.common.DataCorruption: If the download's
-        checksum doesn't agree with server-computed checksum.
+    ~google.cloud.resumable_media.common.DataCorruption: If the download"s
+        checksum doesn"t agree with server-computed checksum.
     ValueError: If the current :class:`Download` has already
         finished.
             """,
@@ -121,8 +121,8 @@ Returns:
     <xref uid="google.cloud.requests.Response">Response</xref>: The HTTP response returned by ``transport``.
 
 Raises:
-    <xref uid="google.cloud.resumable_media.common.DataCorruption">DataCorruption</xref>: If the download's
-        checksum doesn't agree with server-computed checksum.
+    <xref uid="google.cloud.resumable_media.common.DataCorruption">DataCorruption</xref>: If the download"s
+        checksum doesn"t agree with server-computed checksum.
     ValueError: If the current `Download` has already
         finished.
             """,
@@ -235,46 +235,12 @@ The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v
             )
 
 
-    # Variables used for testing _extract_docstring_info
-    top_summary1_want = "\nSimple test for docstring.\n\n"
-    summary_info1_want = {
-        'variables': {
-            'arg1': {
-                'var_type': 'int',
-                'description': 'simple description.'
-            },
-            'arg2': {
-                'var_type': 'str',
-                'description': 'simple description for `arg2`.'
-            }
-        },
-        'returns': [
-            {
-                'var_type': 'str',
-                'description': 'simple description for return value.'
-            }
-        ],
-        'exceptions': [
-            {
-                'var_type': 'AttributeError',
-                'description': 'if `condition x`.'
-            }
-        ]
-    }
-
-    def test_extract_docstring_info_normal_input(self):
-
-        ## Test for normal input
-        summary_info1_got = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
-        }
-
-        summary1 = """
+    test_entries = [
+        [
+            """
 Simple test for docstring.
 
-Args: 
+Args:
     arg1(int): simple description.
     arg2(str): simple description for `arg2`.
 
@@ -283,17 +249,32 @@ Returns:
 
 Raises:
     AttributeError: if `condition x`.
-"""
-
-        top_summary1_got = extension._extract_docstring_info(summary_info1_got, summary1, "")
-
-        self.assertEqual(top_summary1_got, self.top_summary1_want)
-        self.assertEqual(summary_info1_got, self.summary_info1_want)
-
-
-    def test_extract_docstring_info_mixed_format(self):
-        ## Test for input coming in mixed format.
-        summary2 = """
+            """,
+            "\nSimple test for docstring.\n\n",
+            {
+                "variables": {
+                    "arg1": {
+                        "var_type": "int",
+                        "description": "simple description.",
+                    },
+                    "arg2": {
+                        "var_type": "str",
+                        "description": "simple description for `arg2`.",
+                    },
+                },
+                "returns": [{
+                    "var_type": "str",
+                    "description": "simple description for return value.",
+                }],
+                "exceptions": [{
+                    "var_type": "AttributeError",
+                    "description": "if `condition x`.",
+                }],
+            },
+        ],
+        [
+            # Tests summary in mixed format
+            """
 Simple test for docstring.
 
 :type arg1: int
@@ -304,58 +285,156 @@ Simple test for docstring.
 :rtype: str
 :returns: simple description for return value.
 
-:raises AttributeError: if `condition x`. 
-"""
+:raises AttributeError: if `condition x`.
+            """,
+            "\nSimple test for docstring.\n\n",
+            {
+                "variables": {
+                    "arg1": {
+                        "var_type": "int",
+                        "description": "simple description.",
+                    },
+                    "arg2": {
+                        "var_type": "str",
+                        "description": "simple description for `arg2`.",
+                    },
+                },
+                "returns": [{
+                    "var_type": "str",
+                    "description": "simple description for return value.",
+                }],
+                "exceptions": [{
+                    "var_type": "AttributeError",
+                    "description": "if `condition x`.",
+                }],
+            },
 
-        summary_info2_got = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
-        }
-
-        top_summary2_got = extension._extract_docstring_info(summary_info2_got, summary2, "")
-        
-        # Output should be same as test 1 with normal input.
-        self.assertEqual(top_summary2_got, self.top_summary1_want)
-        self.assertEqual(summary_info2_got, self.summary_info1_want)
-
-        
-    def test_extract_docstring_info_check_parser(self):
-        ## Test for parser to correctly scan docstring tokens and not custom fields
-        summary_info3_want = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
-        }
-
-        summary3 = """
+        ],
+        [
+            # Tests summary for docstring tokens and not custom fields
+            """
 Union[int, None]: Expiration time in milliseconds for a partition.
 
 If :attr:`partition_expiration` is set and <xref:type_> is
 not set, :attr:`type_` will default to
 :attr:`~google.cloud.bigquery.table.TimePartitioningType.DAY`.
 It could return :param: with :returns as well.
-"""
+            """,
+            """
+Union[int, None]: Expiration time in milliseconds for a partition.
 
-        summary_info3_got = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
+If :attr:`partition_expiration` is set and <xref:type_> is
+not set, :attr:`type_` will default to
+:attr:`~google.cloud.bigquery.table.TimePartitioningType.DAY`.
+It could return :param: with :returns as well.
+            """,
+            {
+                "variables": {},
+                "returns": [],
+                "exceptions": [],
+            }
+        ],
+        [
+            # Tests summary with xrefs
+            """
+Simple test for docstring.
+
+:type arg1: <xref uid="google.spanner_v1.type.Type">Type</xref>
+:param arg1: simple description.
+:param arg2: simple description for `arg2`.
+:type arg2: ~google.spanner_v1.type.dict
+
+:rtype: <xref uid="Pair">Pair</xref>
+:returns: simple description for return value.
+
+:raises <xref uid="SpannerException">SpannerException</xref>: if `condition x`.
+            """,
+            "\nSimple test for docstring.\n\n",
+            {
+                "variables": {
+                    "arg1": {
+                        "var_type": "<xref uid=\"google.spanner_v1.type.Type\">Type</xref>",
+                        "description": "simple description.",
+                    },
+                    "arg2": {
+                        "var_type": "~google.spanner_v1.type.dict",
+                        "description": "simple description for `arg2`.",
+                    },
+                },
+                "returns": [{
+                    "var_type": "<xref uid=\"Pair\">Pair</xref>",
+                    "description": "simple description for return value.",
+                }],
+                "exceptions": [{
+                    "var_type": "<xref uid=\"SpannerException\">SpannerException</xref>",
+                    "description": "if `condition x`.",
+                }],
+            },
+        ],
+        [
+            # Tests docstring without a summary
+            """
+Args:
+    arg1(int): simple description.
+    arg2(str): simple description for `arg2`.
+
+Returns:
+    str: simple description for return value.
+
+Raises:
+    AttributeError: if `condition x`.
+            """,
+            "\n",
+            {
+                "variables": {
+                    "arg1": {
+                        "var_type": "int",
+                        "description": "simple description.",
+                    },
+                    "arg2": {
+                        "var_type": "str",
+                        "description": "simple description for `arg2`.",
+                    },
+                },
+                "returns": [{
+                    "var_type": "str",
+                    "description": "simple description for return value.",
+                }],
+                "exceptions": [{
+                    "var_type": "AttributeError",
+                    "description": "if `condition x`.",
+                }],
+            },
+
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_extracts_docstring_info(
+        self,
+        summary,
+        expected_top_summary,
+        expected_summary_info
+    ):
+        summary_info = {
+            "variables": {},
+            "returns": [],
+            "exceptions": []
         }
 
-        # Nothing should change
-        top_summary3_want = summary3
+        top_summary = extension._extract_docstring_info(
+            summary_info,
+            summary,
+            "",
+        )
 
-        top_summary3_got = extension._extract_docstring_info(summary_info3_got, summary3, "")
-
-        self.assertEqual(top_summary3_got, top_summary3_want)
-        self.assertEqual(summary_info3_got, summary_info3_want)
+        self.assertEqual(top_summary, expected_top_summary)
+        self.assertDictEqual(summary_info, expected_summary_info)
 
 
     def test_extract_docstring_info_check_error(self):
         ## Test for incorrectly formmatted docstring raising error
         summary4 = """
-Description of docstring which should fail. 
+Description of docstring which should fail.
 
 :returns:param:
 """
@@ -370,84 +449,6 @@ Raises:
 """
         with self.assertRaises(KeyError):
             extension._extract_docstring_info({}, summary5, "malformed docstring")
-
-
-    def test_extract_docstring_info_with_xref(self):
-        ## Test with xref included in the summary, ensure they're processed as-is
-        summary_info_want = {
-            'variables': {
-                'arg1': {
-                    'var_type': '<xref uid="google.spanner_v1.type.Type">Type</xref>',
-                    'description': 'simple description.'
-                },
-                'arg2': {
-                    'var_type': '~google.spanner_v1.type.dict',
-                    'description': 'simple description for `arg2`.'
-                }
-            },
-            'returns': [
-                {
-                    'var_type': '<xref uid="Pair">Pair</xref>', 
-                    'description': 'simple description for return value.'
-                }
-            ],
-            'exceptions': [
-                {
-                    'var_type': '<xref uid="SpannerException">SpannerException</xref>', 
-                    'description': 'if `condition x`.'
-                }
-            ]
-        }
-
-        summary = """
-Simple test for docstring.
-
-:type arg1: <xref uid="google.spanner_v1.type.Type">Type</xref>
-:param arg1: simple description.
-:param arg2: simple description for `arg2`.
-:type arg2: ~google.spanner_v1.type.dict
-
-:rtype: <xref uid="Pair">Pair</xref>
-:returns: simple description for return value.
-
-:raises <xref uid="SpannerException">SpannerException</xref>: if `condition x`. 
-"""
-
-        summary_info_got = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
-        }
-
-        top_summary_got = extension._extract_docstring_info(summary_info_got, summary, "")
-        # Same as the top summary from previous example, compare with that
-        self.assertEqual(top_summary_got, self.top_summary1_want)
-        self.assertDictEqual(summary_info_got, summary_info_want)
-
-
-    def test_extract_docstring_info_no_summary(self):
-        ## Test parsing docstring with no summary.
-        summary =(
-"""Args:
-    arg1(int): simple description.
-    arg2(str): simple description for `arg2`.
-
-Returns:
-    str: simple description for return value.
-
-Raises:
-    AttributeError: if `condition x`.
-"""
-        )
-        summary_info_got = {
-            'variables': {},
-            'returns': [],
-            'exceptions': []
-        }
-
-        top_summary_got = extension._extract_docstring_info(summary_info_got, summary, "")
-        self.assertEqual(top_summary_got, "")
-        self.assertDictEqual(summary_info_got, self.summary_info1_want)
 
 
     def test_find_package_group(self):
@@ -734,7 +735,7 @@ this is not a properly formatted warning.
             {
                 "id": "simple name",
                 "description": "simple description",
-                "var_type": 'str'
+                "var_type": "str"
             }
         ]
         summary = \
@@ -822,40 +823,40 @@ this is not a properly formatted warning.
 
 
     def test_merge_markdown_and_package_toc(self):
-        known_uids = {'acl','batch','blob','client','constants','fileio','hmac_key','notification','retry'}
+        known_uids = {"acl","batch","blob","client","constants","fileio","hmac_key","notification","retry"}
         markdown_pages = {
-            'storage': [
-                {'name': 'FileIO', 'href': 'fileio.md'},
-                {'name': 'Retry', 'href': 'retry.md'},
-                {'name': 'Notification', 'href': 'notification.md'},
-                {'name': 'HMAC Key Metadata', 'href': 'hmac_key.md'},
-                {'name': 'Batches', 'href': 'batch.md'},
-                {'name': 'Constants', 'href': 'constants.md'},
-                {'name': 'Storage Client', 'href': 'client.md'},
-                {'name': 'Blobs / Objects', 'href': 'blobs.md'}
+            "storage": [
+                {"name": "FileIO", "href": "fileio.md"},
+                {"name": "Retry", "href": "retry.md"},
+                {"name": "Notification", "href": "notification.md"},
+                {"name": "HMAC Key Metadata", "href": "hmac_key.md"},
+                {"name": "Batches", "href": "batch.md"},
+                {"name": "Constants", "href": "constants.md"},
+                {"name": "Storage Client", "href": "client.md"},
+                {"name": "Blobs / Objects", "href": "blobs.md"}
             ],
-            'acl': [
-                {'name': 'ACL', 'href': 'acl.md'},
-                {'name': 'ACL guide', 'href': 'acl_guide.md'}
+            "acl": [
+                {"name": "ACL", "href": "acl.md"},
+                {"name": "ACL guide", "href": "acl_guide.md"}
             ],
-            '/': [
-                {'name': 'Overview', 'href': 'index.md'},
-                {'name': 'Changelog', 'href': 'changelog.md'}
+            "/": [
+                {"name": "Overview", "href": "index.md"},
+                {"name": "Changelog", "href": "changelog.md"}
             ],
         }
         pkg_toc_yaml = [
-            {'name': 'Storage',
-                'items': [
-                    {'name': 'acl', 'uid': 'google.cloud.storage.acl', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.acl'}]},
-                    {'name': 'batch', 'uid': 'google.cloud.storage.batch', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.batch'}]},
-                    {'name': 'blob', 'uid': 'google.cloud.storage.blob', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.blob'}]},
-                    {'name': 'bucket', 'uid': 'google.cloud.storage.bucket', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.bucket'}]},
-                    {'name': 'client', 'uid': 'google.cloud.storage.client', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.client'}]},
-                    {'name': 'constants', 'uid': 'google.cloud.storage.constants'},
-                    {'name': 'fileio', 'uid': 'google.cloud.storage.fileio', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.fileio'}]},
-                    {'name': 'hmac_key', 'uid': 'google.cloud.storage.hmac_key', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.hmac_key'}]},
-                    {'name': 'notification', 'uid': 'google.cloud.storage.notification', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.notification'}]},
-                    {'name': 'retry', 'uid': 'google.cloud.storage.retry', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.retry'}]},
+            {"name": "Storage",
+                "items": [
+                    {"name": "acl", "uid": "google.cloud.storage.acl", "items": [{"name": "Overview", "uid": "google.cloud.storage.acl"}]},
+                    {"name": "batch", "uid": "google.cloud.storage.batch", "items": [{"name": "Overview", "uid": "google.cloud.storage.batch"}]},
+                    {"name": "blob", "uid": "google.cloud.storage.blob", "items": [{"name": "Overview", "uid": "google.cloud.storage.blob"}]},
+                    {"name": "bucket", "uid": "google.cloud.storage.bucket", "items": [{"name": "Overview", "uid": "google.cloud.storage.bucket"}]},
+                    {"name": "client", "uid": "google.cloud.storage.client", "items": [{"name": "Overview", "uid": "google.cloud.storage.client"}]},
+                    {"name": "constants", "uid": "google.cloud.storage.constants"},
+                    {"name": "fileio", "uid": "google.cloud.storage.fileio", "items": [{"name": "Overview", "uid": "google.cloud.storage.fileio"}]},
+                    {"name": "hmac_key", "uid": "google.cloud.storage.hmac_key", "items": [{"name": "Overview", "uid": "google.cloud.storage.hmac_key"}]},
+                    {"name": "notification", "uid": "google.cloud.storage.notification", "items": [{"name": "Overview", "uid": "google.cloud.storage.notification"}]},
+                    {"name": "retry", "uid": "google.cloud.storage.retry", "items": [{"name": "Overview", "uid": "google.cloud.storage.retry"}]},
                 ]
              },
         ]
@@ -863,26 +864,26 @@ this is not a properly formatted warning.
         added_pages, merged_pkg_toc_yaml = extension.merge_markdown_and_package_toc(
             pkg_toc_yaml, markdown_pages, known_uids)
 
-        expected_added_pages = {'index.md', 'changelog.md', 'blobs.md', 'acl_guide.md'}
+        expected_added_pages = {"index.md", "changelog.md", "blobs.md", "acl_guide.md"}
         expected_merged_pkg_toc_yaml = [
-            {'name': 'Overview', 'href': 'index.md'},
-            {'name': 'Changelog', 'href': 'changelog.md'},
-            {'name': 'Storage',
-                'items': [
-                    {'name': 'Blobs / Objects', 'href': 'blobs.md'},
-                    {'name': 'acl', 'uid': 'google.cloud.storage.acl', 'items': [
-                        {'name': 'ACL guide', 'href': 'acl_guide.md'},
-                        {'name': 'Overview', 'uid': 'google.cloud.storage.acl'},
+            {"name": "Overview", "href": "index.md"},
+            {"name": "Changelog", "href": "changelog.md"},
+            {"name": "Storage",
+                "items": [
+                    {"name": "Blobs / Objects", "href": "blobs.md"},
+                    {"name": "acl", "uid": "google.cloud.storage.acl", "items": [
+                        {"name": "ACL guide", "href": "acl_guide.md"},
+                        {"name": "Overview", "uid": "google.cloud.storage.acl"},
                     ]},
-                    {'name': 'batch', 'uid': 'google.cloud.storage.batch', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.batch'}]},
-                    {'name': 'blob', 'uid': 'google.cloud.storage.blob', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.blob'}]},
-                    {'name': 'bucket', 'uid': 'google.cloud.storage.bucket', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.bucket'}]},
-                    {'name': 'client', 'uid': 'google.cloud.storage.client', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.client'}]},
-                    {'name': 'constants', 'uid': 'google.cloud.storage.constants'},
-                    {'name': 'fileio', 'uid': 'google.cloud.storage.fileio', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.fileio'}]},
-                    {'name': 'hmac_key', 'uid': 'google.cloud.storage.hmac_key', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.hmac_key'}]},
-                    {'name': 'notification', 'uid': 'google.cloud.storage.notification', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.notification'}]},
-                    {'name': 'retry', 'uid': 'google.cloud.storage.retry', 'items': [{'name': 'Overview', 'uid': 'google.cloud.storage.retry'}]},
+                    {"name": "batch", "uid": "google.cloud.storage.batch", "items": [{"name": "Overview", "uid": "google.cloud.storage.batch"}]},
+                    {"name": "blob", "uid": "google.cloud.storage.blob", "items": [{"name": "Overview", "uid": "google.cloud.storage.blob"}]},
+                    {"name": "bucket", "uid": "google.cloud.storage.bucket", "items": [{"name": "Overview", "uid": "google.cloud.storage.bucket"}]},
+                    {"name": "client", "uid": "google.cloud.storage.client", "items": [{"name": "Overview", "uid": "google.cloud.storage.client"}]},
+                    {"name": "constants", "uid": "google.cloud.storage.constants"},
+                    {"name": "fileio", "uid": "google.cloud.storage.fileio", "items": [{"name": "Overview", "uid": "google.cloud.storage.fileio"}]},
+                    {"name": "hmac_key", "uid": "google.cloud.storage.hmac_key", "items": [{"name": "Overview", "uid": "google.cloud.storage.hmac_key"}]},
+                    {"name": "notification", "uid": "google.cloud.storage.notification", "items": [{"name": "Overview", "uid": "google.cloud.storage.notification"}]},
+                    {"name": "retry", "uid": "google.cloud.storage.retry", "items": [{"name": "Overview", "uid": "google.cloud.storage.retry"}]},
                 ]
              },
         ]
@@ -890,5 +891,5 @@ this is not a properly formatted warning.
         self.assertListEqual(merged_pkg_toc_yaml, expected_merged_pkg_toc_yaml)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
