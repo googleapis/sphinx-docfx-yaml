@@ -648,7 +648,9 @@ You can also pass a mapping object.
 \n            \"client_cert_source\" : get_client_cert
 \n        })
 """
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -662,7 +664,9 @@ And any other documentation that the source code would have could go here.
 """
         summary_want = summary + "\n"
 
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -709,7 +713,9 @@ hyphenated term notice.
 \n    hyphenated term notice.
 """
 
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
         self.assertEqual(summary_got, summary_want)
         self.assertEqual(attributes_got, attributes_want)
 
@@ -743,7 +749,9 @@ this is not a properly formatted warning.
 \n:type: str
 """
 
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
         self.assertCountEqual(attributes_got, attributes_want)
 
         # Check multiple attributes are parsed.
@@ -777,7 +785,9 @@ this is not a properly formatted warning.
 
 \n:type: google.cloud.bigquery_logging_v1.types.TableInsertRequest
 """
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
 
         self.assertCountEqual(attributes_got, attributes_want)
         for attribute_got, attribute_want in zip(attributes_got, attributes_want):
@@ -808,7 +818,9 @@ this is not a properly formatted warning.
 
 \n:type: str
 """
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
+        summary_got, attributes_got, enums_got = (
+            extension._parse_docstring_summary(summary)
+        )
 
         # Check that we are returned only one item.
         self.assertCountEqual(attributes_got, attributes_want)
