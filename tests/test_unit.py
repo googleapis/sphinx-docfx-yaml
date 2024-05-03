@@ -431,44 +431,54 @@ Raises:
         self.assertDictEqual(summary_info, expected_summary_info)
 
 
-    def test_extract_docstring_info_check_error(self):
-        ## Test for incorrectly formmatted docstring raising error
-        summary4 = """
+    test_entries = [
+        [
+            """
 Description of docstring which should fail.
 
 :returns:param:
-"""
-        with self.assertRaises(ValueError):
-            extension._extract_docstring_info({}, summary4, "error string")
-
-        summary5 = """
+            """,
+            ValueError,
+            "Error string",
+        ],
+        [
+            """
 Description of malformed docstring.
 
 Raises:
     Error that should fail: if condition `x`.
-"""
-        with self.assertRaises(KeyError):
-            extension._extract_docstring_info({}, summary5, "malformed docstring")
+            """,
+            KeyError,
+            "Malformed docstring",
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_raises_error_extracting_malformed_docstring(
+        self,
+        summary,
+        error_type,
+        error_string,
+    ):
+        with self.assertRaises(error_type):
+            extension._extract_docstring_info({}, summary, error_string)
 
 
-    def test_find_package_group(self):
-        package_group_want = "google.cloud.spanner_v1beta2"
+    def test_finds_package_group(self):
         uid = "google.cloud.spanner_v1beta2.services.admin_database_v1.types"
 
-        package_group_got = extension.find_package_group(uid)
-        self.assertEqual(package_group_got, package_group_want)
+        package_group = extension.find_package_group(uid)
+        self.assertEqual(package_group, "google.cloud.spanner_v1beta2")
 
 
-    def test_pretty_package_name(self):
-        package_name_want = "Spanner V1beta2"
+    def test_finds_pretty_package_name(self):
         package_group = "google.cloud.spanner_v1beta2"
 
-        package_name_got = extension.pretty_package_name(package_group)
-        self.assertEqual(package_name_got, package_name_want)
+        package_name = extension.pretty_package_name(package_group)
+        self.assertEqual(package_name, "Spanner V1beta2")
 
 
     def test_group_by_package(self):
-        toc_yaml_want = [
+        [
             {
                 "name": "Spanner Admin Database V1",
                 "uidname":"google.cloud.spanner_admin_database_v1",
@@ -582,9 +592,63 @@ Raises:
             }
         ]
 
-        toc_yaml_got = extension.group_by_package(toc_yaml)
+        toc_yaml = extension.group_by_package(toc_yaml)
 
-        self.assertCountEqual(toc_yaml_got, toc_yaml_want)
+        self.assertCountEqual(
+            toc_yaml,
+            [
+                {
+                    "name": "Spanner Admin Database V1",
+                    "uidname":"google.cloud.spanner_admin_database_v1",
+                    "items": [{
+                        "name":"database_admin",
+                        "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin",
+                        "items": [{
+                            "name":"Overview",
+                            "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin",
+                            "uid":"google.cloud.spanner_admin_database_v1.services.database_admin"
+                        },
+                        {
+                            "name":"ListBackupOperationsAsyncPager",
+                            "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin.pagers.ListBackupOperationsAsyncPager",
+                            "uid":"google.cloud.spanner_admin_database_v1.services.database_admin.pagers.ListBackupOperationsAsyncPager",
+                        }],
+                    },
+                    {
+                        "name":"spanner_admin_database_v1.types",
+                        "uidname":"google.cloud.spanner_admin_database_v1.types",
+                        "items": [{
+                            "name":"Overview",
+                            "uidname":"google.cloud.spanner_admin_database_v1.types",
+                            "uid":"google.cloud.spanner_admin_database_v1.types",
+                        },
+                        {
+                            "name":"BackupInfo",
+                            "uidname":"google.cloud.spanner_admin_database_v1.types.BackupInfo",
+                            "uid":"google.cloud.spanner_admin_database_v1.types.BackupInfo",
+                        }],
+                    }],
+                },
+                {
+                    "name": "Spanner V1",
+                    "uidname":"google.cloud.spanner_v1",
+                    "items": [{
+                        "name":"pool",
+                        "uidname":"google.cloud.spanner_v1.pool",
+                        "items": [{
+                            "name":"Overview",
+                            "uidname":"google.cloud.spanner_v1.pool",
+                            "uid":"google.cloud.spanner_v1.pool"
+                        },
+                        {
+                            "name":"AbstractSessionPool",
+                            "uidname":"google.cloud.spanner_v1.pool.AbstractSessionPool",
+                            "uid":"google.cloud.spanner_v1.pool.AbstractSessionPool",
+                        }],
+                    }],
+                },
+            ]
+        )
 
 
     def test_parse_docstring_summary(self):
