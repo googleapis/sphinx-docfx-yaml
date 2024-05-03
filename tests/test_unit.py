@@ -97,7 +97,7 @@ Returns:
 
 Raises:
     ~google.cloud.resumable_media.common.DataCorruption: If the download"s
-        checksum doesn"t agree with server-computed checksum.
+        checksum doesn't agree with server-computed checksum.
     ValueError: If the current :class:`Download` has already
         finished.
             """,
@@ -122,7 +122,7 @@ Returns:
 
 Raises:
     <xref uid="google.cloud.resumable_media.common.DataCorruption">DataCorruption</xref>: If the download"s
-        checksum doesn"t agree with server-computed checksum.
+        checksum doesn't agree with server-computed checksum.
     ValueError: If the current `Download` has already
         finished.
             """,
