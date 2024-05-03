@@ -869,6 +869,7 @@ this is not a properly formatted warning.
             }],
         ],
         [
+            # Tests only attributes in valid format are parsed.
             (\
 """
 
@@ -887,7 +888,6 @@ this is not a properly formatted warning.
 \n:type: str
 """
             ),
-            # Tests only attributes in valid format are parsed.
             [{
                 "id": "proper name",
                 "description": "proper description.",
