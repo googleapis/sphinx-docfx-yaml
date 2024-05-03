@@ -6,68 +6,77 @@ from parameterized import parameterized
 from yaml import load, Loader
 
 class TestGenerate(unittest.TestCase):
-    def test_find_unique_name(self):
+    def test_finds_unique_name(self):
 
         entries = {}
 
         # Disambiguate with unique entries.
-        entry1 = "google.cloud.aiplatform.v1.schema.predict.instance_v1.types"
-        entry2 = "google.cloud.aiplatform.v1beta2.schema.predict.instance_v1.types"
-        want1 = "v1.types"
-        want2 = "v1beta2.types"
-
-        for entry in [entry1, entry2]:
+        schema_v1_entry = (
+            "google.cloud.aiplatform.v1.schema.predict.instance_v1.types"
+        )
+        schema_v1beta2_entry = (
+            "google.cloud.aiplatform.v1beta2.schema.predict.instance_v1.types"
+        )
+        for entry in [schema_v1_entry, schema_v1beta2_entry]:
             for word in entry.split("."):
                 if word not in entries:
                     entries[word] = 1
                 else:
                     entries[word] += 1
 
-        got1 = extension.find_unique_name(entry1.split("."), entries)
-        got2 = extension.find_unique_name(entry2.split("."), entries)
+        unique_v1_name = extension.find_unique_name(
+            schema_v1_entry.split("."), entries
+        )
+        unique_v1beta2_name = extension.find_unique_name(
+            schema_v1beta2_entry.split("."), entries
+        )
 
-        self.assertEqual(want1, ".".join(got1))
-        self.assertEqual(want2, ".".join(got2))
-
-
-    def test_disambiguate_toc_name(self):
-
-        with open('tests/yaml_post.yaml', 'r') as want_file:
-            yaml_want = load(want_file, Loader=Loader)
-        disambiguated_names_want = {
-            'google.cloud.spanner_admin_database_v1.types': 'spanner_admin_database_v1.types',
-            'google.cloud.spanner_admin_instance_v1.types': 'spanner_admin_instance_v1.types',
-            'google.cloud.spanner_v1.types': 'spanner_v1.types'
-        }
-
-        with open('tests/yaml_pre.yaml', 'r') as test_file:
-            yaml_got = load(test_file, Loader=Loader)
-        disambiguated_names_got = extension.disambiguate_toc_name(yaml_got)
-
-        self.assertEqual(yaml_want, yaml_got)
-        self.assertEqual(disambiguated_names_want, disambiguated_names_got)
+        self.assertEqual("v1.types", ".".join(unique_v1_name))
+        self.assertEqual("v1beta2.types", ".".join(unique_v1beta2_name))
 
 
-    def test_disambiguate_toc_name_duplicate(self):
+    test_entries = [
+        [
+            "tests/yaml_pre.yaml",
+            "tests/yaml_post.yaml",
+            {
+                "google.cloud.spanner_admin_database_v1.types": "spanner_admin_database_v1.types",
+                "google.cloud.spanner_admin_instance_v1.types": "spanner_admin_instance_v1.types",
+                "google.cloud.spanner_v1.types": "spanner_v1.types",
+            },
+        ],
+        [
+            # Tests duplicate names
+            "tests/yaml_pre_duplicate.yaml",
+            "tests/yaml_post_duplicate.yaml",
+            {
+                "google.api_core.client_info": "client_info",
+                "google.api_core.gapic_v1.client_info": "gapic_v1.client_info",
+            },
+        ]
+    ]
+    @parameterized.expand(test_entries)
+    def test_disambiguates_toc_name(
+        self,
+        test_filename,
+        expected_filename,
+        expected_disambiguated_names,
+    ):
+        with open(test_filename, "r") as test_file:
+            test_yaml = load(test_file, Loader=Loader)
+        with open(expected_filename, "r") as expected_yaml_file:
+            expected_yaml = load(expected_yaml_file, Loader=Loader)
 
-        with open('tests/yaml_post_duplicate.yaml', 'r') as want_file:
-            yaml_want = load(want_file, Loader=Loader)
-        disambiguated_names_want = {
-            'google.api_core.client_info': 'client_info',
-            'google.api_core.gapic_v1.client_info': 'gapic_v1.client_info'
-        }
+        disambiguated_names = extension.disambiguate_toc_name(
+            test_yaml
+        )
 
-        with open('tests/yaml_pre_duplicate.yaml', 'r') as test_file:
-            yaml_got = load(test_file, Loader=Loader)
-        disambiguated_names_got = extension.disambiguate_toc_name(yaml_got)
+        self.assertEqual(expected_yaml, test_yaml)
+        self.assertEqual(expected_disambiguated_names, disambiguated_names)
 
-
-        self.assertEqual(yaml_want, yaml_got)
-        self.assertEqual(disambiguated_names_want, disambiguated_names_got)
-
-
-    def test_reference_in_summary(self):
-        lines_got = """
+    test_entries = [
+        [
+            """
 If a ``stream`` is attached to this download, then the downloaded
 resource will be written to the stream.
 
@@ -91,18 +100,8 @@ Raises:
         checksum doesn't agree with server-computed checksum.
     ValueError: If the current :class:`Download` has already
         finished.
-"""
-        lines_got = lines_got.split("\n")
-        xrefs_got = []
-        # Resolve over different regular expressions for different types of reference patterns.
-        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN, lines_got)
-        for xref in xrefs:
-            xrefs_got.append(xref)
-        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_LAST, lines_got)
-        for xref in xrefs:
-            xrefs_got.append(xref)
-
-        lines_want = """
+            """,
+            """
 If a ``stream`` is attached to this download, then the downloaded
 resource will be written to the stream.
 
@@ -126,24 +125,16 @@ Raises:
         checksum doesn't agree with server-computed checksum.
     ValueError: If the current `Download` has already
         finished.
-"""
-        lines_want = lines_want.split("\n")
-        xrefs_want = [
-          "google.cloud.requests.Session",
-          "google.cloud.requests.Session.request",
-          "google.cloud.requests.Response",
-          "google.cloud.resumable_media.common.DataCorruption"
-        ]
-
-        self.assertEqual(lines_got, lines_want)
-        self.assertCountEqual(xrefs_got, xrefs_want)
-        # assertCountEqual is a misleading name but checks that two lists contain
-        # same items regardless of order, as long as items in list are sortable.
-
-
-    # Test for added xref coverage and third party xrefs staying as-is
-    def test_reference_in_summary_more_xrefs(self):
-        lines_got = """
+            """,
+            [
+                "google.cloud.requests.Session",
+                "google.cloud.requests.Session.request",
+                "google.cloud.requests.Response",
+                "google.cloud.resumable_media.common.DataCorruption",
+            ],
+        ],
+        [
+            """
 If a ~dateutil.time.stream() is attached to this download, then the downloaded
 resource will be written to the stream.
 
@@ -158,18 +149,8 @@ Args:
 
         Can also be passed as a :func:`~google.cloud.requests.tuple()` (connect_timeout, read_timeout).
         See :meth:`google.cloud.requests.Session.request()` documentation for details.
-"""
-        lines_got = lines_got.split("\n")
-        xrefs_got = []
-        # Resolve over different regular expressions for different types of reference patterns.
-        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN, lines_got)
-        for xref in xrefs:
-            xrefs_got.append(xref)
-        lines_got, xrefs = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_LAST, lines_got)
-        for xref in xrefs:
-            xrefs_got.append(xref)
-
-        lines_want = """
+            """,
+            """
 If a `dateutil.time.stream()` is attached to this download, then the downloaded
 resource will be written to the stream.
 
@@ -184,18 +165,74 @@ Args:
 
         Can also be passed as a <xref uid="google.cloud.requests.tuple">tuple()</xref> (connect_timeout, read_timeout).
         See <xref uid="google.cloud.requests.Session.request">request()</xref> documentation for details.
-"""
-        lines_want = lines_want.split("\n")
-        xrefs_want = [
-          "google.cloud.requests.Session",
-          "google.cloud.requests.tuple",
-          "google.cloud.requests.Session.request"
-        ]
+            """,
+            [
+              "google.cloud.requests.Session",
+              "google.cloud.requests.tuple",
+              "google.cloud.requests.Session.request",
+            ],
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_resolves_references_in_summary(
+        self,
+        test_docstring,
+        expected_content,
+        expected_xrefs,
+    ):
+        xrefs_to_check = []
+        # Resolve over different regular expressions for different types of reference patterns.
+        content_to_resolve, xrefs = (
+            extension._resolve_reference_in_module_summary(
+                extension.REF_PATTERN,
+                test_docstring.split("\n"),
+            )
+        )
+        xrefs_to_check.extend(xrefs)
 
-        self.assertEqual(lines_got, lines_want)
-        self.assertCountEqual(xrefs_got, xrefs_want)
-        # assertCountEqual is a misleading name but checks that two lists contain
-        # same items regardless of order, as long as items in list are sortable.
+        resolved_content, xrefs = (
+            extension._resolve_reference_in_module_summary(
+                extension.REF_PATTERN_LAST,
+                content_to_resolve,
+            )
+        )
+        xrefs_to_check.extend(xrefs)
+
+        self.assertEqual(resolved_content, expected_content.split("\n"))
+        self.assertCountEqual(xrefs_to_check, expected_xrefs)
+
+
+    def test_resolves_square_bracket_references(self):
+        expected_xrefs = [
+            "google.cloud.kms.v1.KeyRing.name",
+            "google.cloud.kms.v1.KeyRing",
+            "google.cloud.kms.v1.ImportJob",
+        ]
+        summary_expected = """Required.
+
+The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
+"""
+        summary = """Required.
+
+The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the [ImportJobs][google.cloud.kms.v1.ImportJob].
+"""
+        resolved_summary, xrefs = (
+            extension._resolve_reference_in_module_summary(
+                extension.REF_PATTERN_BRACKETS,
+                summary.split("\n"),
+            )
+        )
+
+        self.assertEqual(resolved_summary, summary_expected.split("\n"))
+        self.assertCountEqual(xrefs, expected_xrefs)
+
+
+    def test_raises_error_for_invalid_references(self):
+        with self.assertRaises(ValueError):
+            extension._resolve_reference_in_module_summary(
+                ".*",
+                "not a valid ref line".split("\n"),
+            )
 
 
     # Variables used for testing _extract_docstring_info
@@ -213,49 +250,17 @@ Args:
         },
         'returns': [
             {
-                'var_type': 'str', 
+                'var_type': 'str',
                 'description': 'simple description for return value.'
             }
         ],
         'exceptions': [
             {
-                'var_type': 'AttributeError', 
+                'var_type': 'AttributeError',
                 'description': 'if `condition x`.'
             }
         ]
     }
-
-
-    # Test for resolving square bracketed references.
-    def test_reference_square_brackets(self):
-        xrefs_want = [
-            'google.cloud.kms.v1.KeyRing.name',
-            'google.cloud.kms.v1.KeyRing',
-            'google.cloud.kms.v1.ImportJob',
-        ]
-        summary_want = """Required.
-
-The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
-"""
-        summary_want = summary_want.split("\n")
-
-        summary = """Required.
-
-The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the [ImportJobs][google.cloud.kms.v1.ImportJob].
-"""
-        summary = summary.split("\n")
-
-        summary_got, xrefs_got = extension._resolve_reference_in_module_summary(extension.REF_PATTERN_BRACKETS, summary)
-
-        self.assertEqual(summary_got, summary_want)
-        self.assertCountEqual(xrefs_got, xrefs_want)
-
-
-    # Check that other patterns throws an exception.
-    def test_reference_check_error(self):
-        with self.assertRaises(ValueError):
-            extension._resolve_reference_in_module_summary('.*', 'not a valid ref line'.split('\n'))
-
 
     def test_extract_docstring_info_normal_input(self):
 
