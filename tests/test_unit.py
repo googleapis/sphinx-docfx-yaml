@@ -477,7 +477,7 @@ Raises:
         self.assertEqual(package_name, "Spanner V1beta2")
 
 
-    def test_group_by_package(self):
+    def test_groups_by_package(self):
         [
             {
                 "name": "Spanner Admin Database V1",
@@ -651,10 +651,38 @@ Raises:
         )
 
 
-    def test_parse_docstring_summary(self):
-        # Check that the summary gets parsed correctly.
-        attributes_want = []
-        summary_want = \
+    test_entries = [
+        [
+            (\
+"""
+
+
+.. code-block:: python
+
+\n    from google.api_core.client_options import ClientOptions
+\n    from google.cloud.vision_v1 import ImageAnnotatorClient
+\n    def get_client_cert():
+\n        # code to load client certificate and private key.
+\n        return client_cert_bytes, client_private_key_bytes
+\n    options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
+\n        client_cert_source=get_client_cert)
+\n    client = ImageAnnotatorClient(client_options=options)
+
+
+You can also pass a mapping object.
+
+
+\n.. code-block:: ruby
+
+\n    from google.cloud.vision_v1 import ImageAnnotatorClient
+\n    client = ImageAnnotatorClient(
+\n        client_options={
+\n            \"api_endpoint\": \"foo.googleapis.com\",
+\n            \"client_cert_source\" : get_client_cert
+\n        })
+"""
+            ),
+            (\
 """```python
 from google.api_core.client_options import ClientOptions
 
@@ -690,82 +718,31 @@ client = ImageAnnotatorClient(
 
 ```
 """
-        summary = \
-"""
-
-
-.. code-block:: python
-
-\n    from google.api_core.client_options import ClientOptions
-\n    from google.cloud.vision_v1 import ImageAnnotatorClient
-\n    def get_client_cert():
-\n        # code to load client certificate and private key.
-\n        return client_cert_bytes, client_private_key_bytes
-\n    options = ClientOptions(api_endpoint=\"foo.googleapis.com\",
-\n        client_cert_source=get_client_cert)
-\n    client = ImageAnnotatorClient(client_options=options)
-
-
-You can also pass a mapping object.
-
-
-\n.. code-block:: ruby
-
-\n    from google.cloud.vision_v1 import ImageAnnotatorClient
-\n    client = ImageAnnotatorClient(
-\n        client_options={
-\n            \"api_endpoint\": \"foo.googleapis.com\",
-\n            \"client_cert_source\" : get_client_cert
-\n        })
-"""
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-        self.assertEqual(summary_got, summary_want)
-        self.assertEqual(attributes_got, attributes_want)
-
-        # Check that nothing much changes otherwise.
-        summary = \
+            ),
+        ],
+        [
+            # Check that nothing changes for literalincludes.
+            (\
 """
 .. literalinclude::
     note that these are not supported yet, so they will be ignored for now.
 
 And any other documentation that the source code would have could go here.
 """
-        summary_want = summary + "\n"
-
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-        self.assertEqual(summary_got, summary_want)
-        self.assertEqual(attributes_got, attributes_want)
-
-        # Check that exception is raised if code block is not indented.
-        summary = \
+            ),
+            (\
 """
+.. literalinclude::
+    note that these are not supported yet, so they will be ignored for now.
 
+And any other documentation that the source code would have could go here.
 
-.. code:: python
-
-\nprint("This should throw an exception.")
-\nfor i in range(10):
-\n    print(i)
 """
-        with self.assertRaises(ValueError):
-            extension._parse_docstring_summary(summary)
-
-        # Check that notices are processed properly.
-        summary_want = \
-"""<aside class="note">
-<b>Note:</b>
-this is a note.
-</aside>
-<aside class="caution">
-<b>Caution:</b>
-another type of notice.
-</aside>
-<aside class="key-term">
-<b>Key Term:</b>
-hyphenated term notice.
-</aside>"""
-
-        summary = \
+            ),
+        ],
+        [
+            # Tests notices are processed properly.
+            (\
 """
 .. note::
 \n    this is a note.
@@ -778,31 +755,72 @@ hyphenated term notice.
 .. key-term::
 \n    hyphenated term notice.
 """
+            ),
+            (\
+"""<aside class="note">
+<b>Note:</b>
+this is a note.
+</aside>
+<aside class="caution">
+<b>Caution:</b>
+another type of notice.
+</aside>
+<aside class="key-term">
+<b>Key Term:</b>
+hyphenated term notice.
+</aside>"""
+            ),
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_parses_docstring_summary(
+        self,
+        summary,
+        expected_summary,
+    ):
+        parsed_summary, attributes = extension._parse_docstring_summary(summary)
+        self.assertEqual(parsed_summary, expected_summary)
+        self.assertEqual(attributes, [])
 
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-        self.assertEqual(summary_got, summary_want)
-        self.assertEqual(attributes_got, attributes_want)
 
-        # Check that exception is raised if block is not formatted properly.
+    test_entries = [
+        [
+            (\
+"""
 
-        summary = \
+
+.. code:: python
+
+\nprint("This should throw an exception.")
+\nfor i in range(10):
+\n    print(i)
+"""
+            ),
+            ValueError,
+        ],
+        [
+            (\
 """
 .. warning::
 this is not a properly formatted warning.
 """
-        with self.assertRaises(ValueError):
+            ),
+            ValueError,
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_raises_error_parsing_malformed_docstring(
+        self,
+        summary,
+        error_type
+    ):
+        with self.assertRaises(error_type):
             extension._parse_docstring_summary(summary)
 
-    def test_parse_docstring_summary_attributes(self):
-        # Test parsing docstring with attributes.
-        attributes_want = [
-            {
-                "id": "simple name",
-                "description": "simple description",
-                "var_type": "str"
-            }
-        ]
-        summary = \
+
+    test_entries = [
+        [
+            (\
 """
 
 
@@ -812,25 +830,16 @@ this is not a properly formatted warning.
 
 \n:type: str
 """
-
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-        self.assertCountEqual(attributes_got, attributes_want)
-
-        # Check multiple attributes are parsed.
-        attributes_want = [
-            {
+            ),
+            [{
                 "id": "simple name",
                 "description": "simple description",
-                "var_type": "str"
-            },
-            {
-                "id": "table_insert_request",
-                "description": "Table insert request.",
-                "var_type": "google.cloud.bigquery_logging_v1.types.TableInsertRequest"
-            }
-        ]
-
-        summary = \
+                "var_type": "str",
+            }],
+        ],
+        [
+            # Tests for multiple attributes.
+            (\
 """
 
 
@@ -847,21 +856,20 @@ this is not a properly formatted warning.
 
 \n:type: google.cloud.bigquery_logging_v1.types.TableInsertRequest
 """
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-
-        self.assertCountEqual(attributes_got, attributes_want)
-        for attribute_got, attribute_want in zip(attributes_got, attributes_want):
-            self.assertDictEqual(attribute_got, attribute_want)
-
-        # Check only attributes in valid format gets parsed.
-        attributes_want = [
+            ),
+            [{
+                "id": "simple name",
+                "description": "simple description",
+                "var_type": "str",
+            },
             {
-                "id": "proper name",
-                "description": "proper description.",
-                "var_type": "str"
-            }
-        ]
-        summary = \
+                "id": "table_insert_request",
+                "description": "Table insert request.",
+                "var_type": "google.cloud.bigquery_logging_v1.types.TableInsertRequest",
+            }],
+        ],
+        [
+            (\
 """
 
 
@@ -878,12 +886,27 @@ this is not a properly formatted warning.
 
 \n:type: str
 """
-        summary_got, attributes_got = extension._parse_docstring_summary(summary)
-
-        # Check that we are returned only one item.
-        self.assertCountEqual(attributes_got, attributes_want)
-        for attribute_got, attribute_want in zip(attributes_got, attributes_want):
-            self.assertDictEqual(attribute_got, attribute_want)
+            ),
+            # Tests only attributes in valid format are parsed.
+            [{
+                "id": "proper name",
+                "description": "proper description.",
+                "var_type": "str",
+            }],
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_parses_docstring_summary_for_attributes(
+        self,
+        summary,
+        expected_attributes,
+    ):
+        _, attributes = extension._parse_docstring_summary(summary)
+        self.assertCountEqual(attributes, expected_attributes)
+        for attributes, expected_attributes in zip(
+            attributes, expected_attributes
+        ):
+            self.assertDictEqual(attributes, expected_attributes)
 
 
     def test_merge_markdown_and_package_toc(self):
