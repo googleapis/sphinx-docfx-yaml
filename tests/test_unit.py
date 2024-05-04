@@ -201,21 +201,30 @@ Args:
         self.assertEqual(resolved_content, expected_content.split("\n"))
         self.assertCountEqual(xrefs_to_check, expected_xrefs)
 
-
-    def test_resolves_square_bracket_references(self):
-        expected_xrefs = [
-            "google.cloud.kms.v1.KeyRing.name",
-            "google.cloud.kms.v1.KeyRing",
-            "google.cloud.kms.v1.ImportJob",
-        ]
-        summary_expected = """Required.
-
-The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
-"""
-        summary = """Required.
+    test_entries = [
+        [
+            """Required.
 
 The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the [ImportJobs][google.cloud.kms.v1.ImportJob].
-"""
+            """,
+            """Required.
+
+The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
+            """,
+            [
+                "google.cloud.kms.v1.KeyRing.name",
+                "google.cloud.kms.v1.KeyRing",
+                "google.cloud.kms.v1.ImportJob",
+            ],
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_resolves_square_bracket_references(
+        self,
+        summary,
+        expected_summary,
+        expected_xrefs,
+    ):
         resolved_summary, xrefs = (
             extension._resolve_reference_in_module_summary(
                 extension.REF_PATTERN_BRACKETS,
@@ -223,7 +232,7 @@ The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v
             )
         )
 
-        self.assertEqual(resolved_summary, summary_expected.split("\n"))
+        self.assertEqual(resolved_summary, expected_summary.split("\n"))
         self.assertCountEqual(xrefs, expected_xrefs)
 
 
