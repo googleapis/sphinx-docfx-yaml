@@ -202,20 +202,30 @@ Args:
         self.assertCountEqual(xrefs_to_check, expected_xrefs)
 
 
-    def test_resolves_square_bracket_references(self):
-        expected_xrefs = [
-            "google.cloud.kms.v1.KeyRing.name",
-            "google.cloud.kms.v1.KeyRing",
-            "google.cloud.kms.v1.ImportJob",
-        ]
-        summary_expected = """Required.
-
-The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
-"""
-        summary = """Required.
+    test_entries = [
+        [
+            """Required.
 
 The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the [ImportJobs][google.cloud.kms.v1.ImportJob].
-"""
+            """,
+            """Required.
+
+The <xref uid="google.cloud.kms.v1.KeyRing.name">name</xref> of the <xref uid="google.cloud.kms.v1.KeyRing">KeyRing</xref> associated with the <xref uid="google.cloud.kms.v1.ImportJob">ImportJobs</xref>.
+            """,
+            [
+                "google.cloud.kms.v1.KeyRing.name",
+                "google.cloud.kms.v1.KeyRing",
+                "google.cloud.kms.v1.ImportJob",
+            ],
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_resolves_square_bracket_references(
+        self,
+        summary,
+        expected_summary,
+        expected_xrefs,
+    ):
         resolved_summary, xrefs = (
             extension._resolve_reference_in_module_summary(
                 extension.REF_PATTERN_BRACKETS,
@@ -223,7 +233,7 @@ The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v
             )
         )
 
-        self.assertEqual(resolved_summary, summary_expected.split("\n"))
+        self.assertEqual(resolved_summary, expected_summary.split("\n"))
         self.assertCountEqual(xrefs, expected_xrefs)
 
 
@@ -463,86 +473,44 @@ Raises:
             extension._extract_docstring_info({}, summary, error_string)
 
 
-    def test_finds_package_group(self):
-        uid = "google.cloud.spanner_v1beta2.services.admin_database_v1.types"
-
-        package_group = extension.find_package_group(uid)
-        self.assertEqual(package_group, "google.cloud.spanner_v1beta2")
-
-
-    def test_finds_pretty_package_name(self):
-        package_group = "google.cloud.spanner_v1beta2"
-
-        package_name = extension.pretty_package_name(package_group)
-        self.assertEqual(package_name, "Spanner V1beta2")
-
-
-    def test_groups_by_package(self):
+    test_entries = [
         [
-            {
-                "name": "Spanner Admin Database V1",
-                "uidname":"google.cloud.spanner_admin_database_v1",
-                "items": [
-                    {
-                      "name":"database_admin",
-                      "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin",
-                      "items":[
-                          {
-                            "name":"Overview",
-                            "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin",
-                            "uid":"google.cloud.spanner_admin_database_v1.services.database_admin"
-                          },
-                          {
-                            "name":"ListBackupOperationsAsyncPager",
-                            "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin.pagers.ListBackupOperationsAsyncPager",
-                            "uid":"google.cloud.spanner_admin_database_v1.services.database_admin.pagers.ListBackupOperationsAsyncPager"
-                          }
-                      ]
-                    },
-                    {
-                      "name":"spanner_admin_database_v1.types",
-                      "uidname":"google.cloud.spanner_admin_database_v1.types",
-                      "items":[
-                          {
-                            "name":"Overview",
-                            "uidname":"google.cloud.spanner_admin_database_v1.types",
-                            "uid":"google.cloud.spanner_admin_database_v1.types"
-                          },
-                          {
-                            "name":"BackupInfo",
-                            "uidname":"google.cloud.spanner_admin_database_v1.types.BackupInfo",
-                            "uid":"google.cloud.spanner_admin_database_v1.types.BackupInfo"
-                          }
-                      ]
-                    },
-                ]
-            },
-            {
-                "name": "Spanner V1",
-                "uidname":"google.cloud.spanner_v1",
-                "items": [
-                    {
-                      "name":"pool",
-                      "uidname":"google.cloud.spanner_v1.pool",
-                      "items":[
-                          {
-                            "name":"Overview",
-                            "uidname":"google.cloud.spanner_v1.pool",
-                            "uid":"google.cloud.spanner_v1.pool"
-                          },
-                          {
-                            "name":"AbstractSessionPool",
-                            "uidname":"google.cloud.spanner_v1.pool.AbstractSessionPool",
-                            "uid":"google.cloud.spanner_v1.pool.AbstractSessionPool"
-                          }
-                      ]
-                    }
-                ]
-            }
-        ]
+            "google.cloud.spanner_v1beta2.services.admin_database_v1.types",
+            "google.cloud.spanner_v1beta2",
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_finds_package_group(
+        self,
+        uid,
+        expected_package_group,
+    ):
+        package_group = extension.find_package_group(uid)
 
-        toc_yaml = [
-            {
+        self.assertEqual(package_group, expected_package_group)
+
+
+    test_entries = [
+        [
+            "google.cloud.spanner_v1beta2",
+            "Spanner V1beta2",
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_finds_pretty_package_name(
+        self,
+        package_group,
+        expected_package_name,
+    ):
+        package_name = extension.pretty_package_name(package_group)
+
+        self.assertEqual(package_name, expected_package_name)
+
+
+    test_entries = [
+        [
+            # toc_yaml entry
+            [{
               "name":"database_admin",
               "uidname":"google.cloud.spanner_admin_database_v1.services.database_admin",
               "items":[
@@ -589,13 +557,8 @@ Raises:
                     "uid":"google.cloud.spanner_v1.pool.AbstractSessionPool"
                   }
               ]
-            }
-        ]
-
-        toc_yaml = extension.group_by_package(toc_yaml)
-
-        self.assertCountEqual(
-            toc_yaml,
+            }],
+            # expected_toc_yaml entry
             [
                 {
                     "name": "Spanner Admin Database V1",
@@ -647,8 +610,18 @@ Raises:
                         }],
                     }],
                 },
-            ]
-        )
+            ],
+        ],
+    ]
+    @parameterized.expand(test_entries)
+    def test_groups_by_package(
+        self,
+        toc_yaml,
+        expected_toc_yaml,
+    ):
+        toc_yaml = extension.group_by_package(toc_yaml)
+
+        self.assertCountEqual(toc_yaml, expected_toc_yaml)
 
 
     test_entries = [
@@ -959,7 +932,6 @@ Values:
         expected_attributes,
         expected_enums,
     ):
-        self.maxDiff = None
         _, attributes, enums = extension._parse_docstring_summary(summary)
 
         self.assertCountEqual(attributes, expected_attributes)
