@@ -1083,7 +1083,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
             summary = reformat_summary(summary)
             top_summary = _extract_docstring_info(summary_info, summary, name)
             try:
-                datam['summary'], datam['attributes'], datam['enums'] = (
+                datam['summary'], datam['attributes'], datam['enum'] = (
                     _parse_docstring_summary(top_summary)
                 )
             except ValueError:
