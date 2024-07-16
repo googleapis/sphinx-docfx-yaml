@@ -1,5 +1,35 @@
 # Changelog
 
+## [3.2.1](https://github.com/googleapis/sphinx-docfx-yaml/compare/v3.2.0...v3.2.1) (2024-05-07)
+
+
+### Bug Fixes
+
+* Build Markdown relative to input directory ([#380](https://github.com/googleapis/sphinx-docfx-yaml/issues/380)) ([2a4b9fe](https://github.com/googleapis/sphinx-docfx-yaml/commit/2a4b9fe0b3ca94e27a9b1a6e5238711045b372c9))
+* Format enum data into table format ([#376](https://github.com/googleapis/sphinx-docfx-yaml/issues/376)) ([abc9667](https://github.com/googleapis/sphinx-docfx-yaml/commit/abc96675e1cbe3a9175bdf921142b32b16523f28))
+
+## [3.2.0](https://github.com/googleapis/sphinx-docfx-yaml/compare/v3.1.0...v3.2.0) (2024-05-02)
+
+
+### Features
+
+* Add support for enums ([#374](https://github.com/googleapis/sphinx-docfx-yaml/issues/374)) ([4575ffe](https://github.com/googleapis/sphinx-docfx-yaml/commit/4575ffebb8ded4b8ed43d4bfd3308deaa3a7b1b8))
+
+
+### Documentation
+
+* Add summary_overview template ([#367](https://github.com/googleapis/sphinx-docfx-yaml/issues/367)) ([39baecb](https://github.com/googleapis/sphinx-docfx-yaml/commit/39baecb0afcbd9a116cb809a0866bf61ac784f0e))
+
+## [3.1.0](https://github.com/googleapis/sphinx-docfx-yaml/compare/v3.0.1...v3.1.0) (2024-04-01)
+
+
+### Features
+
+* Add summary page for Classes and Modules ([#361](https://github.com/googleapis/sphinx-docfx-yaml/issues/361)) ([e56c3a7](https://github.com/googleapis/sphinx-docfx-yaml/commit/e56c3a732c2a71b76d0e44bd1ed889de4ffa1f63))
+* Add summary page support for methods and properties ([#363](https://github.com/googleapis/sphinx-docfx-yaml/issues/363)) ([e3ae026](https://github.com/googleapis/sphinx-docfx-yaml/commit/e3ae0262492f584516b10e1f8753b430e746ffa9))
+* Grab repository metadata ([#364](https://github.com/googleapis/sphinx-docfx-yaml/issues/364)) ([1318b24](https://github.com/googleapis/sphinx-docfx-yaml/commit/1318b2462c757368be3098824dd8924e4dc8b78f))
+* Support overview page ([#365](https://github.com/googleapis/sphinx-docfx-yaml/issues/365)) ([9985d13](https://github.com/googleapis/sphinx-docfx-yaml/commit/9985d134a45842eca9787483078101e0270e2345))
+
 ## [3.0.1](https://github.com/googleapis/sphinx-docfx-yaml/compare/v3.0.0...v3.0.1) (2024-03-13)
 
 
