@@ -991,6 +991,8 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     # Find the first index which default arguments start at.
                     # Every argument after this offset_count all have default values.
                     offset_count = len(argspec.defaults)
+                    if argspec.kwonlydefaults:
+                        offset_count += len(argspec.kwonlydefaults)
                     # Find the index of the current default value argument
                     index = len(args) + count - offset_count
 
