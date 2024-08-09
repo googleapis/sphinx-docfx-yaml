@@ -939,56 +939,75 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         if _type in [METHOD, FUNCTION, CLASS]:
             argspec = inspect.getfullargspec(obj) # noqa
             type_map = {}
-            if argspec.annotations:
-                for annotation in argspec.annotations:
-                    if annotation == "return":
-                        continue
-                    try:
-                        type_map[annotation] = _extract_type_name(
-                            argspec.annotations[annotation])
-                    except AttributeError:
-                        print(f"Could not parse argument information for {annotation}.")
-                        continue
 
-            # Add up the number of arguments. `argspec.args` contains a list of
-            # all the arguments from the function.
-            arg_count += len(argspec.args)
-            for arg in argspec.args:
-                arg_map = {}
-                # Ignore adding in entry for "self"
-                if arg != 'cls':
-                    arg_map['id'] = arg
-                    if arg in type_map:
-                        arg_map['var_type'] = type_map[arg]
-                        args.append(arg_map)
+            annotations = getattr(argspec, 'annotations', [])
+            for annotation in argspec.annotations:
+                if annotation == "return":
+                    continue
+                try:
+                    type_map[annotation] = _extract_type_name(
+                        argspec.annotations[annotation])
+                except AttributeError:
+                    print(f"Could not parse argument information for {annotation}.")
+                    continue
+
+            # Retrieve arguments from various source,s like `argspec.args`,
+            # `argspec.kwonlyargs` for positional/keyword arguments.
+            args_to_iterate = argspec.args
+            # Stores default information for kwonly arguments. Unlike
+            # inspect.defaults, which is a tuple of default values, kw defaults
+            # is a dict[name, defaultvalue].
+            kw_defaults = {}
+            if argspec.kwonlyargs:
+                args_to_iterate.extend(argspec.kwonlyargs)
+                if argspec.kwonlydefaults:
+                    kw_defaults.update(argspec.kwonlydefaults)
+            arg_count += len(args_to_iterate)
+            for arg in args_to_iterate:
+                # Ignore adding in entry for "self" or if docstring cannot be
+                # formed for current arg, such as docstring is missing or type
+                # annotation is not given.
+                if arg == 'cls' or arg not in type_map:
+                    continue
+
+                arg_map = {
+                    'id': arg,
+                    'var_type': type_map[arg],
+                }
+                if arg in kw_defaults:
+                    # Cast to string, otherwise different types may be stored as
+                    # value instead.
+                    arg_map['defaultValue'] = str(kw_defaults[arg])
+                args.append(arg_map)
 
             if argspec.varargs:
                 args.append({'id': argspec.varargs})
             if argspec.varkw:
                 args.append({'id': argspec.varkw})
 
-            if argspec.defaults:
-                # Attempt to add default values to arguments.
-                try:
-                    for count, default in enumerate(argspec.defaults):
-                        # Find the first index which default arguments start at.
-                        # Every argument after this offset_count all have default values.
-                        offset_count = len(argspec.defaults)
-                        # Find the index of the current default value argument
-                        index = len(args) + count - offset_count
+            try:
+                defaults = getattr(argspec, 'defaults', [])
+                for count, default in enumerate(defaults):
+                    # Find the first index which default arguments start at.
+                    # Every argument after this offset_count all have default values.
+                    offset_count = len(argspec.defaults)
+                    # Find the index of the current default value argument
+                    index = len(args) + count - offset_count
 
-                        # Only add defaultValue when str(default) doesn't
-                        # contain object address string, for example:
-                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
-                        # otherwise inspect.getargspec method will return wrong
-                        # defaults which contain object address for some,
-                        # like sys.stdout.
-                        default_string = str(default)
-                        if 'at 0x' not in default_string:
-                            args[index]['defaultValue'] = default_string
-                # If we cannot find the argument, it is missing a type and was taken out intentionally.
-                except IndexError:
-                    pass
+                    # Only add defaultValue when str(default) doesn't
+                    # contain object address string, for example:
+                    # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
+                    # otherwise inspect.getargspec method will return wrong
+                    # defaults which contain object address for some,
+                    # like sys.stdout.
+                    default_string = str(default)
+                    if 'at 0x' not in default_string:
+                        args[index]['defaultValue'] = default_string
+
+            # If we cannot find the argument, it is missing a type and was taken out intentionally.
+            except IndexError:
+                pass
+
             try:
                 if len(lines) == 0:
                     lines = inspect.getdoc(obj)
