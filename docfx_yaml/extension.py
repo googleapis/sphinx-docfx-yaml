@@ -953,17 +953,17 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
 
             # Retrieve arguments from various sources like `argspec.args` and
             # `argspec.kwonlyargs` for positional/keyword arguments.
-            args_to_iterate = argspec.args
+            original_args = argspec.args
             # Stores default information for kwonly arguments. Unlike
             # inspect.defaults, which is a tuple of default values, kw defaults
             # is a dict[name, defaultvalue].
             kw_defaults = {}
             if argspec.kwonlyargs:
-                args_to_iterate.extend(argspec.kwonlyargs)
+                original_args.extend(argspec.kwonlyargs)
                 if argspec.kwonlydefaults:
                     kw_defaults.update(argspec.kwonlydefaults)
-            arg_count += len(args_to_iterate)
-            for arg in args_to_iterate:
+            arg_count += len(original_args)
+            for arg in original_args:
                 # Ignore adding in entry for "self" or if docstring cannot be
                 # formed for current arg, such as docstring is missing or type
                 # annotation is not given.
