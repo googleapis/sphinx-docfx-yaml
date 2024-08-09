@@ -951,7 +951,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     print(f"Could not parse argument information for {annotation}.")
                     continue
 
-            # Retrieve arguments from various source,s like `argspec.args`,
+            # Retrieve arguments from various sources like `argspec.args` and
             # `argspec.kwonlyargs` for positional/keyword arguments.
             args_to_iterate = argspec.args
             # Stores default information for kwonly arguments. Unlike
