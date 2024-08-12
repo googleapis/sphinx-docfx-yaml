@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Update 2024-08-12: We are using python3.10 explicitly everywhere to
+# avoid `test(3.10)` failures.
+
 # Should run regardless of failure status for the generator.
 set +eo pipefail
 
