@@ -45,7 +45,7 @@ def _reformat_codeblocks(content: str) -> str:
 
 def _reformat_links(content: str) -> str:
     """Formats links from `{reference_name} <{reference_link}>`__
-    to <xref href="{reference_link}">{reference_name}</xref>"""
+    to <a href='{reference_link}'>{reference_name}</a>"""
     reformatted_lines = []
     code_pattern = '`[\w\s]+[\\n]*[\w\s]*\\s<https://.*>`__'
     xref_start = """<a href='{UID_TEMPLATE}'>"""
@@ -64,7 +64,6 @@ def _reformat_links(content: str) -> str:
         reference_link = match.group("reference_link")
         reformatted_lines.append(content[prev_end:start])
         reformatted_lines.append(f'{xref_start.format(UID_TEMPLATE=reference_link)}{reference_name}{xref_end}')
-        #reformatted_lines.append(f'[{reference_name}]({reference_link})')
         prev_end = end
 
     reformatted_lines.append(content[prev_end:])
