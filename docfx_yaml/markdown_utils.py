@@ -43,6 +43,32 @@ def _reformat_codeblocks(content: str) -> str:
 
     return content
 
+def _reformat_links(content: str) -> str:
+    """Formats links from `{reference_name} <{reference_link}>`__
+    to <xref href="{reference_link}">{reference_name}</xref>"""
+    reformatted_lines = []
+    code_pattern = '`[\w\s]+[\\n]*[\w\s]*\\s<https://.*>`__'
+    xref_start = """<a href='{UID_TEMPLATE}'>"""
+    xref_end = '</a>'
+    prev_end = 0
+    for matched_obj in re.finditer(code_pattern, content):
+        start = matched_obj.start()
+        end = matched_obj.end()
+        matched_content = content[start:end]
+        SOME_REGEX = '`(?P<reference_name>(.|\n)*)\s\<(?P<reference_link>.*)\>`__'
+        match = re.search(SOME_REGEX, matched_content)
+        if match is None:
+            print(f'Link could not be reformatted: {content}')
+            return content
+        reference_name = re.sub('[\n]+', ' ', match.group("reference_name"))
+        reference_link = match.group("reference_link")
+        reformatted_lines.append(content[prev_end:start])
+        reformatted_lines.append(f'{xref_start.format(UID_TEMPLATE=reference_link)}{reference_name}{xref_end}')
+        #reformatted_lines.append(f'[{reference_name}]({reference_link})')
+        prev_end = end
+
+    reformatted_lines.append(content[prev_end:])
+    return ''.join(reformatted_lines)
 
 def _reformat_code(content: str) -> str:
     """Formats code from ` to <code>."""
@@ -82,6 +108,7 @@ def reformat_markdown_to_html(content: str) -> str:
         Content that has been formatted with proper HTML.
     """
 
+    content = _reformat_links(content)
     content = _reformat_codeblocks(content)
     content = _reformat_code(content)
 
