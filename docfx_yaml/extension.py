@@ -989,7 +989,7 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     # default index will be between 0 and len(defaults) if we
                     # processed args without defaults, and now only have
                     # args with default values to assign.
-                    if default_index >= len(defaults):
+                    if default_index < 0 or default_index >= len(defaults):
                         continue
                     # Only add defaultValue when str(default) doesn't
                     # contain object address string, for example:
