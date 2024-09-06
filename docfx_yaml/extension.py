@@ -963,52 +963,52 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                 if argspec.kwonlydefaults:
                     kw_defaults.update(argspec.kwonlydefaults)
             arg_count += len(original_args)
+
+            # Retrieve the default values and convert to a list.
+            defaults = list(getattr(argspec, 'defaults', []))
+            # Counter used to extract default values.
+            default_index = -len(argspec.args) + len(defaults)
             for arg in original_args:
                 # Ignore adding in entry for "self" or if docstring cannot be
                 # formed for current arg, such as docstring is missing or type
                 # annotation is not given.
                 if arg == 'cls' or arg not in type_map:
+                    default_index += 1
                     continue
 
                 arg_map = {
                     'id': arg,
                     'var_type': type_map[arg],
                 }
-                if arg in kw_defaults:
-                    # Cast to string, otherwise different types may be stored as
-                    # value instead.
-                    arg_map['defaultValue'] = str(kw_defaults[arg])
-                args.append(arg_map)
 
-            if argspec.varargs:
-                args.append({'id': argspec.varargs})
-            if argspec.varkw:
-                args.append({'id': argspec.varkw})
-
-            try:
-                defaults = getattr(argspec, 'defaults', [])
-                for count, default in enumerate(defaults):
-                    # Find the first index which default arguments start at.
-                    # Every argument after this offset_count all have default values.
-                    offset_count = len(argspec.defaults)
-                    if argspec.kwonlydefaults:
-                        offset_count += len(argspec.kwonlydefaults)
-                    # Find the index of the current default value argument
-                    index = len(args) + count - offset_count
-
+                if arg in argspec.args:
+                    # default index will be between 0 and len(defaults) if we
+                    # processed args without defaults, and now only have
+                    # args with default values to assign.
+                    if default_index >= len(defaults):
+                        continue
                     # Only add defaultValue when str(default) doesn't
                     # contain object address string, for example:
                     # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
                     # otherwise inspect.getargspec method will return wrong
                     # defaults which contain object address for some,
                     # like sys.stdout.
-                    default_string = str(default)
-                    if 'at 0x' not in default_string:
-                        args[index]['defaultValue'] = default_string
+                    default_string = str(defaults[default_index])
+                    if 'at 0x' in default_string:
+                        continue
+                    arg_map['defaultValue'] = default_string
+                if arg in kw_defaults:
+                    # Cast to string, otherwise different types may be stored as
+                    # value instead.
+                    arg_map['defaultValue'] = str(kw_defaults[arg])
 
-            # If we cannot find the argument, it is missing a type and was taken out intentionally.
-            except IndexError:
-                pass
+                default_index += 1
+                args.append(arg_map)
+
+            if argspec.varargs:
+                args.append({'id': argspec.varargs})
+            if argspec.varkw:
+                args.append({'id': argspec.varkw})
 
             try:
                 if len(lines) == 0:
