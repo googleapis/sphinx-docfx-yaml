@@ -38,9 +38,9 @@ cachetools==5.2.0 \
     --hash=sha256:6a94c6402995a99c3970cc7e4884bb60b4a8639938157eeed436098bf9831757 \
     --hash=sha256:f9f17d2aec496a9aa6b76f53e3b614c965223c061982d434d160f930c698a9db
     # via google-auth
-certifi==2023.7.22 \
-    --hash=sha256:539cc1d13202e33ca466e88b2807e29f4c13049d6d87031a3c110744495cb082 \
-    --hash=sha256:92d6037539857d8206b8f6ae472e8b77db8058fec5937a1ef3f54304089edbb9
+certifi==2024.7.4 \
+    --hash=sha256:5a1e7645bc0ec61a09e26c36f6106dd4cf40c6db3a1fb6352b0244e7fb057c7b \
+    --hash=sha256:c198e21b1289c2ab85ee4e67bb4b4ef3ead0892059901a8d5b622f24a1101e90
     # via requests
 cffi==1.15.1 \
     --hash=sha256:00a9ed42e88df81ffae7a8ab6d9356b371399b91dbdf0c3cb1e84c03a13aceb5 \
@@ -171,9 +171,9 @@ distlib==0.3.6 \
     --hash=sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46 \
     --hash=sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e
     # via virtualenv
-django==3.2.25 \
-    --hash=sha256:7ca38a78654aee72378594d63e51636c04b8e28574f5505dff630895b5472777 \
-    --hash=sha256:a52ea7fcf280b16f7b739cec38fa6d3f8953a5456986944c3ca97e79882b4e38
+django==4.2.16 \
+    --hash=sha256:1ddc333a16fc139fd253035a1606bb24261951bbc3a6ca256717fa06cc41a898 \
+    --hash=sha256:6f1616c2786c408ce86ab7e10f792b8f15742f7b7b7460243929cb371e7f1dad
     # via -r requirements.in
 docker==6.0.0 \
     --hash=sha256:19e330470af40167d293b0352578c1fa22d74b34d3edf5d4ff90ebc203bbb2f1 \
@@ -677,10 +677,6 @@ python-dotenv==0.21.0 \
     --hash=sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5 \
     --hash=sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045
     # via uvicorn
-pytz==2022.2.1 \
-    --hash=sha256:220f481bdafa09c3955dfbdddb7b57780e9a94f5127e35456a48589b9e0c0197 \
-    --hash=sha256:cea221417204f2d1a2aa03ddae3e867921971d0d76f14d87abb4414415bbdcf5
-    # via django
 pyyaml==6.0 \
     --hash=sha256:01b45c0191e6d66c470b6cf1b9531a771a83c1c4208272ead47a3ae4f2f603bf \
     --hash=sha256:0283c35a6a9fbf047493e3a0ce8d79ef5030852c51e9d911a27badfde0605293 \
@@ -956,13 +952,13 @@ wheel==0.38.4 \
     --hash=sha256:965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac \
     --hash=sha256:b60533f3f5d530e971d6737ca6d58681ee434818fab630c83a734bb10c083ce8
     # via -r requirements.in
-zipp==3.8.1 \
-    --hash=sha256:05b45f1ee8f807d0cc928485ca40a07cb491cf092ff587c0df9cb1fd154848d2 \
-    --hash=sha256:47c40d7fe183a6f21403a199b3e4192cca5774656965b0a4988ad2f8feb5f009
+zipp==3.19.1 \
+    --hash=sha256:2828e64edb5386ea6a52e7ba7cdb17bb30a73a858f5eb6eb93d8d36f5ea26091 \
+    --hash=sha256:35427f6d5594f4acf82d25541438348c26736fa9b3afa2754bcd63cdb99d8e8f
     # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==68.2.2 \
-    --hash=sha256:4ac1475276d2f1c48684874089fefcd83bd7162ddaafb81fac866ba0db282a87 \
-    --hash=sha256:b454a35605876da60632df1a60f736524eb73cc47bbc9f3f1ef1b644de74fd2a
+setuptools==70.0.0 \
+    --hash=sha256:54faa7f2e8d2d11bcd2c07bed282eef1046b5c080d1c32add737d7b5817b1ad4 \
+    --hash=sha256:f211a66637b8fa059bb28183da127d4e86396c991a942b028c6650d4319c3fd0
     # via -r requirements.in

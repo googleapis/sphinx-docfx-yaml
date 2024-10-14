@@ -162,6 +162,10 @@ _FILE_NAME_AND_ENTRY_NAME_BY_SUMMARY_TYPE = {
 logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 
+# Type alias used for yaml entries.
+_yaml_type_alias = dict[str, any]
+
+
 def _grab_repo_metadata() -> Mapping[str, str] | None:
     """Retrieves the repository's metadata info if found."""
     try:
@@ -939,56 +943,77 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
         if _type in [METHOD, FUNCTION, CLASS]:
             argspec = inspect.getfullargspec(obj) # noqa
             type_map = {}
-            if argspec.annotations:
-                for annotation in argspec.annotations:
-                    if annotation == "return":
-                        continue
-                    try:
-                        type_map[annotation] = _extract_type_name(
-                            argspec.annotations[annotation])
-                    except AttributeError:
-                        print(f"Could not parse argument information for {annotation}.")
-                        continue
 
-            # Add up the number of arguments. `argspec.args` contains a list of
-            # all the arguments from the function.
-            arg_count += len(argspec.args)
-            for arg in argspec.args:
-                arg_map = {}
-                # Ignore adding in entry for "self"
-                if arg != 'cls':
-                    arg_map['id'] = arg
-                    if arg in type_map:
-                        arg_map['var_type'] = type_map[arg]
-                        args.append(arg_map)
+            annotations = getattr(argspec, 'annotations', [])
+            for annotation in argspec.annotations:
+                if annotation == "return":
+                    continue
+                try:
+                    type_map[annotation] = _extract_type_name(
+                        argspec.annotations[annotation])
+                except AttributeError:
+                    print(f"Could not parse argument information for {annotation}.")
+                    continue
+
+            # Retrieve arguments from various sources like `argspec.args` and
+            # `argspec.kwonlyargs` for positional/keyword arguments.
+            original_args = argspec.args
+            # Stores default information for kwonly arguments. Unlike
+            # inspect.defaults, which is a tuple of default values, kw defaults
+            # is a dict[name, defaultvalue].
+            kw_defaults = {}
+            if argspec.kwonlyargs:
+                original_args.extend(argspec.kwonlyargs)
+                if argspec.kwonlydefaults:
+                    kw_defaults.update(argspec.kwonlydefaults)
+            arg_count += len(original_args)
+
+            # Retrieve the default values and convert to a list.
+            defaults = list(getattr(argspec, 'defaults', []))
+            # Counter used to extract default values.
+            default_index = -len(argspec.args) + len(defaults)
+            for arg in original_args:
+                # Ignore adding in entry for "self" or if docstring cannot be
+                # formed for current arg, such as docstring is missing or type
+                # annotation is not given.
+                if arg == 'cls' or arg not in type_map:
+                    default_index += 1
+                    continue
+
+                arg_map = {
+                    'id': arg,
+                    'var_type': type_map[arg],
+                }
+
+                if arg in argspec.args:
+                    # default index will be between 0 and len(defaults) if we
+                    # processed args without defaults, and now only have
+                    # args with default values to assign.
+                    if default_index < 0 or default_index >= len(defaults):
+                        continue
+                    # Only add defaultValue when str(default) doesn't
+                    # contain object address string, for example:
+                    # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
+                    # otherwise inspect.getargspec method will return wrong
+                    # defaults which contain object address for some,
+                    # like sys.stdout.
+                    default_string = str(defaults[default_index])
+                    if 'at 0x' in default_string:
+                        continue
+                    arg_map['defaultValue'] = default_string
+                if arg in kw_defaults:
+                    # Cast to string, otherwise different types may be stored as
+                    # value instead.
+                    arg_map['defaultValue'] = str(kw_defaults[arg])
+
+                default_index += 1
+                args.append(arg_map)
 
             if argspec.varargs:
                 args.append({'id': argspec.varargs})
             if argspec.varkw:
                 args.append({'id': argspec.varkw})
 
-            if argspec.defaults:
-                # Attempt to add default values to arguments.
-                try:
-                    for count, default in enumerate(argspec.defaults):
-                        # Find the first index which default arguments start at.
-                        # Every argument after this offset_count all have default values.
-                        offset_count = len(argspec.defaults)
-                        # Find the index of the current default value argument
-                        index = len(args) + count - offset_count
-
-                        # Only add defaultValue when str(default) doesn't
-                        # contain object address string, for example:
-                        # (object at 0x) or <lambda> at 0x7fed4d57b5e0,
-                        # otherwise inspect.getargspec method will return wrong
-                        # defaults which contain object address for some,
-                        # like sys.stdout.
-                        default_string = str(default)
-                        if 'at 0x' not in default_string:
-                            args[index]['defaultValue'] = default_string
-                # If we cannot find the argument, it is missing a type and was taken out intentionally.
-                except IndexError:
-                    pass
             try:
                 if len(lines) == 0:
                     lines = inspect.getdoc(obj)
@@ -1406,10 +1431,18 @@ def find_unique_name(package_name, entries):
     # If there is no way to disambiguate or we found duplicates, return the identifier name.
     return [package_name[-1]]
 
-# Used to disambiguate names that have same entries.
-# Returns a dictionary of names that are disambiguated in the form of:
-# {uidname: disambiguated_name}
-def disambiguate_toc_name(pkg_toc_yaml):
+
+def disambiguate_toc_name(
+    pkg_toc_yaml: _yaml_type_alias,
+) -> Mapping[str, str]:
+    """Disambiguates names that have same entries in table of contents.
+
+    Args:
+        pkg_toc_yaml: The table of contents for the client library.
+
+    Returns:
+        Mapping from uidname to disambiguated name.
+    """
     name_entries = {}
     disambiguated_names = {}
 
@@ -1418,13 +1451,21 @@ def disambiguate_toc_name(pkg_toc_yaml):
         if module_name not in name_entries:
             name_entries[module_name] = {}
 
+        prev_part = ""
         # Split the name and mark all duplicates.
         # There will be at least 1 unique identifer for each name.
         for part in module['uidname'].split("."):
-            if part not in name_entries[module_name]:
+            if part not in name_entries[module_name] or (
+                # If the name appears in a row, for example:
+                #   google.cloud.run_v2.services
+                #   google.cloud.run_v2.services.services
+                # then ignore this entry as this is clear from the left-nav layout.
+                part == prev_part
+            ):
                 name_entries[module_name][part] = 1
             else:
                 name_entries[module_name][part] += 1
+            prev_part = part
 
         # Some entries don't contain `name` in `uidname`, add these into the map as well.
         if module_name not in name_entries[module_name]:
@@ -1436,7 +1477,7 @@ def disambiguate_toc_name(pkg_toc_yaml):
 
     for module in pkg_toc_yaml:
         module_name = module['name']
-        # Check if there are multiple entires of module['name'], disambiguate if needed.
+        # Check if there are multiple entries of module['name'], disambiguate if needed.
         if name_entries[module_name][module_name] > 1:
             module['name'] = ".".join(find_unique_name(module['uidname'].split("."), name_entries[module_name]))
             disambiguated_names[module['uidname']] = module['name']
@@ -1479,10 +1520,6 @@ def pretty_package_name(package_group):
     # Capitalize the first letter of each package name part
     capitalized_name = [part.capitalize() for part in split_name.split("_")]
     return " ".join(capitalized_name)
-
-
-# Type alias used for yaml entries.
-_yaml_type_alias = dict[str, any]
 
 
 def _find_and_add_summary_details(
