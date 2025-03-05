@@ -103,6 +103,9 @@ REF_PATTERNS = [
     REF_PATTERN_BRACKETS,
 ]
 
+# Regex expression for removing formatting around unidentified objects.
+_UNIDENTIFIED_CODE_REGEX = re.compile(r'<[a-zA-Z\._\-]+\ object>')
+
 PROPERTY = 'property'
 CODEBLOCK = "code-block"
 CODE = "code"
@@ -1292,6 +1295,10 @@ def format_code(code: str) -> str:
         Formatted code with `black.format_str()`. May not format if there is
             an error.
     """
+    matched_objs = list(_UNIDENTIFIED_CODE_REGEX.finditer(code))
+    for matched_obj in matched_objs:
+        content = matched_obj.group()
+        code = code.replace(content, content.split(' ')[0][1:])
     # Signature code comes in raw text without formatting, to run black it
     # requires the code to look like actual function declaration in code.
     # Returns the original formatted code without the added bits.
@@ -1308,7 +1315,7 @@ def process_signature(app, _type, name, obj, options, signature, return_annotati
         try:
             signature = format_code(signature)
         except InvalidInput as e:
-            print(f"Could not format the given code: \n{e})")
+            print(f"Could not format the given code: \n{e}")
         app.env.docfx_signature_funcs_methods[name] = signature
 
 
