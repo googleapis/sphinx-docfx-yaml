@@ -227,15 +227,47 @@ for i in range(10):
 
         self.assertEqual(yaml_pre, yaml_post)
 
-
-    def test_format_code(self):
-        # Test to ensure black formats strings properly.
-        code_want = 'batch_predict(\n    *,\n    gcs_source: Optional[Union[str, Sequence[str]]] = None,\n    instances_format: str = "jsonl",\n    gcs_destination_prefix: Optional[str] = None,\n    predictions_format: str = "jsonl",\n    model_parameters: Optional[Dict] = None,\n    machine_type: Optional[str] = None,\n    accelerator_type: Optional[str] = None,\n    explanation_parameters: Optional[\n        google.cloud.aiplatform_v1.types.explanation.ExplanationParameters\n    ] = None,\n    labels: Optional[Dict[str, str]] = None,\n    sync: bool = True,\n)'
-
-        code = 'batch_predict(*, gcs_source: Optional[Union[str, Sequence[str]]] = None, instances_format: str = "jsonl", gcs_destination_prefix: Optional[str] = None, predictions_format: str = "jsonl", model_parameters: Optional[Dict] = None, machine_type: Optional[str] = None, accelerator_type: Optional[str] = None, explanation_parameters: Optional[google.cloud.aiplatform_v1.types.explanation.ExplanationParameters] = None, labels: Optional[Dict[str, str]] = None, sync: bool = True,)'
-
+    test_codes = [
+        [
+            "batch_predict(*, gcs_source: Optional[Union[str, Sequence[str]]] = None, instances_format: str = 'jsonl', gcs_destination_prefix: Optional[str] = None, predictions_format: str = 'jsonl', model_parameters: Optional[Dict] = None, machine_type: Optional[str] = None, accelerator_type: Optional[str] = None, explanation_parameters: Optional[google.cloud.aiplatform_v1.types.explanation.ExplanationParameters] = None, labels: Optional[Dict[str, str]] = None, sync: bool = True,)",
+            ("batch_predict(\n"
+             "    *,\n"
+             "    gcs_source: Optional[Union[str, Sequence[str]]] = None,\n"
+             "    instances_format: str = \"jsonl\",\n"
+             "    gcs_destination_prefix: Optional[str] = None,\n"
+             "    predictions_format: str = \"jsonl\",\n"
+             "    model_parameters: Optional[Dict] = None,\n"
+             "    machine_type: Optional[str] = None,\n"
+             "    accelerator_type: Optional[str] = None,\n"
+             "    explanation_parameters: Optional[\n"
+             "        google.cloud.aiplatform_v1.types.explanation.ExplanationParameters\n"
+             "    ] = None,\n"
+             "    labels: Optional[Dict[str, str]] = None,\n"
+             "    sync: bool = True,\n"
+             ")"),
+        ],
+        [
+            # Includes unidentified object
+            "upload_chunks_concurrently(filename, blob, content_type=None, chunk_size=33554432, deadline=None, worker_type='process', max_workers=8, *, checksum='auto', timeout=60, retry=<google.api_core.retry.retry_unary.Retry object>)",
+            ("upload_chunks_concurrently(\n"
+             "    filename,\n"
+             "    blob,\n"
+             "    content_type=None,\n"
+             "    chunk_size=33554432,\n"
+             "    deadline=None,\n"
+             "    worker_type=\"process\",\n"
+             "    max_workers=8,\n"
+             "    *,\n"
+             "    checksum=\"auto\",\n"
+             "    timeout=60,\n"
+             "    retry=google.api_core.retry.retry_unary.Retry\n"
+             ")"),
+        ],
+    ]
+    @parameterized.expand(test_codes)
+    def test_format_code(self, code, code_expected):
         code_got = extension.format_code(code)
-        self.assertEqual(code_want, code_got)
+        self.assertEqual(code_expected, code_got)
 
 
     def test_extract_product_name(self):
