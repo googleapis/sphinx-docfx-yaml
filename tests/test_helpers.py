@@ -246,7 +246,6 @@ for i in range(10):
     ]
     @parameterized.expand(test_code_params)
     def test_format_code(self, code, code_want):
-        self.maxDiff = None
         # Test to ensure black formats strings properly.
         code_got = extension.format_code(code)
         self.assertEqual(code_want, code_got)
