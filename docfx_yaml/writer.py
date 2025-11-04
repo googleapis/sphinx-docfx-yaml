@@ -794,7 +794,7 @@ class MarkdownTranslator(nodes.NodeVisitor):
             MarkdownTranslator.resolve_reference_in_node(node)
             lines = node.astext().split('\n')
             quoteLines = [f'> {line}\n>' for line in lines]
-            mdStr = f'\n> [!{name}]\n{"\n".join(quoteLines)}'
+            mdStr = '\n> [!{0}]\n{1}'.format(name, '\n'.join(quoteLines))
             self.add_text(mdStr)
         return depart_alert_box
 

@@ -437,14 +437,14 @@ def _parse_enum_content(parts: Sequence[str]) -> Sequence[Mapping[str, str]]:
         if not enum_name and not enum_description:
             raise ValueError(
                 "The enum docstring is not formatted well. Check the"
-                f" docstring:\n\n{"\n".join(parts)}"
+                " docstring:\n\n{}".format("\n".join(parts))
             )
 
     # Add the last entry.
     if not enum_name or not enum_description:
         raise ValueError(
             "The enum docstring is not formatted well. Check the"
-            f" docstring:\n\n{"\n".join(parts)}"
+            " docstring:\n\n{}".format("\n".join(parts))
         )
 
     enum_content.append({
