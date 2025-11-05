@@ -480,8 +480,8 @@ def move_markdown_pages(
     )
 
 def remove_unused_pages(
-    added_pages: set[str],
-    all_pages: set[str],
+    added_pages: MutableSet[str],
+    all_pages: MutableSet[str],
     outdir: Path,
 ) -> None:
     """Removes unused markdown pages after merging the table of contents.

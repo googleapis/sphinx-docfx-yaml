@@ -166,7 +166,7 @@ logging.getLogger("blib2to3").setLevel(logging.ERROR)
 _yaml_type_alias = dict[str, Any]
 
 
-def _grab_repo_metadata() -> dict[str, str] | None:
+def _grab_repo_metadata() -> Mapping[str, str] | None:
     """Retrieves the repository's metadata info if found.
 
     Returns:
@@ -335,7 +335,10 @@ def _refact_example_in_module_summary(lines: list[str]) -> list[str]:
     return new_lines
 
 
-def _resolve_reference_in_module_summary(pattern: str, lines: list[str]) -> tuple[list[str], list[str]]:
+def _resolve_reference_in_module_summary(
+    pattern: str,
+    lines: list[str],
+) -> tuple[list[str], list[str]]:
     """Resolves references in the module summary.
 
     Args:
@@ -445,7 +448,7 @@ def indent_code_left(lines: str, tab_space: int) -> str:
     return "\n".join(parts)
 
 
-def _parse_enum_content(parts: list[str]) -> list[dict[str, str]]:
+def _parse_enum_content(parts: Sequence[str]) -> Sequence[Mapping[str, str]]:
     """Parses the given content for enums.
 
     Args:
@@ -453,12 +456,12 @@ def _parse_enum_content(parts: list[str]) -> list[dict[str, str]]:
             which have been split by newlines and are left-indented.
 
     Returns:
-        list of mapping of enum entries for name and description.
+        Sequence of mapping of enum entries for name and description.
 
     Raises:
         ValueError: If the `Values` enum docstring is malformed.
     """
-    enum_content: list[dict[str, str]] = []
+    enum_content: MutableSequence[Mapping[str, str]] = []
     enum_name = ""
     enum_description = []
     for part in parts:
@@ -502,7 +505,7 @@ def _parse_enum_content(parts: list[str]) -> list[dict[str, str]]:
 
 def _parse_docstring_summary(
     summary: str,
-) -> tuple[str, dict[str, str], dict[str, str]]:
+) -> tuple[str, Mapping[str, str], Mapping[str, str]]:
     """
     Parses the docstring tokens found in the summary.
 
@@ -514,8 +517,8 @@ def _parse_docstring_summary(
     Returns:
         A tuple of the following:
         * str: The content with parsed docstrings.
-        * dict[str, str]: Attribute entries if found.
-        * dict[str, str]: Enum entries if found.
+        * Mapping[str, str]: Attribute entries if found.
+        * Mapping[str, str]: Enum entries if found.
     """
     summary_parts = []
     attributes = []
@@ -944,9 +947,6 @@ def _extract_type_name(annotation: Any) -> str:
         The extracted type hint in human-readable string format.
     """
 
-    if isinstance(annotation, str):
-        return annotation
-
     annotation_dir = dir(annotation)
     if '__args__' not in annotation_dir:
         return annotation.__name__
@@ -975,7 +975,15 @@ def _extract_type_name(annotation: Any) -> str:
     return type_name
 
 
-def _create_datam(app: sphinx.application.Sphinx, cls: str | None, module: str | None, name: str, _type: str, obj: Any, lines: list[str] | None = None) -> dict:
+def _create_datam(
+    app: sphinx.application.Sphinx,
+    cls: str | None,
+    module: str | None,
+    name: str,
+    _type: str,
+    obj: Any,
+    lines: list[str] | None = None,
+) -> dict:
     """Build the data structure for an autodoc class.
 
     Args:
@@ -1277,7 +1285,14 @@ def _fullname(obj: Any) -> str:
     return obj.__module__ + "." + obj.__name__
 
 
-def process_docstring(app: sphinx.application.Sphinx, _type: str, name: str, obj: Any, options: dict, lines: list[str]) -> None:
+def process_docstring(
+    app: sphinx.application.Sphinx,
+    _type: str,
+    name: str,
+    obj: Any,
+    options: dict,
+    lines: list[str],
+) -> None:
     """Processes a docstring and indexes it into memory.
 
     Args:
@@ -1429,7 +1444,15 @@ def format_code(code: str) -> str:
     return black.format_str("def " + code + ": pass", mode=black.FileMode())[4:-11]
 
 
-def process_signature(app: sphinx.application.Sphinx, _type: str, name: str, obj: Any, options: dict, signature: str, return_annotation: str) -> None:
+def process_signature(
+    app: sphinx.application.Sphinx,
+    _type: str,
+    name: str,
+    obj: Any,
+    options: dict,
+    signature: str,
+    return_annotation: str,
+) -> None:
     """Processes the signature of a function or method.
 
     Args:
@@ -1596,7 +1619,7 @@ def find_unique_name(package_name: list[str], entries: dict) -> list[str]:
 
 def disambiguate_toc_name(
     pkg_toc_yaml: _yaml_type_alias,
-) -> dict[str, str]:
+) -> Mapping[str, str]:
     """Disambiguates names that have same entries in table of contents.
 
     Args:
