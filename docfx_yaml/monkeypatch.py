@@ -22,12 +22,23 @@ from sphinx import directives, addnodes
 from sphinx import addnodes
 
 from sphinx.addnodes import desc, desc_signature
+from typing import Any
 from .utils import transform_node as _transform_node
 from .nodes import remarks
+import sphinx.application
 
 TYPE_SEP_PATTERN = r'(\[|\]|, |\(|\))'
 
-def _get_desc_data(node):
+def _get_desc_data(node: nodes.Node) -> tuple[str | None, str | None]:
+    """Gets the description data from a node.
+
+    Args:
+        node (nodes.Node): The node to get the description data from.
+
+    Returns:
+        tuple[str | None, str | None]: A tuple containing the full name
+            and uid of the node.
+    """
     assert node.tagname == 'desc'
     if node.attributes['domain'] != 'py':
         print(
@@ -50,7 +61,16 @@ def _get_desc_data(node):
     return full_name, uid
 
 
-def _is_desc_of_enum_class(node):
+def _is_desc_of_enum_class(node: nodes.Node) -> bool:
+    """Checks if the node is a description of an enum class.
+
+    Args:
+        node (nodes.Node): The node to check.
+
+    Returns:
+        bool: True if the node is a description of an enum class,
+            False otherwise.
+    """
     assert node.tagname == 'desc_content'
     if node[0] and node[0].tagname == 'paragraph' and node[0].astext() == 'Bases: enum.Enum':
         return True
@@ -58,7 +78,7 @@ def _is_desc_of_enum_class(node):
     return False
 
 
-def _hacked_transform(typemap, node):
+def _hacked_transform(typemap: dict, node: nodes.Node) -> tuple[list, dict]:
     """
     Taken from docfields.py from sphinx.
 
@@ -144,7 +164,7 @@ def _hacked_transform(typemap, node):
     return (entries, types)
 
 
-def patch_docfields(app):
+def patch_docfields(app: sphinx.application.Sphinx) -> None:
     """
     Grab syntax data from the Sphinx info fields.
 
@@ -161,180 +181,188 @@ def patch_docfields(app):
 
     transform_node = partial(_transform_node, app)
 
-    def get_data_structure(entries, types, field_object):
+    def get_data_structure(entries: list, types: dict, field_object: nodes.Node) -> dict:
         """
         Get a proper docfx YAML data structure from the entries & types
         """
 
-        data = {
-            'parameters': [],
-            'variables': [],
-            'exceptions': [],
-            'return': {},
-            'references': [],
+    data = {
+        'parameters': [],
+        'variables': [],
+        'exceptions': [],
+        'return': {},
+        'references': [],
+    }
+
+    def make_param(_id, _description, _type=None, _required=None):
+        ret = {
+            'id': _id,
+            'description': _description.strip(" \n\r\t")
         }
+        if _type:
+            ret['type'] = _type
 
-        def make_param(_id, _description, _type=None, _required=None):
-            ret = {
-                'id': _id,
-                'description': _description.strip(" \n\r\t")
+        if _required is not None:
+            ret['isRequired'] = _required
+
+        return ret
+
+    def transform_para(para_field):
+        if isinstance(para_field, addnodes.pending_xref):
+            return transform_node(para_field)
+        else:
+            return para_field.astext()
+
+    def resolve_type(data_type):
+        # Remove @ ~ and \n for cross reference in parameter/return value type to apply to docfx correctly
+        data_type = re.sub('[@~\n]', '', data_type)
+
+        # Add references for docfx to resolve ref if type contains TYPE_SEP_PATTERN
+        _spec_list = []
+        _spec_fullnames = re.split(TYPE_SEP_PATTERN, data_type)
+
+        _added_reference = {}
+        if len(_spec_fullnames) > 1:
+            _added_reference_name = ''
+            for _spec_fullname in _spec_fullnames:
+                if _spec_fullname != '':
+                    _spec = {}
+                    _spec['name'] = _spec_fullname.split('.')[-1]
+                    _spec['fullName'] = _spec_fullname
+                    if re.match(TYPE_SEP_PATTERN, _spec_fullname) is None:
+                        _spec['uid'] = _spec_fullname
+                    _spec_list.append(_spec)
+                    _added_reference_name += _spec['name']
+
+            _added_reference = {
+                'uid': data_type,
+                'name': _added_reference_name,
+                'fullName': data_type,
+                'spec.python': _spec_list
             }
-            if _type:
-                ret['type'] = _type
 
-            if _required is not None:
-                ret['isRequired'] = _required
+        return data_type, _added_reference
 
-            return ret
+    def extract_exception_desc(field_object):
+        ret = []
+        if len(field_object) > 0:
+            for field in field_object:
+                if 'field_name' == field[0].tagname and field[0].astext() == 'Raises':
+                    assert field[1].tagname == 'field_body'
+                    field_body = field[1]
 
-        def transform_para(para_field):
-            if isinstance(para_field, addnodes.pending_xref):
-                return transform_node(para_field)
-            else:
-                return para_field.astext()
+                    children = [n for n in field_body
+                        if not isinstance(n, nodes.Invisible)]
 
-        def resolve_type(data_type):
-            # Remove @ ~ and \n for cross reference in parameter/return value type to apply to docfx correctly
-            data_type = re.sub('[@~\n]', '', data_type)
+                    for child in children:
+                        if isinstance (child, nodes.paragraph):
+                            pending_xref_index = child.first_child_matching_class(addnodes.pending_xref)
+                            if pending_xref_index is not None:
+                                pending_xref = child[pending_xref_index]
+                                raise_type_index = pending_xref.first_child_matching_class(nodes.literal)
+                                if raise_type_index is not None:
+                                    raise_type = pending_xref[raise_type_index]
+                                    ret.append({'type': pending_xref['reftarget'], 'desc': raise_type.astext()})
 
-            # Add references for docfx to resolve ref if type contains TYPE_SEP_PATTERN
-            _spec_list = []
-            _spec_fullnames = re.split(TYPE_SEP_PATTERN, data_type)
+        return ret
 
-            _added_reference = {}
-            if len(_spec_fullnames) > 1:
-                _added_reference_name = ''
-                for _spec_fullname in _spec_fullnames:
-                    if _spec_fullname != '':
-                        _spec = {}
-                        _spec['name'] = _spec_fullname.split('.')[-1]
-                        _spec['fullName'] = _spec_fullname
-                        if re.match(TYPE_SEP_PATTERN, _spec_fullname) is None:
-                            _spec['uid'] = _spec_fullname
-                        _spec_list.append(_spec)
-                        _added_reference_name += _spec['name']
+    for entry in entries:
+        if isinstance(entry, nodes.field):
+            # pass-through old field
+            pass
+        else:
+            fieldtype, content = entry
+            fieldtypes = types.get(fieldtype.name, {})
+            if fieldtype.name == 'exceptions':
+                for _type, _description in content:
+                    data['exceptions'].append({
+                        'type': _type,
+                        'description': transform_node(_description[0]).strip(" \n\r\t")
+                    })
+            if fieldtype.name == 'returntype':
+                for returntype_node in content[1]:
+                    returntype_ret = transform_node(returntype_node)
+                    if returntype_ret:
+                        # Support or in returntype
+                        for returntype in re.split('[ \n]or[ \n]', returntype_ret):
+                            returntype, _added_reference = resolve_type(returntype)
+                            if _added_reference:
+                                if len(data['references']) == 0:
+                                    data['references'].append(_added_reference)
+                                elif any(r['uid'] != _added_reference['uid'] for r in data['references']):
+                                    data['references'].append(_added_reference)
 
-                _added_reference = {
-                    'uid': data_type,
-                    'name': _added_reference_name,
-                    'fullName': data_type,
-                    'spec.python': _spec_list
-                }
+                            data['return'].setdefault('type', []).append(returntype)
+            if fieldtype.name == 'returnvalue':
+                returnvalue_ret = transform_node(content[1][0])
+                if returnvalue_ret:
+                    data['return']['description'] = returnvalue_ret.strip(" \n\r\t")
+            if fieldtype.name in ['parameter', 'variable', 'keyword']:
+                for field, node_list in content:
+                    _id = field
+                    _description = transform_node(node_list[0])
+                    if field in fieldtypes:
+                        _type = u''.join(transform_para(n) for n in fieldtypes[field])
+                    else:
+                        _type = None
 
-            return data_type, _added_reference
-
-        def extract_exception_desc(field_object):
-            ret = []
-            if len(field_object) > 0:
-                for field in field_object:
-                    if 'field_name' == field[0].tagname and field[0].astext() == 'Raises':
-                        assert field[1].tagname == 'field_body'
-                        field_body = field[1]
-
-                        children = [n for n in field_body
-                            if not isinstance(n, nodes.Invisible)]
-
-                        for child in children:
-                            if isinstance (child, nodes.paragraph):
-                                pending_xref_index = child.first_child_matching_class(addnodes.pending_xref)
-                                if pending_xref_index is not None:
-                                    pending_xref = child[pending_xref_index]
-                                    raise_type_index = pending_xref.first_child_matching_class(nodes.literal)
-                                    if raise_type_index is not None:
-                                        raise_type = pending_xref[raise_type_index]
-                                        ret.append({'type': pending_xref['reftarget'], 'desc': raise_type.astext()})
-
-            return ret
-
-        for entry in entries:
-            if isinstance(entry, nodes.field):
-                # pass-through old field
-                pass
-            else:
-                fieldtype, content = entry
-                fieldtypes = types.get(fieldtype.name, {})
-                if fieldtype.name == 'exceptions':
-                    for _type, _description in content:
-                        data['exceptions'].append({
-                            'type': _type,
-                            'description': transform_node(_description[0]).strip(" \n\r\t")
-                        })
-                if fieldtype.name == 'returntype':
-                    for returntype_node in content[1]:
-                        returntype_ret = transform_node(returntype_node)
-                        if returntype_ret:
-                            # Support or in returntype
-                            for returntype in re.split('[ \n]or[ \n]', returntype_ret):
-                                returntype, _added_reference = resolve_type(returntype)
+                    _para_types = []
+                    if fieldtype.name == 'parameter' or fieldtype.name == 'keyword':
+                        if _type:
+                            # Support or in parameter type
+                            for _s_type in re.split('[ \n]or[ \n]', _type):
+                                _s_type, _added_reference = resolve_type(_s_type)
                                 if _added_reference:
                                     if len(data['references']) == 0:
                                         data['references'].append(_added_reference)
                                     elif any(r['uid'] != _added_reference['uid'] for r in data['references']):
                                         data['references'].append(_added_reference)
 
-                                data['return'].setdefault('type', []).append(returntype)
-                if fieldtype.name == 'returnvalue':
-                    returnvalue_ret = transform_node(content[1][0])
-                    if returnvalue_ret:
-                        data['return']['description'] = returnvalue_ret.strip(" \n\r\t")
-                if fieldtype.name in ['parameter', 'variable', 'keyword']:
-                    for field, node_list in content:
-                        _id = field
-                        _description = transform_node(node_list[0])
-                        if field in fieldtypes:
-                            _type = u''.join(transform_para(n) for n in fieldtypes[field])
-                        else:
-                            _type = None
-
-                        _para_types = []
-                        if fieldtype.name == 'parameter' or fieldtype.name == 'keyword':
-                            if _type:
-                                # Support or in parameter type
-                                for _s_type in re.split('[ \n]or[ \n]', _type):
-                                    _s_type, _added_reference = resolve_type(_s_type)
-                                    if _added_reference:
-                                        if len(data['references']) == 0:
-                                            data['references'].append(_added_reference)
-                                        elif any(r['uid'] != _added_reference['uid'] for r in data['references']):
-                                            data['references'].append(_added_reference)
-
-                                    _para_types.append(_s_type)
+                                _para_types.append(_s_type)
 
 
 
-                            _data = make_param(_id=_id, _type=_para_types, _description=_description, _required=False if fieldtype.name == 'keyword' else True)
-                            data['parameters'].append(_data)
+                        _data = make_param(_id=_id, _type=_para_types, _description=_description, _required=False if fieldtype.name == 'keyword' else True)
+                        data['parameters'].append(_data)
 
-                        if fieldtype.name == 'variable':
-                            if _type:
-                                # Support or in variable type
-                                for _s_type in re.split('[ \n]or[ \n]', _type):
-                                    _s_type, _added_reference = resolve_type(_s_type)
-                                    if _added_reference:
-                                        if len(data['references']) == 0:
-                                            data['references'].append(_added_reference)
-                                        elif any(r['uid'] != _added_reference['uid'] for r in data['references']):
-                                            data['references'].append(_added_reference)
+                    if fieldtype.name == 'variable':
+                        if _type:
+                            # Support or in variable type
+                            for _s_type in re.split('[ \n]or[ \n]', _type):
+                                _s_type, _added_reference = resolve_type(_s_type)
+                                if _added_reference:
+                                    if len(data['references']) == 0:
+                                        data['references'].append(_added_reference)
+                                    elif any(r['uid'] != _added_reference['uid'] for r in data['references']):
+                                        data['references'].append(_added_reference)
 
-                                    _para_types.append(_s_type)
+                                _para_types.append(_s_type)
 
-                            _data = make_param(_id=_id, _type=_para_types, _description=_description)
-                            data['variables'].append(_data)
+                        _data = make_param(_id=_id, _type=_para_types, _description=_description)
+                        data['variables'].append(_data)
 
-                    ret_list = extract_exception_desc(field_object)
-                    for ret in ret_list:
-                        # only use type in exceptions
-                        data.setdefault('exceptions', []).append({
-                            'type': ret['type']
-                        })
+                ret_list = extract_exception_desc(field_object)
+                for ret in ret_list:
+                    # only use type in exceptions
+                    data.setdefault('exceptions', []).append({
+                        'type': ret['type']
+                    })
 
-        return data
+    return data
 
 
     class PatchedDocFieldTransformer(docfields.DocFieldTransformer):
 
         @staticmethod
-        def type_mapping(type_name):
+        def type_mapping(type_name: str) -> str:
+            """Maps a type name to a docfx type name.
+
+            Args:
+                type_name (str): The type name to map.
+
+            Returns:
+                str: The mapped type name.
+            """
             mapping = {
                 "staticmethod": "method",
                 "classmethod": "method",
@@ -343,11 +371,16 @@ def patch_docfields(app):
 
             return mapping[type_name] if type_name in mapping else type_name
 
-        def __init__(self, directive):
+        def __init__(self, directive: Any):
+            """Initializes the transformer.
+
+            Args:
+                directive (Any): The directive.
+            """
             self.directive = directive
             super(PatchedDocFieldTransformer, self).__init__(directive)
 
-        def transform_all(self, node):
+        def transform_all(self, node: nodes.Node) -> None:
             """Transform all field list children of a node."""
             # don't traverse, only handle field lists that are immediate children
             summary = []
