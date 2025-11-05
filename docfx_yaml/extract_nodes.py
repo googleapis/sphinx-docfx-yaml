@@ -162,7 +162,7 @@ def extract_yaml(app: Sphinx, doctree: nodes.document, ignore_patterns: list[str
         try:
             uid = desc_node[0].attributes['ids'][0]
         except Exception:
-            uid = '{module}.{full_name}'.format(module=module, full_name=full_name)
+            uid = f'{module}.{full_name}'
             print('Non-standard id: %s' % uid)
         name = desc_node[0].attributes['names'][0]
         source = desc_node[0].source
@@ -177,7 +177,7 @@ def extract_yaml(app: Sphinx, doctree: nodes.document, ignore_patterns: list[str
             args = []
 
         if args:
-            full_name += "({args})".format(args=', '.join(args))
+            full_name += f"({', '.join(args)})"
 
         datam = {
             'module': str(module),

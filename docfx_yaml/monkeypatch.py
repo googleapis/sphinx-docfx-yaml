@@ -56,7 +56,7 @@ def _get_desc_data(node: nodes.Node) -> tuple[str | None, str | None]:
     try:
         uid = node[0].attributes['ids'][0]
     except Exception:
-        uid = '{module}.{full_name}'.format(module=module, full_name=full_name)
+        uid = f'{module}.{full_name}'
         print('Non-standard id: %s' % uid)
     return full_name, uid
 
