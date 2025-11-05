@@ -5,7 +5,7 @@ import inspect
 import unittest
 from parameterized import parameterized
 
-from typing import Any
+from typing import Any, Optional, Union
 
 
 class TestGenerate(unittest.TestCase):
@@ -28,13 +28,13 @@ class TestGenerate(unittest.TestCase):
         ],
         [
             # Test for forward reference.
-            "ForwardClass | None",
-            'ForwardClass | None'
+            Optional["ForwardClass"],
+            'typing.Optional[ForwardClass]',
         ],
         [
             # Test for multiple forward references.
-            "ForwardClass | ForwardClass2",
-            'ForwardClass | ForwardClass2'
+            Union["ForwardClass", "ForwardClass2"],
+            'typing.Union[ForwardClass, ForwardClass2]'
         ],
     ]
     @parameterized.expand(types_to_test)
