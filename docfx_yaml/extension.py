@@ -32,7 +32,7 @@ import os
 from pathlib import Path
 import re
 import shutil
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Iterable
 import black
 from black import InvalidInput
 
@@ -163,11 +163,16 @@ logging.getLogger("blib2to3").setLevel(logging.ERROR)
 
 
 # Type alias used for yaml entries.
-_yaml_type_alias = dict[str, any]
+_yaml_type_alias = dict[str, Any]
 
 
 def _grab_repo_metadata() -> Mapping[str, str] | None:
-    """Retrieves the repository's metadata info if found."""
+    """Retrieves the repository's metadata info if found.
+
+    Returns:
+        dict[str, str] | None: The repository's metadata info if found,
+            otherwise None.
+    """
     try:
         with open('.repo-metadata.json', 'r') as metadata_file:
             json_content = json.load(metadata_file)
@@ -177,7 +182,12 @@ def _grab_repo_metadata() -> Mapping[str, str] | None:
         return None
 
 
-def build_init(app):
+def build_init(app: sphinx.application.Sphinx) -> None:
+    """Initializes the build.
+
+    Args:
+        app (sphinx.application.Sphinx): The sphinx application.
+    """
     print("Retrieving repository metadata.")
     if not (repo_metadata := _grab_repo_metadata()):
         print("Failed to retrieve repository metadata.")
@@ -241,14 +251,15 @@ def build_init(app):
     app.docfx_transform_string = partial(transform_string, app)
 
 
-def _get_cls_module(_type, name):
-    """
-    Get the class and module name for an object
+def _get_cls_module(_type: str, name: str) -> tuple[str | None, str | None]:
+    """Gets the class and module name for an object.
 
-    .. _sending:
+    Args:
+        _type (str): The type of the object.
+        name (str): The name of the object.
 
-    Foo
-
+    Returns:
+        tuple: A tuple containing the class and module name.
     """
 
     cls = None
@@ -267,7 +278,17 @@ def _get_cls_module(_type, name):
     return (cls, module)
 
 
-def _create_reference(datam, parent, is_external=False):
+def _create_reference(datam: dict, parent: str, is_external: bool = False) -> dict:
+    """Creates a reference to another object.
+
+    Args:
+        datam (dict): The data of the object to reference.
+        parent (str): The parent of the object.
+        is_external (bool): Whether the reference is external.
+
+    Returns:
+        dict: A dictionary representing the reference.
+    """
     return {
         'uid': datam['uid'],
         'parent': parent,
@@ -277,7 +298,15 @@ def _create_reference(datam, parent, is_external=False):
     }
 
 
-def _refact_example_in_module_summary(lines):
+def _refact_example_in_module_summary(lines: list[str]) -> list[str]:
+    """Refactors the example in the module summary.
+
+    Args:
+        lines (list): A list of strings representing the lines of the summary.
+
+    Returns:
+        list: A list of strings representing the refactored lines.
+    """
     new_lines = []
     block_lines = []
     example_block_flag = False
@@ -306,7 +335,19 @@ def _refact_example_in_module_summary(lines):
     return new_lines
 
 
-def _resolve_reference_in_module_summary(pattern, lines):
+def _resolve_reference_in_module_summary(
+    pattern: str,
+    lines: list[str],
+) -> tuple[list[str], list[str]]:
+    """Resolves references in the module summary.
+
+    Args:
+        pattern (str): The regex pattern to use for matching references.
+        lines (list): A list of strings representing the lines of the summary.
+
+    Returns:
+        tuple: A tuple containing the resolved lines and a list of xrefs.
+    """
     new_lines, xrefs = [], []
     for line in lines:
         matched_objs = list(re.finditer(pattern, line))
@@ -355,7 +396,7 @@ def _resolve_reference_in_module_summary(pattern, lines):
 
             # Check to see if we should create an xref for it.
             if 'google.cloud' in matched_str:
-                new_line = new_line.replace(matched_str, '<xref uid=\"{}\">{}</xref>'.format(xref, ref_name))
+                new_line = new_line.replace(matched_str, f'<xref uid="{xref}">{ref_name}</xref>')
             # If it not a Cloud library, don't create xref for it.
             else:
                 # Carefully extract the original uid
@@ -364,14 +405,21 @@ def _resolve_reference_in_module_summary(pattern, lines):
                     ref_name = matched_str[index+1:-1]
                 else:
                     ref_name = matched_str[1:]
-                new_line = new_line.replace(matched_str, '`{}`'.format(ref_name))
+                new_line = new_line.replace(matched_str, f'`{ref_name}`')
 
         new_lines.append(new_line)
     return new_lines, xrefs
 
 
-# Given a line containing restructured keyword, returns which keyword it is.
-def extract_keyword(line):
+def extract_keyword(line: str) -> str:
+    """Extracts the keyword from a line.
+
+    Args:
+        line (str): The line to extract the keyword from.
+
+    Returns:
+        str: The extracted keyword.
+    """
     # Must be in the form of:
     #   .. keyword::
     # where it begind with 2 dot prefix, followed by a space, then the keyword
@@ -385,7 +433,7 @@ def extract_keyword(line):
         return line
 
 
-def indent_code_left(lines, tab_space):
+def indent_code_left(lines: str, tab_space: int) -> str:
     """Indents code lines left by tab_space.
 
     Args:
@@ -602,8 +650,7 @@ def _parse_docstring_summary(
 
             # Extracts the notice content and format it.
             elif keyword and keyword in NOTICES:
-                summary_parts.append(notice_open_tag.format(
-                    notice_tag=keyword, notice_name=NOTICES[keyword]))
+                summary_parts.append(f'<aside class="{keyword}">\n<b>{NOTICES[keyword]}:</b>')
                 tab_space = -1
                 notice_body = []
                 parts = [split_part for split_part in part.split("\n") if split_part][1:]
@@ -646,8 +693,17 @@ def _parse_docstring_summary(
     return "\n".join(summary_parts), attributes, enums
 
 
-# Given documentation docstring, parse them into summary_info.
-def _extract_docstring_info(summary_info, summary, name):
+def _extract_docstring_info(summary_info: dict, summary: str, name: str) -> str:
+    """Extracts info from the docstring.
+
+    Args:
+        summary_info (dict): The dictionary to store the extracted info.
+        summary (str): The docstring to extract info from.
+        name (str): The name of the object.
+
+    Returns:
+        str: The top summary.
+    """
     top_summary = ""
     # Return clean summary if returning early.
     parsed_text = summary
@@ -855,8 +911,15 @@ def reformat_summary(summary: str) -> str:
     return '\n'.join(reformatted_lines)
 
 
-# Returns appropriate product name to display for given full name of entry.
-def extract_product_name(name):
+def extract_product_name(name: str) -> str:
+    """Extracts the product name from the full name.
+
+    Args:
+        name (str): The full name of the object.
+
+    Returns:
+        str: The product name.
+    """
     if 'google.cloud' in name:
         product_name = '.'.join(name.split('.')[2:])
     elif 'google' in name:
@@ -912,9 +975,28 @@ def _extract_type_name(annotation: Any) -> str:
     return type_name
 
 
-def _create_datam(app, cls, module, name, _type, obj, lines=None):
-    """
-    Build the data structure for an autodoc class
+def _create_datam(
+    app: sphinx.application.Sphinx,
+    cls: str | None,
+    module: str | None,
+    name: str,
+    _type: str,
+    obj: Any,
+    lines: list[str] | None = None,
+) -> dict:
+    """Build the data structure for an autodoc class.
+
+    Args:
+        app (sphinx.application.Sphinx): The sphinx application.
+        cls (str | None): The class name.
+        module (str | None): The module name.
+        name (str): The name of the object.
+        _type (str): The type of the object.
+        obj (Any): The object to document.
+        lines (list[str] | None): The docstring lines.
+
+    Returns:
+        dict: The data structure for the object.
     """
 
     def _update_friendly_package_name(path):
@@ -1019,12 +1101,12 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
                     lines = inspect.getdoc(obj)
                     lines = lines.split("\n") if lines else []
             except TypeError as e:
-                print("couldn't getdoc from method, function: {}".format(e))
+                print(f"couldn't getdoc from method, function: {e}")
         elif _type in [PROPERTY]:
             lines = inspect.getdoc(obj)
             lines = lines.split("\n") if lines else []
     except TypeError as e:
-        print("Can't get argspec for {}: {}. {}".format(type(obj), name, e))
+        print(f"Can't get argspec for {type(obj)}: {name}. {e}")
 
     if name in app.env.docfx_signature_funcs_methods:
         sig = app.env.docfx_signature_funcs_methods[name]
@@ -1064,9 +1146,9 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     except (TypeError, OSError):
         # TODO: remove this once there is full handler for property
         if _type in [PROPERTY]:
-            print("Skip inspecting for property: {}".format(name))
+            print(f"Skip inspecting for property: {name}")
         else:
-            print("Can't inspect type {}: {}".format(type(obj), name))
+            print(f"Can't inspect type {type(obj)}: {name}")
         path = None
         start_line = None
 
@@ -1191,16 +1273,35 @@ def _create_datam(app, cls, module, name, _type, obj, lines=None):
     return datam
 
 
-def _fullname(obj):
-    """
-    Get the fullname from a Python object
+def _fullname(obj: Any) -> str:
+    """Gets the full name from a Python object.
+
+    Args:
+        obj (object): The object to get the full name from.
+
+    Returns:
+        str: The full name of the object.
     """
     return obj.__module__ + "." + obj.__name__
 
 
-def process_docstring(app, _type, name, obj, options, lines):
-    """
-    This function takes the docstring and indexes it into memory.
+def process_docstring(
+    app: sphinx.application.Sphinx,
+    _type: str,
+    name: str,
+    obj: Any,
+    options: dict,
+    lines: list[str],
+) -> None:
+    """Processes a docstring and indexes it into memory.
+
+    Args:
+        app (object): The Sphinx application object.
+        _type (str): The type of the object.
+        name (str): The name of the object.
+        obj (object): The object to process.
+        options (dict): The options for the directive.
+        lines (list): A list of strings representing the lines of the docstring.
     """
 
     cls = ""
@@ -1246,11 +1347,11 @@ def process_docstring(app, _type, name, obj, options, lines):
 
     if _type == FUNCTION and app.config.autodoc_functions:
         if datam['uid'] is None:
-            raise ValueError("Issue with {0} (name={1})".format(datam, name))
+            raise ValueError(f"Issue with {datam} (name={name})")
         if cls is None:
             cls = name
         if cls is None:
-            raise ValueError("cls is None for name='{1}' {0}".format(datam, name))
+            raise ValueError(f"cls is None for name='{name}' {datam}")
         if cls not in app.env.docfx_yaml_functions:
             app.env.docfx_yaml_functions[cls] = [datam]
         else:
@@ -1280,6 +1381,42 @@ def is_valid_python_code(syntax: str) -> bool:
         return False
     return True
 
+def _reformat_pattern(code: str, pattern: str) -> str:
+    """Reformats the code for patterns found to remove for code formatting.
+
+    Args:
+        code (str): The code to reformat.
+        pattern (str): The pattern to remove.
+
+    Returns:
+        str: The reformatted code.
+    """
+    # Patterns like retry=<google.api_core.retry.retry_unary.Retry object>
+    # need to be handled separately.
+    if "object" in pattern:
+        end_tag = " object>"
+        pattern_to_find = "<"
+    else:
+        end_tag = "\'>"
+        pattern_to_find = pattern
+
+    while pattern in code:
+        pattern_begin = code.find(pattern_to_find)
+        end_tag_index = code.find(end_tag)
+        # Check that the format is valid.
+        if (pattern_begin == -1 or end_tag_index == -1):
+            print(f"Could not reformat pattern: {pattern} for code: {code}.")
+            return code
+
+        pattern_end = pattern_begin + len(pattern_to_find)
+        code = ''.join([
+            code[:pattern_begin],
+            code[pattern_end:end_tag_index],
+            code[end_tag_index+len(end_tag):],
+        ])
+    return code
+
+
 def format_code(code: str) -> str:
     """Reformats code using black.format_str().
 
@@ -1292,13 +1429,41 @@ def format_code(code: str) -> str:
         Formatted code with `black.format_str()`. May not format if there is
             an error.
     """
+    patterns_to_reformat = (
+        "<class \'",
+        " object>",
+    )
+    for pattern in patterns_to_reformat:
+        if pattern not in code:
+            continue
+        code = _reformat_pattern(code, pattern)
+
     # Signature code comes in raw text without formatting, to run black it
     # requires the code to look like actual function declaration in code.
     # Returns the original formatted code without the added bits.
     return black.format_str("def " + code + ": pass", mode=black.FileMode())[4:-11]
 
 
-def process_signature(app, _type, name, obj, options, signature, return_annotation):
+def process_signature(
+    app: sphinx.application.Sphinx,
+    _type: str,
+    name: str,
+    obj: Any,
+    options: dict,
+    signature: str,
+    return_annotation: str,
+) -> None:
+    """Processes the signature of a function or method.
+
+    Args:
+        app (object): The Sphinx application object.
+        _type (str): The type of the object.
+        name (str): The name of the object.
+        obj (object): The object to process.
+        options (dict): The options for the directive.
+        signature (str): The signature of the object.
+        return_annotation (str): The return annotation of the object.
+    """
     if signature:
         short_name = name.split('.')[-1]
         signature_to_use = [short_name, signature]
@@ -1312,9 +1477,13 @@ def process_signature(app, _type, name, obj, options, signature, return_annotati
         app.env.docfx_signature_funcs_methods[name] = signature
 
 
-def insert_children_on_module(app, _type, datam):
-    """
-    Insert children of a specific module
+def insert_children_on_module(app: sphinx.application.Sphinx, _type: str, datam: dict) -> None:
+    """Inserts children of a specific module.
+
+    Args:
+        app (object): The Sphinx application object.
+        _type (str): The type of the object.
+        datam (dict): The data of the object.
     """
 
     if MODULE not in datam or datam[MODULE] not in app.env.docfx_yaml_modules:
@@ -1371,9 +1540,13 @@ def insert_children_on_module(app, _type, datam):
                         break
 
 
-def insert_children_on_class(app, _type, datam):
-    """
-    Insert children of a specific class
+def insert_children_on_class(app: sphinx.application.Sphinx, _type: str, datam: dict) -> None:
+    """Inserts children of a specific class.
+
+    Args:
+        app (object): The Sphinx application object.
+        _type (str): The type of the object.
+        datam (dict): The data of the object.
     """
     if CLASS not in datam:
         return
@@ -1405,9 +1578,13 @@ def insert_children_on_class(app, _type, datam):
             obj['references'].append(_create_reference(datam, parent=obj['uid']))
 
 
-def insert_children_on_function(app, _type, datam):
-    """
-    Insert children of a specific class
+def insert_children_on_function(app: sphinx.application.Sphinx, _type: str, datam: dict) -> None:
+    """Inserts children of a specific function.
+
+    Args:
+        app (object): The Sphinx application object.
+        _type (str): The type of the object.
+        datam (dict): The data of the object.
     """
     if FUNCTION not in datam:
         return
@@ -1415,8 +1592,16 @@ def insert_children_on_function(app, _type, datam):
     insert_functions = app.env.docfx_yaml_functions[datam[FUNCTION]]
     insert_functions.append(datam)
 
-# Parses the package name and returns unique identifer and name.
-def find_unique_name(package_name, entries):
+def find_unique_name(package_name: list[str], entries: dict) -> list[str]:
+    """Finds a unique name for a package.
+
+    Args:
+        package_name (list[str]): The name of the package.
+        entries (dict): A dictionary of entries.
+
+    Returns:
+        list[str]: A list of unique names.
+    """
     for name in package_name:
         # Only find unique identifiers beside "google" and "cloud"
         # For example, if given
@@ -1485,8 +1670,15 @@ def disambiguate_toc_name(
     return disambiguated_names
 
 
-# Combines pkg_toc_yaml entries with similar version headers.
-def group_by_package(pkg_toc_yaml):
+def group_by_package(pkg_toc_yaml: list[dict]) -> list[dict]:
+    """Groups the pkg_toc_yaml entries by package.
+
+    Args:
+        pkg_toc_yaml (list[dict]): The list of toc entries.
+
+    Returns:
+        list[dict]: The list of toc entries grouped by package.
+    """
     new_pkg_toc_yaml = []
     package_groups = {}
     for module in pkg_toc_yaml:
@@ -1506,13 +1698,27 @@ def group_by_package(pkg_toc_yaml):
     return new_pkg_toc_yaml
 
 
-# Given the full uid, return the package group including its prefix.
-def find_package_group(uid):
+def find_package_group(uid: str) -> str:
+    """Finds the package group for a given uid.
+
+    Args:
+        uid (str): The uid to find the package group for.
+
+    Returns:
+        str: The package group.
+    """
     return ".".join(uid.split(".")[:3])
 
 
-# Given the package group, make its name presentable.
-def pretty_package_name(package_group):
+def pretty_package_name(package_group: str) -> str:
+    """Makes the package name presentable.
+
+    Args:
+        package_group (str): The package group to make presentable.
+
+    Returns:
+        str: The presentable package name.
+    """
     name = ""
 
     # Retrieve only the package name
@@ -1616,13 +1822,13 @@ def _render_summary_content(
 
 def find_uid_to_convert(
     current_word: str,
-    words: List[str],
+    words: list[str],
     index: int,
-    known_uids: List[str],
+    known_uids: list[str],
     current_object_name: str,
-    processed_words: List[str],
-    hard_coded_references: Dict[str, str] = None
-) -> Optional[str]:
+    processed_words: list[str],
+    hard_coded_references: dict[str, str] | None = None
+) -> str | None:
     """Given `current_word`, returns the `uid` to convert to cross reference if found.
 
     Args:
@@ -1667,8 +1873,8 @@ def find_uid_to_convert(
 def convert_cross_references(
     content: str,
     current_object_name: str,
-    known_uids: List[str],
-    ignore_examples: Optional[bool] = False,
+    known_uids: list[str],
+    ignore_examples: bool | None = False,
 ) -> str:
     """Finds and replaces references that should be a cross reference in given content.
 
@@ -1732,9 +1938,14 @@ def convert_cross_references(
     return " ".join(processed_words)
 
 
-# Used to look for cross references in the obj's data where applicable.
-# For now, we inspect summary, syntax and attributes.
-def search_cross_references(obj, current_object_name: str, known_uids: List[str]):
+def search_cross_references(obj: dict, current_object_name: str, known_uids: list[str]) -> None:
+    """Searches for cross references in the object's data.
+
+    Args:
+        obj (dict): The object's data.
+        current_object_name (str): The name of the current object.
+        known_uids (list[str]): A list of known uids.
+    """
     if obj.get("summary"):
         obj["summary"] = convert_cross_references(
             obj["summary"],
@@ -1907,9 +2118,12 @@ def merge_markdown_and_package_toc(
     return added_pages, top_level_pages + pkg_toc_yaml
 
 
-def build_finished(app, exception):
-    """
-    Output YAML on the file system.
+def build_finished(app: sphinx.application.Sphinx, exception: Exception) -> None:
+    """Builds the finished YAML files.
+
+    Args:
+        app (object): The Sphinx application object.
+        exception (Exception): The exception that was thrown, if any.
     """
 
     # Used to get rid of the uidname field for cleaner toc file.
@@ -2167,7 +2381,7 @@ def build_finished(app, exception):
             {
                 "name": f"{app.env.library_shortname} APIs",
                 "items": [
-                    {"name": "Overview", "href": "summary_overview.md"},
+                    {"name": "API overview", "href": "summary_overview.md"},
                     {"name": "Classes", "href": "summary_class.yml"},
                     {"name": "Methods", "href": "summary_method.yml"},
                     {"name": "Properties and Attributes", "href": "summary_property.yml"},
@@ -2290,7 +2504,18 @@ def build_finished(app, exception):
             xref_file_obj.write(f'{xref}\n')
     '''
 
-def missing_reference(app, env, node, contnode):
+def missing_reference(app: sphinx.application.Sphinx, env: Any, node: Any, contnode: Any) -> Any:
+    """Called when a reference is missing.
+
+    Args:
+        app (sphinx.application.Sphinx): The sphinx application.
+        env (Any): The environment.
+        node (Any): The node.
+        contnode (Any): The contnode.
+
+    Returns:
+        Any: The new node.
+    """
     reftarget = ''
     refdoc = ''
     reftype = ''
@@ -2314,7 +2539,7 @@ def missing_reference(app, env, node, contnode):
         return make_refnode(app.builder, refdoc, reftarget, '', contnode)
 
 
-def setup(app):
+def setup(app: sphinx.application.Sphinx) -> None:
     """
     Plugin init for our Sphinx extension.
 
