@@ -37,7 +37,7 @@ python3.10 -m pip install --no-deps --require-hashes -r .kokoro/requirements.txt
 python3.10 -m pip install -e .
 
 # Store the contents of bucket log in a variable to reuse.
-python_bucket_items=$(gsutil ls "gs://docs-staging-v2/docfx-python*")
+python_bucket_items=$(gcloud storage ls "gs://docs-staging-v2/docfx-python*")
 # Store empty tarballs that did not produce any content to check later.
 empty_packages=""
 # Store monorepo packages to process later
@@ -57,7 +57,7 @@ for package in $(echo "${python_bucket_items}" | cut -d "-" -f 5- | rev | cut -d
   cd ${tarball}
 
   # Retrieve the GitHub Repository info.
-  gsutil cp ${bucket_item} .
+  gcloud storage cp ${bucket_item} .
   tar -zxvf ${tarball}
   repo=$(cat docs.metadata | grep "github_repository:" | cut -d "\"" -f 2 | cut -d "/" -f 2)
 
